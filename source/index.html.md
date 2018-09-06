@@ -1,239 +1,1227 @@
----
-title: API Reference
+# Welcome to the common APIs
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
 
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+# Assessment Responses
 
-includes:
-  - errors
 
-search: true
----
+Some doc string for transform
 
-# Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+  
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+### Model
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Authentication
+field | type | description
+- | - | -
+id | guid | The primary identifier
+spec_id | string | 
+user_id | guid | 
+model | anything | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
 
-> To authorize, use this code:
+  
 
-```ruby
-require 'kittn'
+## Get
+Gets a single assessment response.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+### Invocation
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -XGET /v1/assessment_responses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ```
 
-```javascript
-const kittn = require('kittn');
+`GET /v1/assessment_responses/:id`
+  
 
-let api = kittn.authorize('meowmeowmeow');
-```
+###Params
 
-> Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+param | type | description
+- | - | -
+id | guid | The primary identifier
+  
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+  
+  
 
-`Authorization: meowmeowmeow`
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+## Create
+Creates a new assessment response.
 
-# Kittens
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+### Invocation
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl -XPOST /v1/assessment_responses -d 
 ```
 
-```javascript
-const kittn = require('kittn');
+`POST /v1/assessment_responses -d `
+  
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+###Params
 
-> The above command returns JSON structured like this:
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
+param | type | description
+- | - | -
+spec_id | string | 
+user_id | guid | 
+model | anything | 
+spec_name | string | 
+spec_version | string | 
+title | string | 
+  
 
-This endpoint retrieves all kittens.
+  
+  
 
-### HTTP Request
 
-`GET http://example.com/api/kittens`
+  
 
-### Query Parameters
+# Calendar Events
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 
-## Get a Specific Kitten
 
-```ruby
-require 'kittn'
+Calendar events belong to a worker calender, and reference a patient.
+They can be scheduled for a time of day, or simply for a date.
+<aside>All calendar events have an appointment type. Valid types vary by program, and each has separate
+product implications. The range and capabilities of appointment types are not covered in this document.</aside>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+  
 
-```python
-import kittn
+### Model
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+calendar_id | guid | Id of the referenced `calendar` resource
+user_id | guid | The id of the `patient`
+is_all_day |  | `true` if an all day event. `false` otherwise.
+start_time | isodatetime | Scheduled start time of the calendar event if scheduled for a time of day
+end_time | isodatetime | Scheduled end time of the calendar event if scheduled for a time of day
+day | date | Date of the calendar event if an all day event
+outcome | enum | The result of the event if completed
+modality | enum | Modality, such as `call` or `visit`
+appointment_type | string | Type of appointment
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single calendar event.
+
+
+### Invocation
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl -XGET /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ```
 
-```javascript
-const kittn = require('kittn');
+`GET /v1/calendar_events/:id`
+  
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
+###Params
 
-> The above command returns JSON structured like this:
 
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
+param | type | description
+- | - | -
+id | guid | The primary identifier
+  
 
-This endpoint retrieves a specific kitten.
+  
+  
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+## Update
+Updates an existing calendar event.
 
-### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+### Invocation
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+curl -XPUT /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
 ```
 
-```javascript
-const kittn = require('kittn');
+`PUT /v1/calendar_events/:id -d `
+  
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+start_time | isodatetime | Scheduled start time of the calendar event if scheduled for a time of day
+end_time | isodatetime | Scheduled end time of the calendar event if scheduled for a time of day
+day | date | Date of the calendar event if an all day event
+outcome | enum | The result of the event if completed
+  
+
+  
+  
+
+## Create
+Creates a new calendar event.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/calendar_events -d 
 ```
 
-> The above command returns JSON structured like this:
+`POST /v1/calendar_events -d `
+  
 
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
+###Params
+
+
+param | type | description
+- | - | -
+calendar_id | guid | Id of the referenced `calendar` resource
+user_id | guid | The id of the `patient`
+start_time | isodatetime | Scheduled start time of the calendar event if scheduled for a time of day
+end_time | isodatetime | Scheduled end time of the calendar event if scheduled for a time of day
+day | date | Date of the calendar event if an all day event
+modality | enum | Modality, such as `call` or `visit`
+appointment_type | string | Type of appointment
+  
+
+  
+  
+
+
+  
+
+# Calendars
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+worker_id |  | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single calendar.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/calendars/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ```
 
-This endpoint deletes a specific kitten.
+`GET /v1/calendars/:id`
+  
 
-### HTTP Request
+###Params
 
-`DELETE http://example.com/kittens/<ID>`
 
-### URL Parameters
+param | type | description
+- | - | -
+id | guid | The primary identifier
+  
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+  
+  
+
+
+
+
+  
+
+# Careplans
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+user_id |  | 
+careplan |  | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single careplan.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/careplans/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/careplans/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+
+
+  
+
+# Conversations
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+user_id | guid | 
+conversation_type |  | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single conversation.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/conversations/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/conversations/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+## Create
+Creates a new conversation.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/conversations -d 
+```
+
+`POST /v1/conversations -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+user_id | guid | 
+  
+
+  
+  
+
+
+  
+
+# Custom Data Type Records
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+body | anything | 
+user_id | guid | 
+type_name | string | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single custom data type record.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/custom_data_type_records/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+## Update
+Updates an existing custom data type record.
+
+
+### Invocation
+
+```shell
+curl -XPUT /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`PUT /v1/custom_data_type_records/:id -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+body | anything | 
+  
+
+  
+  
+
+## Create
+Creates a new custom data type record.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/custom_data_type_records -d 
+```
+
+`POST /v1/custom_data_type_records -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+body | anything | 
+user_id | guid | 
+type_name | string | 
+  
+
+  
+  
+
+
+  
+
+# Email Addresses
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+email | email | 
+friendly_name | string | 
+user_id | guid | 
+verified | boolean | 
+opted_in_to_email | boolean | 
+automatic_recipient | boolean | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single email address.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/email_addresses/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+## Update
+Updates an existing email address.
+
+
+### Invocation
+
+```shell
+curl -XPUT /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`PUT /v1/email_addresses/:id -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+email | email | 
+friendly_name | string | 
+verified | boolean | 
+opted_in_to_email | boolean | 
+automatic_recipient | boolean | 
+  
+
+  
+  
+
+## Create
+Creates a new email address.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/email_addresses -d 
+```
+
+`POST /v1/email_addresses -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+email | email | 
+friendly_name | string | 
+user_id | guid | 
+verified | boolean | 
+opted_in_to_email | boolean | 
+automatic_recipient | boolean | 
+  
+
+  
+  
+
+
+  
+
+# External Ids
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+resource | string | 
+namespace | string | 
+external_id | string | 
+welkin_id | guid | 
+  
+
+  
+
+
+## Update
+Updates an existing external id.
+
+
+### Invocation
+
+```shell
+curl -XPUT /v1/external_ids/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`PUT /v1/external_ids/:id -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+resource | string | 
+namespace | string | 
+external_id | string | 
+welkin_id | guid | 
+  
+
+  
+  
+
+## Create
+Creates a new external id.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/external_ids -d 
+```
+
+`POST /v1/external_ids -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+resource | string | 
+namespace | string | 
+external_id | string | 
+welkin_id | guid | 
+  
+
+  
+  
+
+
+  
+
+# Integration Tasks
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+status |  | 
+user_id |  | 
+provider_id |  | 
+args |  | 
+result |  | 
+ref_ids |  | 
+job_id | string | 
+task_name | string | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+errors |  | 
+  
+
+  
+
+## Get
+Gets a single integration task.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/integration_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/integration_tasks/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+
+
+  
+
+# Messages
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+user_id | guid | 
+worker_id | guid | 
+conversation_id | guid | 
+direction | enum | 
+contents | string | 
+automatically_sent |  | 
+send_time | isodatetime | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single message.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/messages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/messages/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+## Create
+Creates a new message.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/messages -d 
+```
+
+`POST /v1/messages -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+user_id | guid | 
+worker_id | guid | 
+conversation_id | guid | 
+direction | enum | 
+contents | string | 
+send_time | isodatetime | 
+  
+
+  
+  
+
+
+  
+
+# Patient Tasks
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+user_id | guid | 
+task_type | string | 
+dismissed |  | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single patient task.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/patient_tasks/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+## Create
+Creates a new patient task.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/patient_tasks -d 
+```
+
+`POST /v1/patient_tasks -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+user_id | guid | 
+task_type | string | 
+  
+
+  
+  
+
+## Delete
+Deletes a single patient task.
+
+
+### Invocation
+
+```shell
+curl -XDELETE /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`DELETE /v1/patient_tasks/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+  
+
+# Patients
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+phase | provider_code | 
+coach_id | guid | 
+timezone | timezone | 
+first_name | name | 
+last_name | name | 
+birthday | birthday | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+street | string | 
+street_line_two | string | 
+city | string | 
+county | string | 
+zip_code | string | 
+state | address_state | 
+  
+
+  
+
+
+## Update
+Updates an existing patient.
+
+
+### Invocation
+
+```shell
+curl -XPUT /v1/patients/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`PUT /v1/patients/:id -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+phase | provider_code | 
+coach_id | guid | 
+timezone | timezone | 
+first_name | name | 
+last_name | name | 
+birthday | birthday | 
+  
+
+  
+  
+
+## Create
+Creates a new patient.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/patients -d 
+```
+
+`POST /v1/patients -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+phase | provider_code | 
+coach_id | guid | 
+timezone | timezone | 
+first_name | name | 
+last_name | name | 
+birthday | birthday | 
+street | string | 
+street_line_two | string | 
+city | string | 
+county | string | 
+zip_code | string | 
+state | address_state | 
+country | country | 
+email | email | 
+external_ids | object | 
+phone | phone | 
+  
+
+  
+  
+
+
+  
+
+# Phone Numbers
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+user_id | guid | 
+phone_number | phone | 
+phone_number_type | enum | 
+friendly_name | string | 
+verified | boolean | 
+opted_in_to_sms | boolean | 
+opted_in_to_call_recording | boolean | 
+opted_in_to_voicemail | boolean | 
+opted_on_to_phone |  | 
+automatic_recipient | boolean | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single phone number.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/phone_numbers/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+## Update
+Updates an existing phone number.
+
+
+### Invocation
+
+```shell
+curl -XPUT /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
+```
+
+`PUT /v1/phone_numbers/:id -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+phone_number_type | enum | 
+friendly_name | string | 
+verified | boolean | 
+opted_in_to_sms | boolean | 
+opted_in_to_call_recording | boolean | 
+opted_in_to_voicemail | boolean | 
+automatic_recipient | boolean | 
+opted_in_to_phone | boolean | 
+  
+
+  
+  
+
+## Create
+Creates a new phone number.
+
+
+### Invocation
+
+```shell
+curl -XPOST /v1/phone_numbers -d 
+```
+
+`POST /v1/phone_numbers -d `
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+user_id | guid | 
+phone_number | phone | 
+phone_number_type | enum | 
+friendly_name | string | 
+verified | boolean | 
+opted_in_to_sms | boolean | 
+opted_in_to_call_recording | boolean | 
+opted_in_to_voicemail | boolean | 
+automatic_recipient | boolean | 
+opted_in_to_phone | boolean | 
+  
+
+  
+  
+
+
+  
+
+# Workers
+
+
+
+
+
+  
+
+### Model
+
+
+field | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+email |  | 
+first_name |  | 
+last_name |  | 
+phone_number |  | 
+timezone |  | 
+gender |  | 
+updated_at |  | Datetime the resource was last updated
+created_at |  | Datetime the resource was created
+  
+
+  
+
+## Get
+Gets a single worker.
+
+
+### Invocation
+
+```shell
+curl -XGET /v1/workers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+```
+
+`GET /v1/workers/:id`
+  
+
+###Params
+
+
+param | type | description
+- | - | -
+id | guid | The primary identifier
+id | guid | The primary identifier
+  
+
+  
+  
+
+
+
+
+  
+
+
+# Types
+
+Reference on the types we use
+
+# Errors
+
+Commons errors and such
 
