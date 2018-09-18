@@ -258,8 +258,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.525966+00:00", 
-        "page[to]": "2018-09-14T18:46:50.525993+00:00", 
+        "page[from]": "2018-09-17T20:03:21.173481+00:00", 
+        "page[to]": "2018-09-17T20:03:21.173505+00:00", 
         "page[size]": 50
       }
     }
@@ -506,8 +506,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.534554+00:00", 
-        "page[to]": "2018-09-14T18:46:50.534570+00:00", 
+        "page[from]": "2018-09-17T20:03:21.182092+00:00", 
+        "page[to]": "2018-09-17T20:03:21.182113+00:00", 
         "page[size]": 50
       }
     }
@@ -628,8 +628,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.536368+00:00", 
-        "page[to]": "2018-09-14T18:46:50.536379+00:00", 
+        "page[from]": "2018-09-17T20:03:21.184115+00:00", 
+        "page[to]": "2018-09-17T20:03:21.184130+00:00", 
         "page[size]": 50
       }
     }
@@ -670,7 +670,7 @@ connection back to the template from which they were been generated.</aside>
 {
   "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
   "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "careplan": null, 
+  "care_flow": null, 
   "updated_at": "2018-09-12T01:27:32.029691+00:00", 
   "created_at": "2018-09-12T01:27:32.029817+00:00"
 }
@@ -682,16 +682,15 @@ connection back to the template from which they were been generated.</aside>
 field | type | description
 - | - | -
 id | `guid` | The primary identifier
-id | `guid` | The primary identifier
 user_id | `guid` | The id of the [patient](#patients)
-careplan | `[careflow object](#model-careflow)` | List of [careflow objects](#model-careflow)
+care_flow | `[care_flow object](#model-care_flow)` | List of [care_flow objects](#model-care_flow)
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
   
 
   
 
-### Model careflow
+### Model care_flow
 field | type | description
 - | - | -
 description | string | Description of the overall Care Flow
@@ -715,15 +714,15 @@ worker_id | guid | ID of the worker who this intervention is assigned to | optio
 
 
 ## Get
-Gets a single careplan.
+Gets a single care flow.
 
 ### Invocation
 
 ```shell
-curl -XGET /v1/careplans/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+curl -XGET /v1/care_flows/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ```
 
-`GET /v1/careplans/:id`
+`GET /v1/care_flows/:id`
   
 
 > Returns
@@ -732,7 +731,7 @@ curl -XGET /v1/careplans/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 {
   "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
   "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "careplan": null, 
+  "care_flow": null, 
   "updated_at": "2018-09-12T01:27:32.029691+00:00", 
   "created_at": "2018-09-12T01:27:32.029817+00:00"
 }
@@ -744,7 +743,6 @@ curl -XGET /v1/careplans/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 param | type | description
 - | - | -
 id | `guid` | The primary identifier
-id | `guid` | The primary identifier
   
 
   
@@ -754,15 +752,15 @@ id | `guid` | The primary identifier
 
 
 ## Find
-Finds  careplans, subject to filters.
+Finds  care flows, subject to filters.
 
 ### Invocation
 
 ```shell
-curl -XGET /v1/careplans
+curl -XGET /v1/care_flows
 ```
 
-`GET /v1/careplans`
+`GET /v1/care_flows`
   
 
 > Returns
@@ -774,15 +772,15 @@ curl -XGET /v1/careplans
       {
         "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
         "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-        "careplan": null, 
+        "care_flow": null, 
         "updated_at": "2018-09-12T01:27:32.029691+00:00", 
         "created_at": "2018-09-12T01:27:32.029817+00:00"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.538381+00:00", 
-        "page[to]": "2018-09-14T18:46:50.538394+00:00", 
+        "page[from]": "2018-09-17T20:03:21.185985+00:00", 
+        "page[to]": "2018-09-17T20:03:21.185996+00:00", 
         "page[size]": 50
       }
     }
@@ -943,8 +941,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.541030+00:00", 
-        "page[to]": "2018-09-14T18:46:50.541047+00:00", 
+        "page[from]": "2018-09-17T20:03:21.188348+00:00", 
+        "page[to]": "2018-09-17T20:03:21.188363+00:00", 
         "page[size]": 50
       }
     }
@@ -1144,8 +1142,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.543639+00:00", 
-        "page[to]": "2018-09-14T18:46:50.543650+00:00", 
+        "page[from]": "2018-09-17T20:03:21.191702+00:00", 
+        "page[to]": "2018-09-17T20:03:21.191722+00:00", 
         "page[size]": 50
       }
     }
@@ -1380,8 +1378,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.547808+00:00", 
-        "page[to]": "2018-09-14T18:46:50.547818+00:00", 
+        "page[from]": "2018-09-17T20:03:21.197039+00:00", 
+        "page[to]": "2018-09-17T20:03:21.197059+00:00", 
         "page[size]": 50
       }
     }
@@ -1550,8 +1548,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.550188+00:00", 
-        "page[to]": "2018-09-14T18:46:50.550198+00:00", 
+        "page[from]": "2018-09-17T20:03:21.199779+00:00", 
+        "page[to]": "2018-09-17T20:03:21.199793+00:00", 
         "page[size]": 50
       }
     }
@@ -1724,8 +1722,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.554344+00:00", 
-        "page[to]": "2018-09-14T18:46:50.554354+00:00", 
+        "page[from]": "2018-09-17T20:03:21.204217+00:00", 
+        "page[to]": "2018-09-17T20:03:21.204230+00:00", 
         "page[size]": 50
       }
     }
@@ -1844,7 +1842,14 @@ id | `guid` | The primary identifier
 
 
 ## Create
-Creates a new message.
+
+
+Store a new message on the [patient's](#patients) profile. Messages created here display a record of communication
+to the [worker](#workers).
+
+<aside>Creating a message record does NOT cause that message to be sent to the [patient](#patients).</aside>
+
+
 
 ### Invocation
 
@@ -1922,8 +1927,8 @@ curl -XGET /v1/messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.558956+00:00", 
-        "page[to]": "2018-09-14T18:46:50.558972+00:00", 
+        "page[from]": "2018-09-17T20:03:21.209711+00:00", 
+        "page[to]": "2018-09-17T20:03:21.209731+00:00", 
         "page[size]": 50
       }
     }
@@ -2122,8 +2127,8 @@ curl -XGET /v1/patient_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.561408+00:00", 
-        "page[to]": "2018-09-14T18:46:50.561419+00:00", 
+        "page[from]": "2018-09-17T20:03:21.212882+00:00", 
+        "page[to]": "2018-09-17T20:03:21.212901+00:00", 
         "page[size]": 50
       }
     }
@@ -2559,8 +2564,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.588979+00:00", 
-        "page[to]": "2018-09-14T18:46:50.588999+00:00", 
+        "page[from]": "2018-09-17T20:03:21.242719+00:00", 
+        "page[to]": "2018-09-17T20:03:21.242741+00:00", 
         "page[size]": 50
       }
     }
@@ -2702,8 +2707,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-14T18:46:50.592788+00:00", 
-        "page[to]": "2018-09-14T18:46:50.592807+00:00", 
+        "page[from]": "2018-09-17T20:03:21.247143+00:00", 
+        "page[to]": "2018-09-17T20:03:21.247165+00:00", 
         "page[size]": 50
       }
     }
