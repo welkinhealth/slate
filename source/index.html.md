@@ -86,6 +86,13 @@ href | string | link to GET all updates for this notification
 # Assessment Responses
 
 
+Assessments can be completed in external systems and loaded into Welkin for display in the coach portal.
+
+Assessments completed in Welkin can be retrieved via this API.
+
+Assessment responses must match existing  assessment templates which have been created in
+[Workshop](https://workshop.welkinhealth.com).
+
 
 
 
@@ -119,7 +126,7 @@ field | type | description
 id | `guid` | The primary identifier
 spec_id | `string` | Id of the assessment which this response corresponds to. This Id can be found in [Workshop](https://workshop.welkinhealth.com).
 user_id | `guid` | Id of the [patient](#patients)
-model | `anything` | Response data for assessment fields
+model | `json` | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
   
@@ -172,7 +179,10 @@ id | `guid` | The primary identifier
 
 
 ## Create
-Creates a new assessment response.
+
+
+
+
 
 ### Invocation
 
@@ -211,7 +221,7 @@ param | type | description
 - | - | -
 spec_id | `string` | Id of the assessment which this response corresponds to. This Id can be found in [Workshop](https://workshop.welkinhealth.com).
 user_id | `guid` | Id of the [patient](#patients)
-model | `anything` | Response data for assessment fields
+model | `json` | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 spec_name | `string` | 
 spec_version | `string` | 
 title | `string` | 
@@ -258,8 +268,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.173481+00:00", 
-        "page[to]": "2018-09-17T20:03:21.173505+00:00", 
+        "page[from]": "2018-09-19T00:36:58.242471+00:00", 
+        "page[to]": "2018-09-19T00:36:58.242492+00:00", 
         "page[size]": 50
       }
     }
@@ -506,8 +516,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.182092+00:00", 
-        "page[to]": "2018-09-17T20:03:21.182113+00:00", 
+        "page[from]": "2018-09-19T00:36:58.249727+00:00", 
+        "page[to]": "2018-09-19T00:36:58.249757+00:00", 
         "page[size]": 50
       }
     }
@@ -628,8 +638,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.184115+00:00", 
-        "page[to]": "2018-09-17T20:03:21.184130+00:00", 
+        "page[from]": "2018-09-19T00:36:58.252735+00:00", 
+        "page[to]": "2018-09-19T00:36:58.252754+00:00", 
         "page[size]": 50
       }
     }
@@ -657,8 +667,8 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
 Care Flows represent a set of actions or tasks to be completed for a specific patient.
 
-<aside>Care flows can be created from templates but are stored per patient and do not have a
-connection back to the template from which they were been generated.</aside>
+<aside>Care flows can be created from templates by coaches or processes but are stored per patient and do not have
+a connection back to the template from which they were been generated.</aside>
 
 
 
@@ -670,7 +680,33 @@ connection back to the template from which they were been generated.</aside>
 {
   "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
   "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "care_flow": null, 
+  "care_flow": {
+    "description": "increase daily exercise", 
+    "diagnosis": "patient needs at least 30min exercise per day", 
+    "goals": [
+      {
+        "title": "Make a plan", 
+        "interventions": [
+          {
+            "title": "decide on type of exercise", 
+            "reminder_date": "2018-08-07T00:00:00+00:00", 
+            "completed_at": null, 
+            "completed_by_worker_id": null, 
+            "worker_id": null, 
+            "instructions": "Help the patient decide what type of exercise they can commit to doing."
+          }, 
+          {
+            "title": "document the new plan", 
+            "reminder_date": "2018-08-10T00:00:00+00:00", 
+            "completed_at": null, 
+            "completed_by_worker_id": null, 
+            "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
+            "instructions": "Make sure there is a written record of the patient's new exercise plan"
+          }
+        ]
+      }
+    ]
+  }, 
   "updated_at": "2018-09-12T01:27:32.029691+00:00", 
   "created_at": "2018-09-12T01:27:32.029817+00:00"
 }
@@ -683,7 +719,7 @@ field | type | description
 - | - | -
 id | `guid` | The primary identifier
 user_id | `guid` | The id of the [patient](#patients)
-care_flow | `[care_flow object](#model-care_flow)` | List of [care_flow objects](#model-care_flow)
+care_flow | `json` | List of [care_flow objects](#model-care_flow)
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
   
@@ -709,8 +745,8 @@ field | type | description | optional
 title | string | Title of the Care Flow intervention
 reminder_date | isodatetime | Due date of the intervention | optional
 completed_at | isodatetime | Date the intervention was marked completed | optional
-completed_by_worker_id | guid | ID of the worker who completed this intervention | optional
-worker_id | guid | ID of the worker who this intervention is assigned to | optional
+completed_by_worker_id | guid | ID of the [worker](#workers) who completed this intervention | optional
+worker_id | guid | ID of the [worker](#workers) who this intervention is assigned to | optional
 
 
 ## Get
@@ -731,7 +767,33 @@ curl -XGET /v1/care_flows/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 {
   "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
   "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "care_flow": null, 
+  "care_flow": {
+    "description": "increase daily exercise", 
+    "diagnosis": "patient needs at least 30min exercise per day", 
+    "goals": [
+      {
+        "title": "Make a plan", 
+        "interventions": [
+          {
+            "title": "decide on type of exercise", 
+            "reminder_date": "2018-08-07T00:00:00+00:00", 
+            "completed_at": null, 
+            "completed_by_worker_id": null, 
+            "worker_id": null, 
+            "instructions": "Help the patient decide what type of exercise they can commit to doing."
+          }, 
+          {
+            "title": "document the new plan", 
+            "reminder_date": "2018-08-10T00:00:00+00:00", 
+            "completed_at": null, 
+            "completed_by_worker_id": null, 
+            "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
+            "instructions": "Make sure there is a written record of the patient's new exercise plan"
+          }
+        ]
+      }
+    ]
+  }, 
   "updated_at": "2018-09-12T01:27:32.029691+00:00", 
   "created_at": "2018-09-12T01:27:32.029817+00:00"
 }
@@ -772,15 +834,41 @@ curl -XGET /v1/care_flows
       {
         "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
         "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-        "care_flow": null, 
+        "care_flow": {
+          "description": "increase daily exercise", 
+          "diagnosis": "patient needs at least 30min exercise per day", 
+          "goals": [
+            {
+              "title": "Make a plan", 
+              "interventions": [
+                {
+                  "title": "decide on type of exercise", 
+                  "reminder_date": "2018-08-07T00:00:00+00:00", 
+                  "completed_at": null, 
+                  "completed_by_worker_id": null, 
+                  "worker_id": null, 
+                  "instructions": "Help the patient decide what type of exercise they can commit to doing."
+                }, 
+                {
+                  "title": "document the new plan", 
+                  "reminder_date": "2018-08-10T00:00:00+00:00", 
+                  "completed_at": null, 
+                  "completed_by_worker_id": null, 
+                  "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
+                  "instructions": "Make sure there is a written record of the patient's new exercise plan"
+                }
+              ]
+            }
+          ]
+        }, 
         "updated_at": "2018-09-12T01:27:32.029691+00:00", 
         "created_at": "2018-09-12T01:27:32.029817+00:00"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.185985+00:00", 
-        "page[to]": "2018-09-17T20:03:21.185996+00:00", 
+        "page[from]": "2018-09-19T00:36:58.255709+00:00", 
+        "page[to]": "2018-09-19T00:36:58.255723+00:00", 
         "page[size]": 50
       }
     }
@@ -941,8 +1029,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.188348+00:00", 
-        "page[to]": "2018-09-17T20:03:21.188363+00:00", 
+        "page[from]": "2018-09-19T00:36:58.258163+00:00", 
+        "page[to]": "2018-09-19T00:36:58.258179+00:00", 
         "page[size]": 50
       }
     }
@@ -967,6 +1055,15 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 # Custom Data Type Records
 
 
+Welkin stores custom structured data about a [patient](#patients) in the form of custom data type records.
+The spec of custom data types must be defined in [Workshop](https://workshop.welkinhealth.com)
+before being created via this endpoint.
+
+<aside>Multiple records of the same data type can be created for each [patient](#patients). Depending on the display
+conditions and data uses defined in [Workshop](https://workshop.welkinhealth.com), creating multiple records of the
+same type will have different effects within the Welkin Coach Portal.</aside>
+
+
 
 
 
@@ -975,7 +1072,13 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 ```json
 {
   "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
-  "body": null, 
+  "body": {
+    "name": "Frank Smith", 
+    "suffix": "MD", 
+    "practice_name": "Boston Medical Group", 
+    "office_id": "e32ac52", 
+    "specialty": "internal medicine"
+  }, 
   "user_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
   "type_name": "hcp", 
   "updated_at": "2018-09-12T01:27:32.033666+00:00", 
@@ -990,9 +1093,9 @@ field | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-body | `anything` | 
-user_id | `guid` | 
-type_name | `string` | 
+body | `json` | The content of the custom date type record.
+user_id | `guid` | Id of the [patient](#patients) this data is associated with
+type_name | `string` | Name of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
   
@@ -1016,7 +1119,13 @@ curl -XGET /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ```json
 {
   "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
-  "body": null, 
+  "body": {
+    "name": "Frank Smith", 
+    "suffix": "MD", 
+    "practice_name": "Boston Medical Group", 
+    "office_id": "e32ac52", 
+    "specialty": "internal medicine"
+  }, 
   "user_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
   "type_name": "hcp", 
   "updated_at": "2018-09-12T01:27:32.033666+00:00", 
@@ -1053,7 +1162,13 @@ curl -XPUT /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 ```json
 {
   "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
-  "body": null, 
+  "body": {
+    "name": "Frank Smith", 
+    "suffix": "MD", 
+    "practice_name": "Boston Medical Group", 
+    "office_id": "e32ac52", 
+    "specialty": "internal medicine"
+  }, 
   "user_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
   "type_name": "hcp", 
   "updated_at": "2018-09-12T01:27:32.033666+00:00", 
@@ -1068,7 +1183,7 @@ param | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-body | `anything` | 
+body | `json` | The content of the custom date type record.
   
 
   
@@ -1091,7 +1206,13 @@ curl -XPOST /v1/custom_data_type_records -d
 ```json
 {
   "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
-  "body": null, 
+  "body": {
+    "name": "Frank Smith", 
+    "suffix": "MD", 
+    "practice_name": "Boston Medical Group", 
+    "office_id": "e32ac52", 
+    "specialty": "internal medicine"
+  }, 
   "user_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
   "type_name": "hcp", 
   "updated_at": "2018-09-12T01:27:32.033666+00:00", 
@@ -1104,9 +1225,9 @@ curl -XPOST /v1/custom_data_type_records -d
 
 param | type | description
 - | - | -
-body | `anything` | 
-user_id | `guid` | 
-type_name | `string` | 
+body | `json` | The content of the custom date type record.
+user_id | `guid` | Id of the [patient](#patients) this data is associated with
+type_name | `string` | Name of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
   
 
   
@@ -1133,7 +1254,13 @@ curl -XGET /v1/custom_data_type_records
     "data": [
       {
         "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
-        "body": null, 
+        "body": {
+          "name": "Frank Smith", 
+          "suffix": "MD", 
+          "practice_name": "Boston Medical Group", 
+          "office_id": "e32ac52", 
+          "specialty": "internal medicine"
+        }, 
         "user_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
         "type_name": "hcp", 
         "updated_at": "2018-09-12T01:27:32.033666+00:00", 
@@ -1142,8 +1269,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.191702+00:00", 
-        "page[to]": "2018-09-17T20:03:21.191722+00:00", 
+        "page[from]": "2018-09-19T00:36:58.261514+00:00", 
+        "page[to]": "2018-09-19T00:36:58.261531+00:00", 
         "page[size]": 50
       }
     }
@@ -1156,7 +1283,7 @@ curl -XGET /v1/custom_data_type_records
 
 param | type | description
 - | - | -
-type_name | `optional string` | 
+type_name | `optional string` | Name of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 page[from] | `optional isodatetime` | The minimum timestamp to include in the response
 page[to] | `optional isodatetime` | The max timestamp to include in the response
 page[size] | `optional integer` | Maximum number of items to include in the response
@@ -1378,8 +1505,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.197039+00:00", 
-        "page[to]": "2018-09-17T20:03:21.197059+00:00", 
+        "page[from]": "2018-09-19T00:36:58.268367+00:00", 
+        "page[to]": "2018-09-19T00:36:58.268393+00:00", 
         "page[size]": 50
       }
     }
@@ -1406,8 +1533,11 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
 
 
-ID sets must be unique
-name can be anything but ...
+Welkin APIs and systems communicate via Welkin Ids which are GUIDs. All communications with Welkin's standard API
+must be in Welkin Ids. In rare cases custom integartions may be created which rely on knowing the mapping between
+Welkin Ids and a set of external Ids.
+
+<aside>Duplicate values within the same namespace will be rejected.</aside>
 
 
 
@@ -1432,10 +1562,10 @@ field | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`. :param namespace:
-namespace | `string` | 
+resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`.
+namespace | `string` | Seperates mappings of the same Welkin Id to multiple external Ids.
 external_id | `string` | Id of the resource in 3rd party system. Can be any string format.
-welkin_id | `guid` | 
+welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing Welkin GUID.
   
 
   
@@ -1472,10 +1602,10 @@ param | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`. :param namespace:
-namespace | `string` | 
+resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`.
+namespace | `string` | Seperates mappings of the same Welkin Id to multiple external Ids.
 external_id | `string` | Id of the resource in 3rd party system. Can be any string format.
-welkin_id | `guid` | 
+welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing Welkin GUID.
   
 
   
@@ -1510,10 +1640,10 @@ curl -XPOST /v1/external_ids -d
 
 param | type | description
 - | - | -
-resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`. :param namespace:
-namespace | `string` | 
+resource | `string` | String name of the resource collection that this Id is associated with. For example `workers`.
+namespace | `string` | Seperates mappings of the same Welkin Id to multiple external Ids.
 external_id | `string` | Id of the resource in 3rd party system. Can be any string format.
-welkin_id | `guid` | 
+welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing Welkin GUID.
   
 
   
@@ -1548,8 +1678,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.199779+00:00", 
-        "page[to]": "2018-09-17T20:03:21.199793+00:00", 
+        "page[from]": "2018-09-19T00:36:58.271410+00:00", 
+        "page[to]": "2018-09-19T00:36:58.271427+00:00", 
         "page[size]": 50
       }
     }
@@ -1562,10 +1692,10 @@ curl -XGET /v1/external_ids
 
 param | type | description
 - | - | -
-resource | `optional string` | String name of the resource collection that this Id is associated with. For example `workers`. :param namespace:
-namespace | `optional string` | 
+resource | `optional string` | String name of the resource collection that this Id is associated with. For example `workers`.
+namespace | `optional string` | Seperates mappings of the same Welkin Id to multiple external Ids.
 external_id | `optional string` | Id of the resource in 3rd party system. Can be any string format.
-welkin_id | `optional string` | 
+welkin_id | `optional string` | Id of the resource within Welkin. Must be a valid existing Welkin GUID.
 page[from] | `optional isodatetime` | The minimum timestamp to include in the response
 page[to] | `optional isodatetime` | The max timestamp to include in the response
 page[size] | `optional integer` | Maximum number of items to include in the response
@@ -1722,8 +1852,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.204217+00:00", 
-        "page[to]": "2018-09-17T20:03:21.204230+00:00", 
+        "page[from]": "2018-09-19T00:36:58.275705+00:00", 
+        "page[to]": "2018-09-19T00:36:58.275720+00:00", 
         "page[size]": 50
       }
     }
@@ -1748,8 +1878,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
 
 
-# Mobile Messages
-
+# Messages
 
 
 View and create messages which are shown in the [conversation](#conversations) view on
@@ -1927,8 +2056,8 @@ curl -XGET /v1/messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.209711+00:00", 
-        "page[to]": "2018-09-17T20:03:21.209731+00:00", 
+        "page[from]": "2018-09-19T00:36:58.279997+00:00", 
+        "page[to]": "2018-09-19T00:36:58.280007+00:00", 
         "page[size]": 50
       }
     }
@@ -1948,7 +2077,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
   
   
-
+  
 
 # Patient Tasks
 
@@ -2127,8 +2256,8 @@ curl -XGET /v1/patient_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.212882+00:00", 
-        "page[to]": "2018-09-17T20:03:21.212901+00:00", 
+        "page[from]": "2018-09-19T00:36:58.282942+00:00", 
+        "page[to]": "2018-09-19T00:36:58.282961+00:00", 
         "page[size]": 50
       }
     }
@@ -2153,6 +2282,18 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 # Patients
 
 
+Patients are the primary data object within Welkin. Almost all other data is attached to a patient. Emails,
+assessment responses, care flows, and many more resources are mapped directly to a specific patient.
+
+There are no restrictions on patient data and thus duplicate can be created on purpose or by accident. Take care when
+creating new patients that you do not create duplicates inadvertantly.
+
+When using the Welkin API it is best of have one system be the Master copy and other systems be followers. In this
+model patients are created in only one source and thus duplicates are very rare and not introduced when the patient
+is create both via Welkin and in an external tool.
+
+
+
 
 
 
@@ -2161,20 +2302,21 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 ```json
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": null, 
+  "phase": "intake", 
   "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": null, 
-  "first_name": null, 
-  "last_name": null, 
-  "birthday": null, 
+  "timezone": "US/Pacific", 
+  "first_name": "Grace", 
+  "last_name": "Hopper", 
+  "birthday": "1906-12-09", 
   "updated_at": "2018-09-12T01:27:32.108773+00:00", 
   "created_at": "2018-09-12T01:27:32.109872+00:00", 
-  "street": "some_string", 
-  "street_line_two": "some_string", 
-  "city": "some_string", 
-  "county": "some_string", 
-  "zip_code": "some_string", 
-  "state": null
+  "street": "3265 17th St", 
+  "street_line_two": "#304", 
+  "city": "San Francisco", 
+  "county": "San Francisco County", 
+  "zip_code": "94110", 
+  "state": "CA", 
+  "country": "USA"
 }
 ```
 
@@ -2185,20 +2327,21 @@ field | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-phase | `provider_code` | 
-coach_id | `guid` | 
-timezone | `timezone` | 
-first_name | `name` | 
-last_name | `name` | 
-birthday | `birthday` | 
+phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
+timezone | `timezone` | Timezone which the [patient](#patients) lives in.
+first_name | `name` | First name of this patient
+last_name | `name` | Last name of this patient
+birthday | `isodate` | Date of birth of this patient
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
-street | `string` | 
-street_line_two | `string` | 
-city | `string` | 
-county | `string` | 
-zip_code | `string` | 
-state | `address_state` | 
+street | `string` | Street address of this patient
+street_line_two | `string` | Second line of this patient's street address
+city | `string` | City of this patient's address
+county | `string` | ???
+zip_code | `string` | Zip code of this patient's address
+state | `string` | Two digit abbrivation of the state in which the patient resides.
+country | `country` | 
   
 
   
@@ -2221,20 +2364,21 @@ curl -XPUT /v1/patients/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 ```json
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": null, 
+  "phase": "intake", 
   "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": null, 
-  "first_name": null, 
-  "last_name": null, 
-  "birthday": null, 
+  "timezone": "US/Pacific", 
+  "first_name": "Grace", 
+  "last_name": "Hopper", 
+  "birthday": "1906-12-09", 
   "updated_at": "2018-09-12T01:27:32.108773+00:00", 
   "created_at": "2018-09-12T01:27:32.109872+00:00", 
-  "street": "some_string", 
-  "street_line_two": "some_string", 
-  "city": "some_string", 
-  "county": "some_string", 
-  "zip_code": "some_string", 
-  "state": null
+  "street": "3265 17th St", 
+  "street_line_two": "#304", 
+  "city": "San Francisco", 
+  "county": "San Francisco County", 
+  "zip_code": "94110", 
+  "state": "CA", 
+  "country": "USA"
 }
 ```
 
@@ -2245,12 +2389,12 @@ param | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-phase | `provider_code` | 
-coach_id | `guid` | 
-timezone | `timezone` | 
-first_name | `name` | 
-last_name | `name` | 
-birthday | `birthday` | 
+phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
+timezone | `timezone` | Timezone which the [patient](#patients) lives in.
+first_name | `name` | First name of this patient
+last_name | `name` | Last name of this patient
+birthday | `isodate` | Date of birth of this patient
   
 
   
@@ -2273,20 +2417,21 @@ curl -XPOST /v1/patients -d
 ```json
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": null, 
+  "phase": "intake", 
   "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": null, 
-  "first_name": null, 
-  "last_name": null, 
-  "birthday": null, 
+  "timezone": "US/Pacific", 
+  "first_name": "Grace", 
+  "last_name": "Hopper", 
+  "birthday": "1906-12-09", 
   "updated_at": "2018-09-12T01:27:32.108773+00:00", 
   "created_at": "2018-09-12T01:27:32.109872+00:00", 
-  "street": "some_string", 
-  "street_line_two": "some_string", 
-  "city": "some_string", 
-  "county": "some_string", 
-  "zip_code": "some_string", 
-  "state": null
+  "street": "3265 17th St", 
+  "street_line_two": "#304", 
+  "city": "San Francisco", 
+  "county": "San Francisco County", 
+  "zip_code": "94110", 
+  "state": "CA", 
+  "country": "USA"
 }
 ```
 
@@ -2295,18 +2440,18 @@ curl -XPOST /v1/patients -d
 
 param | type | description
 - | - | -
-phase | `provider_code` | 
-coach_id | `guid` | 
-timezone | `timezone` | 
-first_name | `name` | 
-last_name | `name` | 
-birthday | `birthday` | 
-street | `string` | 
-street_line_two | `string` | 
-city | `string` | 
-county | `string` | 
-zip_code | `string` | 
-state | `address_state` | 
+phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
+timezone | `timezone` | Timezone which the [patient](#patients) lives in.
+first_name | `name` | First name of this patient
+last_name | `name` | Last name of this patient
+birthday | `isodate` | Date of birth of this patient
+street | `string` | Street address of this patient
+street_line_two | `string` | Second line of this patient's street address
+city | `string` | City of this patient's address
+county | `string` | ???
+zip_code | `string` | Zip code of this patient's address
+state | `string` | Two digit abbrivation of the state in which the patient resides.
 country | `country` | 
 email | `email` | 
 external_ids | `list(object)` | 
@@ -2564,8 +2709,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.242719+00:00", 
-        "page[to]": "2018-09-17T20:03:21.242741+00:00", 
+        "page[from]": "2018-09-19T00:36:58.310828+00:00", 
+        "page[to]": "2018-09-19T00:36:58.310845+00:00", 
         "page[size]": 50
       }
     }
@@ -2592,6 +2737,8 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
 
 All the workers for who have access to Welkin Coach Portal.
+
+Workers are assigned to [patients](#patients) as their primary coach via `[Patient](#patients).coach_id`
 
 
 
@@ -2625,7 +2772,7 @@ first_name | `string` | Worker's first name
 last_name | `string` | Worker's last name
 phone_number | `string` | Direct line phone number of the worker
 timezone | `string` | Timezone which the worker's working hours should be represented in
-gender | `string` | (Male, Female, Unknown, Other, Transgender, Decline)
+gender | `string` | (`Male`, `Female`, `Unknown`, `Other`, `Transgender`, `Decline`)
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
   
@@ -2707,8 +2854,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-17T20:03:21.247143+00:00", 
-        "page[to]": "2018-09-17T20:03:21.247165+00:00", 
+        "page[from]": "2018-09-19T00:36:58.314447+00:00", 
+        "page[to]": "2018-09-19T00:36:58.314463+00:00", 
         "page[size]": 50
       }
     }
