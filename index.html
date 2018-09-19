@@ -397,7 +397,7 @@
               </ul>
           </li>
           <li>
-            <a href="#mobile-messages" class="toc-h1 toc-link" data-title="Mobile Messages">Mobile Messages</a>
+            <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#model-10" class="toc-h2 toc-link" data-title="Model">Model</a>
@@ -599,6 +599,13 @@ Each notification contains all the updates for all the resource types since the 
 <h2 id='webhook-security'>Webhook security</h2>
 <p><how do we authorize into the endpoint at the client></p>
 <h1 id='assessment-responses'>Assessment Responses</h1>
+<p>Assessments can be completed in external systems and loaded into Welkin for display in the coach portal.</p>
+
+<p>Assessments completed in Welkin can be retrieved via this API.</p>
+
+<p>Assessment responses must match existing  assessment templates which have been created in
+<a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
+
 <blockquote>
 <p>Example Response</p>
 </blockquote>
@@ -643,8 +650,8 @@ Each notification contains all the updates for all the resource types since the 
 </tr>
 <tr>
 <td>model</td>
-<td><code>anything</code></td>
-<td>Response data for assessment fields</td>
+<td><code>json</code></td>
+<td>Response data for assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>updated_at</td>
@@ -696,9 +703,7 @@ Each notification contains all the updates for all the resource types since the 
 <td>The primary identifier</td>
 </tr>
 </tbody></table>
-<h2 id='create'>Create</h2>
-<p>Creates a new assessment response.</p>
-<h3 id='invocation-2'>Invocation</h3><pre class="highlight shell tab-shell"><code>curl -XPOST /v1/assessment_responses -d 
+<h2 id='create'>Create</h2><h3 id='invocation-2'>Invocation</h3><pre class="highlight shell tab-shell"><code>curl -XPOST /v1/assessment_responses -d 
 </code></pre>
 <p><code>POST /v1/assessment_responses -d</code></p>
 
@@ -741,8 +746,8 @@ Each notification contains all the updates for all the resource types since the 
 </tr>
 <tr>
 <td>model</td>
-<td><code>anything</code></td>
-<td>Response data for assessment fields</td>
+<td><code>json</code></td>
+<td>Response data for assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>spec_name</td>
@@ -791,8 +796,8 @@ Each notification contains all the updates for all the resource types since the 
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.173481+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.173505+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.242471+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.242492+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1105,8 +1110,8 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.182092+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.182113+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.249727+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.249757+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1229,8 +1234,8 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.184115+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.184130+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.252735+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.252754+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1263,8 +1268,8 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
 <h1 id='care-flows'>Care Flows</h1>
 <p>Care Flows represent a set of actions or tasks to be completed for a specific patient.</p>
 
-<aside>Care flows can be created from templates but are stored per patient and do not have a
-connection back to the template from which they were been generated.</aside>
+<aside>Care flows can be created from templates by coaches or processes but are stored per patient and do not have
+a connection back to the template from which they were been generated.</aside>
 
 <blockquote>
 <p>Example Response</p>
@@ -1272,7 +1277,33 @@ connection back to the template from which they were been generated.</aside>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c68a80d4-95ea-4f61-bf90-615d70bea591"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509fad6c-5382-4952-ad23-cfc2b2707180"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"increase daily exercise"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient needs at least 30min exercise per day"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"goals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make a plan"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"interventions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"decide on type of exercise"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-07T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Help the patient decide what type of exercise they can commit to doing."</span><span class="w">
+          </span><span class="p">},</span><span class="w"> 
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document the new plan"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-10T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d5de756-cdda-4cc0-9cca-bcdc36b1a92f"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make sure there is a written record of the patient's new exercise plan"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029691+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029817+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1296,7 +1327,7 @@ connection back to the template from which they were been generated.</aside>
 </tr>
 <tr>
 <td>care_flow</td>
-<td><code>[care_flow object](#model-care_flow)</code></td>
+<td><code>json</code></td>
 <td>List of <a href="#model-care_flow">care_flow objects</a></td>
 </tr>
 <tr>
@@ -1383,13 +1414,13 @@ connection back to the template from which they were been generated.</aside>
 <tr>
 <td>completed_by_worker_id</td>
 <td>guid</td>
-<td>ID of the worker who completed this intervention</td>
+<td>ID of the <a href="#workers">worker</a> who completed this intervention</td>
 <td>optional</td>
 </tr>
 <tr>
 <td>worker_id</td>
 <td>guid</td>
-<td>ID of the worker who this intervention is assigned to</td>
+<td>ID of the <a href="#workers">worker</a> who this intervention is assigned to</td>
 <td>optional</td>
 </tr>
 </tbody></table>
@@ -1405,7 +1436,33 @@ connection back to the template from which they were been generated.</aside>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c68a80d4-95ea-4f61-bf90-615d70bea591"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509fad6c-5382-4952-ad23-cfc2b2707180"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"increase daily exercise"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient needs at least 30min exercise per day"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"goals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make a plan"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"interventions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"decide on type of exercise"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-07T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Help the patient decide what type of exercise they can commit to doing."</span><span class="w">
+          </span><span class="p">},</span><span class="w"> 
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document the new plan"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-10T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d5de756-cdda-4cc0-9cca-bcdc36b1a92f"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make sure there is a written record of the patient's new exercise plan"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029691+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029817+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1438,15 +1495,41 @@ connection back to the template from which they were been generated.</aside>
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c68a80d4-95ea-4f61-bf90-615d70bea591"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509fad6c-5382-4952-ad23-cfc2b2707180"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"care_flow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"increase daily exercise"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient needs at least 30min exercise per day"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"goals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make a plan"</span><span class="p">,</span><span class="w"> 
+              </span><span class="s2">"interventions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"decide on type of exercise"</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-07T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Help the patient decide what type of exercise they can commit to doing."</span><span class="w">
+                </span><span class="p">},</span><span class="w"> 
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document the new plan"</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"reminder_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-10T00:00:00+00:00"</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"completed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"completed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d5de756-cdda-4cc0-9cca-bcdc36b1a92f"</span><span class="p">,</span><span class="w"> 
+                  </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make sure there is a written record of the patient's new exercise plan"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
         </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029691+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.029817+00:00"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.185985+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.185996+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.255709+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.255723+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1617,8 +1700,8 @@ connection back to the template from which they were been generated.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.188348+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.188363+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.258163+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.258179+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1649,12 +1732,26 @@ connection back to the template from which they were been generated.</aside>
 </tr>
 </tbody></table>
 <h1 id='custom-data-type-records'>Custom Data Type Records</h1>
+<p>Welkin stores custom structured data about a <a href="#patients">patient</a> in the form of custom data type records.
+The spec of custom data types must be defined in <a href="https://workshop.welkinhealth.com">Workshop</a>
+before being created via this endpoint.</p>
+
+<aside>Multiple records of the same data type can be created for each [patient](#patients). Depending on the display
+conditions and data uses defined in [Workshop](https://workshop.welkinhealth.com), creating multiple records of the
+same type will have different effects within the Welkin Coach Portal.</aside>
+
 <blockquote>
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07ae21f7-c60e-42cb-ab7a-c80a3c445cc7"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Smith"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"suffix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"practice_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston Medical Group"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"office_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e32ac52"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal medicine"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a162d51e-7791-476a-bf9c-c631e178e3c4"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hcp"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.033666+00:00"</span><span class="p">,</span><span class="w"> 
@@ -1680,18 +1777,18 @@ connection back to the template from which they were been generated.</aside>
 </tr>
 <tr>
 <td>body</td>
-<td><code>anything</code></td>
-<td></td>
+<td><code>json</code></td>
+<td>The content of the custom date type record.</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the <a href="#patients">patient</a> this data is associated with</td>
 </tr>
 <tr>
 <td>type_name</td>
 <td><code>string</code></td>
-<td></td>
+<td>Name of the custom data type as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
 </tr>
 <tr>
 <td>updated_at</td>
@@ -1715,7 +1812,13 @@ connection back to the template from which they were been generated.</aside>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07ae21f7-c60e-42cb-ab7a-c80a3c445cc7"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Smith"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"suffix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"practice_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston Medical Group"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"office_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e32ac52"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal medicine"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a162d51e-7791-476a-bf9c-c631e178e3c4"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hcp"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.033666+00:00"</span><span class="p">,</span><span class="w"> 
@@ -1751,7 +1854,13 @@ connection back to the template from which they were been generated.</aside>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07ae21f7-c60e-42cb-ab7a-c80a3c445cc7"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Smith"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"suffix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"practice_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston Medical Group"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"office_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e32ac52"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal medicine"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a162d51e-7791-476a-bf9c-c631e178e3c4"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hcp"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.033666+00:00"</span><span class="p">,</span><span class="w"> 
@@ -1777,8 +1886,8 @@ connection back to the template from which they were been generated.</aside>
 </tr>
 <tr>
 <td>body</td>
-<td><code>anything</code></td>
-<td></td>
+<td><code>json</code></td>
+<td>The content of the custom date type record.</td>
 </tr>
 </tbody></table>
 <h2 id='create-4'>Create</h2>
@@ -1792,7 +1901,13 @@ connection back to the template from which they were been generated.</aside>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07ae21f7-c60e-42cb-ab7a-c80a3c445cc7"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Smith"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"suffix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"practice_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston Medical Group"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"office_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e32ac52"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal medicine"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a162d51e-7791-476a-bf9c-c631e178e3c4"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hcp"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.033666+00:00"</span><span class="p">,</span><span class="w"> 
@@ -1808,18 +1923,18 @@ connection back to the template from which they were been generated.</aside>
 </thead><tbody>
 <tr>
 <td>body</td>
-<td><code>anything</code></td>
-<td></td>
+<td><code>json</code></td>
+<td>The content of the custom date type record.</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the <a href="#patients">patient</a> this data is associated with</td>
 </tr>
 <tr>
 <td>type_name</td>
 <td><code>string</code></td>
-<td></td>
+<td>Name of the custom data type as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
 </tr>
 </tbody></table>
 <h2 id='find-6'>Find</h2>
@@ -1836,7 +1951,13 @@ connection back to the template from which they were been generated.</aside>
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"07ae21f7-c60e-42cb-ab7a-c80a3c445cc7"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Smith"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"suffix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"practice_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston Medical Group"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"office_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e32ac52"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal medicine"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a162d51e-7791-476a-bf9c-c631e178e3c4"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hcp"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.033666+00:00"</span><span class="p">,</span><span class="w"> 
@@ -1845,8 +1966,8 @@ connection back to the template from which they were been generated.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.191702+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.191722+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.261514+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.261531+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1863,7 +1984,7 @@ connection back to the template from which they were been generated.</aside>
 <tr>
 <td>type_name</td>
 <td><code>optional string</code></td>
-<td></td>
+<td>Name of the custom data type as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
 </tr>
 <tr>
 <td>page[from]</td>
@@ -2151,8 +2272,8 @@ coaches will always be routed to the right patient even if two [patients](#patie
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.197039+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.197059+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.268367+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.268393+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2188,8 +2309,11 @@ coaches will always be routed to the right patient even if two [patients](#patie
 </tr>
 </tbody></table>
 <h1 id='external-ids-provisional'>External Ids (provisional)</h1>
-<p>ID sets must be unique
-name can be anything but ...</p>
+<p>Welkin APIs and systems communicate via Welkin Ids which are GUIDs. All communications with Welkin&#39;s standard API
+must be in Welkin Ids. In rare cases custom integartions may be created which rely on knowing the mapping between
+Welkin Ids and a set of external Ids.</p>
+
+<aside>Duplicate values within the same namespace will be rejected.</aside>
 
 <blockquote>
 <p>Example Response</p>
@@ -2222,12 +2346,12 @@ name can be anything but ...</p>
 <tr>
 <td>resource</td>
 <td><code>string</code></td>
-<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>. :param namespace:</td>
+<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>.</td>
 </tr>
 <tr>
 <td>namespace</td>
 <td><code>string</code></td>
-<td></td>
+<td>Seperates mappings of the same Welkin Id to multiple external Ids.</td>
 </tr>
 <tr>
 <td>external_id</td>
@@ -2237,7 +2361,7 @@ name can be anything but ...</p>
 <tr>
 <td>welkin_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 </tbody></table>
 <h2 id='update-4'>Update</h2>
@@ -2277,12 +2401,12 @@ name can be anything but ...</p>
 <tr>
 <td>resource</td>
 <td><code>string</code></td>
-<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>. :param namespace:</td>
+<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>.</td>
 </tr>
 <tr>
 <td>namespace</td>
 <td><code>string</code></td>
-<td></td>
+<td>Seperates mappings of the same Welkin Id to multiple external Ids.</td>
 </tr>
 <tr>
 <td>external_id</td>
@@ -2292,7 +2416,7 @@ name can be anything but ...</p>
 <tr>
 <td>welkin_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 </tbody></table>
 <h2 id='create-6'>Create</h2>
@@ -2322,12 +2446,12 @@ name can be anything but ...</p>
 <tr>
 <td>resource</td>
 <td><code>string</code></td>
-<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>. :param namespace:</td>
+<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>.</td>
 </tr>
 <tr>
 <td>namespace</td>
 <td><code>string</code></td>
-<td></td>
+<td>Seperates mappings of the same Welkin Id to multiple external Ids.</td>
 </tr>
 <tr>
 <td>external_id</td>
@@ -2337,7 +2461,7 @@ name can be anything but ...</p>
 <tr>
 <td>welkin_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 </tbody></table>
 <h2 id='find-8'>Find</h2>
@@ -2362,8 +2486,8 @@ name can be anything but ...</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.199779+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.199793+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.271410+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.271427+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2380,12 +2504,12 @@ name can be anything but ...</p>
 <tr>
 <td>resource</td>
 <td><code>optional string</code></td>
-<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>. :param namespace:</td>
+<td>String name of the resource collection that this Id is associated with. For example <code>workers</code>.</td>
 </tr>
 <tr>
 <td>namespace</td>
 <td><code>optional string</code></td>
-<td></td>
+<td>Seperates mappings of the same Welkin Id to multiple external Ids.</td>
 </tr>
 <tr>
 <td>external_id</td>
@@ -2395,7 +2519,7 @@ name can be anything but ...</p>
 <tr>
 <td>welkin_id</td>
 <td><code>optional string</code></td>
-<td></td>
+<td>Id of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 <tr>
 <td>page[from]</td>
@@ -2609,8 +2733,8 @@ name can be anything but ...</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.204217+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.204230+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.275705+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.275720+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2655,7 +2779,7 @@ name can be anything but ...</p>
 <td>Maximum number of items to include in the response</td>
 </tr>
 </tbody></table>
-<h1 id='mobile-messages'>Mobile Messages</h1>
+<h1 id='messages'>Messages</h1>
 <p>View and create messages which are shown in the <a href="#conversations">conversation</a> view on
 the <a href="#patients">patient</a> profile in the coach portal.</p>
 
@@ -2871,8 +2995,8 @@ to the <a href="#workers">worker</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.209711+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.209731+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.279997+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.280007+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3089,8 +3213,8 @@ to the <a href="#workers">worker</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.212882+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.212901+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.282942+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.282961+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3121,25 +3245,36 @@ to the <a href="#workers">worker</a>.</p>
 </tr>
 </tbody></table>
 <h1 id='patients'>Patients</h1>
+<p>Patients are the primary data object within Welkin. Almost all other data is attached to a patient. Emails,
+assessment responses, care flows, and many more resources are mapped directly to a specific patient.</p>
+
+<p>There are no restrictions on patient data and thus duplicate can be created on purpose or by accident. Take care when
+creating new patients that you do not create duplicates inadvertantly.</p>
+
+<p>When using the Welkin API it is best of have one system be the Master copy and other systems be followers. In this
+model patients are created in only one source and thus duplicates are very rare and not introduced when the patient
+is create both via Welkin and in an external tool.</p>
+
 <blockquote>
 <p>Example Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"coach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1ecacc1f-1a4c-4bcb-9790-528642cba054"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US/Pacific"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='model-12'>Model</h3>
 <table><thead>
@@ -3161,33 +3296,33 @@ to the <a href="#workers">worker</a>.</p>
 </tr>
 <tr>
 <td>phase</td>
-<td><code>provider_code</code></td>
-<td></td>
+<td><code>enum</code></td>
+<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the <a href="#workers">worker</a> who is the primary coach for this patient.</td>
 </tr>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td></td>
+<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
 </tr>
 <tr>
 <td>first_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>Last name of this patient</td>
 </tr>
 <tr>
 <td>birthday</td>
-<td><code>birthday</code></td>
-<td></td>
+<td><code>isodate</code></td>
+<td>Date of birth of this patient</td>
 </tr>
 <tr>
 <td>updated_at</td>
@@ -3202,31 +3337,36 @@ to the <a href="#workers">worker</a>.</p>
 <tr>
 <td>street</td>
 <td><code>string</code></td>
-<td></td>
+<td>Street address of this patient</td>
 </tr>
 <tr>
 <td>street_line_two</td>
 <td><code>string</code></td>
-<td></td>
+<td>Second line of this patient&#39;s street address</td>
 </tr>
 <tr>
 <td>city</td>
 <td><code>string</code></td>
-<td></td>
+<td>City of this patient&#39;s address</td>
 </tr>
 <tr>
 <td>county</td>
 <td><code>string</code></td>
-<td></td>
+<td>???</td>
 </tr>
 <tr>
 <td>zip_code</td>
 <td><code>string</code></td>
-<td></td>
+<td>Zip code of this patient&#39;s address</td>
 </tr>
 <tr>
 <td>state</td>
-<td><code>address_state</code></td>
+<td><code>string</code></td>
+<td>Two digit abbrivation of the state in which the patient resides.</td>
+</tr>
+<tr>
+<td>country</td>
+<td><code>country</code></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -3241,20 +3381,21 @@ to the <a href="#workers">worker</a>.</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"coach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1ecacc1f-1a4c-4bcb-9790-528642cba054"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US/Pacific"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='params-35'>Params</h3>
 <table><thead>
@@ -3276,33 +3417,33 @@ to the <a href="#workers">worker</a>.</p>
 </tr>
 <tr>
 <td>phase</td>
-<td><code>provider_code</code></td>
-<td></td>
+<td><code>enum</code></td>
+<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the <a href="#workers">worker</a> who is the primary coach for this patient.</td>
 </tr>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td></td>
+<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
 </tr>
 <tr>
 <td>first_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>Last name of this patient</td>
 </tr>
 <tr>
 <td>birthday</td>
-<td><code>birthday</code></td>
-<td></td>
+<td><code>isodate</code></td>
+<td>Date of birth of this patient</td>
 </tr>
 </tbody></table>
 <h2 id='create-9'>Create</h2>
@@ -3316,20 +3457,21 @@ to the <a href="#workers">worker</a>.</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"coach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1ecacc1f-1a4c-4bcb-9790-528642cba054"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US/Pacific"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='params-36'>Params</h3>
 <table><thead>
@@ -3341,63 +3483,63 @@ to the <a href="#workers">worker</a>.</p>
 </thead><tbody>
 <tr>
 <td>phase</td>
-<td><code>provider_code</code></td>
-<td></td>
+<td><code>enum</code></td>
+<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
 <td><code>guid</code></td>
-<td></td>
+<td>Id of the <a href="#workers">worker</a> who is the primary coach for this patient.</td>
 </tr>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td></td>
+<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
 </tr>
 <tr>
 <td>first_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
 <td><code>name</code></td>
-<td></td>
+<td>Last name of this patient</td>
 </tr>
 <tr>
 <td>birthday</td>
-<td><code>birthday</code></td>
-<td></td>
+<td><code>isodate</code></td>
+<td>Date of birth of this patient</td>
 </tr>
 <tr>
 <td>street</td>
 <td><code>string</code></td>
-<td></td>
+<td>Street address of this patient</td>
 </tr>
 <tr>
 <td>street_line_two</td>
 <td><code>string</code></td>
-<td></td>
+<td>Second line of this patient&#39;s street address</td>
 </tr>
 <tr>
 <td>city</td>
 <td><code>string</code></td>
-<td></td>
+<td>City of this patient&#39;s address</td>
 </tr>
 <tr>
 <td>county</td>
 <td><code>string</code></td>
-<td></td>
+<td>???</td>
 </tr>
 <tr>
 <td>zip_code</td>
 <td><code>string</code></td>
-<td></td>
+<td>Zip code of this patient&#39;s address</td>
 </tr>
 <tr>
 <td>state</td>
-<td><code>address_state</code></td>
-<td></td>
+<td><code>string</code></td>
+<td>Two digit abbrivation of the state in which the patient resides.</td>
 </tr>
 <tr>
 <td>country</td>
@@ -3767,8 +3909,8 @@ associated directly with the [patient's](#patients) profile.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.242719+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.242741+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.310828+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.310845+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3805,6 +3947,8 @@ associated directly with the [patient's](#patients) profile.</aside>
 </tbody></table>
 <h1 id='workers'>Workers</h1>
 <p>All the workers for who have access to Welkin Coach Portal.</p>
+
+<p>Workers are assigned to <a href="#patients">patients</a> as their primary coach via <code>[Patient](#patients).coach_id</code></p>
 
 <blockquote>
 <p>Example Response</p>
@@ -3866,7 +4010,7 @@ associated directly with the [patient's](#patients) profile.</aside>
 <tr>
 <td>gender</td>
 <td><code>string</code></td>
-<td>(Male, Female, Unknown, Other, Transgender, Decline)</td>
+<td>(<code>Male</code>, <code>Female</code>, <code>Unknown</code>, <code>Other</code>, <code>Transgender</code>, <code>Decline</code>)</td>
 </tr>
 <tr>
 <td>updated_at</td>
@@ -3944,8 +4088,8 @@ associated directly with the [patient's](#patients) profile.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.247143+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-17T20:03:21.247165+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.314447+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.314463+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
