@@ -68,15 +68,15 @@ Each notification contains all the updates for all the resource types since the 
 ### Webhook request body model
 field | type | description
 - | - | -
-- | list | List of data_update_notification objects
+_ | `list` | List of data_update_notification objects
 
 ### data_update_notification model
 field | type | description
 - | - | -
-resource | string | resource endpoint path name
-from | isodatetime | date of first update
-to | isodatetime | date of latest update
-href | string | link to GET all updates for this notification
+resource | `string` | resource endpoint path name
+from | `isodatetime` | date of first update
+to | `isodatetime` | date of latest update
+href | `string` | link to GET all updates for this notification
 
 ## Webhook security
 <how do we authorize into the endpoint at the client>
@@ -268,8 +268,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.242471+00:00", 
-        "page[to]": "2018-09-19T00:36:58.242492+00:00", 
+        "page[from]": "2018-09-20T02:22:55.418318+00:00", 
+        "page[to]": "2018-09-20T02:22:55.418345+00:00", 
         "page[size]": 50
       }
     }
@@ -299,6 +299,14 @@ They can be scheduled for a time of day, or simply for a date.
 
 <aside>All calendar events have an appointment type. Valid types are specific to your implementation of Welkin. The
 range of appointment types can be found in [Workshop](https://workshop.welkinhealth.com).</aside>
+
+
+
+
+
+
+
+
 
 
 
@@ -334,7 +342,7 @@ user_id | `guid` | Id of the [patient](#patients)
 is_all_day | `boolean` | `true` if not scheduled for a specific time of day. `false` otherwise.
 start_time | `isodatetime` | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time | `isodatetime` | Scheduled end time of the calendar event if scheduled for a specific time of day
-day | `date` | Date of the calendar event if not scheduled for a specific time of day
+day | `isodate` | Date of the calendar event if not scheduled for a specific time of day
 outcome | `enum` | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
 modality | `enum` | Mode via which the event will take place (`call`, `visit`, `video`)
 appointment_type | `string` | Type of appointment (see note for details)
@@ -425,7 +433,7 @@ param | type | description
 id | `guid` | The primary identifier
 start_time | `isodatetime` | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time | `isodatetime` | Scheduled end time of the calendar event if scheduled for a specific time of day
-day | `date` | Date of the calendar event if not scheduled for a specific time of day
+day | `isodate` | Date of the calendar event if not scheduled for a specific time of day
 outcome | `enum` | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
   
 
@@ -472,7 +480,7 @@ calendar_id | `guid` | Id of the [calendar](#calendars) on which this event resi
 user_id | `guid` | Id of the [patient](#patients)
 start_time | `isodatetime` | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time | `isodatetime` | Scheduled end time of the calendar event if scheduled for a specific time of day
-day | `date` | Date of the calendar event if not scheduled for a specific time of day
+day | `isodate` | Date of the calendar event if not scheduled for a specific time of day
 modality | `enum` | Mode via which the event will take place (`call`, `visit`, `video`)
 appointment_type | `string` | Type of appointment (see note for details)
   
@@ -516,8 +524,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.249727+00:00", 
-        "page[to]": "2018-09-19T00:36:58.249757+00:00", 
+        "page[from]": "2018-09-20T02:22:55.434622+00:00", 
+        "page[to]": "2018-09-20T02:22:55.434639+00:00", 
         "page[size]": 50
       }
     }
@@ -545,6 +553,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 Calendars link [Calendar Events](#calendar-events) to [Workers](#workers).
 
 <aside>Each worker has one and only one calendar.</aside>
+
 
 
 
@@ -638,8 +647,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.252735+00:00", 
-        "page[to]": "2018-09-19T00:36:58.252754+00:00", 
+        "page[from]": "2018-09-20T02:22:55.441393+00:00", 
+        "page[to]": "2018-09-20T02:22:55.441410+00:00", 
         "page[size]": 50
       }
     }
@@ -669,6 +678,7 @@ Care Flows represent a set of actions or tasks to be completed for a specific pa
 
 <aside>Care flows can be created from templates by coaches or processes but are stored per patient and do not have
 a connection back to the template from which they were been generated.</aside>
+
 
 
 
@@ -729,24 +739,24 @@ created_at | `isodatetime` | Datetime the resource was created
 ### Model care_flow
 field | type | description
 - | - | -
-description | string | Description of the overall Care Flow
-diagnosis | string |
-goals | list | List of [goal objects](#model-goal)
+description | `string` | Description of the overall Care Flow
+diagnosis | `string` |
+goals | `list` | List of [goal objects](#model-goal)
 
 ### Model goal
 field | type | description
 - | - | -
-title | string | Title of the Care Flow goal
-interventions | list | List of [goal intervention objects](#model-intervention)
+title | `string` | Title of the Care Flow goal
+interventions | `list` | List of [goal intervention objects](#model-intervention)
 
 ### Model intervention
 field | type | description | optional
 - | - | - | -
-title | string | Title of the Care Flow intervention
-reminder_date | isodatetime | Due date of the intervention | optional
-completed_at | isodatetime | Date the intervention was marked completed | optional
-completed_by_worker_id | guid | ID of the [worker](#workers) who completed this intervention | optional
-worker_id | guid | ID of the [worker](#workers) who this intervention is assigned to | optional
+title | `string` | Title of the Care Flow intervention
+reminder_date | `isodatetime` | Due date of the intervention | optional
+completed_at | `isodatetime` | Date the intervention was marked completed | optional
+completed_by_worker_id | `guid` | ID of the [worker](#workers) who completed this intervention | optional
+worker_id | `guid` | ID of the [worker](#workers) who this intervention is assigned to | optional
 
 
 ## Get
@@ -867,8 +877,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.255709+00:00", 
-        "page[to]": "2018-09-19T00:36:58.255723+00:00", 
+        "page[from]": "2018-09-20T02:22:55.448069+00:00", 
+        "page[to]": "2018-09-20T02:22:55.448086+00:00", 
         "page[size]": 50
       }
     }
@@ -1029,8 +1039,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.258163+00:00", 
-        "page[to]": "2018-09-19T00:36:58.258179+00:00", 
+        "page[from]": "2018-09-20T02:22:55.457523+00:00", 
+        "page[to]": "2018-09-20T02:22:55.457541+00:00", 
         "page[size]": 50
       }
     }
@@ -1269,8 +1279,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.261514+00:00", 
-        "page[to]": "2018-09-19T00:36:58.261531+00:00", 
+        "page[from]": "2018-09-20T02:22:55.467652+00:00", 
+        "page[to]": "2018-09-20T02:22:55.467670+00:00", 
         "page[size]": 50
       }
     }
@@ -1505,8 +1515,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.268367+00:00", 
-        "page[to]": "2018-09-19T00:36:58.268393+00:00", 
+        "page[from]": "2018-09-20T02:22:55.481165+00:00", 
+        "page[to]": "2018-09-20T02:22:55.481181+00:00", 
         "page[size]": 50
       }
     }
@@ -1678,8 +1688,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.271410+00:00", 
-        "page[to]": "2018-09-19T00:36:58.271427+00:00", 
+        "page[from]": "2018-09-20T02:22:55.488764+00:00", 
+        "page[to]": "2018-09-20T02:22:55.488777+00:00", 
         "page[size]": 50
       }
     }
@@ -1708,6 +1718,18 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
 
 
+For custom integrations built by Welkin, this endpoint reports the status and resulting error from the ingestion of
+specific data itmes.
+
+<aside>
+This only applies for custom integrations built by Welkin and is rarely used. Integrations created using
+Welkin's standard API are self reporting and do not require Integration Task monitoring as exposed here.</aside>
+
+
+
+
+
+
 
 
 
@@ -1720,18 +1742,24 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
   "status": "failed", 
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "provider_id": "c9a72425-f433-4c6c-9d95-0c36846acd2f", 
-  "args": null, 
-  "result": null, 
   "ref_ids": [
     "abc123", 
     "cdf456"
   ], 
-  "job_id": "some_string", 
-  "task_name": "some_string", 
+  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
+  "task_name": "kiwihealth_pull.process_item", 
   "updated_at": "2018-09-12T01:27:32.041332+00:00", 
   "created_at": "2018-09-12T01:27:32.041464+00:00", 
-  "errors": null
+  "errors": [
+    {
+      "code": "user_not_found", 
+      "message": "There is no user with that ID.", 
+      "extra": {
+        "user_id": "abc", 
+        "attempt_number": 7
+      }
+    }
+  ]
 }
 ```
 
@@ -1744,25 +1772,42 @@ id | `guid` | The primary identifier
 id | `guid` | The primary identifier
 status | `enum` | `unattempted`, `running`, `failed`, or `succeeded`
 user_id | `guid` | Id of the [patient](#patients)
-provider_id | `string` | 
-args | `string` | 
-result | `optional string` | 
-ref_ids | `array string` | 
-job_id | `string` | 
-task_name | `string` | 
+provider_id | `` | to be removed
+args | `` | to be removed
+result | `` | to be removed
+ref_ids | `array string` | Array of external Ids that tasks is working with. This enables tasks to be linked to the resources in systems outside Welkin.
+job_id | `string` | Groups related tasks together
+task_name | `string` | The name of the task prefixed with the name of the job
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
-errors | `array integration-errors` | 
+errors | `array integration-errors` | Array of all the errors that resulted from this specific task. Note, these errors do not roll up to higher level tasks.
   
 
   
 
-### Model integration error
+### Model integration-errors
 field | type | description
 - | - | -
-code | string | Machine readable error code
-message | string | Human readable error message
-extra | string | JSON blob
+code | `string` | Machine readable error code. The set of possible errors is defined during custom implementation. Examples include: `user_not_found` or `customer_disabled`
+message | `string` | Human readable error message
+extra | `string` | JSON blob
+
+### Integration jobs
+An integration job is a series of tasks all linked together with a common job id.
+
+The following describes an example custom (built by Welkin) integration.
+
+Kiwi Health is a health system which sends patient data to Welkin throgh a custom integration. When new data is availible for Welkin to consume Kiwi Health sends Welkin a notification. Welkin then valudates the notification and then fetches the data and processes it.
+
+For example a intregration job might be structured as follows:
+
+* kiwihealth_pull.run_kiwihealth_pull
+    * kiwihealth_pull.validate_user
+    * kiwihealth_pull.fetch_results
+    * kiwihealth_pull.process_response
+        * kiwihealth_pull.process_item (potentially multiple process_item tasks)
+
+Status for each task is tracked individually and the overall job can hit failures at any of these stages. The top-level task (run_kiwihealth_pull) reports the overall status of the entire job.
 
 
 ## Get
@@ -1784,18 +1829,24 @@ curl -XGET /v1/integration_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
   "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
   "status": "failed", 
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "provider_id": "c9a72425-f433-4c6c-9d95-0c36846acd2f", 
-  "args": null, 
-  "result": null, 
   "ref_ids": [
     "abc123", 
     "cdf456"
   ], 
-  "job_id": "some_string", 
-  "task_name": "some_string", 
+  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
+  "task_name": "kiwihealth_pull.process_item", 
   "updated_at": "2018-09-12T01:27:32.041332+00:00", 
   "created_at": "2018-09-12T01:27:32.041464+00:00", 
-  "errors": null
+  "errors": [
+    {
+      "code": "user_not_found", 
+      "message": "There is no user with that ID.", 
+      "extra": {
+        "user_id": "abc", 
+        "attempt_number": 7
+      }
+    }
+  ]
 }
 ```
 
@@ -1836,24 +1887,30 @@ curl -XGET /v1/integration_tasks
         "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
         "status": "failed", 
         "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-        "provider_id": "c9a72425-f433-4c6c-9d95-0c36846acd2f", 
-        "args": null, 
-        "result": null, 
         "ref_ids": [
           "abc123", 
           "cdf456"
         ], 
-        "job_id": "some_string", 
-        "task_name": "some_string", 
+        "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
+        "task_name": "kiwihealth_pull.process_item", 
         "updated_at": "2018-09-12T01:27:32.041332+00:00", 
         "created_at": "2018-09-12T01:27:32.041464+00:00", 
-        "errors": null
+        "errors": [
+          {
+            "code": "user_not_found", 
+            "message": "There is no user with that ID.", 
+            "extra": {
+              "user_id": "abc", 
+              "attempt_number": 7
+            }
+          }
+        ]
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.275705+00:00", 
-        "page[to]": "2018-09-19T00:36:58.275720+00:00", 
+        "page[from]": "2018-09-20T02:22:55.502508+00:00", 
+        "page[to]": "2018-09-20T02:22:55.502525+00:00", 
         "page[size]": 50
       }
     }
@@ -1866,8 +1923,8 @@ curl -XGET /v1/integration_tasks
 
 param | type | description
 - | - | -
-job_id | `optional string` | 
-task_name | `optional string` | 
+job_id | `optional string` | Groups related tasks together
+task_name | `optional string` | The name of the task prefixed with the name of the job
 ref_id | `optional string` | 
 page[from] | `optional isodatetime` | The minimum timestamp to include in the response
 page[to] | `optional isodatetime` | The max timestamp to include in the response
@@ -2056,8 +2113,8 @@ curl -XGET /v1/messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.279997+00:00", 
-        "page[to]": "2018-09-19T00:36:58.280007+00:00", 
+        "page[from]": "2018-09-20T02:22:55.515543+00:00", 
+        "page[to]": "2018-09-20T02:22:55.515560+00:00", 
         "page[size]": 50
       }
     }
@@ -2256,8 +2313,8 @@ curl -XGET /v1/patient_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.282942+00:00", 
-        "page[to]": "2018-09-19T00:36:58.282961+00:00", 
+        "page[from]": "2018-09-20T02:22:55.525308+00:00", 
+        "page[to]": "2018-09-20T02:22:55.525325+00:00", 
         "page[size]": 50
       }
     }
@@ -2282,8 +2339,9 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 # Patients
 
 
-Patients are the primary data object within Welkin. Almost all other data is attached to a patient. Emails,
-assessment responses, care flows, and many more resources are mapped directly to a specific patient.
+Patients are the primary data object within Welkin. Almost all other data is attached to a patient.
+[Emails](#email-addresses), [assessment responses](#assessment_responses), [care flows](#care_flows), and many more
+resources are mapped directly to a specific patient.
 
 There are no restrictions on patient data and thus duplicate can be created on purpose or by accident. Take care when
 creating new patients that you do not create duplicates inadvertantly.
@@ -2327,21 +2385,21 @@ field | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+phase | `enum` | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
-timezone | `timezone` | Timezone which the [patient](#patients) lives in.
-first_name | `name` | First name of this patient
-last_name | `name` | Last name of this patient
+timezone | `timezone` | Timezone in which this [patient](#patients) lives
+first_name | `string` | First name of this patient
+last_name | `string` | Last name of this patient
 birthday | `isodate` | Date of birth of this patient
 updated_at | `isodatetime` | Datetime the resource was last updated
 created_at | `isodatetime` | Datetime the resource was created
 street | `string` | Street address of this patient
 street_line_two | `string` | Second line of this patient's street address
 city | `string` | City of this patient's address
-county | `string` | ???
-zip_code | `string` | Zip code of this patient's address
-state | `string` | Two digit abbrivation of the state in which the patient resides.
-country | `country` | 
+county | `string` | County in which the patient lives. If unknown then this can be left out.
+zip_code | `zip_code` | Zip code of this patient's address in five digit form.
+state | `state` | Two character abbrivation of the state in which the patient resides.
+country | `string` | Country in which the [patient](#patients) lives
   
 
   
@@ -2389,11 +2447,11 @@ param | type | description
 - | - | -
 id | `guid` | The primary identifier
 id | `guid` | The primary identifier
-phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+phase | `enum` | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
-timezone | `timezone` | Timezone which the [patient](#patients) lives in.
-first_name | `name` | First name of this patient
-last_name | `name` | Last name of this patient
+timezone | `timezone` | Timezone in which this [patient](#patients) lives
+first_name | `string` | First name of this patient
+last_name | `string` | Last name of this patient
 birthday | `isodate` | Date of birth of this patient
   
 
@@ -2440,19 +2498,19 @@ curl -XPOST /v1/patients -d
 
 param | type | description
 - | - | -
-phase | `enum` | The phase of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+phase | `enum` | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 coach_id | `guid` | Id of the [worker](#workers) who is the primary coach for this patient.
-timezone | `timezone` | Timezone which the [patient](#patients) lives in.
-first_name | `name` | First name of this patient
-last_name | `name` | Last name of this patient
+timezone | `timezone` | Timezone in which this [patient](#patients) lives
+first_name | `string` | First name of this patient
+last_name | `string` | Last name of this patient
 birthday | `isodate` | Date of birth of this patient
 street | `string` | Street address of this patient
 street_line_two | `string` | Second line of this patient's street address
 city | `string` | City of this patient's address
-county | `string` | ???
-zip_code | `string` | Zip code of this patient's address
-state | `string` | Two digit abbrivation of the state in which the patient resides.
-country | `country` | 
+county | `string` | County in which the patient lives. If unknown then this can be left out.
+zip_code | `zip_code` | Zip code of this patient's address in five digit form.
+state | `state` | Two character abbrivation of the state in which the patient resides.
+country | `string` | Country in which the [patient](#patients) lives
 email | `email` | 
 external_ids | `list(object)` | 
 phone | `phone` | 
@@ -2709,8 +2767,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.310828+00:00", 
-        "page[to]": "2018-09-19T00:36:58.310845+00:00", 
+        "page[from]": "2018-09-20T02:22:55.569337+00:00", 
+        "page[to]": "2018-09-20T02:22:55.569354+00:00", 
         "page[size]": 50
       }
     }
@@ -2854,8 +2912,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-19T00:36:58.314447+00:00", 
-        "page[to]": "2018-09-19T00:36:58.314463+00:00", 
+        "page[from]": "2018-09-20T02:22:55.576995+00:00", 
+        "page[to]": "2018-09-20T02:22:55.577012+00:00", 
         "page[size]": 50
       }
     }
@@ -2880,9 +2938,25 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
 
 # Types
 
-Reference on the types we use
+type | definition | example
+- | - | -
+enum | `string` with predefined set of values | `"Female"`
+isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
+isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
+guid | `string` with X number of characters. 36 characters seperated by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
+boolean | JSON style boolean | `true`
+string | Any quoted set of characters with no length restriction. | `"Welcome to Welkin's APIs"`
+phone | `string` representing a phone number without extensions or other dialing information. Country code should not be included. +1 numbers only. | `"555-555-1234"`
+email | `string` representing an email address | `"support@welkinhealth.com"`
+timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
+state | `string` of two character United States state abbrivation | `"CA"`
+zip_code | `string` of a five digit United States zip code | `"94110"`
+integer | Counting numbers with no decimal place including zero and negative numbers | `42`
+json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format. | `""`
+
+<aside>GUIDs are global unique identifiers for objects within Welkin. These Ids are long lived for resources and are unqiue within and across resources.</aside>
 
 # Errors
 
-Commons errors and such
+Common errors and such
 
