@@ -386,7 +386,10 @@
                     <a href="#model-9" class="toc-h2 toc-link" data-title="Model">Model</a>
                   </li>
                   <li>
-                    <a href="#model-integration-error" class="toc-h2 toc-link" data-title="Model integration error">Model integration error</a>
+                    <a href="#model-integration-errors" class="toc-h2 toc-link" data-title="Model integration-errors">Model integration-errors</a>
+                  </li>
+                  <li>
+                    <a href="#integration-jobs" class="toc-h2 toc-link" data-title="Integration jobs">Integration jobs</a>
                   </li>
                   <li>
                     <a href="#get-8" class="toc-h2 toc-link" data-title="Get">Get</a>
@@ -562,8 +565,8 @@ Each notification contains all the updates for all the resource types since the 
 </tr>
 </thead><tbody>
 <tr>
-<td>-</td>
-<td>list</td>
+<td>_</td>
+<td><code>list</code></td>
 <td>List of data_update_notification objects</td>
 </tr>
 </tbody></table>
@@ -577,22 +580,22 @@ Each notification contains all the updates for all the resource types since the 
 </thead><tbody>
 <tr>
 <td>resource</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>resource endpoint path name</td>
 </tr>
 <tr>
 <td>from</td>
-<td>isodatetime</td>
+<td><code>isodatetime</code></td>
 <td>date of first update</td>
 </tr>
 <tr>
 <td>to</td>
-<td>isodatetime</td>
+<td><code>isodatetime</code></td>
 <td>date of latest update</td>
 </tr>
 <tr>
 <td>href</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>link to GET all updates for this notification</td>
 </tr>
 </tbody></table>
@@ -796,8 +799,8 @@ Each notification contains all the updates for all the resource types since the 
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.242471+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.242492+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.418318+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.418345+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -891,7 +894,7 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
 </tr>
 <tr>
 <td>day</td>
-<td><code>date</code></td>
+<td><code>isodate</code></td>
 <td>Date of the calendar event if not scheduled for a specific time of day</td>
 </tr>
 <tr>
@@ -1005,7 +1008,7 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
 </tr>
 <tr>
 <td>day</td>
-<td><code>date</code></td>
+<td><code>isodate</code></td>
 <td>Date of the calendar event if not scheduled for a specific time of day</td>
 </tr>
 <tr>
@@ -1067,7 +1070,7 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
 </tr>
 <tr>
 <td>day</td>
-<td><code>date</code></td>
+<td><code>isodate</code></td>
 <td>Date of the calendar event if not scheduled for a specific time of day</td>
 </tr>
 <tr>
@@ -1110,8 +1113,8 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.249727+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.249757+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.434622+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.434639+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1234,8 +1237,8 @@ range of appointment types can be found in [Workshop](https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.252735+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.252754+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.441393+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.441410+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1351,17 +1354,17 @@ a connection back to the template from which they were been generated.</aside>
 </thead><tbody>
 <tr>
 <td>description</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>Description of the overall Care Flow</td>
 </tr>
 <tr>
 <td>diagnosis</td>
-<td>string</td>
+<td><code>string</code></td>
 <td></td>
 </tr>
 <tr>
 <td>goals</td>
-<td>list</td>
+<td><code>list</code></td>
 <td>List of <a href="#model-goal">goal objects</a></td>
 </tr>
 </tbody></table>
@@ -1375,12 +1378,12 @@ a connection back to the template from which they were been generated.</aside>
 </thead><tbody>
 <tr>
 <td>title</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>Title of the Care Flow goal</td>
 </tr>
 <tr>
 <td>interventions</td>
-<td>list</td>
+<td><code>list</code></td>
 <td>List of <a href="#model-intervention">goal intervention objects</a></td>
 </tr>
 </tbody></table>
@@ -1395,31 +1398,31 @@ a connection back to the template from which they were been generated.</aside>
 </thead><tbody>
 <tr>
 <td>title</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>Title of the Care Flow intervention</td>
 <td></td>
 </tr>
 <tr>
 <td>reminder_date</td>
-<td>isodatetime</td>
+<td><code>isodatetime</code></td>
 <td>Due date of the intervention</td>
 <td>optional</td>
 </tr>
 <tr>
 <td>completed_at</td>
-<td>isodatetime</td>
+<td><code>isodatetime</code></td>
 <td>Date the intervention was marked completed</td>
 <td>optional</td>
 </tr>
 <tr>
 <td>completed_by_worker_id</td>
-<td>guid</td>
+<td><code>guid</code></td>
 <td>ID of the <a href="#workers">worker</a> who completed this intervention</td>
 <td>optional</td>
 </tr>
 <tr>
 <td>worker_id</td>
-<td>guid</td>
+<td><code>guid</code></td>
 <td>ID of the <a href="#workers">worker</a> who this intervention is assigned to</td>
 <td>optional</td>
 </tr>
@@ -1528,8 +1531,8 @@ a connection back to the template from which they were been generated.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.255709+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.255723+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.448069+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.448086+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1700,8 +1703,8 @@ a connection back to the template from which they were been generated.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.258163+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.258179+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.457523+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.457541+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1966,8 +1969,8 @@ same type will have different effects within the Welkin Coach Portal.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.261514+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.261531+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.467652+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.467670+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2272,8 +2275,8 @@ coaches will always be routed to the right patient even if two [patients](#patie
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.268367+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.268393+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.481165+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.481181+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2486,8 +2489,8 @@ Welkin Ids and a set of external Ids.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.271410+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.271427+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.488764+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.488777+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2538,6 +2541,13 @@ Welkin Ids and a set of external Ids.</p>
 </tr>
 </tbody></table>
 <h1 id='integration-tasks-provisional'>Integration Tasks (provisional)</h1>
+<p>For custom integrations built by Welkin, this endpoint reports the status and resulting error from the ingestion of
+specific data itmes.</p>
+
+<aside>
+This only applies for custom integrations built by Welkin and is rarely used. Integrations created using
+Welkin's standard API are self reporting and do not require Integration Task monitoring as exposed here.</aside>
+
 <blockquote>
 <p>Example Response</p>
 </blockquote>
@@ -2545,18 +2555,24 @@ Welkin Ids and a set of external Ids.</p>
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf1e295-47f5-4027-a382-008c860694c2"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-0c36846acd2f"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"ref_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"cdf456"</span><span class="w">
   </span><span class="p">],</span><span class="w"> 
-  </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8bf1e295-4944-1027-d382-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kiwihealth_pull.process_item"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041332+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041464+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_not_found"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no user with that ID."</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"extra"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"attempt_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='model-9'>Model</h3>
 <table><thead>
@@ -2588,33 +2604,33 @@ Welkin Ids and a set of external Ids.</p>
 </tr>
 <tr>
 <td>provider_id</td>
-<td><code>string</code></td>
-<td></td>
+<td>``</td>
+<td>to be removed</td>
 </tr>
 <tr>
 <td>args</td>
-<td><code>string</code></td>
-<td></td>
+<td>``</td>
+<td>to be removed</td>
 </tr>
 <tr>
 <td>result</td>
-<td><code>optional string</code></td>
-<td></td>
+<td>``</td>
+<td>to be removed</td>
 </tr>
 <tr>
 <td>ref_ids</td>
 <td><code>array string</code></td>
-<td></td>
+<td>Array of external Ids that tasks is working with. This enables tasks to be linked to the resources in systems outside Welkin.</td>
 </tr>
 <tr>
 <td>job_id</td>
 <td><code>string</code></td>
-<td></td>
+<td>Groups related tasks together</td>
 </tr>
 <tr>
 <td>task_name</td>
 <td><code>string</code></td>
-<td></td>
+<td>The name of the task prefixed with the name of the job</td>
 </tr>
 <tr>
 <td>updated_at</td>
@@ -2629,10 +2645,10 @@ Welkin Ids and a set of external Ids.</p>
 <tr>
 <td>errors</td>
 <td><code>array integration-errors</code></td>
-<td></td>
+<td>Array of all the errors that resulted from this specific task. Note, these errors do not roll up to higher level tasks.</td>
 </tr>
 </tbody></table>
-<h3 id='model-integration-error'>Model integration error</h3>
+<h3 id='model-integration-errors'>Model integration-errors</h3>
 <table><thead>
 <tr>
 <th>field</th>
@@ -2642,20 +2658,44 @@ Welkin Ids and a set of external Ids.</p>
 </thead><tbody>
 <tr>
 <td>code</td>
-<td>string</td>
-<td>Machine readable error code</td>
+<td><code>string</code></td>
+<td>Machine readable error code. The set of possible errors is defined during custom implementation. Examples include: <code>user_not_found</code> or <code>customer_disabled</code></td>
 </tr>
 <tr>
 <td>message</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>Human readable error message</td>
 </tr>
 <tr>
 <td>extra</td>
-<td>string</td>
+<td><code>string</code></td>
 <td>JSON blob</td>
 </tr>
 </tbody></table>
+<h3 id='integration-jobs'>Integration jobs</h3>
+<p>An integration job is a series of tasks all linked together with a common job id.</p>
+
+<p>The following describes an example custom (built by Welkin) integration.</p>
+
+<p>Kiwi Health is a health system which sends patient data to Welkin throgh a custom integration. When new data is availible for Welkin to consume Kiwi Health sends Welkin a notification. Welkin then valudates the notification and then fetches the data and processes it.</p>
+
+<p>For example a intregration job might be structured as follows:</p>
+
+<ul>
+<li>kiwihealth_pull.run_kiwihealth_pull
+
+<ul>
+<li>kiwihealth_pull.validate_user</li>
+<li>kiwihealth_pull.fetch_results</li>
+<li>kiwihealth_pull.process_response
+
+<ul>
+<li>kiwihealth_pull.process_item (potentially multiple process_item tasks)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>Status for each task is tracked individually and the overall job can hit failures at any of these stages. The top-level task (run_kiwihealth_pull) reports the overall status of the entire job.</p>
 <h2 id='get-8'>Get</h2>
 <p>Gets a single integration task.</p>
 <h3 id='invocation-26'>Invocation</h3><pre class="highlight shell tab-shell"><code>curl -XGET /v1/integration_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -2669,18 +2709,24 @@ Welkin Ids and a set of external Ids.</p>
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf1e295-47f5-4027-a382-008c860694c2"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-0c36846acd2f"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"ref_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"cdf456"</span><span class="w">
   </span><span class="p">],</span><span class="w"> 
-  </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8bf1e295-4944-1027-d382-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kiwihealth_pull.process_item"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041332+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041464+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_not_found"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no user with that ID."</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"extra"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"attempt_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='params-26'>Params</h3>
 <table><thead>
@@ -2717,24 +2763,30 @@ Welkin Ids and a set of external Ids.</p>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf1e295-47f5-4027-a382-008c860694c2"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-0c36846acd2f"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"ref_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w"> 
           </span><span class="s2">"cdf456"</span><span class="w">
         </span><span class="p">],</span><span class="w"> 
-        </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some_string"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8bf1e295-4944-1027-d382-0c36846acd4c"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"task_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kiwihealth_pull.process_item"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041332+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.041464+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_not_found"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no user with that ID."</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"extra"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w"> 
+              </span><span class="s2">"attempt_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.275705+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.275720+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.502508+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.502525+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2751,12 +2803,12 @@ Welkin Ids and a set of external Ids.</p>
 <tr>
 <td>job_id</td>
 <td><code>optional string</code></td>
-<td></td>
+<td>Groups related tasks together</td>
 </tr>
 <tr>
 <td>task_name</td>
 <td><code>optional string</code></td>
-<td></td>
+<td>The name of the task prefixed with the name of the job</td>
 </tr>
 <tr>
 <td>ref_id</td>
@@ -2995,8 +3047,8 @@ to the <a href="#workers">worker</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.279997+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.280007+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.515543+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.515560+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3213,8 +3265,8 @@ to the <a href="#workers">worker</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.282942+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.282961+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.525308+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.525325+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3245,8 +3297,9 @@ to the <a href="#workers">worker</a>.</p>
 </tr>
 </tbody></table>
 <h1 id='patients'>Patients</h1>
-<p>Patients are the primary data object within Welkin. Almost all other data is attached to a patient. Emails,
-assessment responses, care flows, and many more resources are mapped directly to a specific patient.</p>
+<p>Patients are the primary data object within Welkin. Almost all other data is attached to a patient.
+<a href="#email-addresses">Emails</a>, <a href="#assessment_responses">assessment responses</a>, <a href="#care_flows">care flows</a>, and many more
+resources are mapped directly to a specific patient.</p>
 
 <p>There are no restrictions on patient data and thus duplicate can be created on purpose or by accident. Take care when
 creating new patients that you do not create duplicates inadvertantly.</p>
@@ -3297,7 +3350,7 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>phase</td>
 <td><code>enum</code></td>
-<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+<td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
@@ -3307,16 +3360,16 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
+<td>Timezone in which this <a href="#patients">patient</a> lives</td>
 </tr>
 <tr>
 <td>first_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>Last name of this patient</td>
 </tr>
 <tr>
@@ -3352,22 +3405,22 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>county</td>
 <td><code>string</code></td>
-<td>???</td>
+<td>County in which the patient lives. If unknown then this can be left out.</td>
 </tr>
 <tr>
 <td>zip_code</td>
-<td><code>string</code></td>
-<td>Zip code of this patient&#39;s address</td>
+<td><code>zip_code</code></td>
+<td>Zip code of this patient&#39;s address in five digit form.</td>
 </tr>
 <tr>
 <td>state</td>
-<td><code>string</code></td>
-<td>Two digit abbrivation of the state in which the patient resides.</td>
+<td><code>state</code></td>
+<td>Two character abbrivation of the state in which the patient resides.</td>
 </tr>
 <tr>
 <td>country</td>
-<td><code>country</code></td>
-<td></td>
+<td><code>string</code></td>
+<td>Country in which the <a href="#patients">patient</a> lives</td>
 </tr>
 </tbody></table>
 <h2 id='update-5'>Update</h2>
@@ -3418,7 +3471,7 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>phase</td>
 <td><code>enum</code></td>
-<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+<td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
@@ -3428,16 +3481,16 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
+<td>Timezone in which this <a href="#patients">patient</a> lives</td>
 </tr>
 <tr>
 <td>first_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>Last name of this patient</td>
 </tr>
 <tr>
@@ -3484,7 +3537,7 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>phase</td>
 <td><code>enum</code></td>
-<td>The phase of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+<td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>coach_id</td>
@@ -3494,16 +3547,16 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>timezone</td>
 <td><code>timezone</code></td>
-<td>Timezone which the <a href="#patients">patient</a> lives in.</td>
+<td>Timezone in which this <a href="#patients">patient</a> lives</td>
 </tr>
 <tr>
 <td>first_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>First name of this patient</td>
 </tr>
 <tr>
 <td>last_name</td>
-<td><code>name</code></td>
+<td><code>string</code></td>
 <td>Last name of this patient</td>
 </tr>
 <tr>
@@ -3529,22 +3582,22 @@ is create both via Welkin and in an external tool.</p>
 <tr>
 <td>county</td>
 <td><code>string</code></td>
-<td>???</td>
+<td>County in which the patient lives. If unknown then this can be left out.</td>
 </tr>
 <tr>
 <td>zip_code</td>
-<td><code>string</code></td>
-<td>Zip code of this patient&#39;s address</td>
+<td><code>zip_code</code></td>
+<td>Zip code of this patient&#39;s address in five digit form.</td>
 </tr>
 <tr>
 <td>state</td>
-<td><code>string</code></td>
-<td>Two digit abbrivation of the state in which the patient resides.</td>
+<td><code>state</code></td>
+<td>Two character abbrivation of the state in which the patient resides.</td>
 </tr>
 <tr>
 <td>country</td>
-<td><code>country</code></td>
-<td></td>
+<td><code>string</code></td>
+<td>Country in which the <a href="#patients">patient</a> lives</td>
 </tr>
 <tr>
 <td>email</td>
@@ -3909,8 +3962,8 @@ associated directly with the [patient's](#patients) profile.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.310828+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.310845+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.569337+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.569354+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4088,8 +4141,8 @@ associated directly with the [patient's](#patients) profile.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.314447+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-19T00:36:58.314463+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.576995+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-20T02:22:55.577012+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="s2">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4120,9 +4173,83 @@ associated directly with the [patient's](#patients) profile.</aside>
 </tr>
 </tbody></table>
 <h1 id='types'>Types</h1>
-<p>Reference on the types we use</p>
+<table><thead>
+<tr>
+<th>type</th>
+<th>definition</th>
+<th>example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>enum</td>
+<td><code>string</code> with predefined set of values</td>
+<td><code>&quot;Female&quot;</code></td>
+</tr>
+<tr>
+<td>isodatetime</td>
+<td><code>string</code> following <a href="https://en.wikipedia.org/wiki/ISO_8601">isodatetime format</a> representing a date and time in UTC</td>
+<td><code>&quot;2018-09-15T15:20:01&quot;</code></td>
+</tr>
+<tr>
+<td>isodate</td>
+<td><code>string</code> following the <a href="https://en.wikipedia.org/wiki/ISO_8601">isodatetime format</a> representing a day in the local timezone of the <a href="#workers">worker</a> or <a href="#patients">patient</a></td>
+<td><code>&quot;2018-09-15&quot;</code></td>
+</tr>
+<tr>
+<td>guid</td>
+<td><code>string</code> with X number of characters. 36 characters seperated by dashes 8-4-4-4-12.</td>
+<td><code>&quot;45ceeba9-4944-43d1-b34d-0c36846acd4c&quot;</code></td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>JSON style boolean</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>string</td>
+<td>Any quoted set of characters with no length restriction.</td>
+<td><code>&quot;Welcome to Welkin&#39;s APIs&quot;</code></td>
+</tr>
+<tr>
+<td>phone</td>
+<td><code>string</code> representing a phone number without extensions or other dialing information. Country code should not be included. +1 numbers only.</td>
+<td><code>&quot;555-555-1234&quot;</code></td>
+</tr>
+<tr>
+<td>email</td>
+<td><code>string</code> representing an email address</td>
+<td><code>&quot;support@welkinhealth.com&quot;</code></td>
+</tr>
+<tr>
+<td>timezone</td>
+<td><code>string</code> following <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">iana tz format</a></td>
+<td><code>&quot;US/Pacific&quot;</code></td>
+</tr>
+<tr>
+<td>state</td>
+<td><code>string</code> of two character United States state abbrivation</td>
+<td><code>&quot;CA&quot;</code></td>
+</tr>
+<tr>
+<td>zip_code</td>
+<td><code>string</code> of a five digit United States zip code</td>
+<td><code>&quot;94110&quot;</code></td>
+</tr>
+<tr>
+<td>integer</td>
+<td>Counting numbers with no decimal place including zero and negative numbers</td>
+<td><code>42</code></td>
+</tr>
+<tr>
+<td>json</td>
+<td><code>string</code> following <a href="https://en.wikipedia.org/wiki/JSON">JSON format</a>. Welkin may require the <code>json</code> to have a specific format.</td>
+<td><code>&quot;&quot;</code></td>
+</tr>
+</tbody></table>
+
+<aside>GUIDs are global unique identifiers for objects within Welkin. These Ids are long lived for resources and are unqiue within and across resources.</aside>
 <h1 id='errors'>Errors</h1>
-<p>Commons errors and such</p>
+<p>Common errors and such</p>
 
       </div>
       <div class="dark-box">
