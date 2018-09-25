@@ -2,6 +2,8 @@
 @import 'normalize';
 @import 'variables';
 @import 'icon-font';
+@import 'syntax';
+
 // @import 'rtl'; // uncomment to switch to RTL format
 
 /*
@@ -459,7 +461,7 @@ html, body {
   }
 
   code {
-    background-color: rgba(0,0,0,0.05);
+    background-color: #E9F6F8;
     padding: 3px;
     border-radius: 3px;
     @extend %break-words;
