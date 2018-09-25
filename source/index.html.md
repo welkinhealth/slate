@@ -1,9 +1,10 @@
-# Welkin API documentation
+# Overview
+
 This documentation outlines the datatypes available via Welkin’s APIs and the usage of these APIs. APIs exist for all of the core datatypes managed within Welkin.
 
 **Base URL:** https://api.welkinhealth.com
 
-# Authentication
+## Authentication
 > Example token fetch (PYTHON)
 
 ```python
@@ -44,16 +45,27 @@ Use of Welkin APIs requires the use of 2-legged OAuth using the JWT-Bearer flow.
 
 Once you obtain an access token, the token can should be passed as an Authorization header along with the keyword “Bearer”.
 
-# Notification Job
-Welkin sends a webhook notification to API consumer's servers when the state of any resource changes. The webhook includes which resources have changed, the time range of the changes, and a url to GET the deltas.
+More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
-Change notification webhooks are delayed up to 60 seconds from the time of update.
+A simple guide to understanding JWT can befound in this [Medium article](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec).
 
-<talk about what the expected flow is for using the API in conjunction with notifications>
+## Notification Job
+Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to their data within our platform. Those subscribers can then decide if they want to pull the updated resources into their system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
 
-<retry logic>
+The webhook notification includes which resources have changed, the time range of the changes, and a url to GET the deltas.
 
-Webhook body
+Change notification webhooks are delayed no more than 60 seconds from the time of update.
+
+An example of Welkin’s data sync could look like the following:
+
+1. Alex, a coach, logs into Welkin and updates the phone number in the patient's (Allison)  profile.
+2. Welkin sends a notification to the customer’s 3rd party system, letting them know that the patient object for Allison has been changed.
+3. In response, the 3rd party system requests the full patient object for Allison, which contains the new phone number.
+4. The system processes the updated patient object and saves it.
+5. Both Welkin and the customer’s integrated system are now in sync, both reflecting Allison’s updated phone number.
+
+### Webhook body
+
 Each notification contains all the updates for all the resource types since the last successful notification.
 
 > Example notification request body (JSON)
@@ -65,12 +77,12 @@ Each notification contains all the updates for all the resource types since the 
     "href": "https://api.welkinhealth.com/v1/patients?page[to]=2018-05-15T23:34:05.647496&page[from]=2018-05-14T23:34:05.647496"}]
 ```
 
-### Webhook request body model
+#### Model notification webhook request body
 field | type | description
 - | - | -
 _ | `list` | List of data_update_notification objects
 
-### data_update_notification model
+#### Model data_update_notification
 field | type | description
 - | - | -
 resource | `string` | resource endpoint path name
@@ -78,12 +90,13 @@ from | `isodatetime` | date of first update
 to | `isodatetime` | date of latest update
 href | `string` | link to GET all updates for this notification
 
-## Webhook security
-<how do we authorize into the endpoint at the client>
+### Webhook security
+Welkin's APIs expect that the webhook destination is secured using [JWT Bearer Authorization](#authentication) in the same manor that our core API is secured. This ensures that patient data remains secure and protected at all times.
+
+# Collection Reference
 
 
-
-# Assessment Responses
+## Assessment Responses
 
 
 Assessments can be completed in external systems and loaded into Welkin for display in the coach portal.
@@ -92,6 +105,8 @@ Assessments completed in Welkin can be retrieved via this API.
 
 Assessment responses must match existing  assessment templates which have been created in
 [Workshop](https://workshop.welkinhealth.com).
+
+
 
 
 
@@ -133,10 +148,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single assessment response.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/assessment_responses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -166,7 +181,7 @@ curl -XGET /v1/assessment_responses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -178,13 +193,13 @@ id | `guid` | The primary identifier
   
 
 
-## Create
+### Create
 
 
 
 
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/assessment_responses -d 
@@ -214,7 +229,7 @@ curl -XPOST /v1/assessment_responses -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -231,10 +246,10 @@ title | `string` |
   
 
 
-## Find
+### Find
 Finds  assessment responses, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/assessment_responses
@@ -268,8 +283,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.418318+00:00", 
-        "page[to]": "2018-09-20T02:22:55.418345+00:00", 
+        "page[from]": "2018-09-25T00:47:03.340003+00:00", 
+        "page[to]": "2018-09-25T00:47:03.340028+00:00", 
         "page[size]": 50
       }
     }
@@ -277,7 +292,7 @@ curl -XGET /v1/assessment_responses
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -291,7 +306,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Calendar Events
+## Calendar Events
 
 
 Calendar events belong to a [worker calender](#calendars), and reference a [patient](#patients).
@@ -352,10 +367,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single calendar event.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -383,7 +398,7 @@ curl -XGET /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -394,10 +409,10 @@ id | `guid` | The primary identifier
   
   
 
-## Update
+### Update
 Updates an existing calendar event.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -425,7 +440,7 @@ curl -XPUT /v1/calendar_events/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -440,10 +455,10 @@ outcome | `enum` | The result of the event if it is no longer upcoming (`complet
   
   
 
-## Create
+### Create
 Creates a new calendar event.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/calendar_events -d 
@@ -471,7 +486,7 @@ curl -XPOST /v1/calendar_events -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -489,10 +504,10 @@ appointment_type | `string` | Type of appointment (see note for details)
   
 
 
-## Find
+### Find
 Finds  calendar events, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/calendar_events
@@ -524,8 +539,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.434622+00:00", 
-        "page[to]": "2018-09-20T02:22:55.434639+00:00", 
+        "page[from]": "2018-09-25T00:47:03.348085+00:00", 
+        "page[to]": "2018-09-25T00:47:03.348098+00:00", 
         "page[size]": 50
       }
     }
@@ -533,7 +548,7 @@ curl -XGET /v1/calendar_events
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -547,7 +562,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Calendars
+## Calendars
 
 
 Calendars link [Calendar Events](#calendar-events) to [Workers](#workers).
@@ -583,10 +598,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single calendar.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/calendars/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -606,7 +621,7 @@ curl -XGET /v1/calendars/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -620,10 +635,10 @@ id | `guid` | The primary identifier
 
 
 
-## Find
+### Find
 Finds  calendars, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/calendars
@@ -647,8 +662,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.441393+00:00", 
-        "page[to]": "2018-09-20T02:22:55.441410+00:00", 
+        "page[from]": "2018-09-25T00:47:03.355459+00:00", 
+        "page[to]": "2018-09-25T00:47:03.355473+00:00", 
         "page[size]": 50
       }
     }
@@ -656,7 +671,7 @@ curl -XGET /v1/calendars
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -670,7 +685,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Care Flows
+## Care Flows
 
 
 
@@ -759,10 +774,10 @@ completed_by_worker_id | `guid` | ID of the [worker](#workers) who completed thi
 worker_id | `guid` | ID of the [worker](#workers) who this intervention is assigned to | optional
 
 
-## Get
+### Get
 Gets a single care flow.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/care_flows/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -809,7 +824,7 @@ curl -XGET /v1/care_flows/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -823,10 +838,10 @@ id | `guid` | The primary identifier
 
 
 
-## Find
+### Find
 Finds  care flows, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/care_flows
@@ -877,8 +892,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.448069+00:00", 
-        "page[to]": "2018-09-20T02:22:55.448086+00:00", 
+        "page[from]": "2018-09-25T00:47:03.365607+00:00", 
+        "page[to]": "2018-09-25T00:47:03.365628+00:00", 
         "page[size]": 50
       }
     }
@@ -886,7 +901,7 @@ curl -XGET /v1/care_flows
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -900,12 +915,13 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
 
 
-# Conversations
+## Conversations
 
 
 Text based conversations which [worker](#workers) have with [patient](#patients).
 
 <aside>There may be multiple conversations of each conversation type with a single patient.</aside>
+
 
 
 
@@ -938,10 +954,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single conversation.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/conversations/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -962,7 +978,7 @@ curl -XGET /v1/conversations/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -975,10 +991,10 @@ id | `guid` | The primary identifier
   
 
 
-## Create
+### Create
 Creates a new conversation.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/conversations -d 
@@ -999,7 +1015,7 @@ curl -XPOST /v1/conversations -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1011,10 +1027,10 @@ user_id | `guid` | Id of the [patient](#patients) which this conversation is wit
   
 
 
-## Find
+### Find
 Finds  conversations, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/conversations
@@ -1039,8 +1055,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.457523+00:00", 
-        "page[to]": "2018-09-20T02:22:55.457541+00:00", 
+        "page[from]": "2018-09-25T00:47:03.373798+00:00", 
+        "page[to]": "2018-09-25T00:47:03.373823+00:00", 
         "page[size]": 50
       }
     }
@@ -1048,7 +1064,7 @@ curl -XGET /v1/conversations
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1062,7 +1078,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Custom Data Type Records
+## Custom Data Type Records
 
 
 Welkin stores custom structured data about a [patient](#patients) in the form of custom data type records.
@@ -1072,6 +1088,8 @@ before being created via this endpoint.
 <aside>Multiple records of the same data type can be created for each [patient](#patients). Depending on the display
 conditions and data uses defined in [Workshop](https://workshop.welkinhealth.com), creating multiple records of the
 same type will have different effects within the Welkin Coach Portal.</aside>
+
+
 
 
 
@@ -1112,10 +1130,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single custom data type record.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -1143,7 +1161,7 @@ curl -XGET /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1155,10 +1173,10 @@ id | `guid` | The primary identifier
   
   
 
-## Update
+### Update
 Updates an existing custom data type record.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -1186,7 +1204,7 @@ curl -XPUT /v1/custom_data_type_records/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1199,10 +1217,10 @@ body | `json` | The content of the custom date type record.
   
   
 
-## Create
+### Create
 Creates a new custom data type record.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/custom_data_type_records -d 
@@ -1230,7 +1248,7 @@ curl -XPOST /v1/custom_data_type_records -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1244,10 +1262,10 @@ type_name | `string` | Name of the custom data type as defined in [Workshop](htt
   
 
 
-## Find
+### Find
 Finds  custom data type records, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/custom_data_type_records
@@ -1279,8 +1297,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.467652+00:00", 
-        "page[to]": "2018-09-20T02:22:55.467670+00:00", 
+        "page[from]": "2018-09-25T00:47:03.383212+00:00", 
+        "page[to]": "2018-09-25T00:47:03.383232+00:00", 
         "page[size]": 50
       }
     }
@@ -1288,7 +1306,7 @@ curl -XGET /v1/custom_data_type_records
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1303,7 +1321,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Email Addresses
+## Email Addresses
 
 
 Manage the availible email addresses at which coaches can contact the [patient](#patients).
@@ -1313,6 +1331,11 @@ a email address make sure that you have a record of how and when consent was rec
 
 <aside>There are no uniqueness constraints on email addresses. Unlike [phone numbers](#phone-numbers), emails back to
 coaches will always be routed to the right patient even if two [patients](#patients) share the same email address.</aside>
+
+
+
+
+
 
 
 
@@ -1353,10 +1376,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single email addresse.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -1381,7 +1404,7 @@ curl -XGET /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1393,10 +1416,10 @@ id | `guid` | The primary identifier
   
   
 
-## Update
+### Update
 Updates an existing email addresse.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -1421,7 +1444,7 @@ curl -XPUT /v1/email_addresses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1438,10 +1461,10 @@ automatic_recipient | `boolean` | True if and only if the [patient](#patients) a
   
   
 
-## Create
+### Create
 Creates a new email addresse.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/email_addresses -d 
@@ -1466,7 +1489,7 @@ curl -XPOST /v1/email_addresses -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1483,10 +1506,10 @@ automatic_recipient | `boolean` | True if and only if the [patient](#patients) a
   
 
 
-## Find
+### Find
 Finds  email addresses, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/email_addresses
@@ -1515,8 +1538,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.481165+00:00", 
-        "page[to]": "2018-09-20T02:22:55.481181+00:00", 
+        "page[from]": "2018-09-25T00:47:03.393355+00:00", 
+        "page[to]": "2018-09-25T00:47:03.393375+00:00", 
         "page[size]": 50
       }
     }
@@ -1524,7 +1547,7 @@ curl -XGET /v1/email_addresses
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1539,7 +1562,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# External Ids (provisional)
+## External Ids (provisional)
 
 
 
@@ -1548,6 +1571,9 @@ must be in Welkin Ids. In rare cases custom integartions may be created which re
 Welkin Ids and a set of external Ids.
 
 <aside>Duplicate values within the same namespace will be rejected.</aside>
+
+
+
 
 
 
@@ -1581,10 +1607,10 @@ welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing 
   
 
 
-## Update
+### Update
 Updates an existing external id.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/external_ids/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -1605,7 +1631,7 @@ curl -XPUT /v1/external_ids/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1621,10 +1647,10 @@ welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing 
   
   
 
-## Create
+### Create
 Creates a new external id.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/external_ids -d 
@@ -1645,7 +1671,7 @@ curl -XPOST /v1/external_ids -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1660,10 +1686,10 @@ welkin_id | `guid` | Id of the resource within Welkin. Must be a valid existing 
   
 
 
-## Find
+### Find
 Finds  external ids, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/external_ids
@@ -1688,8 +1714,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.488764+00:00", 
-        "page[to]": "2018-09-20T02:22:55.488777+00:00", 
+        "page[from]": "2018-09-25T00:47:03.401950+00:00", 
+        "page[to]": "2018-09-25T00:47:03.401963+00:00", 
         "page[size]": 50
       }
     }
@@ -1697,7 +1723,7 @@ curl -XGET /v1/external_ids
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1714,7 +1740,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Integration Tasks (provisional)
+## Integration Tasks (provisional)
 
 
 
@@ -1810,10 +1836,10 @@ For example a intregration job might be structured as follows:
 Status for each task is tracked individually and the overall job can hit failures at any of these stages. The top-level task (run_kiwihealth_pull) reports the overall status of the entire job.
 
 
-## Get
+### Get
 Gets a single integration task.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/integration_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -1850,7 +1876,7 @@ curl -XGET /v1/integration_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1865,10 +1891,10 @@ id | `guid` | The primary identifier
 
 
 
-## Find
+### Find
 Finds  integration tasks, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/integration_tasks
@@ -1909,8 +1935,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.502508+00:00", 
-        "page[to]": "2018-09-20T02:22:55.502525+00:00", 
+        "page[from]": "2018-09-25T00:47:03.413915+00:00", 
+        "page[to]": "2018-09-25T00:47:03.413929+00:00", 
         "page[size]": 50
       }
     }
@@ -1918,7 +1944,7 @@ curl -XGET /v1/integration_tasks
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -1935,7 +1961,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
 
 
-# Messages
+## Messages
 
 
 View and create messages which are shown in the [conversation](#conversations) view on
@@ -1943,6 +1969,12 @@ the [patient](#patients) profile in the coach portal.
 
 <aside>Creating a message does NOT send that message to the [patient](#patients) . It records that the message was sent
 to the [patient](#patients) . Sending must take place within a 3rd party system.</aside>
+
+
+
+
+
+
 
 
 
@@ -1985,10 +2017,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single message.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/messages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -2014,7 +2046,7 @@ curl -XGET /v1/messages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2027,7 +2059,7 @@ id | `guid` | The primary identifier
   
 
 
-## Create
+### Create
 
 
 Store a new message on the [patient's](#patients) profile. Messages created here display a record of communication
@@ -2037,7 +2069,7 @@ to the [worker](#workers).
 
 
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/messages -d 
@@ -2063,7 +2095,7 @@ curl -XPOST /v1/messages -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2080,10 +2112,10 @@ send_time | `isodatetime` | Date and time when the message was sent.
   
 
 
-## Find
+### Find
 Finds  messages, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/messages
@@ -2113,8 +2145,8 @@ curl -XGET /v1/messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.515543+00:00", 
-        "page[to]": "2018-09-20T02:22:55.515560+00:00", 
+        "page[from]": "2018-09-25T00:47:03.425246+00:00", 
+        "page[to]": "2018-09-25T00:47:03.425261+00:00", 
         "page[size]": 50
       }
     }
@@ -2122,7 +2154,7 @@ curl -XGET /v1/messages
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2136,8 +2168,12 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Patient Tasks
+## Patient Tasks
 
+
+Tasks sent to patients in the Welkin app. Often this links to an patient facing survey.
+
+**To be removed** until we have a more concrete use case for this.
 
 
 
@@ -2172,10 +2208,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single patient task.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -2197,7 +2233,7 @@ curl -XGET /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2210,10 +2246,10 @@ id | `guid` | The primary identifier
   
 
 
-## Create
+### Create
 Creates a new patient task.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/patient_tasks -d 
@@ -2235,7 +2271,7 @@ curl -XPOST /v1/patient_tasks -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2247,10 +2283,10 @@ task_type | `string` |
   
   
 
-## Delete
+### Delete
 Deletes a single patient task.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XDELETE /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -2272,7 +2308,7 @@ curl -XDELETE /v1/patient_tasks/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2284,10 +2320,10 @@ id | `guid` | The primary identifier
   
   
 
-## Find
+### Find
 Finds  patient tasks, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/patient_tasks
@@ -2313,8 +2349,8 @@ curl -XGET /v1/patient_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.525308+00:00", 
-        "page[to]": "2018-09-20T02:22:55.525325+00:00", 
+        "page[from]": "2018-09-25T00:47:03.432565+00:00", 
+        "page[to]": "2018-09-25T00:47:03.432582+00:00", 
         "page[size]": 50
       }
     }
@@ -2322,7 +2358,7 @@ curl -XGET /v1/patient_tasks
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2336,7 +2372,7 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Patients
+## Patients
 
 
 Patients are the primary data object within Welkin. Almost all other data is attached to a patient.
@@ -2349,6 +2385,18 @@ creating new patients that you do not create duplicates inadvertantly.
 When using the Welkin API it is best of have one system be the Master copy and other systems be followers. In this
 model patients are created in only one source and thus duplicates are very rare and not introduced when the patient
 is create both via Welkin and in an external tool.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2405,10 +2453,10 @@ country | `string` | Country in which the [patient](#patients) lives
   
 
 
-## Update
+### Update
 Updates an existing patient.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/patients/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -2440,7 +2488,7 @@ curl -XPUT /v1/patients/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2458,10 +2506,10 @@ birthday | `isodate` | Date of birth of this patient
   
   
 
-## Create
+### Create
 Creates a new patient.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/patients -d 
@@ -2493,7 +2541,7 @@ curl -XPOST /v1/patients -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2512,7 +2560,7 @@ zip_code | `zip_code` | Zip code of this patient's address in five digit form.
 state | `state` | Two character abbrivation of the state in which the patient resides.
 country | `string` | Country in which the [patient](#patients) lives
 email | `email` | 
-external_ids | `list(object)` | 
+external_ids | `object` | 
 phone | `phone` | 
   
 
@@ -2522,7 +2570,7 @@ phone | `phone` |
 
   
 
-# Phone Numbers
+## Phone Numbers
 
 
 Manage the availible phone based contact methods for a [patient](#patients). Phone based contact methods are
@@ -2534,6 +2582,15 @@ make sure that you have a record of how and when consent was received from the p
 <aside>There are no uniqueness constraints on phone numbers but if two [patients](#patients) share the same
 phone number calls and sms messages will be listed as unassigned in the coach portal rather than
 associated directly with the [patient's](#patients) profile.</aside>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2582,10 +2639,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single phone number.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -2614,7 +2671,7 @@ curl -XGET /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2626,10 +2683,10 @@ id | `guid` | The primary identifier
   
   
 
-## Update
+### Update
 Updates an existing phone number.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPUT /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d 
@@ -2658,7 +2715,7 @@ curl -XPUT /v1/phone_numbers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2678,10 +2735,10 @@ automatic_recipient | `boolean` | True if and only if the [patient](#patients) h
   
   
 
-## Create
+### Create
 Creates a new phone number.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XPOST /v1/phone_numbers -d 
@@ -2710,7 +2767,7 @@ curl -XPOST /v1/phone_numbers -d
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2731,10 +2788,10 @@ automatic_recipient | `boolean` | True if and only if the [patient](#patients) h
   
 
 
-## Find
+### Find
 Finds  phone numbers, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/phone_numbers
@@ -2767,8 +2824,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.569337+00:00", 
-        "page[to]": "2018-09-20T02:22:55.569354+00:00", 
+        "page[from]": "2018-09-25T00:47:03.454484+00:00", 
+        "page[to]": "2018-09-25T00:47:03.454506+00:00", 
         "page[size]": 50
       }
     }
@@ -2776,7 +2833,7 @@ curl -XGET /v1/phone_numbers
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2791,12 +2848,17 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
   
 
-# Workers
+## Workers
 
 
 All the workers for who have access to Welkin Coach Portal.
 
 Workers are assigned to [patients](#patients) as their primary coach via `[Patient](#patients).coach_id`
+
+
+
+
+
 
 
 
@@ -2837,10 +2899,10 @@ created_at | `isodatetime` | Datetime the resource was created
 
   
 
-## Get
+### Get
 Gets a single worker.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/workers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
@@ -2865,7 +2927,7 @@ curl -XGET /v1/workers/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 }
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2880,10 +2942,10 @@ id | `guid` | The primary identifier
 
 
 
-## Find
+### Find
 Finds  workers, subject to filters.
 
-### Invocation
+#### Invocation
 
 ```shell
 curl -XGET /v1/workers
@@ -2912,8 +2974,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-20T02:22:55.576995+00:00", 
-        "page[to]": "2018-09-20T02:22:55.577012+00:00", 
+        "page[from]": "2018-09-25T00:47:03.462641+00:00", 
+        "page[to]": "2018-09-25T00:47:03.462670+00:00", 
         "page[size]": 50
       }
     }
@@ -2921,7 +2983,7 @@ curl -XGET /v1/workers
 ]
 ```
 
-###Params
+#### Params
 
 
 param | type | description
@@ -2936,7 +2998,9 @@ page[size] | `optional integer` | Maximum number of items to include in the resp
   
 
 
-# Types
+# Reference
+
+## Types
 
 type | definition | example
 - | - | -
@@ -2956,7 +3020,7 @@ json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Wel
 
 <aside>GUIDs are global unique identifiers for objects within Welkin. These Ids are long lived for resources and are unqiue within and across resources.</aside>
 
-# Errors
+## Errors
 
 Common errors and such
 
