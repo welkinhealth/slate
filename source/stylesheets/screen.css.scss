@@ -279,7 +279,7 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 
 .page-wrapper {
-  margin-left: $nav-width + 30px;
+  margin-left: $nav-width + 10px;
   position: relative;
   z-index: 10;
   // background-color: $main-bg;
@@ -416,7 +416,8 @@ html, body {
 
   h3 {
     font-size: 18px;
-    margin-top: 2.5em;
+    margin: 0;
+    padding-top: 2.5em; // padding here is better than margin b/c the right column aligns better
     margin-bottom: 0.8em;
   }
 
@@ -424,6 +425,8 @@ html, body {
     font-size: 16px;
     color: #26A7BF;
     font-weight: 500;
+    margin-bottom: 0;
+    padding-bottom: 0.8em;
   }
 
   h5, h6 {
@@ -502,10 +505,9 @@ html, body {
   }
 
   aside {
+    margin-left: 16px;
     padding-top: 1em;
     padding-bottom: 1em;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
 
@@ -519,9 +521,9 @@ html, body {
   }
 
   aside:before {
-    vertical-align: middle;
-    padding-right: 0.5em;
-    font-size: 14px;
+    content: "Note: ";
+    vertical-align: baseline;
+    color:#E54B57 ;
   }
 
   aside.notice:before {
