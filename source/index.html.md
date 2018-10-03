@@ -1,8 +1,19 @@
 # Overview
 
+Welkin’s goal is to empower you, our customers, to deliver patient-centered care. Our API exists in support of this goal. Whether it’s data kept within our platform, or your pre-existing systems, we think you should have complete, real-time access and agency over your own data.
+
+Using Welkin's APIs will allow you to keep your systems in sync with Welkin.
+
+By design, our API notifies your subscribed systems of any updates to your resources within Welkin. For example, when a patient's phone number is changed in Welkin, that information is immediately sent to your systems, keeping them up to date with the latest values stored in our platform.
+
+Welkin's API also transfer the data created and updated in your 3rd party systems into our platform, keeping your information across systems aligned.
+
 This documentation outlines the data types available via Welkin’s APIs and the usage of these APIs. APIs exist for all of the core data types managed within Welkin.
 
 **Base URL:** https://api.welkinhealth.com
+
+## API updates
+**Welkin's API is in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.
 
 ## Authentication
 > Example token fetch (PYTHON)
@@ -51,14 +62,14 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
 A simple guide to understanding JWT can befound in this [Medium article](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec).
 
-# Notification Job
+# Update Notifications
 Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
 
-The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes.
+The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
 
 Webhook notifications are delayed up to 60 seconds, from the time the resource is changed in Welkin.
 
-An example of Welkin’s data sync could look like the following:
+**An example of Welkin’s data sync could look like the following:**
 
 1. Alex, a worker, logs into Welkin and updates the phone number in the patient's (Allison) profile.
 2. Welkin sends a notification to the customer’s 3rd party system, letting them know that the patient object for Allison has been changed.
@@ -95,8 +106,246 @@ href | `string` | Link to GET all updates for this notification
 ### Webhook security
 Welkin's APIs expect that the webhook destination is secured using [JWT Bearer Authorization](#authentication) in the same manor that our core API is secured. This ensures that patient data remains secure and protected at all times.
 
-# Api Reference
+### Find endpoints
+> Example Request
 
+```shell
+curl -XGET /v1/patients?page[from]=2018-06-15T10:30:01&page[to]=2018-09-30T10:29:59&page[size]=10
+```
+
+You can pull large batches of data from Welkin at anytime using the *Find* endpoint for any API resource. These endpoints support filtering by time ranges. If your system misses notifications or needs data from a specific time range you should use the *Find* endpoints to pull data for the missing time range.
+
+The example here pulls patients created or updated during the time range June 15th 2018 to September 30th 2018.
+
+# API Reference
+
+
+## App Messages
+
+
+App Messages can be viewed or created from the [conversation](#conversations) view of the [Patient](#patients)
+Profile. App Messages are text based communications that are sent to patients via a web or mobile app and do not
+include emails or sms messages.
+
+<aside>Creating an App Message does NOT send that message to the <a href="#patients">patient</a>. Creating the message resource
+via this api only records that the message was sent to the <a href="#patients">patient</a>. Messages are sent via
+3rd party systems, not Welkin.</aside>
+
+
+
+
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
+  "direction": "inbound", 
+  "contents": "Hi Developer, Welcome to Welkin Health.", 
+  "automatically_sent": false, 
+  "send_time": "2018-09-12T01:27:32.045046+00:00", 
+  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "created_at": "2018-09-12T01:27:32.045336+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
+direction <br /><code><a href='#enum'>enum</a></code> | Direction of the messsage from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#string'>string</a></code> | Text of the message
+automatically_sent <br /><code><a href='#boolean'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
+send_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
+updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+  
+  
+  
+
+### Get
+Retrieves a single app message.
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
+```
+
+`GET /v1/app_messages/:id`
+  
+
+> Example Response
+
+```json
+{
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
+  "direction": "inbound", 
+  "contents": "Hi Developer, Welcome to Welkin Health.", 
+  "automatically_sent": false, 
+  "send_time": "2018-09-12T01:27:32.045046+00:00", 
+  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "created_at": "2018-09-12T01:27:32.045336+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+  
+
+  
+  
+
+
+### Create
+
+
+New messages can be created in a [Patient](#patients)  Profile. Messages created in Welkin are recorded in the
+[conversation](#conversations) view.
+
+<aside>Creating a message record does NOT cause that message to be sent to the <a href="#patients">patient</a>.</aside>
+
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/app_messages -d '{
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
+  "direction": "inbound", 
+  "contents": "Hi Developer, Welcome to Welkin Health.", 
+  "send_time": "2018-09-12T01:27:32.045046+00:00"
+}'
+```
+
+`POST /v1/app_messages -d { }`
+  
+
+> Example Response
+
+```json
+{
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
+  "direction": "inbound", 
+  "contents": "Hi Developer, Welcome to Welkin Health.", 
+  "automatically_sent": false, 
+  "send_time": "2018-09-12T01:27:32.045046+00:00", 
+  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "created_at": "2018-09-12T01:27:32.045336+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
+direction <br /><code><a href='#enum'>enum</a></code> | Direction of the messsage from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#string'>string</a></code> | Text of the message
+send_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
+  
+
+  
+  
+
+
+### Find
+Finds app messages, using param filters.
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/app_messages
+```
+
+`GET /v1/app_messages`
+  
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
+        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
+        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
+        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
+        "direction": "inbound", 
+        "contents": "Hi Developer, Welcome to Welkin Health.", 
+        "automatically_sent": false, 
+        "send_time": "2018-09-12T01:27:32.045046+00:00", 
+        "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+        "created_at": "2018-09-12T01:27:32.045336+00:00"
+      }
+    ], 
+    "meta": {
+      "current": {
+        "page[from]": "2018-10-03T22:06:44.126027+00:00", 
+        "page[to]": "2018-10-03T22:06:44.126050+00:00", 
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+  
+
+  
+  
+  
 
 ## Assessment Responses
 
@@ -107,6 +356,10 @@ The data format of assessment responses created via this API must match existing
 created in [Workshop](https://workshop.welkinhealth.com).
 
 Similarly, Assessments completed in Welkin can be retrieved via this API.
+
+
+
+
 
 
 
@@ -140,10 +393,10 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
 param | description
 - | -
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-spec_id <br /><code><a href='#string'>string</a></code> | (Deprecated) Id of the assessment which this response corresponds to.
+spec_id <br /><code><a href='#string'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to.
 spec_name <br /><code><a href='#string'>string</a></code> | The ref_name for the assessment as it appears in workshop.
 spec_version <br /><code><a href='#string'>string</a></code> | Optionally, the version string of assessment spec. If not specified, the assessment spec most recently authored in Workshop will be used.
-patient_id <br /><code><a href='#guid'>guid</a></code> | Id of the [patient](#patients)
+patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients)
 model <br /><code><a href='#json'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
@@ -262,10 +515,10 @@ curl -XPOST /v1/assessment_responses -d '{
 
 param | description
 - | -
-spec_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | (Deprecated) Id of the assessment which this response corresponds to.
+spec_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to.
 spec_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The ref_name for the assessment as it appears in workshop.
 spec_version <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Optionally, the version string of assessment spec. If not specified, the assessment spec most recently authored in Workshop will be used.
-patient_id <br /><code><a href='#guid'>guid</a></code> | Id of the [patient](#patients)
+patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients)
 model <br /><code><a href='#anything'>anything</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 title <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The title for the assessment. If not specified, the default title (configured in Workshop) will be used.
   
@@ -315,8 +568,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:34.955696+00:00", 
-        "page[to]": "2018-09-28T23:13:34.955734+00:00", 
+        "page[from]": "2018-10-03T22:06:44.138680+00:00", 
+        "page[to]": "2018-10-03T22:06:44.138698+00:00", 
         "page[size]": 50
       }
     }
@@ -360,6 +613,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 
 
 
+
 ### Model
 
 > Example Response
@@ -369,7 +623,6 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
@@ -425,7 +678,6 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
   "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
@@ -477,7 +729,6 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
@@ -518,7 +769,7 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
+  "user_id": "4afd3b73-3f6b-460d-adf4-f87d48e9fe82", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "day": null, 
@@ -537,7 +788,6 @@ curl -XPOST /v1/calendar_events -d '{
   "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
@@ -595,7 +845,6 @@ curl -XGET /v1/calendar_events
         "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
         "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
         "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-        "user_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
         "is_all_day": false, 
         "start_time": "2018-09-10T18:56:19.357228+00:00", 
         "end_time": "2018-09-10T18:56:19.357540+00:00", 
@@ -609,8 +858,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:34.976428+00:00", 
-        "page[to]": "2018-09-28T23:13:34.976460+00:00", 
+        "page[from]": "2018-10-03T22:06:44.155065+00:00", 
+        "page[to]": "2018-10-03T22:06:44.155081+00:00", 
         "page[size]": 50
       }
     }
@@ -740,8 +989,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:34.982955+00:00", 
-        "page[to]": "2018-09-28T23:13:34.982977+00:00", 
+        "page[from]": "2018-10-03T22:06:44.160351+00:00", 
+        "page[to]": "2018-10-03T22:06:44.160368+00:00", 
         "page[size]": 50
       }
     }
@@ -769,9 +1018,11 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 
 Care Flows lay out a set of tasks, or multiple sets of tasks, to help the patient achieve 1 or more Goals.
 
-<aside>Care Flows can be created in the Coach Portal using a Care Flow template (designed in Workshop), or they may be
-automatically created as the end result of a Process (also designed in Workshop). When using a template to make
-a new Care Flow, changes made to the Care Flow will not be reflected in the template it originated from.</aside>
+<aside>Care Flows can be created in the Coach Portal using a Care Flow template (designed in
+<a href="https://workshop.welkinhealth.com">Workshop</a>), or they may be automatically created as the end result of a Process
+(also designed in <a href="https://workshop.welkinhealth.com">Workshop</a>). When using a template to make a new Care Flow,
+changes made to the Care Flow will not be reflected in the template it originated from.</aside>
+
 
 
 
@@ -925,8 +1176,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:34.989542+00:00", 
-        "page[to]": "2018-09-28T23:13:34.989560+00:00", 
+        "page[from]": "2018-10-03T22:06:44.166348+00:00", 
+        "page[to]": "2018-10-03T22:06:44.166363+00:00", 
         "page[size]": 50
       }
     }
@@ -956,6 +1207,7 @@ Conversations track the text-based conversations between [worker](#workers) and 
 Text-based communications supported by Welkin include, SMS, email, and in-app messaging.
 
 <aside>There may be multiple conversations of each conversation type with a single patient.</aside>
+
 
 
 
@@ -1103,8 +1355,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:34.998015+00:00", 
-        "page[to]": "2018-09-28T23:13:34.998036+00:00", 
+        "page[from]": "2018-10-03T22:06:44.176130+00:00", 
+        "page[to]": "2018-10-03T22:06:44.176150+00:00", 
         "page[size]": 50
       }
     }
@@ -1117,6 +1369,7 @@ curl -XGET /v1/conversations
 
 param | description
 - | -
+patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) which this conversation is with
 page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
@@ -1375,8 +1628,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.009845+00:00", 
-        "page[to]": "2018-09-28T23:13:35.009867+00:00", 
+        "page[from]": "2018-10-03T22:06:44.187425+00:00", 
+        "page[to]": "2018-10-03T22:06:44.187439+00:00", 
         "page[size]": 50
       }
     }
@@ -1420,6 +1673,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 
 
 
+
 ### Model
 
 > Example Response
@@ -1430,7 +1684,6 @@ more <a href="#patients">patients</a> share the same email address.</aside>
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false, 
@@ -1480,7 +1733,6 @@ curl -XGET /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false, 
@@ -1530,7 +1782,6 @@ curl -XPUT /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false, 
@@ -1572,7 +1823,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
+  "user_id": "7c24e14d-e9c8-4ee3-921a-f5a02d22c39a", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1590,7 +1841,6 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false, 
@@ -1644,7 +1894,6 @@ curl -XGET /v1/email_addresses
         "email": "developer@welkinhealth.com", 
         "friendly_name": "developer contact", 
         "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-        "user_id": "14492e35-c4e4-4235-8175-aa874321144e", 
         "verified": false, 
         "opted_in_to_email": true, 
         "automatic_recipient": false, 
@@ -1654,8 +1903,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.023791+00:00", 
-        "page[to]": "2018-09-28T23:13:35.023811+00:00", 
+        "page[from]": "2018-10-03T22:06:44.199442+00:00", 
+        "page[to]": "2018-10-03T22:06:44.199456+00:00", 
         "page[size]": 50
       }
     }
@@ -1827,8 +2076,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.034253+00:00", 
-        "page[to]": "2018-09-28T23:13:35.034272+00:00", 
+        "page[from]": "2018-10-03T22:06:44.211624+00:00", 
+        "page[to]": "2018-10-03T22:06:44.211645+00:00", 
         "page[size]": 50
       }
     }
@@ -1997,8 +2246,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.039728+00:00", 
-        "page[to]": "2018-09-28T23:13:35.039743+00:00", 
+        "page[from]": "2018-10-03T22:06:44.217779+00:00", 
+        "page[to]": "2018-10-03T22:06:44.217796+00:00", 
         "page[size]": 50
       }
     }
@@ -2023,235 +2272,11 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
   
 
 
-## Messages
-
-
-Messages can be viewed or created from the [conversation](#conversations) view of the [Patient](#patients) Profile.
-
-<aside>Creating a message does NOT send that message to the <a href="#patients">patient</a>. Creating the message resource via
-this api only records that the message was sent to the <a href="#patients">patient</a>. Messages are sent via
-3rd party systems, not Welkin.</aside>
-
-
-
-
-
-
-
-
-
-
-
-### Model
-
-> Example Response
-
-```json
-{
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "send_time": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
-  "created_at": "2018-09-12T01:27:32.045336+00:00"
-}
-```
-
-
-param | description
-- | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-worker_id <br /><code><a href='#guid'>guid</a></code> | Id of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | Id of the [conversation](#conversations) that this messages is contained in
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the messsage from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-automatically_sent <br /><code><a href='#boolean'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
-send_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
-  
-  
-  
-
-### Get
-Retrieves a single message.
-
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XGET /v1/messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
-```
-
-`GET /v1/messages/:id`
-  
-
-> Example Response
-
-```json
-{
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "send_time": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
-  "created_at": "2018-09-12T01:27:32.045336+00:00"
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-  
-
-  
-  
-
-
-### Create
-
-
-New messages can be created in a [Patient](#patients)  Profile. Messages created in Welkin are recorded in the
-[conversation](#conversations) view.
-
-<aside>Creating a message record does NOT cause that message to be sent to the <a href="#patients">patient</a>.</aside>
-
-
-
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XPOST /v1/messages -d '{
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "send_time": "2018-09-12T01:27:32.045046+00:00"
-}'
-```
-
-`POST /v1/messages -d { }`
-  
-
-> Example Response
-
-```json
-{
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "send_time": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
-  "created_at": "2018-09-12T01:27:32.045336+00:00"
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-worker_id <br /><code><a href='#guid'>guid</a></code> | Id of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | Id of the [conversation](#conversations) that this messages is contained in
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the messsage from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-send_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
-  
-
-  
-  
-
-
-### Find
-Finds messages, using param filters.
-
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XGET /v1/messages
-```
-
-`GET /v1/messages`
-  
-
-> Example Response
-
-```json
-[
-  {
-    "data": [
-      {
-        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-        "direction": "inbound", 
-        "contents": "Hi Developer, Welcome to Welkin Health.", 
-        "automatically_sent": false, 
-        "send_time": "2018-09-12T01:27:32.045046+00:00", 
-        "updated_at": "2018-09-12T01:27:32.045196+00:00", 
-        "created_at": "2018-09-12T01:27:32.045336+00:00"
-      }
-    ], 
-    "meta": {
-      "current": {
-        "page[from]": "2018-09-28T23:13:35.054832+00:00", 
-        "page[to]": "2018-09-28T23:13:35.054852+00:00", 
-        "page[size]": 50
-      }
-    }
-  }
-]
-```
-
-#### Params
-
-
-param | description
-- | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
-  
-
-  
-  
-  
-
 ## Patients
 
 
 Patients are the primary data object within Welkin. Almost all other data is attached to a patient.
-[Emails](#email-addresses), [assessment responses](#assessment_responses), [care flows](#care_flows), and many more
+[Emails](#email-addresses), [assessment responses](#assessment-responses), [care flows](#care-flows), and many more
 resources are mapped directly to a specific patient.
 
 There are no restrictions on patient data, so it's possible for duplicates to be created-on purpose or by accident.
@@ -2277,6 +2302,7 @@ generation.
 
 
 
+
 ### Model
 
 > Example Response
@@ -2285,7 +2311,7 @@ generation.
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
   "phase": "intake", 
-  "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2339,7 +2365,7 @@ Updates an existing patient.
 ```shell
 curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "phase": "intake", 
-  "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "coach_id": "b272ab8f-360a-412d-961b-2a0b17dcda30", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2356,7 +2382,7 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
   "phase": "intake", 
-  "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2402,8 +2428,8 @@ Creates a new patient.
 ```shell
 curl -XPOST /v1/patients -d '{
   "phase": "intake", 
-  "primary_worker_id": "6f7b4687-4762-4147-a2e3-8d5f3fcf8780", 
-  "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "coach_id": "b272ab8f-360a-412d-961b-2a0b17dcda30", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2433,7 +2459,7 @@ curl -XPOST /v1/patients -d '{
 {
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
   "phase": "intake", 
-  "coach_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2513,7 +2539,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 ```json
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2570,7 +2596,7 @@ curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```json
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2626,7 +2652,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 ```json
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2674,8 +2700,8 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
-  "patient_id": "eca86db0-1f85-495a-b2c5-768261a33466", 
-  "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "user_id": "462887f2-95a7-45e9-9603-f20a8d429a7f", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2696,7 +2722,7 @@ curl -XPOST /v1/phone_numbers -d '{
 ```json
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2757,7 +2783,7 @@ curl -XGET /v1/phone_numbers
     "data": [
       {
         "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-        "user_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
+        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
         "phone_number": "555-555-5555", 
         "phone_number_type": "landline", 
         "friendly_name": "main number", 
@@ -2773,8 +2799,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.115159+00:00", 
-        "page[to]": "2018-09-28T23:13:35.115177+00:00", 
+        "page[from]": "2018-10-03T22:06:44.286837+00:00", 
+        "page[to]": "2018-10-03T22:06:44.286856+00:00", 
         "page[size]": 50
       }
     }
@@ -2803,7 +2829,7 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 
 Workers have access to the Welkin Portal and provide care to [patients](#patients).
 
-Workers are assigned to [patients](#patients) as the patient's primary worker via `[Patient](#patients).worker_id`
+Workers are assigned to [patients](#patients) as the patient's primary worker via <br />`patient.worker_id`
 
 
 
@@ -2935,8 +2961,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-09-28T23:13:35.124844+00:00", 
-        "page[to]": "2018-09-28T23:13:35.124871+00:00", 
+        "page[from]": "2018-10-03T22:06:44.296482+00:00", 
+        "page[to]": "2018-10-03T22:06:44.296502+00:00", 
         "page[size]": 50
       }
     }
@@ -2965,21 +2991,21 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 
 type | definition | example
 - | - | -
-enum | `string` with predefined set of values | `"Female"`
+boolean | JSON style boolean | `true`
+email | `string` representing an email address | `"support@welkinhealth.com"`
+enum | `string` with predefined set of values (also known as an enumeration) | `"Female"`
+guid | `string` with 36 characters separated into groups by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
+integer | Counting numbers with no decimal place including zero and negative numbers | `42`
 isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
 isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
-guid | `string` with X number of characters. 36 characters seperated by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
-boolean | JSON style boolean | `true`
-string | Any quoted set of characters with no length restriction | `"Welcome to Welkin's APIs"`
-phone | `string` representing a phone number without extensions or other dialing information. Country code should not be included. +1 numbers only. | `"555-555-1234"`
-email | `string` representing an email address | `"support@welkinhealth.com"`
+json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
+phone | `string` representing a 10 digit phone number without extensions or other dialing information. Country code should not be included as Welkin only supports numbers with country code `+1`. | `"555-555-1234"`
+state | `string` of the capitalized two character United States state abbreviation | `"CA"`
+string | Any quoted set of ASCII characters with no length restriction | `"Welcome to Welkin's APIs"`
 timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
-state | `string` of two character United States state abbrivation | `"CA"`
 zip_code | `string` of a five digit United States zip code | `"94110"`
-integer | Counting numbers with no decimal place including zero and negative numbers | `42`
-json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format. | `"{"foo": "bar"}"`
 
-<aside>GUIDs are global unique identifiers for objects within Welkin. These IDs are long lived for resources and are unqiue within and across resources.</aside>
+<aside>GUIDs are global unique identifiers for objects within Welkin. These IDs are long lived for resources and are unique within and across resources.</aside>
 
 ## Errors
 
