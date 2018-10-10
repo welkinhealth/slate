@@ -323,8 +323,8 @@ curl -XGET /v1/app_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.126027+00:00", 
-        "page[to]": "2018-10-03T22:06:44.126050+00:00", 
+        "page[from]": "2018-10-10T22:26:26.964899+00:00", 
+        "page[to]": "2018-10-10T22:26:26.964925+00:00", 
         "page[size]": 50
       }
     }
@@ -568,8 +568,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.138680+00:00", 
-        "page[to]": "2018-10-03T22:06:44.138698+00:00", 
+        "page[from]": "2018-10-10T22:26:26.973253+00:00", 
+        "page[to]": "2018-10-10T22:26:26.973270+00:00", 
         "page[size]": 50
       }
     }
@@ -626,7 +626,6 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -645,7 +644,7 @@ user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) ID of the [pa
 is_all_day <br /><code><a href='#boolean'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
 start_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#isodate'>isodate</a></code> | Date of the calendar event if not scheduled for a specific time of day
+day <br /><code><a href='#optional'>optional</a> <a href='#isodate'>isodate</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#enum'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
 modality <br /><code><a href='#enum'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
 appointment_type <br /><code><a href='#string'>string</a></code> | Appointment prompt to be used for this event (see note for details)
@@ -681,7 +680,6 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -714,7 +712,6 @@ Updates an existing calendar event.
 curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "outcome": "completed"
 }'
 ```
@@ -732,7 +729,6 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -769,10 +765,9 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "4afd3b73-3f6b-460d-adf4-f87d48e9fe82", 
+  "user_id": "aaa312cf-86ff-4629-b3fd-a1a9c6d1f7fd", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "modality": "phone", 
   "appointment_type": "intake_call"
 }'
@@ -791,7 +786,6 @@ curl -XPOST /v1/calendar_events -d '{
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -848,7 +842,6 @@ curl -XGET /v1/calendar_events
         "is_all_day": false, 
         "start_time": "2018-09-10T18:56:19.357228+00:00", 
         "end_time": "2018-09-10T18:56:19.357540+00:00", 
-        "day": null, 
         "outcome": "completed", 
         "modality": "phone", 
         "appointment_type": "intake_call", 
@@ -858,8 +851,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.155065+00:00", 
-        "page[to]": "2018-10-03T22:06:44.155081+00:00", 
+        "page[from]": "2018-10-10T22:26:26.985210+00:00", 
+        "page[to]": "2018-10-10T22:26:26.985228+00:00", 
         "page[size]": 50
       }
     }
@@ -989,8 +982,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.160351+00:00", 
-        "page[to]": "2018-10-03T22:06:44.160368+00:00", 
+        "page[from]": "2018-10-10T22:26:26.989340+00:00", 
+        "page[to]": "2018-10-10T22:26:26.989358+00:00", 
         "page[size]": 50
       }
     }
@@ -1176,8 +1169,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.166348+00:00", 
-        "page[to]": "2018-10-03T22:06:44.166363+00:00", 
+        "page[from]": "2018-10-10T22:26:26.992560+00:00", 
+        "page[to]": "2018-10-10T22:26:26.992573+00:00", 
         "page[size]": 50
       }
     }
@@ -1221,7 +1214,7 @@ Text-based communications supported by Welkin include, SMS, email, and in-app me
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": null, 
+  "conversation_type": "app", 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1262,7 +1255,7 @@ curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": null, 
+  "conversation_type": "app", 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1305,7 +1298,7 @@ curl -XPOST /v1/conversations -d '{
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": null, 
+  "conversation_type": "app", 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1348,15 +1341,15 @@ curl -XGET /v1/conversations
       {
         "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
         "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-        "conversation_type": null, 
+        "conversation_type": "app", 
         "updated_at": "2018-09-12T01:27:32.031245+00:00", 
         "created_at": "2018-09-12T01:27:32.031362+00:00"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.176130+00:00", 
-        "page[to]": "2018-10-03T22:06:44.176150+00:00", 
+        "page[from]": "2018-10-10T22:26:26.996915+00:00", 
+        "page[to]": "2018-10-10T22:26:26.996926+00:00", 
         "page[size]": 50
       }
     }
@@ -1628,8 +1621,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.187425+00:00", 
-        "page[to]": "2018-10-03T22:06:44.187439+00:00", 
+        "page[from]": "2018-10-10T22:26:27.003331+00:00", 
+        "page[to]": "2018-10-10T22:26:27.003344+00:00", 
         "page[size]": 50
       }
     }
@@ -1823,7 +1816,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "7c24e14d-e9c8-4ee3-921a-f5a02d22c39a", 
+  "user_id": "fe388336-9864-4e82-85c4-59b2f6dba995", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1903,8 +1896,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.199442+00:00", 
-        "page[to]": "2018-10-03T22:06:44.199456+00:00", 
+        "page[from]": "2018-10-10T22:26:27.012165+00:00", 
+        "page[to]": "2018-10-10T22:26:27.012181+00:00", 
         "page[size]": 50
       }
     }
@@ -1946,6 +1939,31 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 
 
 
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
+  "resource": "patient", 
+  "namespace": "ehr", 
+  "external_id": "abc-123", 
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+resource <br /><code><a href='#string'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#string'>string</a></code> | Snake cased string seperating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+  
+  
+  
 
 
 ### Update
@@ -1959,9 +1977,9 @@ Updates an existing external id.
 
 ```shell
 curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
-  "resource": "some_string", 
-  "namespace": "some_string", 
-  "external_id": "some_string", 
+  "resource": "patient", 
+  "namespace": "ehr", 
+  "external_id": "abc-123", 
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }'
 ```
@@ -1974,9 +1992,9 @@ curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-  "resource": "some_string", 
-  "namespace": "some_string", 
-  "external_id": "some_string", 
+  "resource": "patient", 
+  "namespace": "ehr", 
+  "external_id": "abc-123", 
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }
 ```
@@ -2007,9 +2025,9 @@ Creates a new external id.
 
 ```shell
 curl -XPOST /v1/external_ids -d '{
-  "resource": "some_string", 
-  "namespace": "some_string", 
-  "external_id": "some_string", 
+  "resource": "patient", 
+  "namespace": "ehr", 
+  "external_id": "abc-123", 
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }'
 ```
@@ -2022,9 +2040,9 @@ curl -XPOST /v1/external_ids -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-  "resource": "some_string", 
-  "namespace": "some_string", 
-  "external_id": "some_string", 
+  "resource": "patient", 
+  "namespace": "ehr", 
+  "external_id": "abc-123", 
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }
 ```
@@ -2068,16 +2086,16 @@ curl -XGET /v1/external_ids
     "data": [
       {
         "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-        "resource": "some_string", 
-        "namespace": "some_string", 
-        "external_id": "some_string", 
+        "resource": "patient", 
+        "namespace": "ehr", 
+        "external_id": "abc-123", 
         "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.211624+00:00", 
-        "page[to]": "2018-10-03T22:06:44.211645+00:00", 
+        "page[from]": "2018-10-10T22:26:27.017838+00:00", 
+        "page[to]": "2018-10-10T22:26:27.017851+00:00", 
         "page[size]": 50
       }
     }
@@ -2122,6 +2140,47 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 
 
 
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
+  "status": "failed", 
+  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
+  "ref_ids": [
+    "abc123", 
+    "cdf456"
+  ], 
+  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
+  "task_name": "kiwihealth_pull.process_item", 
+  "updated_at": "2018-09-12T01:27:32.041332+00:00", 
+  "created_at": "2018-09-12T01:27:32.041464+00:00", 
+  "errors": [
+    {
+      "code": "patient_not_found", 
+      "message": "There is no patient with that ID."
+    }
+  ]
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+status <br /><code><a href='#enum'>enum</a></code> | Status of the task. Possible options are, `unattempted`, `running`, `failed`, or `succeeded`
+patient_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient](#patients)
+ref_ids <br /><code><a href='#array'>array</a> <a href='#string'>string</a></code> | Array of external IDs associated with the tasks, linking the task to the resource in external systems.
+job_id <br /><code><a href='#string'>string</a></code> | Groups related tasks together
+task_name <br /><code><a href='#string'>string</a></code> | The name of the task prefixed by the name of the job
+updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+errors <br /><code><a href='#array'>array</a> <a href='#integration-errors'>integration-errors</a></code> | Array of all the errors that resulted from this specific task. Note, these errors do not roll up to parent tasks.
+  
+  
+  
 
 ### Model integration-errors
 field | type | description
@@ -2246,8 +2305,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.217779+00:00", 
-        "page[to]": "2018-10-03T22:06:44.217796+00:00", 
+        "page[from]": "2018-10-10T22:26:27.022910+00:00", 
+        "page[to]": "2018-10-10T22:26:27.022922+00:00", 
         "page[size]": 50
       }
     }
@@ -2285,6 +2344,9 @@ Take care to ensure you are not duplicating a patient when creating a new one.
 When using the Welkin API it's best to designate one system as the master system, and have the other systems be
 followers. In this model, patients are created in only one source, limiting the possibility of duplicate patient
 generation.
+
+
+
 
 
 
@@ -2365,7 +2427,7 @@ Updates an existing patient.
 ```shell
 curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "phase": "intake", 
-  "coach_id": "b272ab8f-360a-412d-961b-2a0b17dcda30", 
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2406,6 +2468,7 @@ param | description
 - | -
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 phase <br /><code><a href='#optional'>optional</a> <a href='#provider_code'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#optional'>optional</a> <a href='#timezone'>timezone</a></code> | Timezone in which this [patient](#patients) lives
 first_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | First name of this patient
@@ -2429,7 +2492,6 @@ Creates a new patient.
 curl -XPOST /v1/patients -d '{
   "phase": "intake", 
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "coach_id": "b272ab8f-360a-412d-961b-2a0b17dcda30", 
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
@@ -2441,12 +2503,12 @@ curl -XPOST /v1/patients -d '{
   "zip_code": "94110", 
   "state": "CA", 
   "country": "USA", 
-  "email": null, 
-  "external_ids": {
-    "external_id": null, 
-    "namespace": null
-  }, 
-  "phone": null
+  "external_ids": [
+    {
+      "external_id": "abc-123", 
+      "namespace": "ehr"
+    }
+  ]
 }'
 ```
 
@@ -2495,9 +2557,9 @@ county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a>
 zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Zip code of this patient's address in five digit form
 state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which the patient resides
 country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which the [patient](#patients) lives
-email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | 
-external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)'>list(object)</a></code> | 
-phone <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | 
+email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
+external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
+phone <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
   
 
   
@@ -2701,7 +2763,7 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "462887f2-95a7-45e9-9603-f20a8d429a7f", 
+  "user_id": "b0ec9ded-9df8-4094-9e34-32266232637d", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2799,8 +2861,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.286837+00:00", 
-        "page[to]": "2018-10-03T22:06:44.286856+00:00", 
+        "page[from]": "2018-10-10T22:26:27.056589+00:00", 
+        "page[to]": "2018-10-10T22:26:27.056607+00:00", 
         "page[size]": 50
       }
     }
@@ -2961,8 +3023,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-03T22:06:44.296482+00:00", 
-        "page[to]": "2018-10-03T22:06:44.296502+00:00", 
+        "page[from]": "2018-10-10T22:26:27.061732+00:00", 
+        "page[to]": "2018-10-10T22:26:27.061745+00:00", 
         "page[size]": 50
       }
     }
