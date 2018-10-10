@@ -323,8 +323,8 @@ curl -XGET /v1/app_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.964899+00:00", 
-        "page[to]": "2018-10-10T22:26:26.964925+00:00", 
+        "page[from]": "2018-10-10T22:53:42.502341+00:00", 
+        "page[to]": "2018-10-10T22:53:42.502362+00:00", 
         "page[size]": 50
       }
     }
@@ -568,8 +568,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.973253+00:00", 
-        "page[to]": "2018-10-10T22:26:26.973270+00:00", 
+        "page[from]": "2018-10-10T22:53:42.515163+00:00", 
+        "page[to]": "2018-10-10T22:53:42.515181+00:00", 
         "page[size]": 50
       }
     }
@@ -626,6 +626,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
+  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -644,7 +645,7 @@ user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) ID of the [pa
 is_all_day <br /><code><a href='#boolean'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
 start_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time <br /><code><a href='#isodatetime'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#optional'>optional</a> <a href='#isodate'>isodate</a></code> | Date of the calendar event if not scheduled for a specific time of day
+day <br /><code><a href='#isodate'>isodate</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#enum'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
 modality <br /><code><a href='#enum'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
 appointment_type <br /><code><a href='#string'>string</a></code> | Appointment prompt to be used for this event (see note for details)
@@ -680,6 +681,7 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
+  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -729,6 +731,7 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
+  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -765,7 +768,7 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "aaa312cf-86ff-4629-b3fd-a1a9c6d1f7fd", 
+  "user_id": "ca6376e4-e883-4ee2-9568-43c67fc124ac", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "modality": "phone", 
@@ -786,6 +789,7 @@ curl -XPOST /v1/calendar_events -d '{
   "is_all_day": false, 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
+  "day": null, 
   "outcome": "completed", 
   "modality": "phone", 
   "appointment_type": "intake_call", 
@@ -842,6 +846,7 @@ curl -XGET /v1/calendar_events
         "is_all_day": false, 
         "start_time": "2018-09-10T18:56:19.357228+00:00", 
         "end_time": "2018-09-10T18:56:19.357540+00:00", 
+        "day": null, 
         "outcome": "completed", 
         "modality": "phone", 
         "appointment_type": "intake_call", 
@@ -851,8 +856,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.985210+00:00", 
-        "page[to]": "2018-10-10T22:26:26.985228+00:00", 
+        "page[from]": "2018-10-10T22:53:42.536209+00:00", 
+        "page[to]": "2018-10-10T22:53:42.536224+00:00", 
         "page[size]": 50
       }
     }
@@ -982,8 +987,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.989340+00:00", 
-        "page[to]": "2018-10-10T22:26:26.989358+00:00", 
+        "page[from]": "2018-10-10T22:53:42.541313+00:00", 
+        "page[to]": "2018-10-10T22:53:42.541325+00:00", 
         "page[size]": 50
       }
     }
@@ -1169,8 +1174,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.992560+00:00", 
-        "page[to]": "2018-10-10T22:26:26.992573+00:00", 
+        "page[from]": "2018-10-10T22:53:42.546567+00:00", 
+        "page[to]": "2018-10-10T22:53:42.546578+00:00", 
         "page[size]": 50
       }
     }
@@ -1214,7 +1219,7 @@ Text-based communications supported by Welkin include, SMS, email, and in-app me
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
+  "conversation_type": null, 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1255,7 +1260,7 @@ curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
+  "conversation_type": null, 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1298,7 +1303,7 @@ curl -XPOST /v1/conversations -d '{
 {
   "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
+  "conversation_type": null, 
   "updated_at": "2018-09-12T01:27:32.031245+00:00", 
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1341,15 +1346,15 @@ curl -XGET /v1/conversations
       {
         "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
         "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-        "conversation_type": "app", 
+        "conversation_type": null, 
         "updated_at": "2018-09-12T01:27:32.031245+00:00", 
         "created_at": "2018-09-12T01:27:32.031362+00:00"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:26.996915+00:00", 
-        "page[to]": "2018-10-10T22:26:26.996926+00:00", 
+        "page[from]": "2018-10-10T22:53:42.554531+00:00", 
+        "page[to]": "2018-10-10T22:53:42.554549+00:00", 
         "page[size]": 50
       }
     }
@@ -1621,8 +1626,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.003331+00:00", 
-        "page[to]": "2018-10-10T22:26:27.003344+00:00", 
+        "page[from]": "2018-10-10T22:53:42.563918+00:00", 
+        "page[to]": "2018-10-10T22:53:42.563935+00:00", 
         "page[size]": 50
       }
     }
@@ -1816,7 +1821,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "fe388336-9864-4e82-85c4-59b2f6dba995", 
+  "user_id": "efe3affc-05de-42d5-8f13-266f3d75768e", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1896,8 +1901,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.012165+00:00", 
-        "page[to]": "2018-10-10T22:26:27.012181+00:00", 
+        "page[from]": "2018-10-10T22:53:42.576319+00:00", 
+        "page[to]": "2018-10-10T22:53:42.576336+00:00", 
         "page[size]": 50
       }
     }
@@ -2094,8 +2099,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.017838+00:00", 
-        "page[to]": "2018-10-10T22:26:27.017851+00:00", 
+        "page[from]": "2018-10-10T22:53:42.586196+00:00", 
+        "page[to]": "2018-10-10T22:53:42.586216+00:00", 
         "page[size]": 50
       }
     }
@@ -2305,8 +2310,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.022910+00:00", 
-        "page[to]": "2018-10-10T22:26:27.022922+00:00", 
+        "page[from]": "2018-10-10T22:53:42.595892+00:00", 
+        "page[to]": "2018-10-10T22:53:42.595906+00:00", 
         "page[size]": 50
       }
     }
@@ -2566,6 +2571,70 @@ phone <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></c
   
 
 
+### Find
+Finds patients, using param filters.
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/patients
+```
+
+`GET /v1/patients`
+  
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
+        "phase": "intake", 
+        "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
+        "timezone": "US/Pacific", 
+        "first_name": "Grace", 
+        "last_name": "Hopper", 
+        "birthday": "1906-12-09", 
+        "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+        "created_at": "2018-09-12T01:27:32.109872+00:00", 
+        "street": "3265 17th St", 
+        "street_line_two": "#304", 
+        "city": "San Francisco", 
+        "county": "San Francisco County", 
+        "zip_code": "94110", 
+        "state": "CA", 
+        "country": "USA"
+      }
+    ], 
+    "meta": {
+      "current": {
+        "page[from]": "2018-10-10T22:53:42.633855+00:00", 
+        "page[to]": "2018-10-10T22:53:42.633878+00:00", 
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+  
+
+  
+  
   
 
 ## Phone Numbers
@@ -2763,7 +2832,7 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "b0ec9ded-9df8-4094-9e34-32266232637d", 
+  "user_id": "56dbebbd-1d72-497d-aad8-b18c0cbbdb20", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -2861,8 +2930,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.056589+00:00", 
-        "page[to]": "2018-10-10T22:26:27.056607+00:00", 
+        "page[from]": "2018-10-10T22:53:42.654276+00:00", 
+        "page[to]": "2018-10-10T22:53:42.654290+00:00", 
         "page[size]": 50
       }
     }
@@ -3023,8 +3092,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-10-10T22:26:27.061732+00:00", 
-        "page[to]": "2018-10-10T22:26:27.061745+00:00", 
+        "page[from]": "2018-10-10T22:53:42.662153+00:00", 
+        "page[to]": "2018-10-10T22:53:42.662165+00:00", 
         "page[size]": 50
       }
     }
