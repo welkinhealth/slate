@@ -60,7 +60,7 @@ Once you obtain an access token, the token can be passed as an Authorization hea
 
 More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
-A simple guide to understanding JWT can befound in this [Medium article](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec).
+A simple guide to understanding JWT can be found in this [Medium article](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec).
 
 # Update Notifications
 Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
@@ -276,7 +276,7 @@ sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isod
 ### Create
 
 
-New messages can be created in a [Patient](#patients)  Profile. Messages created in Welkin are recorded in the
+New messages can be created in a [Patient](#patients) Profile. Messages created in Welkin are recorded in the
 [conversation](#conversations) view.
 
 <aside>Creating a app message record does NOT cause that message to be sent to the <a href="#patients">patient</a>.</aside>
@@ -374,8 +374,8 @@ curl -XGET /v1/app_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.574561+00:00", 
-        "page[to]": "2018-11-01T19:00:39.574581+00:00", 
+        "page[from]": "2019-01-09T00:18:15.987215+00:00", 
+        "page[to]": "2019-01-09T00:18:15.987236+00:00", 
         "page[size]": 50
       }
     }
@@ -623,8 +623,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.582357+00:00", 
-        "page[to]": "2018-11-01T19:00:39.582369+00:00", 
+        "page[from]": "2019-01-09T00:18:15.995743+00:00", 
+        "page[to]": "2019-01-09T00:18:15.995760+00:00", 
         "page[size]": 50
       }
     }
@@ -823,7 +823,7 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "c9ec778f-048e-456a-bb69-25708cfcb66a", 
+  "user_id": "c34cb49b-7570-45cb-bb6c-f10f9fc77138", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "modality": "phone", 
@@ -909,8 +909,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.593649+00:00", 
-        "page[to]": "2018-11-01T19:00:39.593664+00:00", 
+        "page[from]": "2019-01-09T00:18:16.007090+00:00", 
+        "page[to]": "2019-01-09T00:18:16.007106+00:00", 
         "page[size]": 50
       }
     }
@@ -1040,8 +1040,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.597304+00:00", 
-        "page[to]": "2018-11-01T19:00:39.597322+00:00", 
+        "page[from]": "2019-01-09T00:18:16.010520+00:00", 
+        "page[to]": "2019-01-09T00:18:16.010536+00:00", 
         "page[size]": 50
       }
     }
@@ -1227,8 +1227,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.601743+00:00", 
-        "page[to]": "2018-11-01T19:00:39.601768+00:00", 
+        "page[from]": "2019-01-09T00:18:16.014039+00:00", 
+        "page[to]": "2019-01-09T00:18:16.014057+00:00", 
         "page[size]": 50
       }
     }
@@ -1431,8 +1431,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.608226+00:00", 
-        "page[to]": "2018-11-01T19:00:39.608245+00:00", 
+        "page[from]": "2019-01-09T00:18:16.019611+00:00", 
+        "page[to]": "2019-01-09T00:18:16.019624+00:00", 
         "page[size]": 50
       }
     }
@@ -1704,8 +1704,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.615383+00:00", 
-        "page[to]": "2018-11-01T19:00:39.615400+00:00", 
+        "page[from]": "2019-01-09T00:18:16.025903+00:00", 
+        "page[to]": "2019-01-09T00:18:16.025921+00:00", 
         "page[size]": 50
       }
     }
@@ -1899,7 +1899,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "cab415cb-13e6-4e8f-ba74-68383b458da5", 
+  "user_id": "6ef07213-4f93-4f67-93d5-ea665378f6be", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1979,8 +1979,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.624527+00:00", 
-        "page[to]": "2018-11-01T19:00:39.624543+00:00", 
+        "page[from]": "2019-01-09T00:18:16.035308+00:00", 
+        "page[to]": "2019-01-09T00:18:16.035324+00:00", 
         "page[size]": 50
       }
     }
@@ -2177,8 +2177,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.631114+00:00", 
-        "page[to]": "2018-11-01T19:00:39.631131+00:00", 
+        "page[from]": "2019-01-09T00:18:16.040733+00:00", 
+        "page[to]": "2019-01-09T00:18:16.040744+00:00", 
         "page[size]": 50
       }
     }
@@ -2209,6 +2209,9 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 
 Attach [uploaded files](#file_uploads) to specific [patient](#patients) profiles. A single file can be attached to
 multiple [patients](#patients).
+
+A timeline event is automatically created when a file is attached to a [patient](#patients). This timeline event
+includes the file preview and the attachment type.
 
 
 
@@ -2381,8 +2384,8 @@ curl -XGET /v1/file_attachments
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.637110+00:00", 
-        "page[to]": "2018-11-01T19:00:39.637128+00:00", 
+        "page[from]": "2019-01-09T00:18:16.046111+00:00", 
+        "page[to]": "2019-01-09T00:18:16.046125+00:00", 
         "page[size]": 50
       }
     }
@@ -2544,8 +2547,8 @@ curl -XGET /v1/file_uploads
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.640542+00:00", 
-        "page[to]": "2018-11-01T19:00:39.640558+00:00", 
+        "page[from]": "2019-01-09T00:18:16.049368+00:00", 
+        "page[to]": "2019-01-09T00:18:16.049380+00:00", 
         "page[size]": 50
       }
     }
@@ -2751,8 +2754,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.645932+00:00", 
-        "page[to]": "2018-11-01T19:00:39.645948+00:00", 
+        "page[from]": "2019-01-09T00:18:16.054524+00:00", 
+        "page[to]": "2019-01-09T00:18:16.054535+00:00", 
         "page[size]": 50
       }
     }
@@ -2811,6 +2814,11 @@ generation.
 
 
 
+
+
+
+
+
 ### Model
 
 > Example Response
@@ -2824,15 +2832,20 @@ generation.
   "first_name": "Grace", 
   "last_name": "Hopper", 
   "birthday": "1906-12-09", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
-  "created_at": "2018-09-12T01:27:32.109872+00:00", 
+  "gender": "Female", 
+  "height": "72", 
+  "primary_language": "english", 
+  "smokes": "false", 
+  "weight": "175", 
   "street": "3265 17th St", 
   "street_line_two": "#304", 
   "city": "San Francisco", 
   "county": "San Francisco County", 
   "zip_code": "94110", 
   "state": "CA", 
-  "country": "USA"
+  "country": "US", 
+  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
 
@@ -2852,10 +2865,15 @@ created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime 
 street <br /><code><a href='#string'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#string'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#string'>string</a></code> | City of this patient's address
-county <br /><code><a href='#string'>string</a></code> | County in which the patient lives. If unknown then this can be left out.
+county <br /><code><a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
 zip_code <br /><code><a href='#zip_code'>zip_code</a></code> | Zip code of this patient's address in five digit form
-state <br /><code><a href='#state'>state</a></code> | Two character abbreviation of the state in which the patient resides
-country <br /><code><a href='#country'>country</a></code> | Country in which the [patient](#patients) lives
+state <br /><code><a href='#state'>state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#country'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#language'>language</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#string'>string</a></code> | Gender of this patient
+height <br /><code><a href='#string'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#string'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
   
   
   
@@ -2877,7 +2895,12 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
-  "birthday": "1906-12-09"
+  "birthday": "1906-12-09", 
+  "primary_language": "english", 
+  "gender": "Female", 
+  "height": "72", 
+  "weight": "175", 
+  "smokes": "false"
 }'
 ```
 
@@ -2895,15 +2918,20 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "first_name": "Grace", 
   "last_name": "Hopper", 
   "birthday": "1906-12-09", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
-  "created_at": "2018-09-12T01:27:32.109872+00:00", 
+  "gender": "Female", 
+  "height": "72", 
+  "primary_language": "english", 
+  "smokes": "false", 
+  "weight": "175", 
   "street": "3265 17th St", 
   "street_line_two": "#304", 
   "city": "San Francisco", 
   "county": "San Francisco County", 
   "zip_code": "94110", 
   "state": "CA", 
-  "country": "USA"
+  "country": "US", 
+  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
 
@@ -2920,6 +2948,11 @@ timezone <br /><code><a href='#optional'>optional</a> <a href='#timezone'>timezo
 first_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | First name of this patient
 last_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | Last name of this patient
 birthday <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date of birth of this patient
+primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of this patient
+height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
   
 
   
@@ -2948,7 +2981,12 @@ curl -XPOST /v1/patients -d '{
   "county": "San Francisco County", 
   "zip_code": "94110", 
   "state": "CA", 
-  "country": "USA", 
+  "country": "US", 
+  "primary_language": "english", 
+  "gender": "Female", 
+  "height": "72", 
+  "weight": "175", 
+  "smokes": "false", 
   "external_ids": [
     {
       "external_id": "abc-123", 
@@ -2972,15 +3010,20 @@ curl -XPOST /v1/patients -d '{
   "first_name": "Grace", 
   "last_name": "Hopper", 
   "birthday": "1906-12-09", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
-  "created_at": "2018-09-12T01:27:32.109872+00:00", 
+  "gender": "Female", 
+  "height": "72", 
+  "primary_language": "english", 
+  "smokes": "false", 
+  "weight": "175", 
   "street": "3265 17th St", 
   "street_line_two": "#304", 
   "city": "San Francisco", 
   "county": "San Francisco County", 
   "zip_code": "94110", 
   "state": "CA", 
-  "country": "USA"
+  "country": "US", 
+  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
 
@@ -2999,10 +3042,15 @@ birthday <br /><code><a href='#birthday'>birthday</a></code> | Date of birth of 
 street <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | City of this patient's address
-county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | County in which the patient lives. If unknown then this can be left out.
+county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
 zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Zip code of this patient's address in five digit form
-state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which the patient resides
-country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which the [patient](#patients) lives
+state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of this patient
+height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
 email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
 external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
 phone <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
@@ -3042,21 +3090,26 @@ curl -XGET /v1/patients
         "first_name": "Grace", 
         "last_name": "Hopper", 
         "birthday": "1906-12-09", 
-        "updated_at": "2018-09-12T01:27:32.108773+00:00", 
-        "created_at": "2018-09-12T01:27:32.109872+00:00", 
+        "gender": "Female", 
+        "height": "72", 
+        "primary_language": "english", 
+        "smokes": "false", 
+        "weight": "175", 
         "street": "3265 17th St", 
         "street_line_two": "#304", 
         "city": "San Francisco", 
         "county": "San Francisco County", 
         "zip_code": "94110", 
         "state": "CA", 
-        "country": "USA"
+        "country": "US", 
+        "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+        "created_at": "2018-09-12T01:27:32.109872+00:00"
       }
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.669878+00:00", 
-        "page[to]": "2018-11-01T19:00:39.669895+00:00", 
+        "page[from]": "2019-01-09T00:18:16.085851+00:00", 
+        "page[to]": "2019-01-09T00:18:16.085868+00:00", 
         "page[size]": 50
       }
     }
@@ -3081,7 +3134,7 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 ## Phone Numbers
 
 
-Manage the availible phone based contact methods for a [patient](#patients). Phone based contact methods are
+Manage the available phone based contact methods for a [patient](#patients). Phone based contact methods are
 call and sms.
 
 Each patient phone number has it's own consents and opt in status. When setting the consent flags on a phone number
@@ -3205,6 +3258,7 @@ Updates an existing phone number.
 
 ```shell
 curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
+  "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3245,6 +3299,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 param | description
 - | -
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+phone_number <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | The phone number to be associated with the patient. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 phone_number_type <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) indentity details. Default `false`
@@ -3273,7 +3328,7 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "38bdb138-b518-42a3-bb97-2ce6e31401a9", 
+  "user_id": "10b9c103-4405-4567-9657-646331b00858", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -3330,6 +3385,43 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
   
   
 
+### Delete
+
+
+
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+```
+
+`DELETE /v1/phone_numbers/:id`
+  
+
+> Example Response
+
+```json
+{
+  "data": null
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+  
+
+  
+  
 
 ### Find
 Finds phone numbers, using param filters.
@@ -3371,8 +3463,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.681894+00:00", 
-        "page[to]": "2018-11-01T19:00:39.681907+00:00", 
+        "page[from]": "2019-01-09T00:18:16.098457+00:00", 
+        "page[to]": "2019-01-09T00:18:16.098473+00:00", 
         "page[size]": 50
       }
     }
@@ -3600,8 +3692,8 @@ curl -XGET /v1/sms_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.690423+00:00", 
-        "page[to]": "2018-11-01T19:00:39.690433+00:00", 
+        "page[from]": "2019-01-09T00:18:16.107624+00:00", 
+        "page[to]": "2019-01-09T00:18:16.107639+00:00", 
         "page[size]": 50
       }
     }
@@ -3761,8 +3853,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2018-11-01T19:00:39.696417+00:00", 
-        "page[to]": "2018-11-01T19:00:39.696433+00:00", 
+        "page[from]": "2019-01-09T00:18:16.112667+00:00", 
+        "page[to]": "2019-01-09T00:18:16.112681+00:00", 
         "page[size]": 50
       }
     }
