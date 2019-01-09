@@ -491,6 +491,9 @@
                             <a href="#create-10" class="toc-h3 toc-link" data-title="API Reference">Create</a>
                           </li>
                           <li>
+                            <a href="#delete" class="toc-h3 toc-link" data-title="API Reference">Delete</a>
+                          </li>
+                          <li>
                             <a href="#find-14" class="toc-h3 toc-link" data-title="API Reference">Find</a>
                           </li>
                       </ul>
@@ -601,7 +604,7 @@
 
 <p>More information on the JWT protocol can be found at <a href="https://jwt.io/">jwt.io</a>.</p>
 
-<p>A simple guide to understanding JWT can befound in this <a href="https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec">Medium article</a>.</p>
+<p>A simple guide to understanding JWT can be found in this <a href="https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec">Medium article</a>.</p>
 <h1 id='update-notifications'>Update Notifications</h1>
 <p>Welkin&#39;s APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.</p>
 
@@ -836,7 +839,7 @@ behalf of Welkin to the patient.</p>
 </tr>
 </tbody></table>
 <h3 id='create'>Create</h3>
-<p>New messages can be created in a <a href="#patients">Patient</a>  Profile. Messages created in Welkin are recorded in the
+<p>New messages can be created in a <a href="#patients">Patient</a> Profile. Messages created in Welkin are recorded in the
 <a href="#conversations">conversation</a> view.</p>
 
 <aside>Creating a app message record does NOT cause that message to be sent to the <a href="#patients">patient</a>.</aside>
@@ -933,8 +936,8 @@ behalf of Welkin to the patient.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.574561+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.574581+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:15.987215+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:15.987236+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1187,8 +1190,8 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.582357+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.582369+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:15.995743+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:15.995760+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1406,7 +1409,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 <pre class="highlight shell tab-shell"><code>curl -XPOST /v1/calendar_events -d <span class="s1">'{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "c9ec778f-048e-456a-bb69-25708cfcb66a", 
+  "user_id": "c34cb49b-7570-45cb-bb6c-f10f9fc77138", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "modality": "phone", 
@@ -1503,8 +1506,8 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.593649+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.593664+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.007090+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.007106+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1624,8 +1627,8 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.597304+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.597322+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.010520+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.010536+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1847,8 +1850,8 @@ changes made to the Care Flow will not be reflected in the template it originate
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.601743+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.601768+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.014039+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.014057+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2049,8 +2052,8 @@ phone number is added to the patient.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.608226+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.608245+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.019611+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.019624+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2317,8 +2320,8 @@ same type will have different effects within the Welkin Portal.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.615383+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.615400+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.025903+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.025921+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2526,7 +2529,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "cab415cb-13e6-4e8f-ba74-68383b458da5", 
+  "user_id": "6ef07213-4f93-4f67-93d5-ea665378f6be", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -2614,8 +2617,8 @@ more <a href="#patients">patients</a> share the same email address.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.624527+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.624543+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.035308+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.035324+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2822,8 +2825,8 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.631114+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.631131+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.040733+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.040744+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2868,6 +2871,9 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 <h2 id='file-attachments'>File Attachments</h2>
 <p>Attach <a href="#file_uploads">uploaded files</a> to specific <a href="#patients">patient</a> profiles. A single file can be attached to
 multiple <a href="#patients">patients</a>.</p>
+
+<p>A timeline event is automatically created when a file is attached to a <a href="#patients">patient</a>. This timeline event
+includes the file preview and the attachment type.</p>
 <h3 id='model-9'>Model</h3>
 <blockquote>
 <p>Example Response</p>
@@ -3037,8 +3043,8 @@ multiple <a href="#patients">patients</a>.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.637110+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.637128+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.046111+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.046125+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3195,8 +3201,8 @@ profile one they have been attached via the <a href="#file-attachments">File Att
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.640542+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.640558+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.049368+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.049380+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3425,8 +3431,8 @@ Welkin's standard API are self reporting and do not require Integration Task mon
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.645932+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.645948+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.054524+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.054535+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3487,15 +3493,20 @@ generation.</p>
   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"primary_language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"smokes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"175"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -3558,7 +3569,7 @@ generation.</p>
 </tr>
 <tr>
 <td>county <br /><code><a href='#string'>string</a></code></td>
-<td>County in which the patient lives. If unknown then this can be left out.</td>
+<td>County in which this patient lives. If unknown then this can be left out.</td>
 </tr>
 <tr>
 <td>zip_code <br /><code><a href='#zip_code'>zip_code</a></code></td>
@@ -3566,11 +3577,31 @@ generation.</p>
 </tr>
 <tr>
 <td>state <br /><code><a href='#state'>state</a></code></td>
-<td>Two character abbreviation of the state in which the patient resides</td>
+<td>Two character abbreviation of the state in which this patient resides</td>
 </tr>
 <tr>
 <td>country <br /><code><a href='#country'>country</a></code></td>
-<td>Country in which the <a href="#patients">patient</a> lives</td>
+<td>Country in which this patient lives</td>
+</tr>
+<tr>
+<td>primary_language <br /><code><a href='#language'>language</a></code></td>
+<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+</tr>
+<tr>
+<td>gender <br /><code><a href='#string'>string</a></code></td>
+<td>Gender of this patient</td>
+</tr>
+<tr>
+<td>height <br /><code><a href='#string'>string</a></code></td>
+<td>The two digit height of this patient in inches.</td>
+</tr>
+<tr>
+<td>weight <br /><code><a href='#string'>string</a></code></td>
+<td>The weight of this patient in pounds.</td>
+</tr>
+<tr>
+<td>smokes <br /><code><a href='#boolean'>boolean</a></code></td>
+<td><code>true</code> or <code>false</code> for whether this patient smokes.</td>
 </tr>
 </tbody></table>
 <h3 id='update-6'>Update</h3>
@@ -3585,7 +3616,12 @@ generation.</p>
   "timezone": "US/Pacific", 
   "first_name": "Grace", 
   "last_name": "Hopper", 
-  "birthday": "1906-12-09"
+  "birthday": "1906-12-09", 
+  "primary_language": "english", 
+  "gender": "Female", 
+  "height": "72", 
+  "weight": "175", 
+  "smokes": "false"
 }'</span>
 </code></pre>
 <p><code>PUT /v1/patients/:id -d { }</code></p>
@@ -3601,15 +3637,20 @@ generation.</p>
   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"primary_language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"smokes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"175"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h4 id='params-38'>Params</h4>
 <table><thead>
@@ -3650,6 +3691,26 @@ generation.</p>
 <td>birthday <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code></td>
 <td>Date of birth of this patient</td>
 </tr>
+<tr>
+<td>primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code></td>
+<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+</tr>
+<tr>
+<td>gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>Gender of this patient</td>
+</tr>
+<tr>
+<td>height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>The two digit height of this patient in inches.</td>
+</tr>
+<tr>
+<td>weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>The weight of this patient in pounds.</td>
+</tr>
+<tr>
+<td>smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code></td>
+<td><code>true</code> or <code>false</code> for whether this patient smokes.</td>
+</tr>
 </tbody></table>
 <h3 id='create-9'>Create</h3>
 <p>Creates a new patient.</p>
@@ -3670,7 +3731,12 @@ generation.</p>
   "county": "San Francisco County", 
   "zip_code": "94110", 
   "state": "CA", 
-  "country": "USA", 
+  "country": "US", 
+  "primary_language": "english", 
+  "gender": "Female", 
+  "height": "72", 
+  "weight": "175", 
+  "smokes": "false", 
   "external_ids": [
     {
       "external_id": "abc-123", 
@@ -3692,15 +3758,20 @@ generation.</p>
   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"primary_language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"smokes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"175"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h4 id='params-39'>Params</h4>
 <table><thead>
@@ -3751,7 +3822,7 @@ generation.</p>
 </tr>
 <tr>
 <td>county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
-<td>County in which the patient lives. If unknown then this can be left out.</td>
+<td>County in which this patient lives. If unknown then this can be left out.</td>
 </tr>
 <tr>
 <td>zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
@@ -3759,11 +3830,31 @@ generation.</p>
 </tr>
 <tr>
 <td>state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code></td>
-<td>Two character abbreviation of the state in which the patient resides</td>
+<td>Two character abbreviation of the state in which this patient resides</td>
 </tr>
 <tr>
 <td>country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code></td>
-<td>Country in which the <a href="#patients">patient</a> lives</td>
+<td>Country in which this patient lives</td>
+</tr>
+<tr>
+<td>primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code></td>
+<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+</tr>
+<tr>
+<td>gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>Gender of this patient</td>
+</tr>
+<tr>
+<td>height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>The two digit height of this patient in inches.</td>
+</tr>
+<tr>
+<td>weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code></td>
+<td>The weight of this patient in pounds.</td>
+</tr>
+<tr>
+<td>smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code></td>
+<td><code>true</code> or <code>false</code> for whether this patient smokes.</td>
 </tr>
 <tr>
 <td>email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code></td>
@@ -3802,21 +3893,26 @@ generation.</p>
         </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"primary_language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"smokes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"175"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3265 17th St"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"street_line_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#304"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco County"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.669878+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.669895+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.085851+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.085868+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -3843,7 +3939,7 @@ generation.</p>
 </tr>
 </tbody></table>
 <h2 id='phone-numbers'>Phone Numbers</h2>
-<p>Manage the availible phone based contact methods for a <a href="#patients">patient</a>. Phone based contact methods are
+<p>Manage the available phone based contact methods for a <a href="#patients">patient</a>. Phone based contact methods are
 call and sms.</p>
 
 <p>Each patient phone number has it&#39;s own consents and opt in status. When setting the consent flags on a phone number
@@ -3982,6 +4078,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 <p>Example Request</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d <span class="s1">'{
+  "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -4024,6 +4121,10 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 <td>The primary identifier</td>
 </tr>
 <tr>
+<td>phone_number <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code></td>
+<td>The phone number to be associated with the patient. Note, this can be a phone number of the patient, a care giver, or other associated entity.</td>
+</tr>
+<tr>
 <td>phone_number_type <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code></td>
 <td>(<code>cell</code>, <code>landline</code>, <code>other</code>)</td>
 </tr>
@@ -4062,7 +4163,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -XPOST /v1/phone_numbers -d <span class="s1">'{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "38bdb138-b518-42a3-bb97-2ce6e31401a9", 
+  "user_id": "10b9c103-4405-4567-9657-646331b00858", 
   "phone_number": "555-555-5555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -4146,9 +4247,35 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 <td><code>true</code> only if the <a href="#patients">patient</a> has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default <code>false</code></td>
 </tr>
 </tbody></table>
+<h3 id='delete'>Delete</h3><h4 id='invocation-44'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+</code></pre>
+<p><code>DELETE /v1/phone_numbers/:id</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='params-44'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#guid'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+</tbody></table>
 <h3 id='find-14'>Find</h3>
 <p>Finds phone numbers, using param filters.</p>
-<h4 id='invocation-44'>Invocation</h4>
+<h4 id='invocation-45'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4180,14 +4307,14 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.681894+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.681907+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.098457+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.098473+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h4 id='params-44'>Params</h4>
+</span></code></pre><h4 id='params-45'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4284,7 +4411,7 @@ profile.</p>
 </tbody></table>
 <h3 id='get-13'>Get</h3>
 <p>Retrieves a single sms message.</p>
-<h4 id='invocation-45'>Invocation</h4>
+<h4 id='invocation-46'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4307,7 +4434,7 @@ profile.</p>
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.045196+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.045336+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='params-45'>Params</h4>
+</span></code></pre><h4 id='params-46'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4326,7 +4453,7 @@ profile.</p>
 <aside>Creating an SMS Message will send that message to the <a href="#patients">patient</a> only if the
 <code>welkin_send</code> parameter is <code>true</code>. Creating the message resource via this api without setting <code>welkin_send</code> to
 <code>true</code> only records that the message was sent to the <a href="#patients">patient</a>.</aside>
-<h4 id='invocation-46'>Invocation</h4>
+<h4 id='invocation-47'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4357,7 +4484,7 @@ profile.</p>
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.045196+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.045336+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='params-46'>Params</h4>
+</span></code></pre><h4 id='params-47'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4399,7 +4526,7 @@ profile.</p>
 </tbody></table>
 <h3 id='find-15'>Find</h3>
 <p>Finds sms messages, using param filters.</p>
-<h4 id='invocation-47'>Invocation</h4>
+<h4 id='invocation-48'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4428,14 +4555,14 @@ profile.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.690423+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.690433+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.107624+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.107639+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h4 id='params-47'>Params</h4>
+</span></code></pre><h4 id='params-48'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4529,7 +4656,7 @@ profile.</p>
 </tbody></table>
 <h3 id='get-14'>Get</h3>
 <p>Retrieves a single worker.</p>
-<h4 id='invocation-48'>Invocation</h4>
+<h4 id='invocation-49'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4552,7 +4679,7 @@ profile.</p>
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.125123+00:00"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.125229+00:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='params-48'>Params</h4>
+</span></code></pre><h4 id='params-49'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4566,7 +4693,7 @@ profile.</p>
 </tbody></table>
 <h3 id='find-16'>Find</h3>
 <p>Finds workers, using param filters.</p>
-<h4 id='invocation-49'>Invocation</h4>
+<h4 id='invocation-50'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -4595,14 +4722,14 @@ profile.</p>
     </span><span class="p">],</span><span class="w"> 
     </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.696417+00:00"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-01T19:00:39.696433+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.112667+00:00"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-09T00:18:16.112681+00:00"</span><span class="p">,</span><span class="w"> 
         </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h4 id='params-49'>Params</h4>
+</span></code></pre><h4 id='params-50'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
