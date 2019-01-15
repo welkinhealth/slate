@@ -374,8 +374,8 @@ curl -XGET /v1/app_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:15.987215+00:00", 
-        "page[to]": "2019-01-09T00:18:15.987236+00:00", 
+        "page[from]": "2019-01-15T22:43:10.822829+00:00", 
+        "page[to]": "2019-01-15T22:43:10.822856+00:00", 
         "page[size]": 50
       }
     }
@@ -623,8 +623,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:15.995743+00:00", 
-        "page[to]": "2019-01-09T00:18:15.995760+00:00", 
+        "page[from]": "2019-01-15T22:43:10.834517+00:00", 
+        "page[to]": "2019-01-15T22:43:10.834538+00:00", 
         "page[size]": 50
       }
     }
@@ -823,7 +823,7 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "c34cb49b-7570-45cb-bb6c-f10f9fc77138", 
+  "user_id": "e22baf38-63d9-4518-8a5a-10ddef718331", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "modality": "phone", 
@@ -909,8 +909,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.007090+00:00", 
-        "page[to]": "2019-01-09T00:18:16.007106+00:00", 
+        "page[from]": "2019-01-15T22:43:10.846183+00:00", 
+        "page[to]": "2019-01-15T22:43:10.846200+00:00", 
         "page[size]": 50
       }
     }
@@ -1040,8 +1040,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.010520+00:00", 
-        "page[to]": "2019-01-09T00:18:16.010536+00:00", 
+        "page[from]": "2019-01-15T22:43:10.849635+00:00", 
+        "page[to]": "2019-01-15T22:43:10.849651+00:00", 
         "page[size]": 50
       }
     }
@@ -1227,8 +1227,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.014039+00:00", 
-        "page[to]": "2019-01-09T00:18:16.014057+00:00", 
+        "page[from]": "2019-01-15T22:43:10.853716+00:00", 
+        "page[to]": "2019-01-15T22:43:10.853735+00:00", 
         "page[size]": 50
       }
     }
@@ -1431,8 +1431,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.019611+00:00", 
-        "page[to]": "2019-01-09T00:18:16.019624+00:00", 
+        "page[from]": "2019-01-15T22:43:10.861793+00:00", 
+        "page[to]": "2019-01-15T22:43:10.861814+00:00", 
         "page[size]": 50
       }
     }
@@ -1704,8 +1704,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.025903+00:00", 
-        "page[to]": "2019-01-09T00:18:16.025921+00:00", 
+        "page[from]": "2019-01-15T22:43:10.868422+00:00", 
+        "page[to]": "2019-01-15T22:43:10.868441+00:00", 
         "page[size]": 50
       }
     }
@@ -1899,7 +1899,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "6ef07213-4f93-4f67-93d5-ea665378f6be", 
+  "user_id": "079c7872-134d-4abe-8568-c042241528f9", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1979,8 +1979,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.035308+00:00", 
-        "page[to]": "2019-01-09T00:18:16.035324+00:00", 
+        "page[from]": "2019-01-15T22:43:10.877609+00:00", 
+        "page[to]": "2019-01-15T22:43:10.877625+00:00", 
         "page[size]": 50
       }
     }
@@ -2177,8 +2177,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.040733+00:00", 
-        "page[to]": "2019-01-09T00:18:16.040744+00:00", 
+        "page[from]": "2019-01-15T22:43:10.883719+00:00", 
+        "page[to]": "2019-01-15T22:43:10.883739+00:00", 
         "page[size]": 50
       }
     }
@@ -2384,8 +2384,8 @@ curl -XGET /v1/file_attachments
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.046111+00:00", 
-        "page[to]": "2019-01-09T00:18:16.046125+00:00", 
+        "page[from]": "2019-01-15T22:43:10.889468+00:00", 
+        "page[to]": "2019-01-15T22:43:10.889488+00:00", 
         "page[size]": 50
       }
     }
@@ -2547,8 +2547,8 @@ curl -XGET /v1/file_uploads
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.049368+00:00", 
-        "page[to]": "2019-01-09T00:18:16.049380+00:00", 
+        "page[from]": "2019-01-15T22:43:10.897181+00:00", 
+        "page[to]": "2019-01-15T22:43:10.897221+00:00", 
         "page[size]": 50
       }
     }
@@ -2754,8 +2754,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.054524+00:00", 
-        "page[to]": "2019-01-09T00:18:16.054535+00:00", 
+        "page[from]": "2019-01-15T22:43:10.909554+00:00", 
+        "page[to]": "2019-01-15T22:43:10.909582+00:00", 
         "page[size]": 50
       }
     }
@@ -2959,7 +2959,12 @@ smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</
   
 
 ### Create
+
+
 Creates a new patient.
+
+
+
 
 
 
@@ -3053,7 +3058,7 @@ weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a>
 smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
 email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
 external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
-phone <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
+phone <br /><code><a href='#optional'>optional</a> <a href='#e164_phone'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
   
 
   
@@ -3108,8 +3113,8 @@ curl -XGET /v1/patients
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.085851+00:00", 
-        "page[to]": "2019-01-09T00:18:16.085868+00:00", 
+        "page[from]": "2019-01-15T22:43:10.963300+00:00", 
+        "page[to]": "2019-01-15T22:43:10.963321+00:00", 
         "page[size]": 50
       }
     }
@@ -3165,7 +3170,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3185,7 +3190,7 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#guid'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
 user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#phone'>phone</a></code> | The phone number to be associated with the patient. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number <br /><code><a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 phone_number_type <br /><code><a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) indentity details. Default `false`
@@ -3222,7 +3227,7 @@ curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3258,7 +3263,7 @@ Updates an existing phone number.
 
 ```shell
 curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3279,7 +3284,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3299,7 +3304,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 param | description
 - | -
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | The phone number to be associated with the patient. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number <br /><code><a href='#optional'>optional</a> <a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 phone_number_type <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) indentity details. Default `false`
@@ -3328,8 +3333,8 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "10b9c103-4405-4567-9657-646331b00858", 
-  "phone_number": "555-555-5555", 
+  "user_id": "fb185e7a-db8b-4fc6-b72a-d7dee07b8493", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3350,7 +3355,7 @@ curl -XPOST /v1/phone_numbers -d '{
 {
   "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
   "verified": false, 
@@ -3371,7 +3376,7 @@ param | description
 - | -
 patient_id <br /><code><a href='#guid'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
 user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#phone'>phone</a></code> | The phone number to be associated with the patient. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number <br /><code><a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 phone_number_type <br /><code><a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) indentity details. Default `false`
@@ -3448,7 +3453,7 @@ curl -XGET /v1/phone_numbers
       {
         "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
         "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-        "phone_number": "555-555-5555", 
+        "phone_number": "+15555555555", 
         "phone_number_type": "landline", 
         "friendly_name": "main number", 
         "verified": false, 
@@ -3463,8 +3468,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.098457+00:00", 
-        "page[to]": "2019-01-09T00:18:16.098473+00:00", 
+        "page[from]": "2019-01-15T22:43:10.978113+00:00", 
+        "page[to]": "2019-01-15T22:43:10.978130+00:00", 
         "page[size]": 50
       }
     }
@@ -3692,8 +3697,8 @@ curl -XGET /v1/sms_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.107624+00:00", 
-        "page[to]": "2019-01-09T00:18:16.107639+00:00", 
+        "page[from]": "2019-01-15T22:43:10.989560+00:00", 
+        "page[to]": "2019-01-15T22:43:10.989577+00:00", 
         "page[size]": 50
       }
     }
@@ -3743,7 +3748,7 @@ Workers are assigned to [patients](#patients) as the patient's primary worker vi
   "email": "developer@welkinhealth.com", 
   "first_name": "Emily", 
   "last_name": "Smith", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "timezone": "US/Eastern", 
   "gender": "Transgender", 
   "roles": "CDE", 
@@ -3759,7 +3764,7 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 email <br /><code><a href='#string'>string</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#string'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#string'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#string'>string</a></code> | Direct line phone number of the worker
+phone_number <br /><code><a href='#string'>string</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#string'>string</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#string'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 roles <br /><code><a href='#enum'>enum</a></code> | The roles of this worker. Possible roles are defined in [Workshop](https://workshop.welkinhealth.com).
@@ -3793,7 +3798,7 @@ curl -XGET /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
   "email": "developer@welkinhealth.com", 
   "first_name": "Emily", 
   "last_name": "Smith", 
-  "phone_number": "555-555-5555", 
+  "phone_number": "+15555555555", 
   "timezone": "US/Eastern", 
   "gender": "Transgender", 
   "roles": "CDE", 
@@ -3843,7 +3848,7 @@ curl -XGET /v1/workers
         "email": "developer@welkinhealth.com", 
         "first_name": "Emily", 
         "last_name": "Smith", 
-        "phone_number": "555-555-5555", 
+        "phone_number": "+15555555555", 
         "timezone": "US/Eastern", 
         "gender": "Transgender", 
         "roles": "CDE", 
@@ -3853,8 +3858,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-09T00:18:16.112667+00:00", 
-        "page[to]": "2019-01-09T00:18:16.112681+00:00", 
+        "page[from]": "2019-01-15T22:43:10.996113+00:00", 
+        "page[to]": "2019-01-15T22:43:10.996130+00:00", 
         "page[size]": 50
       }
     }
@@ -3892,7 +3897,7 @@ isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/w
 isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
 json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
 list(x) | JSON list of objects of type `x` | `["a", "b", "c"]`
-phone | `string` representing a 10 digit phone number without extensions or other dialing information. Country code should not be included as Welkin only supports numbers with country code `+1`. | `"555-555-1234"`
+e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
 state | `string` of the capitalized two character United States state abbreviation | `"CA"`
 string | Any quoted set of ASCII characters with no length restriction | `"Welcome to Welkin's APIs"`
 timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
