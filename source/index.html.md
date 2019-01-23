@@ -374,8 +374,8 @@ curl -XGET /v1/app_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.822829+00:00", 
-        "page[to]": "2019-01-15T22:43:10.822856+00:00", 
+        "page[from]": "2019-01-23T01:26:06.682273+00:00", 
+        "page[to]": "2019-01-23T01:26:06.682293+00:00", 
         "page[size]": 50
       }
     }
@@ -623,8 +623,8 @@ curl -XGET /v1/assessment_responses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.834517+00:00", 
-        "page[to]": "2019-01-15T22:43:10.834538+00:00", 
+        "page[from]": "2019-01-23T01:26:06.690192+00:00", 
+        "page[to]": "2019-01-23T01:26:06.690205+00:00", 
         "page[size]": 50
       }
     }
@@ -823,7 +823,7 @@ Creates a new calendar event.
 curl -XPOST /v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "e22baf38-63d9-4518-8a5a-10ddef718331", 
+  "user_id": "84b423f9-c649-4215-b479-7ba5aefa7c71", 
   "start_time": "2018-09-10T18:56:19.357228+00:00", 
   "end_time": "2018-09-10T18:56:19.357540+00:00", 
   "modality": "phone", 
@@ -909,8 +909,8 @@ curl -XGET /v1/calendar_events
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.846183+00:00", 
-        "page[to]": "2019-01-15T22:43:10.846200+00:00", 
+        "page[from]": "2019-01-23T01:26:06.701940+00:00", 
+        "page[to]": "2019-01-23T01:26:06.701957+00:00", 
         "page[size]": 50
       }
     }
@@ -1040,8 +1040,8 @@ curl -XGET /v1/calendars
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.849635+00:00", 
-        "page[to]": "2019-01-15T22:43:10.849651+00:00", 
+        "page[from]": "2019-01-23T01:26:06.706028+00:00", 
+        "page[to]": "2019-01-23T01:26:06.706042+00:00", 
         "page[size]": 50
       }
     }
@@ -1227,8 +1227,8 @@ curl -XGET /v1/care_flows
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.853716+00:00", 
-        "page[to]": "2019-01-15T22:43:10.853735+00:00", 
+        "page[from]": "2019-01-23T01:26:06.709294+00:00", 
+        "page[to]": "2019-01-23T01:26:06.709304+00:00", 
         "page[size]": 50
       }
     }
@@ -1431,8 +1431,8 @@ curl -XGET /v1/conversations
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.861793+00:00", 
-        "page[to]": "2019-01-15T22:43:10.861814+00:00", 
+        "page[from]": "2019-01-23T01:26:06.714762+00:00", 
+        "page[to]": "2019-01-23T01:26:06.714774+00:00", 
         "page[size]": 50
       }
     }
@@ -1704,8 +1704,8 @@ curl -XGET /v1/custom_data_type_records
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.868422+00:00", 
-        "page[to]": "2019-01-15T22:43:10.868441+00:00", 
+        "page[from]": "2019-01-23T01:26:06.720759+00:00", 
+        "page[to]": "2019-01-23T01:26:06.720772+00:00", 
         "page[size]": 50
       }
     }
@@ -1899,7 +1899,7 @@ curl -XPOST /v1/email_addresses -d '{
   "email": "developer@welkinhealth.com", 
   "friendly_name": "developer contact", 
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "079c7872-134d-4abe-8568-c042241528f9", 
+  "user_id": "eb51e051-8963-4dd3-9a61-e25fceb780f9", 
   "verified": false, 
   "opted_in_to_email": true, 
   "automatic_recipient": false
@@ -1979,8 +1979,8 @@ curl -XGET /v1/email_addresses
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.877609+00:00", 
-        "page[to]": "2019-01-15T22:43:10.877625+00:00", 
+        "page[from]": "2019-01-23T01:26:06.728752+00:00", 
+        "page[to]": "2019-01-23T01:26:06.728768+00:00", 
         "page[size]": 50
       }
     }
@@ -2177,8 +2177,8 @@ curl -XGET /v1/external_ids
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.883719+00:00", 
-        "page[to]": "2019-01-15T22:43:10.883739+00:00", 
+        "page[from]": "2019-01-23T01:26:06.734376+00:00", 
+        "page[to]": "2019-01-23T01:26:06.734391+00:00", 
         "page[size]": 50
       }
     }
@@ -2384,8 +2384,8 @@ curl -XGET /v1/file_attachments
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.889468+00:00", 
-        "page[to]": "2019-01-15T22:43:10.889488+00:00", 
+        "page[from]": "2019-01-23T01:26:06.739634+00:00", 
+        "page[to]": "2019-01-23T01:26:06.739646+00:00", 
         "page[size]": 50
       }
     }
@@ -2547,8 +2547,8 @@ curl -XGET /v1/file_uploads
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.897181+00:00", 
-        "page[to]": "2019-01-15T22:43:10.897221+00:00", 
+        "page[from]": "2019-01-23T01:26:06.742798+00:00", 
+        "page[to]": "2019-01-23T01:26:06.742808+00:00", 
         "page[size]": 50
       }
     }
@@ -2754,8 +2754,8 @@ curl -XGET /v1/integration_tasks
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.909554+00:00", 
-        "page[to]": "2019-01-15T22:43:10.909582+00:00", 
+        "page[from]": "2019-01-23T01:26:06.747827+00:00", 
+        "page[to]": "2019-01-23T01:26:06.747840+00:00", 
         "page[size]": 50
       }
     }
@@ -2896,6 +2896,13 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "first_name": "Grace", 
   "last_name": "Hopper", 
   "birthday": "1906-12-09", 
+  "street": "3265 17th St", 
+  "street_line_two": "#304", 
+  "city": "San Francisco", 
+  "county": "San Francisco County", 
+  "zip_code": "94110", 
+  "state": "CA", 
+  "country": "US", 
   "primary_language": "english", 
   "gender": "Female", 
   "height": "72", 
@@ -2948,6 +2955,13 @@ timezone <br /><code><a href='#optional'>optional</a> <a href='#timezone'>timezo
 first_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | First name of this patient
 last_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | Last name of this patient
 birthday <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date of birth of this patient
+street <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | City of this patient's address
+county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Zip code of this patient's address in five digit form
+state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
 gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of this patient
 height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The two digit height of this patient in inches.
@@ -3113,8 +3127,8 @@ curl -XGET /v1/patients
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.963300+00:00", 
-        "page[to]": "2019-01-15T22:43:10.963321+00:00", 
+        "page[from]": "2019-01-23T01:26:06.778782+00:00", 
+        "page[to]": "2019-01-23T01:26:06.778800+00:00", 
         "page[size]": 50
       }
     }
@@ -3333,7 +3347,7 @@ automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boole
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "fb185e7a-db8b-4fc6-b72a-d7dee07b8493", 
+  "user_id": "2d93352b-86e9-457e-a4b9-961b04c3aadd", 
   "phone_number": "+15555555555", 
   "phone_number_type": "landline", 
   "friendly_name": "main number", 
@@ -3468,8 +3482,8 @@ curl -XGET /v1/phone_numbers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.978113+00:00", 
-        "page[to]": "2019-01-15T22:43:10.978130+00:00", 
+        "page[from]": "2019-01-23T01:26:06.791139+00:00", 
+        "page[to]": "2019-01-23T01:26:06.791152+00:00", 
         "page[size]": 50
       }
     }
@@ -3697,8 +3711,8 @@ curl -XGET /v1/sms_messages
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.989560+00:00", 
-        "page[to]": "2019-01-15T22:43:10.989577+00:00", 
+        "page[from]": "2019-01-23T01:26:06.800179+00:00", 
+        "page[to]": "2019-01-23T01:26:06.800197+00:00", 
         "page[size]": 50
       }
     }
@@ -3858,8 +3872,8 @@ curl -XGET /v1/workers
     ], 
     "meta": {
       "current": {
-        "page[from]": "2019-01-15T22:43:10.996113+00:00", 
-        "page[to]": "2019-01-15T22:43:10.996130+00:00", 
+        "page[from]": "2019-01-23T01:26:06.805102+00:00", 
+        "page[to]": "2019-01-23T01:26:06.805114+00:00", 
         "page[size]": 50
       }
     }
