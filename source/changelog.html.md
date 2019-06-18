@@ -12,6 +12,8 @@ Updates are listed by the day the api or documentation was released.
 
 ## June 18th, 2019
 * **[added]** Worker `Create` and `Update` methods. You can now create and update worker accounts via Welkin APIs. In order to create workers you must have this functionality turned on by Welkin. Please contact your implementation manager or customer success manager to have this functionality enabled.
+
+* **[changed]** Worker roles are now represented with the `role_ids` field. The `roles` field is now deprecated but will still be populated for Get and Find methods of Workers.
 * **[added]** Worker `Unavailable Time` and `Working Hours` endpoints added to worker calenders. You can now view the time on a worker's calendar which they are busy or can't be scheduled for.
 * **[added]** Batch creation of nested resources. This allows resources like Patients and Phone Numbers to be created in a single API call rather than in two sequential calls.
 * **[added]** `Relationship Records` endpoint. This allows you to connect profiles to patients. Note profiles endpoints not yet released. Requires profiles to be enabled for your Welkin configuration.
