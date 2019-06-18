@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+protected_branch='master'
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+diff=$(git diff --name-only HEAD origin/master)
+
+if [ $protected_branch = $current_branch ]; then
+    read -p "You're about to push master, is that what you intended? [y|N] " -n 1 -r < /dev/tty
+    echo
+    if echo $REPLY | grep -E '^[Yy]$' > /dev/null; then
+        exit 0 # push will execute
+    fi
+    exit 1 # push will not execute
+else
+    if echo $diff | grep -E '^source\/changelog\.html\.md' > /dev/null && echo $diff | grep -E '^source\/index\.html\.md' > /dev/null; then
+        exit 0 # push will execute
+    fi
+    if echo $diff | grep -E '^source\/index\.html\.md' > /dev/null; then
+        read -p "You have not included an update to the change log but are updating the API docs, is that what you intended? [y|N] " -n 1 -r < /dev/tty
+        echo
+        if echo $REPLY | grep -E '^[Yy]$' > /dev/null; then
+            exit 0 # push will execute
+        fi
+        exit 1 # push will not execute
+    fi
+    exit 0 # push will execute
+fi
