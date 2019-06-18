@@ -12,7 +12,7 @@ class NestingUniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
     @@headers_history[header_level] = text.parameterize
 
     if header_level > 1
-      for i in (header_level - 1).downto(1)
+      for i in (header_level - 1).downto(2)
         friendly_text.prepend("#{@@headers_history[i]}-") if @@headers_history.key?(i)
       end
     end
