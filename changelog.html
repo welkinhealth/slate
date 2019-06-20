@@ -1,0 +1,256 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="changelog" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#welkin-api-change-log" class="toc-h1 toc-link" data-title="Welkin API Change Log">Welkin API Change Log</a>
+          </li>
+          <li>
+            <a href="#api-updates" class="toc-h1 toc-link" data-title="API Updates">API Updates</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#june-18th-2019" class="toc-h2 toc-link" data-title="June 18th, 2019">June 18th, 2019</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='welkin-api-change-log'>Welkin API Change Log</h1>
+<p>This document outlines the changes that Welkin has made to our external API.
+This document was started in June 2019 and covers all changes made since that date.</p>
+
+<p><strong>API Documentation URL:</strong> <a href="https://developers.welkinhealth.com">https://developers.welkinhealth.com</a></p>
+
+<p><strong>Welkin&#39;s API is in active development.</strong> We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.</p>
+<h1 id='api-updates'>API Updates</h1>
+<p>Updates are listed by the day the api or documentation was released.</p>
+<h2 id='june-18th-2019'>June 18th, 2019</h2>
+<ul>
+<li><p><strong>[added]</strong> Worker <code>Create</code> and <code>Update</code> methods. You can now create and update worker accounts via Welkin APIs. In order to create or update workers you must have this functionality turned on by Welkin. Please contact your implementation manager or customer success manager to have this functionality enabled.</p></li>
+<li><p><strong>[changed]</strong> Worker roles are now represented with the <code>role_ids</code> field. The <code>roles</code> field is now deprecated but will still be populated for Get and Find methods of Workers.</p></li>
+<li><p><strong>[added]</strong> Worker <code>Unavailable Time</code> and <code>Working Hours</code> endpoints added to worker calenders. You can now view the time on a worker&#39;s calendar which they are busy or can&#39;t be scheduled for.</p></li>
+<li><p><strong>[added]</strong> Batch creation of nested resources. This allows resources like Patients and Phone Numbers to be created in a single API call rather than in two sequential calls.</p></li>
+<li><p><strong>[added]</strong> <code>Relationship Records</code> endpoint. This allows you to connect profiles to patients. Note profiles endpoints not yet released. Requires profiles to be enabled for your Welkin configuration.</p></li>
+<li><p><strong>[documented]</strong> Clarified documentation on how webhook notifications are secured in Welkin.</p></li>
+<li><p><strong>[documented]</strong> Clarified example of how to upload files via Welkin&#39;s API.</p></li>
+<li><p><strong>[documented]</strong> Clarified how Conversations resource works with emails and app messages.</p></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
