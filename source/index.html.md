@@ -307,15 +307,15 @@ via this api only records that the message was sent to the <a href="#patients">p
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -334,12 +334,11 @@ sent_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and tim
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single app message.
-
 
 
 #### Invocation
@@ -351,21 +350,21 @@ curl -XGET /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 ```
 
 `GET /v1/app_messages/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -378,8 +377,8 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 
@@ -392,38 +391,37 @@ New messages can be created in a [Patient](#patients) Profile. Messages created 
 
 
 
-
 #### Invocation
 
 > Example Request
 
 ```shell
 curl -XPOST /v1/app_messages -d '{
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
   "sent_at": "2018-09-12T01:27:32.045046+00:00"
 }'
 ```
 
 `POST /v1/app_messages -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -441,15 +439,14 @@ contents <br /><code><a href='#string'>string</a></code> | Text of the message
 sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
   
 
-  
-  
+
+
 
 ### Update
 
 
 Update the time at which the message was sent. This is to be used when an outside system sends the app messages on
 behalf of Welkin to the patient.
-
 
 
 
@@ -465,21 +462,21 @@ curl -XPUT /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -d '{
 ```
 
 `PUT /v1/app_messages/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -493,13 +490,12 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
   
 
-  
-  
+
+
 
 
 ### Find
 Finds app messages, using param filters.
-
 
 
 #### Invocation
@@ -511,7 +507,7 @@ curl -XGET /v1/app_messages
 ```
 
 `GET /v1/app_messages`
-  
+
 
 > Example Response
 
@@ -520,22 +516,22 @@ curl -XGET /v1/app_messages
   {
     "data": [
       {
-        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-        "direction": "inbound", 
-        "contents": "Hi Developer, Welcome to Welkin Health.", 
-        "automatically_sent": false, 
-        "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-        "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+        "direction": "inbound",
+        "contents": "Hi Developer, Welcome to Welkin Health.",
+        "automatically_sent": false,
+        "sent_at": "2018-09-12T01:27:32.045046+00:00",
+        "updated_at": "2018-09-12T01:27:32.045196+00:00",
         "created_at": "2018-09-12T01:27:32.045336+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.129353+00:00", 
-        "page[to]": "2019-06-20T01:01:29.129373+00:00", 
+        "page[from]": "2019-07-11T19:24:08.523395+00:00",
+        "page[to]": "2019-07-11T19:24:08.523427+00:00",
         "page[size]": 50
       }
     }
@@ -554,9 +550,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Assessment Responses
 
@@ -583,20 +579,20 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
 
 ```json
 {
-  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218", 
-  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611", 
-  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc", 
-  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6", 
+  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
   "model": {
-    "insurance_provider": "Acme Insurance", 
-    "plan_type": "SILVER", 
-    "active": true, 
-    "years_active": 2, 
-    "last_hcp_visit": "2018-07-14", 
-    "pain_scale": 0.4, 
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4,
     "completed_at": "2018-08-12T10:20:15"
-  }, 
-  "updated_at": "2018-09-12T01:27:32.024836+00:00", 
+  },
+  "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
 }
 ```
@@ -613,12 +609,11 @@ model <br /><code><a href='#json'>json</a></code> | Response data for assessment
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single assessment response.
-
 
 
 #### Invocation
@@ -630,26 +625,26 @@ curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
 ```
 
 `GET /v1/assessment_responses/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218", 
-  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611", 
-  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc", 
-  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6", 
+  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
   "model": {
-    "insurance_provider": "Acme Insurance", 
-    "plan_type": "SILVER", 
-    "active": true, 
-    "years_active": 2, 
-    "last_hcp_visit": "2018-07-14", 
-    "pain_scale": 0.4, 
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4,
     "completed_at": "2018-08-12T10:20:15"
-  }, 
-  "updated_at": "2018-09-12T01:27:32.024836+00:00", 
+  },
+  "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
 }
 ```
@@ -662,14 +657,13 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 
 
 Creates a new assessment response.
-
 
 
 
@@ -681,44 +675,44 @@ Creates a new assessment response.
 
 ```shell
 curl -XPOST /v1/assessment_responses -d '{
-  "spec_id": "some_string", 
-  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611", 
-  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc", 
-  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6", 
+  "spec_id": "some_string",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
   "model": {
-    "insurance_provider": "Acme Insurance", 
-    "plan_type": "SILVER", 
-    "active": true, 
-    "years_active": 2, 
-    "last_hcp_visit": "2018-07-14", 
-    "pain_scale": 0.4, 
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4,
     "completed_at": "2018-08-12T10:20:15"
-  }, 
+  },
   "title": "some_string"
 }'
 ```
 
 `POST /v1/assessment_responses -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218", 
-  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611", 
-  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc", 
-  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6", 
+  "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
   "model": {
-    "insurance_provider": "Acme Insurance", 
-    "plan_type": "SILVER", 
-    "active": true, 
-    "years_active": 2, 
-    "last_hcp_visit": "2018-07-14", 
-    "pain_scale": 0.4, 
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4,
     "completed_at": "2018-08-12T10:20:15"
-  }, 
-  "updated_at": "2018-09-12T01:27:32.024836+00:00", 
+  },
+  "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
 }
 ```
@@ -736,14 +730,13 @@ model <br /><code><a href='#anything'>anything</a></code> | Response data for as
 title <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The title of the assessment response to be displayed in the timeline.
   
 
-  
-  
+
+
 
 
 
 ### Find
 Finds assessment responses, using param filters.
-
 
 
 #### Invocation
@@ -755,7 +748,7 @@ curl -XGET /v1/assessment_responses
 ```
 
 `GET /v1/assessment_responses`
-  
+
 
 > Example Response
 
@@ -764,27 +757,27 @@ curl -XGET /v1/assessment_responses
   {
     "data": [
       {
-        "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218", 
-        "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611", 
-        "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc", 
-        "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6", 
+        "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
+        "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+        "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+        "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
         "model": {
-          "insurance_provider": "Acme Insurance", 
-          "plan_type": "SILVER", 
-          "active": true, 
-          "years_active": 2, 
-          "last_hcp_visit": "2018-07-14", 
-          "pain_scale": 0.4, 
+          "insurance_provider": "Acme Insurance",
+          "plan_type": "SILVER",
+          "active": true,
+          "years_active": 2,
+          "last_hcp_visit": "2018-07-14",
+          "pain_scale": 0.4,
           "completed_at": "2018-08-12T10:20:15"
-        }, 
-        "updated_at": "2018-09-12T01:27:32.024836+00:00", 
+        },
+        "updated_at": "2018-09-12T01:27:32.024836+00:00",
         "created_at": "2018-09-12T01:27:32.025031+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.137426+00:00", 
-        "page[to]": "2019-06-20T01:01:29.137440+00:00", 
+        "page[from]": "2019-07-11T19:24:08.535848+00:00",
+        "page[to]": "2019-07-11T19:24:08.535878+00:00",
         "page[size]": 50
       }
     }
@@ -802,9 +795,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Calendar Events
 
@@ -838,16 +831,16 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 
 ```json
 {
-  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
-  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "is_all_day": false, 
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "outcome": "completed", 
-  "modality": "phone", 
-  "appointment_type": "intake_call", 
-  "updated_at": "2018-09-10T18:56:19.359240+00:00", 
+  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "is_all_day": false,
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed",
+  "modality": "phone",
+  "appointment_type": "intake_call",
+  "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
 }
 ```
@@ -869,12 +862,11 @@ appointment_type <br /><code><a href='#string'>string</a></code> | Appointment p
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single calendar event.
-
 
 
 #### Invocation
@@ -886,22 +878,22 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
 ```
 
 `GET /v1/calendar_events/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
-  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "is_all_day": false, 
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "outcome": "completed", 
-  "modality": "phone", 
-  "appointment_type": "intake_call", 
-  "updated_at": "2018-09-10T18:56:19.359240+00:00", 
+  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "is_all_day": false,
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed",
+  "modality": "phone",
+  "appointment_type": "intake_call",
+  "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
 }
 ```
@@ -914,12 +906,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 Creates a new calendar event.
-
 
 
 #### Invocation
@@ -928,33 +919,33 @@ Creates a new calendar event.
 
 ```shell
 curl -XPOST /v1/calendar_events -d '{
-  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "user_id": "ec1a5d3c-e19d-4af0-a1e8-baa85f0a9c00", 
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "modality": "phone", 
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "user_id": "c2f55e6d-f17d-4296-9892-090ce5d327dc",
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "modality": "phone",
   "appointment_type": "intake_call"
 }'
 ```
 
 `POST /v1/calendar_events -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
-  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "is_all_day": false, 
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "outcome": "completed", 
-  "modality": "phone", 
-  "appointment_type": "intake_call", 
-  "updated_at": "2018-09-10T18:56:19.359240+00:00", 
+  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "is_all_day": false,
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed",
+  "modality": "phone",
+  "appointment_type": "intake_call",
+  "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
 }
 ```
@@ -974,12 +965,11 @@ modality <br /><code><a href='#enum'>enum</a></code> | Mode via which the event 
 appointment_type <br /><code><a href='#string'>string</a></code> | Appointment prompt to be used for this event (see note for details)
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing calendar event.
-
 
 
 #### Invocation
@@ -988,29 +978,29 @@ Updates an existing calendar event.
 
 ```shell
 curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed"
 }'
 ```
 
 `PUT /v1/calendar_events/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
-  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-  "is_all_day": false, 
-  "start_time": "2018-09-10T18:56:19.357228+00:00", 
-  "end_time": "2018-09-10T18:56:19.357540+00:00", 
-  "outcome": "completed", 
-  "modality": "phone", 
-  "appointment_type": "intake_call", 
-  "updated_at": "2018-09-10T18:56:19.359240+00:00", 
+  "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "is_all_day": false,
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed",
+  "modality": "phone",
+  "appointment_type": "intake_call",
+  "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
 }
 ```
@@ -1027,13 +1017,12 @@ day <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code>
 outcome <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
   
 
-  
-  
+
+
 
 
 ### Find
 Finds calendar events, using param filters.
-
 
 
 #### Invocation
@@ -1045,7 +1034,7 @@ curl -XGET /v1/calendar_events
 ```
 
 `GET /v1/calendar_events`
-  
+
 
 > Example Response
 
@@ -1054,23 +1043,23 @@ curl -XGET /v1/calendar_events
   {
     "data": [
       {
-        "id": "f2baaf15-94d2-415d-b3e6-7409b643d297", 
-        "calendar_id": "598de18b-b203-4947-be34-6871188cd81d", 
-        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
-        "is_all_day": false, 
-        "start_time": "2018-09-10T18:56:19.357228+00:00", 
-        "end_time": "2018-09-10T18:56:19.357540+00:00", 
-        "outcome": "completed", 
-        "modality": "phone", 
-        "appointment_type": "intake_call", 
-        "updated_at": "2018-09-10T18:56:19.359240+00:00", 
+        "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+        "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+        "is_all_day": false,
+        "start_time": "2018-09-10T18:56:19.357228+00:00",
+        "end_time": "2018-09-10T18:56:19.357540+00:00",
+        "outcome": "completed",
+        "modality": "phone",
+        "appointment_type": "intake_call",
+        "updated_at": "2018-09-10T18:56:19.359240+00:00",
         "created_at": "2018-09-10T18:56:19.359873+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.148729+00:00", 
-        "page[to]": "2019-06-20T01:01:29.148749+00:00", 
+        "page[from]": "2019-07-11T19:24:08.556959+00:00",
+        "page[to]": "2019-07-11T19:24:08.556986+00:00",
         "page[size]": 50
       }
     }
@@ -1088,9 +1077,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Calendars
 
@@ -1111,9 +1100,9 @@ coach [Working Hours](#working-hours) to [Workers](#workers).
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5", 
-  "updated_at": "2018-09-12T01:27:32.028059+00:00", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5",
+  "updated_at": "2018-09-12T01:27:32.028059+00:00",
   "created_at": "2018-09-12T01:27:32.028187+00:00"
 }
 ```
@@ -1126,12 +1115,11 @@ worker_id <br /><code><a href='#guid'>guid</a></code> | The ID of the worker who
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single calendar.
-
 
 
 #### Invocation
@@ -1143,15 +1131,15 @@ curl -XGET /v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 ```
 
 `GET /v1/calendars/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5", 
-  "updated_at": "2018-09-12T01:27:32.028059+00:00", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5",
+  "updated_at": "2018-09-12T01:27:32.028059+00:00",
   "created_at": "2018-09-12T01:27:32.028187+00:00"
 }
 ```
@@ -1164,15 +1152,14 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 
 
 
 ### Find
 Finds calendars, using param filters.
-
 
 
 #### Invocation
@@ -1184,7 +1171,7 @@ curl -XGET /v1/calendars
 ```
 
 `GET /v1/calendars`
-  
+
 
 > Example Response
 
@@ -1193,16 +1180,16 @@ curl -XGET /v1/calendars
   {
     "data": [
       {
-        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-        "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5", 
-        "updated_at": "2018-09-12T01:27:32.028059+00:00", 
+        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+        "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5",
+        "updated_at": "2018-09-12T01:27:32.028059+00:00",
         "created_at": "2018-09-12T01:27:32.028187+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.152382+00:00", 
-        "page[to]": "2019-06-20T01:01:29.152398+00:00", 
+        "page[from]": "2019-07-11T19:24:08.563245+00:00",
+        "page[to]": "2019-07-11T19:24:08.563273+00:00",
         "page[size]": 50
       }
     }
@@ -1220,9 +1207,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Care Flows
 
@@ -1270,7 +1257,6 @@ worker_id | `guid` | ID of the [worker](#workers) who this intervention is assig
 Retrieves a single care flow.
 
 
-
 #### Invocation
 
 > Example Request
@@ -1280,40 +1266,40 @@ curl -XGET /v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591
 ```
 
 `GET /v1/care_flows/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
-  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
+  "id": "c68a80d4-95ea-4f61-bf90-615d70bea591",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
   "care_flow": {
-    "title": "patient needs at least 30min exercise per day", 
-    "description": "increase daily exercise", 
+    "title": "patient needs at least 30min exercise per day",
+    "description": "increase daily exercise",
     "goals": [
       {
-        "title": "Make a plan", 
+        "title": "Make a plan",
         "tasks": [
           {
-            "description": "Help the patient decide what type of exercise they can commit to doing.", 
-            "due_date": "2018-08-07T00:00:00+00:00", 
-            "worker_id": null, 
-            "completed_by_worker_id": null, 
+            "description": "Help the patient decide what type of exercise they can commit to doing.",
+            "due_date": "2018-08-07T00:00:00+00:00",
+            "worker_id": null,
+            "completed_by_worker_id": null,
             "completed_at": null
-          }, 
+          },
           {
-            "description": "Make sure there is a written record of the patient's new exercise plan", 
-            "due_date": "2018-08-10T00:00:00+00:00", 
-            "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-            "completed_by_worker_id": null, 
+            "description": "Make sure there is a written record of the patient's new exercise plan",
+            "due_date": "2018-08-10T00:00:00+00:00",
+            "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+            "completed_by_worker_id": null,
             "completed_at": null
           }
         ]
       }
     ]
-  }, 
-  "updated_at": "2018-09-12T01:27:32.029691+00:00", 
+  },
+  "updated_at": "2018-09-12T01:27:32.029691+00:00",
   "created_at": "2018-09-12T01:27:32.029817+00:00"
 }
 ```
@@ -1326,15 +1312,14 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 
 
 
 ### Find
 Finds care flows, using param filters.
-
 
 
 #### Invocation
@@ -1346,7 +1331,7 @@ curl -XGET /v1/care_flows
 ```
 
 `GET /v1/care_flows`
-  
+
 
 > Example Response
 
@@ -1355,41 +1340,41 @@ curl -XGET /v1/care_flows
   {
     "data": [
       {
-        "id": "c68a80d4-95ea-4f61-bf90-615d70bea591", 
-        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180", 
+        "id": "c68a80d4-95ea-4f61-bf90-615d70bea591",
+        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
         "care_flow": {
-          "title": "patient needs at least 30min exercise per day", 
-          "description": "increase daily exercise", 
+          "title": "patient needs at least 30min exercise per day",
+          "description": "increase daily exercise",
           "goals": [
             {
-              "title": "Make a plan", 
+              "title": "Make a plan",
               "tasks": [
                 {
-                  "description": "Help the patient decide what type of exercise they can commit to doing.", 
-                  "due_date": "2018-08-07T00:00:00+00:00", 
-                  "worker_id": null, 
-                  "completed_by_worker_id": null, 
+                  "description": "Help the patient decide what type of exercise they can commit to doing.",
+                  "due_date": "2018-08-07T00:00:00+00:00",
+                  "worker_id": null,
+                  "completed_by_worker_id": null,
                   "completed_at": null
-                }, 
+                },
                 {
-                  "description": "Make sure there is a written record of the patient's new exercise plan", 
-                  "due_date": "2018-08-10T00:00:00+00:00", 
-                  "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-                  "completed_by_worker_id": null, 
+                  "description": "Make sure there is a written record of the patient's new exercise plan",
+                  "due_date": "2018-08-10T00:00:00+00:00",
+                  "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+                  "completed_by_worker_id": null,
                   "completed_at": null
                 }
               ]
             }
           ]
-        }, 
-        "updated_at": "2018-09-12T01:27:32.029691+00:00", 
+        },
+        "updated_at": "2018-09-12T01:27:32.029691+00:00",
         "created_at": "2018-09-12T01:27:32.029817+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.155724+00:00", 
-        "page[to]": "2019-06-20T01:01:29.155741+00:00", 
+        "page[from]": "2019-07-11T19:24:08.569054+00:00",
+        "page[to]": "2019-07-11T19:24:08.569085+00:00",
         "page[size]": 50
       }
     }
@@ -1407,8 +1392,8 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
+
+
 
 
 ## Conversations
@@ -1437,12 +1422,12 @@ phone number is added to the patient.</aside>
 
 ```json
 {
-  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
-  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
-  "title": "App", 
-  "phone_number_id": null, 
-  "updated_at": "2018-09-12T01:27:32.031245+00:00", 
+  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
+  "title": "App",
+  "phone_number_id": null,
+  "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
 ```
@@ -1459,12 +1444,11 @@ phone_number_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [pat
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single conversation.
-
 
 
 #### Invocation
@@ -1476,18 +1460,18 @@ curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
 ```
 
 `GET /v1/conversations/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
-  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
-  "title": "App", 
-  "phone_number_id": null, 
-  "updated_at": "2018-09-12T01:27:32.031245+00:00", 
+  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
+  "title": "App",
+  "phone_number_id": null,
+  "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
 ```
@@ -1501,14 +1485,13 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 
 
 Create a 3rd party app conversation for a [patient](#patients)
-
 
 
 
@@ -1520,25 +1503,25 @@ Create a 3rd party app conversation for a [patient](#patients)
 
 ```shell
 curl -XPOST /v1/conversations -d '{
-  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
   "title": "App"
 }'
 ```
 
 `POST /v1/conversations -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
-  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-  "conversation_type": "app", 
-  "title": "App", 
-  "phone_number_id": null, 
-  "updated_at": "2018-09-12T01:27:32.031245+00:00", 
+  "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
+  "title": "App",
+  "phone_number_id": null,
+  "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
 ```
@@ -1553,14 +1536,13 @@ conversation_type <br /><code><a href='#enum'>enum</a></code> | `sms`, `email`, 
 title <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
   
 
-  
-  
+
+
 
 
 
 ### Find
 Finds conversations, using param filters.
-
 
 
 #### Invocation
@@ -1572,7 +1554,7 @@ curl -XGET /v1/conversations
 ```
 
 `GET /v1/conversations`
-  
+
 
 > Example Response
 
@@ -1581,19 +1563,19 @@ curl -XGET /v1/conversations
   {
     "data": [
       {
-        "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca", 
-        "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88", 
-        "conversation_type": "app", 
-        "title": "App", 
-        "phone_number_id": null, 
-        "updated_at": "2018-09-12T01:27:32.031245+00:00", 
+        "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+        "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+        "conversation_type": "app",
+        "title": "App",
+        "phone_number_id": null,
+        "updated_at": "2018-09-12T01:27:32.031245+00:00",
         "created_at": "2018-09-12T01:27:32.031362+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.162519+00:00", 
-        "page[to]": "2019-06-20T01:01:29.162537+00:00", 
+        "page[from]": "2019-07-11T19:24:08.578056+00:00",
+        "page[to]": "2019-07-11T19:24:08.578079+00:00",
         "page[size]": 50
       }
     }
@@ -1612,9 +1594,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Custom Data Type Records
 
@@ -1638,17 +1620,17 @@ same type will have different effects within the Welkin Portal.</aside>
 
 ```json
 {
-  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
-  }, 
-  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
-  "type_name": "hcp", 
-  "updated_at": "2018-09-12T01:27:32.033666+00:00", 
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
   "created_at": "2018-09-12T01:27:32.033816+00:00"
 }
 ```
@@ -1663,12 +1645,11 @@ type_name <br /><code><a href='#string'>string</a></code> | ID of the custom dat
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single custom data type record.
-
 
 
 #### Invocation
@@ -1680,23 +1661,23 @@ curl -XGET /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
 ```
 
 `GET /v1/custom_data_type_records/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
-  }, 
-  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
-  "type_name": "hcp", 
-  "updated_at": "2018-09-12T01:27:32.033666+00:00", 
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
   "created_at": "2018-09-12T01:27:32.033816+00:00"
 }
 ```
@@ -1709,12 +1690,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 Creates a new custom data type record.
-
 
 
 #### Invocation
@@ -1724,35 +1704,35 @@ Creates a new custom data type record.
 ```shell
 curl -XPOST /v1/custom_data_type_records -d '{
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
-  }, 
-  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
   "type_name": "hcp"
 }'
 ```
 
 `POST /v1/custom_data_type_records -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
-  }, 
-  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
-  "type_name": "hcp", 
-  "updated_at": "2018-09-12T01:27:32.033666+00:00", 
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
   "created_at": "2018-09-12T01:27:32.033816+00:00"
 }
 ```
@@ -1767,12 +1747,11 @@ patient_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient]
 type_name <br /><code><a href='#string'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing custom data type record.
-
 
 
 #### Invocation
@@ -1782,33 +1761,33 @@ Updates an existing custom data type record.
 ```shell
 curl -XPUT /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
   }
 }'
 ```
 
 `PUT /v1/custom_data_type_records/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
   "body": {
-    "name": "Frank Smith", 
-    "suffix": "MD", 
-    "practice_name": "Boston Medical Group", 
-    "office_id": "e32ac52", 
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
     "specialty": "internal medicine"
-  }, 
-  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
-  "type_name": "hcp", 
-  "updated_at": "2018-09-12T01:27:32.033666+00:00", 
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
   "created_at": "2018-09-12T01:27:32.033816+00:00"
 }
 ```
@@ -1822,13 +1801,12 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 body <br /><code><a href='#anything'>anything</a></code> | The content of the custom date type record
   
 
-  
-  
+
+
 
 
 ### Find
 Finds custom data type records, using param filters.
-
 
 
 #### Invocation
@@ -1840,7 +1818,7 @@ curl -XGET /v1/custom_data_type_records
 ```
 
 `GET /v1/custom_data_type_records`
-  
+
 
 > Example Response
 
@@ -1849,24 +1827,24 @@ curl -XGET /v1/custom_data_type_records
   {
     "data": [
       {
-        "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7", 
+        "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
         "body": {
-          "name": "Frank Smith", 
-          "suffix": "MD", 
-          "practice_name": "Boston Medical Group", 
-          "office_id": "e32ac52", 
+          "name": "Frank Smith",
+          "suffix": "MD",
+          "practice_name": "Boston Medical Group",
+          "office_id": "e32ac52",
           "specialty": "internal medicine"
-        }, 
-        "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4", 
-        "type_name": "hcp", 
-        "updated_at": "2018-09-12T01:27:32.033666+00:00", 
+        },
+        "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+        "type_name": "hcp",
+        "updated_at": "2018-09-12T01:27:32.033666+00:00",
         "created_at": "2018-09-12T01:27:32.033816+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.169563+00:00", 
-        "page[to]": "2019-06-20T01:01:29.169582+00:00", 
+        "page[from]": "2019-07-11T19:24:08.588405+00:00",
+        "page[to]": "2019-07-11T19:24:08.588434+00:00",
         "page[size]": 50
       }
     }
@@ -1885,9 +1863,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Email Addresses
 
@@ -1917,14 +1895,14 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 
 ```json
 {
-  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd", 
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "verified": false, 
-  "opted_in_to_email": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.035940+00:00", 
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
   "created_at": "2018-09-12T01:27:32.036062+00:00"
 }
 ```
@@ -1943,12 +1921,11 @@ automatic_recipient <br /><code><a href='#boolean'>boolean</a></code> | `true` o
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single email address.
-
 
 
 #### Invocation
@@ -1960,20 +1937,20 @@ curl -XGET /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
 ```
 
 `GET /v1/email_addresses/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd", 
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "verified": false, 
-  "opted_in_to_email": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.035940+00:00", 
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
   "created_at": "2018-09-12T01:27:32.036062+00:00"
 }
 ```
@@ -1986,11 +1963,10 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
-
 
 
 
@@ -2003,31 +1979,31 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 
 ```shell
 curl -XPOST /v1/email_addresses -d '{
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "user_id": "f1180c6a-720c-4610-9d89-cdffb2f6c5b5", 
-  "verified": false, 
-  "opted_in_to_email": true, 
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "user_id": "44d69371-6234-412b-aee8-4f1754950455",
+  "verified": false,
+  "opted_in_to_email": true,
   "automatic_recipient": false
 }'
 ```
 
 `POST /v1/email_addresses -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd", 
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "verified": false, 
-  "opted_in_to_email": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.035940+00:00", 
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
   "created_at": "2018-09-12T01:27:32.036062+00:00"
 }
 ```
@@ -2046,12 +2022,11 @@ opted_in_to_email <br /><code><a href='#optional'>optional</a> <a href='#boolean
 automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing email address.
-
 
 
 #### Invocation
@@ -2060,29 +2035,29 @@ Updates an existing email address.
 
 ```shell
 curl -XPUT /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "verified": false, 
-  "opted_in_to_email": true, 
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "verified": false,
+  "opted_in_to_email": true,
   "automatic_recipient": false
 }'
 ```
 
 `PUT /v1/email_addresses/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd", 
-  "email": "developer@welkinhealth.com", 
-  "friendly_name": "developer contact", 
-  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-  "verified": false, 
-  "opted_in_to_email": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.035940+00:00", 
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
   "created_at": "2018-09-12T01:27:32.036062+00:00"
 }
 ```
@@ -2100,13 +2075,12 @@ opted_in_to_email <br /><code><a href='#optional'>optional</a> <a href='#boolean
 automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
   
 
-  
-  
+
+
 
 
 ### Find
 Finds email addresses, using param filters.
-
 
 
 #### Invocation
@@ -2118,7 +2092,7 @@ curl -XGET /v1/email_addresses
 ```
 
 `GET /v1/email_addresses`
-  
+
 
 > Example Response
 
@@ -2127,21 +2101,21 @@ curl -XGET /v1/email_addresses
   {
     "data": [
       {
-        "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd", 
-        "email": "developer@welkinhealth.com", 
-        "friendly_name": "developer contact", 
-        "patient_id": "14492e35-c4e4-4235-8175-aa874321144e", 
-        "verified": false, 
-        "opted_in_to_email": true, 
-        "automatic_recipient": false, 
-        "updated_at": "2018-09-12T01:27:32.035940+00:00", 
+        "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+        "email": "developer@welkinhealth.com",
+        "friendly_name": "developer contact",
+        "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+        "verified": false,
+        "opted_in_to_email": true,
+        "automatic_recipient": false,
+        "updated_at": "2018-09-12T01:27:32.035940+00:00",
         "created_at": "2018-09-12T01:27:32.036062+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.178073+00:00", 
-        "page[to]": "2019-06-20T01:01:29.178091+00:00", 
+        "page[from]": "2019-07-11T19:24:08.602667+00:00",
+        "page[to]": "2019-07-11T19:24:08.602694+00:00",
         "page[size]": 50
       }
     }
@@ -2161,9 +2135,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## External Ids (provisional)
 
@@ -2189,10 +2163,10 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 
 ```json
 {
-  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-  "resource": "patient", 
-  "namespace": "ehr", 
-  "external_id": "abc-123", 
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }
 ```
@@ -2206,13 +2180,12 @@ namespace <br /><code><a href='#string'>string</a></code> | Snake cased string s
 external_id <br /><code><a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
 welkin_id <br /><code><a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
   
-  
-  
+
+
 
 
 ### Update
 Updates an existing external id.
-
 
 
 #### Invocation
@@ -2221,24 +2194,24 @@ Updates an existing external id.
 
 ```shell
 curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
-  "resource": "patient", 
-  "namespace": "ehr", 
-  "external_id": "abc-123", 
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }'
 ```
 
 `PUT /v1/external_ids/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-  "resource": "patient", 
-  "namespace": "ehr", 
-  "external_id": "abc-123", 
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }
 ```
@@ -2255,12 +2228,11 @@ external_id <br /><code><a href='#optional'>optional</a> <a href='#string'>strin
 welkin_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
   
 
-  
-  
+
+
 
 ### Create
 Creates a new external id.
-
 
 
 #### Invocation
@@ -2269,24 +2241,24 @@ Creates a new external id.
 
 ```shell
 curl -XPOST /v1/external_ids -d '{
-  "resource": "patient", 
-  "namespace": "ehr", 
-  "external_id": "abc-123", 
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }'
 ```
 
 `POST /v1/external_ids -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-  "resource": "patient", 
-  "namespace": "ehr", 
-  "external_id": "abc-123", 
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }
 ```
@@ -2302,13 +2274,12 @@ external_id <br /><code><a href='#string'>string</a></code> | ID of the resource
 welkin_id <br /><code><a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
   
 
-  
-  
+
+
 
 
 ### Find
 Finds external ids, using param filters.
-
 
 
 #### Invocation
@@ -2320,7 +2291,7 @@ curl -XGET /v1/external_ids
 ```
 
 `GET /v1/external_ids`
-  
+
 
 > Example Response
 
@@ -2329,17 +2300,17 @@ curl -XGET /v1/external_ids
   {
     "data": [
       {
-        "id": "76c5662c-1e16-4cfa-bbad-900e721a290b", 
-        "resource": "patient", 
-        "namespace": "ehr", 
-        "external_id": "abc-123", 
+        "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+        "resource": "patient",
+        "namespace": "ehr",
+        "external_id": "abc-123",
         "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.184298+00:00", 
-        "page[to]": "2019-06-20T01:01:29.184316+00:00", 
+        "page[from]": "2019-07-11T19:24:08.612544+00:00",
+        "page[to]": "2019-07-11T19:24:08.612572+00:00",
         "page[size]": 50
       }
     }
@@ -2361,8 +2332,8 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
+
+
 
 
 ## File Attachments
@@ -2388,11 +2359,11 @@ includes the file preview and the attachment type.
 
 ```json
 {
-  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee", 
-  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14", 
-  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac", 
-  "attachment_type": "x-ray", 
-  "description": "Right leg", 
+  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
   ]
@@ -2409,12 +2380,11 @@ attachment_type <br /><code><a href='#string'>string</a></code> | A label attach
 description <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Text description or notes about the file being attached
 file_upload_ids <br /><code><a href='#list(guid)'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
   
-  
-  
+
+
 
 ### Get
 Retrieves a single file attachment.
-
 
 
 #### Invocation
@@ -2426,17 +2396,17 @@ curl -XGET /v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee
 ```
 
 `GET /v1/file_attachments/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee", 
-  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14", 
-  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac", 
-  "attachment_type": "x-ray", 
-  "description": "Right leg", 
+  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
   ]
@@ -2451,12 +2421,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 Creates a new file attachment.
-
 
 
 #### Invocation
@@ -2465,10 +2434,10 @@ Creates a new file attachment.
 
 ```shell
 curl -XPOST /v1/file_attachments -d '{
-  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14", 
-  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac", 
-  "attachment_type": "x-ray", 
-  "description": "Right leg", 
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
   ]
@@ -2476,17 +2445,17 @@ curl -XPOST /v1/file_attachments -d '{
 ```
 
 `POST /v1/file_attachments -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee", 
-  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14", 
-  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac", 
-  "attachment_type": "x-ray", 
-  "description": "Right leg", 
+  "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
   ]
@@ -2505,14 +2474,13 @@ description <br /><code><a href='#optional'>optional</a> <a href='#string'>strin
 file_upload_ids <br /><code><a href='#list(guid)'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
   
 
-  
-  
+
+
 
 
 
 ### Find
 Finds file attachments, using param filters.
-
 
 
 #### Invocation
@@ -2524,7 +2492,7 @@ curl -XGET /v1/file_attachments
 ```
 
 `GET /v1/file_attachments`
-  
+
 
 > Example Response
 
@@ -2533,20 +2501,20 @@ curl -XGET /v1/file_attachments
   {
     "data": [
       {
-        "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee", 
-        "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14", 
-        "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac", 
-        "attachment_type": "x-ray", 
-        "description": "Right leg", 
+        "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
+        "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+        "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+        "attachment_type": "x-ray",
+        "description": "Right leg",
         "file_upload_ids": [
           "efbcc819-f25f-4bf4-afd4-198a035d5340"
         ]
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.189902+00:00", 
-        "page[to]": "2019-06-20T01:01:29.189914+00:00", 
+        "page[from]": "2019-07-11T19:24:08.621414+00:00",
+        "page[to]": "2019-07-11T19:24:08.621440+00:00",
         "page[size]": 50
       }
     }
@@ -2564,9 +2532,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 ## File Uploads
 
 
@@ -2588,8 +2556,8 @@ profile one they have been attached via the [File Attachments](#file-attachments
 
 ```json
 {
-  "id": "efbcc819-f25f-4bf4-afd4-198a035d5340", 
-  "mime_type": "image/png", 
+  "id": "efbcc819-f25f-4bf4-afd4-198a035d5340",
+  "mime_type": "image/png",
   "url": "https://welkin-photos-prod-bdb45be0-464e.s3.amazonaws.com/2ab9791d-86f1-e50?AWSAccessKeyId=ASIA&Expires=153924&x-amz-security-token=FQoGZXdz&Signature=FjSiY"
 }
 ```
@@ -2601,8 +2569,8 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 mime_type <br /><code><a href='#enum'>enum</a></code> | MIME type of the file being uploaded. Accepted MINE types: `image/tiff`, `image/jpeg`, `image/png`, `application/pdf`
 url <br /><code><a href='#string'>string</a></code> | URL of the file, including access tokens, of the file on Amazon S3. Note, the example URL has been truncated for display purposes.
   
-  
-  
+
+
 
 ### Upload
 Accepts the binary data of a file and creates the file upload record.
@@ -2645,7 +2613,6 @@ data<br /><code><a href='#binary'>binary</a></code> | The binary data of the fil
 Retrieves a single file upload.
 
 
-
 #### Invocation
 
 > Example Request
@@ -2655,14 +2622,14 @@ curl -XGET /v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340
 ```
 
 `GET /v1/file_uploads/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "efbcc819-f25f-4bf4-afd4-198a035d5340", 
-  "mime_type": "image/png", 
+  "id": "efbcc819-f25f-4bf4-afd4-198a035d5340",
+  "mime_type": "image/png",
   "url": "https://welkin-photos-prod-bdb45be0-464e.s3.amazonaws.com/2ab9791d-86f1-e50?AWSAccessKeyId=ASIA&Expires=153924&x-amz-security-token=FQoGZXdz&Signature=FjSiY"
 }
 ```
@@ -2675,12 +2642,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Find
 Finds file uploads, using param filters.
-
 
 
 #### Invocation
@@ -2692,7 +2658,7 @@ curl -XGET /v1/file_uploads
 ```
 
 `GET /v1/file_uploads`
-  
+
 
 > Example Response
 
@@ -2701,15 +2667,15 @@ curl -XGET /v1/file_uploads
   {
     "data": [
       {
-        "id": "efbcc819-f25f-4bf4-afd4-198a035d5340", 
-        "mime_type": "image/png", 
+        "id": "efbcc819-f25f-4bf4-afd4-198a035d5340",
+        "mime_type": "image/png",
         "url": "https://welkin-photos-prod-bdb45be0-464e.s3.amazonaws.com/2ab9791d-86f1-e50?AWSAccessKeyId=ASIA&Expires=153924&x-amz-security-token=FQoGZXdz&Signature=FjSiY"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.193776+00:00", 
-        "page[to]": "2019-06-20T01:01:29.193794+00:00", 
+        "page[from]": "2019-07-11T19:24:08.627501+00:00",
+        "page[to]": "2019-07-11T19:24:08.627530+00:00",
         "page[size]": 50
       }
     }
@@ -2727,8 +2693,8 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
+
+
 
 ## Integration Tasks (provisional)
 
@@ -2756,20 +2722,20 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 
 ```json
 {
-  "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
-  "status": "failed", 
-  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
+  "id": "9bf1e295-47f5-4027-a382-008c860694c2",
+  "status": "failed",
+  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "ref_ids": [
-    "abc123", 
+    "abc123",
     "cdf456"
-  ], 
-  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
-  "task_name": "kiwihealth_pull.process_item", 
-  "updated_at": "2018-09-12T01:27:32.041332+00:00", 
-  "created_at": "2018-09-12T01:27:32.041464+00:00", 
+  ],
+  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c",
+  "task_name": "kiwihealth_pull.process_item",
+  "updated_at": "2018-09-12T01:27:32.041332+00:00",
+  "created_at": "2018-09-12T01:27:32.041464+00:00",
   "errors": [
     {
-      "code": "patient_not_found", 
+      "code": "patient_not_found",
       "message": "There is no patient with that ID."
     }
   ]
@@ -2789,8 +2755,8 @@ updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime 
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
 errors <br /><code><a href='#array'>array</a> <a href='#integration-errors'>integration-errors</a></code> | Array of all the errors that resulted from this specific task. Note, these errors do not roll up to parent tasks.
   
-  
-  
+
+
 
 ### Model integration-errors
 field | type | description
@@ -2821,7 +2787,6 @@ The top-level task (run_kiwihealth_pull) reports the status of the entire job, n
 Retrieves a single integration task.
 
 
-
 #### Invocation
 
 > Example Request
@@ -2831,26 +2796,26 @@ curl -XGET /v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2
 ```
 
 `GET /v1/integration_tasks/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
-  "status": "failed", 
-  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
+  "id": "9bf1e295-47f5-4027-a382-008c860694c2",
+  "status": "failed",
+  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "ref_ids": [
-    "abc123", 
+    "abc123",
     "cdf456"
-  ], 
-  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
-  "task_name": "kiwihealth_pull.process_item", 
-  "updated_at": "2018-09-12T01:27:32.041332+00:00", 
-  "created_at": "2018-09-12T01:27:32.041464+00:00", 
+  ],
+  "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c",
+  "task_name": "kiwihealth_pull.process_item",
+  "updated_at": "2018-09-12T01:27:32.041332+00:00",
+  "created_at": "2018-09-12T01:27:32.041464+00:00",
   "errors": [
     {
-      "code": "patient_not_found", 
+      "code": "patient_not_found",
       "message": "There is no patient with that ID."
     }
   ]
@@ -2865,15 +2830,14 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 
 
 
 ### Find
 Finds integration tasks, using param filters.
-
 
 
 #### Invocation
@@ -2885,7 +2849,7 @@ curl -XGET /v1/integration_tasks
 ```
 
 `GET /v1/integration_tasks`
-  
+
 
 > Example Response
 
@@ -2894,29 +2858,29 @@ curl -XGET /v1/integration_tasks
   {
     "data": [
       {
-        "id": "9bf1e295-47f5-4027-a382-008c860694c2", 
-        "status": "failed", 
-        "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
+        "id": "9bf1e295-47f5-4027-a382-008c860694c2",
+        "status": "failed",
+        "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
         "ref_ids": [
-          "abc123", 
+          "abc123",
           "cdf456"
-        ], 
-        "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c", 
-        "task_name": "kiwihealth_pull.process_item", 
-        "updated_at": "2018-09-12T01:27:32.041332+00:00", 
-        "created_at": "2018-09-12T01:27:32.041464+00:00", 
+        ],
+        "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c",
+        "task_name": "kiwihealth_pull.process_item",
+        "updated_at": "2018-09-12T01:27:32.041332+00:00",
+        "created_at": "2018-09-12T01:27:32.041464+00:00",
         "errors": [
           {
-            "code": "patient_not_found", 
+            "code": "patient_not_found",
             "message": "There is no patient with that ID."
           }
         ]
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.199141+00:00", 
-        "page[to]": "2019-06-20T01:01:29.199174+00:00", 
+        "page[from]": "2019-07-11T19:24:08.635926+00:00",
+        "page[to]": "2019-07-11T19:24:08.635948+00:00",
         "page[size]": 50
       }
     }
@@ -2937,8 +2901,8 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
+
+
 
 
 ## Patients
@@ -2986,26 +2950,26 @@ generation.
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": "intake", 
-  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": "US/Pacific", 
-  "first_name": "Grace", 
-  "last_name": "Hopper", 
-  "birthday": "1906-12-09", 
-  "gender": "Female", 
-  "height": "72", 
-  "primary_language": "english", 
-  "smokes": "false", 
-  "weight": "175", 
-  "street": "3265 17th St", 
-  "street_line_two": "#304", 
-  "city": "San Francisco", 
-  "county": "San Francisco County", 
-  "zip_code": "94110", 
-  "state": "CA", 
-  "country": "US", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "gender": "Female",
+  "height": "72",
+  "primary_language": "english",
+  "smokes": "false",
+  "weight": "175",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3036,8 +3000,8 @@ height <br /><code><a href='#string'>string</a></code> | The two digit height of
 weight <br /><code><a href='#string'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
   
-  
-  
+
+
 
 
 ### Create
@@ -3049,34 +3013,33 @@ Creates a new patient.
 
 
 
-
 #### Invocation
 
 > Example Request
 
 ```shell
 curl -XPOST /v1/patients -d '{
-  "phase": "intake", 
-  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": "US/Pacific", 
-  "first_name": "Grace", 
-  "last_name": "Hopper", 
-  "birthday": "1906-12-09", 
-  "street": "3265 17th St", 
-  "street_line_two": "#304", 
-  "city": "San Francisco", 
-  "county": "San Francisco County", 
-  "zip_code": "94110", 
-  "state": "CA", 
-  "country": "US", 
-  "primary_language": "english", 
-  "gender": "Female", 
-  "height": "72", 
-  "weight": "175", 
-  "smokes": "false", 
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
+  "smokes": "false",
   "external_ids": [
     {
-      "external_id": "abc-123", 
+      "external_id": "abc-123",
       "namespace": "ehr"
     }
   ]
@@ -3084,32 +3047,32 @@ curl -XPOST /v1/patients -d '{
 ```
 
 `POST /v1/patients -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": "intake", 
-  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": "US/Pacific", 
-  "first_name": "Grace", 
-  "last_name": "Hopper", 
-  "birthday": "1906-12-09", 
-  "gender": "Female", 
-  "height": "72", 
-  "primary_language": "english", 
-  "smokes": "false", 
-  "weight": "175", 
-  "street": "3265 17th St", 
-  "street_line_two": "#304", 
-  "city": "San Francisco", 
-  "county": "San Francisco County", 
-  "zip_code": "94110", 
-  "state": "CA", 
-  "country": "US", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "gender": "Female",
+  "height": "72",
+  "primary_language": "english",
+  "smokes": "false",
+  "weight": "175",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3143,12 +3106,11 @@ external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)
 phone <br /><code><a href='#optional'>optional</a> <a href='#e164_phone'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing patient.
-
 
 
 #### Invocation
@@ -3157,54 +3119,54 @@ Updates an existing patient.
 
 ```shell
 curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
-  "phase": "intake", 
-  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": "US/Pacific", 
-  "first_name": "Grace", 
-  "last_name": "Hopper", 
-  "birthday": "1906-12-09", 
-  "street": "3265 17th St", 
-  "street_line_two": "#304", 
-  "city": "San Francisco", 
-  "county": "San Francisco County", 
-  "zip_code": "94110", 
-  "state": "CA", 
-  "country": "US", 
-  "primary_language": "english", 
-  "gender": "Female", 
-  "height": "72", 
-  "weight": "175", 
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
   "smokes": "false"
 }'
 ```
 
 `PUT /v1/patients/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "phase": "intake", 
-  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-  "timezone": "US/Pacific", 
-  "first_name": "Grace", 
-  "last_name": "Hopper", 
-  "birthday": "1906-12-09", 
-  "gender": "Female", 
-  "height": "72", 
-  "primary_language": "english", 
-  "smokes": "false", 
-  "weight": "175", 
-  "street": "3265 17th St", 
-  "street_line_two": "#304", 
-  "city": "San Francisco", 
-  "county": "San Francisco County", 
-  "zip_code": "94110", 
-  "state": "CA", 
-  "country": "US", 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "gender": "Female",
+  "height": "72",
+  "primary_language": "english",
+  "smokes": "false",
+  "weight": "175",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3236,13 +3198,12 @@ weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a>
 smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
   
 
-  
-  
+
+
 
 
 ### Find
 Finds patients, using param filters.
-
 
 
 #### Invocation
@@ -3254,7 +3215,7 @@ curl -XGET /v1/patients
 ```
 
 `GET /v1/patients`
-  
+
 
 > Example Response
 
@@ -3263,33 +3224,33 @@ curl -XGET /v1/patients
   {
     "data": [
       {
-        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-        "phase": "intake", 
-        "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054", 
-        "timezone": "US/Pacific", 
-        "first_name": "Grace", 
-        "last_name": "Hopper", 
-        "birthday": "1906-12-09", 
-        "gender": "Female", 
-        "height": "72", 
-        "primary_language": "english", 
-        "smokes": "false", 
-        "weight": "175", 
-        "street": "3265 17th St", 
-        "street_line_two": "#304", 
-        "city": "San Francisco", 
-        "county": "San Francisco County", 
-        "zip_code": "94110", 
-        "state": "CA", 
-        "country": "US", 
-        "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+        "phase": "intake",
+        "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+        "timezone": "US/Pacific",
+        "first_name": "Grace",
+        "last_name": "Hopper",
+        "birthday": "1906-12-09",
+        "gender": "Female",
+        "height": "72",
+        "primary_language": "english",
+        "smokes": "false",
+        "weight": "175",
+        "street": "3265 17th St",
+        "street_line_two": "#304",
+        "city": "San Francisco",
+        "county": "San Francisco County",
+        "zip_code": "94110",
+        "state": "CA",
+        "country": "US",
+        "updated_at": "2018-09-12T01:27:32.108773+00:00",
         "created_at": "2018-09-12T01:27:32.109872+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.234618+00:00", 
-        "page[to]": "2019-06-20T01:01:29.234637+00:00", 
+        "page[from]": "2019-07-11T19:24:08.687776+00:00",
+        "page[to]": "2019-07-11T19:24:08.687804+00:00",
         "page[size]": 50
       }
     }
@@ -3307,9 +3268,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Phone Numbers
 
@@ -3343,18 +3304,18 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 
 ```json
 {
-  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.123172+00:00", 
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
   "created_at": "2018-09-12T01:27:32.123301+00:00"
 }
 ```
@@ -3377,12 +3338,11 @@ automatic_recipient <br /><code><a href='#boolean'>boolean</a></code> | `true` o
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single phone number.
-
 
 
 #### Invocation
@@ -3394,24 +3354,24 @@ curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
 `GET /v1/phone_numbers/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.123172+00:00", 
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
   "created_at": "2018-09-12T01:27:32.123301+00:00"
 }
 ```
@@ -3424,11 +3384,10 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
-
 
 
 
@@ -3441,39 +3400,39 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 
 ```shell
 curl -XPOST /v1/phone_numbers -d '{
-  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "user_id": "f0d5bdca-704b-4143-8d38-b00e69223b0d", 
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "25697132-2736-4bf4-a2bc-b07cced5deb3",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
   "automatic_recipient": false
 }'
 ```
 
 `POST /v1/phone_numbers -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.123172+00:00", 
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
   "created_at": "2018-09-12T01:27:32.123301+00:00"
 }
 ```
@@ -3496,12 +3455,11 @@ opted_in_to_phone <br /><code><a href='#optional'>optional</a> <a href='#boolean
 automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing phone number.
-
 
 
 #### Invocation
@@ -3510,37 +3468,37 @@ Updates an existing phone number.
 
 ```shell
 curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
   "automatic_recipient": false
 }'
 ```
 
 `PUT /v1/phone_numbers/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-  "phone_number": "+15555555555", 
-  "phone_number_type": "landline", 
-  "friendly_name": "main number", 
-  "verified": false, 
-  "opted_in_to_sms": true, 
-  "opted_in_to_call_recording": false, 
-  "opted_in_to_voicemail": false, 
-  "opted_in_to_phone": true, 
-  "automatic_recipient": false, 
-  "updated_at": "2018-09-12T01:27:32.123172+00:00", 
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
   "created_at": "2018-09-12T01:27:32.123301+00:00"
 }
 ```
@@ -3562,11 +3520,10 @@ opted_in_to_phone <br /><code><a href='#optional'>optional</a> <a href='#boolean
 automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
   
 
-  
-  
+
+
 
 ### Delete
-
 
 
 
@@ -3582,7 +3539,7 @@ curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
 `DELETE /v1/phone_numbers/:id`
-  
+
 
 > Example Response
 
@@ -3600,12 +3557,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Find
 Finds phone numbers, using param filters.
-
 
 
 #### Invocation
@@ -3617,7 +3573,7 @@ curl -XGET /v1/phone_numbers
 ```
 
 `GET /v1/phone_numbers`
-  
+
 
 > Example Response
 
@@ -3626,25 +3582,25 @@ curl -XGET /v1/phone_numbers
   {
     "data": [
       {
-        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f", 
-        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f", 
-        "phone_number": "+15555555555", 
-        "phone_number_type": "landline", 
-        "friendly_name": "main number", 
-        "verified": false, 
-        "opted_in_to_sms": true, 
-        "opted_in_to_call_recording": false, 
-        "opted_in_to_voicemail": false, 
-        "opted_in_to_phone": true, 
-        "automatic_recipient": false, 
-        "updated_at": "2018-09-12T01:27:32.123172+00:00", 
+        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+        "phone_number": "+15555555555",
+        "phone_number_type": "landline",
+        "friendly_name": "main number",
+        "verified": false,
+        "opted_in_to_sms": true,
+        "opted_in_to_call_recording": false,
+        "opted_in_to_voicemail": false,
+        "opted_in_to_phone": true,
+        "automatic_recipient": false,
+        "updated_at": "2018-09-12T01:27:32.123172+00:00",
         "created_at": "2018-09-12T01:27:32.123301+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.248703+00:00", 
-        "page[to]": "2019-06-20T01:01:29.248723+00:00", 
+        "page[from]": "2019-07-11T19:24:08.709999+00:00",
+        "page[to]": "2019-07-11T19:24:08.710026+00:00",
         "page[size]": 50
       }
     }
@@ -3664,9 +3620,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Relationship Records
 
@@ -3691,14 +3647,14 @@ to quickly navigate to view details about the people and places in a [patient's]
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "relationship_type_id": "family_member", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "archived_at": null, 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "relationship_type_id": "family_member",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "archived_at": null,
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3716,12 +3672,11 @@ entity_1_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity (
 entity_2_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
 relationship_type_id <br /><code><a href='#string'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
   
-  
-  
+
+
 
 ### Get
 Retrieves a single relationship record.
-
 
 
 #### Invocation
@@ -3733,20 +3688,20 @@ curl -XGET /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
 `GET /v1/relationship_records/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "relationship_type_id": "family_member", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "archived_at": null, 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "relationship_type_id": "family_member",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "archived_at": null,
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3759,12 +3714,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 Creates a new relationship record.
-
 
 
 #### Invocation
@@ -3773,29 +3727,29 @@ Creates a new relationship record.
 
 ```shell
 curl -XPOST /v1/relationship_records -d '{
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
   "relationship_type_id": "family_member"
 }'
 ```
 
 `POST /v1/relationship_records -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "relationship_type_id": "family_member", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "archived_at": null, 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "relationship_type_id": "family_member",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "archived_at": null,
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3812,12 +3766,11 @@ entity_2_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity (
 relationship_type_id <br /><code><a href='#string'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing relationship record.
-
 
 
 #### Invocation
@@ -3826,26 +3779,26 @@ Updates an existing relationship record.
 
 ```shell
 curl -XPUT /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
-  "start_date": "2018-02-02", 
+  "start_date": "2018-02-02",
   "end_date": "2018-12-17"
 }'
 ```
 
 `PUT /v1/relationship_records/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "relationship_type_id": "family_member", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "archived_at": null, 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "relationship_type_id": "family_member",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "archived_at": null,
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3860,15 +3813,14 @@ start_date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a>
 end_date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
   
 
-  
-  
+
+
 
 ### Delete
 
 
 Archive a specific relationship. Archived relationships no longer show up in the coach portal but do still exist in
 the data.
-
 
 
 
@@ -3882,20 +3834,20 @@ curl -XDELETE /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
 `DELETE /v1/relationship_records/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-  "relationship_type_id": "family_member", 
-  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-  "start_date": "2018-02-02", 
-  "end_date": "2018-12-17", 
-  "archived_at": null, 
-  "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "relationship_type_id": "family_member",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "archived_at": null,
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
 ```
@@ -3908,12 +3860,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Find
 Finds relationship records, using param filters.
-
 
 
 #### Invocation
@@ -3925,7 +3876,7 @@ curl -XGET /v1/relationship_records
 ```
 
 `GET /v1/relationship_records`
-  
+
 
 > Example Response
 
@@ -3934,21 +3885,21 @@ curl -XGET /v1/relationship_records
   {
     "data": [
       {
-        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c", 
-        "relationship_type_id": "family_member", 
-        "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b", 
-        "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12", 
-        "start_date": "2018-02-02", 
-        "end_date": "2018-12-17", 
-        "archived_at": null, 
-        "updated_at": "2018-09-12T01:27:32.108773+00:00", 
+        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+        "relationship_type_id": "family_member",
+        "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+        "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+        "start_date": "2018-02-02",
+        "end_date": "2018-12-17",
+        "archived_at": null,
+        "updated_at": "2018-09-12T01:27:32.108773+00:00",
         "created_at": "2018-09-12T01:27:32.109872+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.256972+00:00", 
-        "page[to]": "2019-06-20T01:01:29.256990+00:00", 
+        "page[from]": "2019-07-11T19:24:08.724203+00:00",
+        "page[to]": "2019-07-11T19:24:08.724232+00:00",
         "page[size]": 50
       }
     }
@@ -3968,9 +3919,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Sms Messages
 
@@ -3995,15 +3946,15 @@ profile.
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -4022,12 +3973,11 @@ sent_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and tim
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single sms message.
-
 
 
 #### Invocation
@@ -4039,21 +3989,21 @@ curl -XGET /v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 ```
 
 `GET /v1/sms_messages/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -4066,8 +4016,8 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 
@@ -4082,39 +4032,38 @@ profile.
 
 
 
-
 #### Invocation
 
 > Example Request
 
 ```shell
 curl -XPOST /v1/sms_messages -d '{
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
   "sent_at": "2018-09-12T01:27:32.045046+00:00"
 }'
 ```
 
 `POST /v1/sms_messages -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-  "direction": "inbound", 
-  "contents": "Hi Developer, Welcome to Welkin Health.", 
-  "automatically_sent": false, 
-  "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-  "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+  "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00",
+  "updated_at": "2018-09-12T01:27:32.045196+00:00",
   "created_at": "2018-09-12T01:27:32.045336+00:00"
 }
 ```
@@ -4134,14 +4083,13 @@ sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isod
 welkin_send <br /><code><a href='#boolean'>boolean</a></code> | Indicates if Welkin should send the message for outbound SMS messages
   
 
-  
-  
+
+
 
 
 
 ### Find
 Finds sms messages, using param filters.
-
 
 
 #### Invocation
@@ -4153,7 +4101,7 @@ curl -XGET /v1/sms_messages
 ```
 
 `GET /v1/sms_messages`
-  
+
 
 > Example Response
 
@@ -4162,22 +4110,22 @@ curl -XGET /v1/sms_messages
   {
     "data": [
       {
-        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26", 
-        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f", 
-        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0", 
-        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31", 
-        "direction": "inbound", 
-        "contents": "Hi Developer, Welcome to Welkin Health.", 
-        "automatically_sent": false, 
-        "sent_at": "2018-09-12T01:27:32.045046+00:00", 
-        "updated_at": "2018-09-12T01:27:32.045196+00:00", 
+        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+        "direction": "inbound",
+        "contents": "Hi Developer, Welcome to Welkin Health.",
+        "automatically_sent": false,
+        "sent_at": "2018-09-12T01:27:32.045046+00:00",
+        "updated_at": "2018-09-12T01:27:32.045196+00:00",
         "created_at": "2018-09-12T01:27:32.045336+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.267092+00:00", 
-        "page[to]": "2019-06-20T01:01:29.267111+00:00", 
+        "page[from]": "2019-07-11T19:24:08.739952+00:00",
+        "page[to]": "2019-07-11T19:24:08.739979+00:00",
         "page[size]": 50
       }
     }
@@ -4196,9 +4144,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Unavailable Times
 
@@ -4223,14 +4171,14 @@ are linked to a [worker](#workers)'s [Calendar](#calendars).
 
 ```json
 {
-  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f", 
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
-  "recurrence": "weekly", 
-  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4248,12 +4196,11 @@ calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single unavailable time.
-
 
 
 #### Invocation
@@ -4265,20 +4212,20 @@ curl -XGET /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 ```
 
 `GET /v1/unavailable_times/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f", 
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
-  "recurrence": "weekly", 
-  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4291,11 +4238,10 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
-
 
 
 
@@ -4308,30 +4254,30 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 
 ```shell
 curl -XPOST /v1/unavailable_times -d '{
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
-  "recurrence": "weekly", 
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
   "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4"
 }'
 ```
 
 `POST /v1/unavailable_times -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f", 
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
-  "recurrence": "weekly", 
-  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4349,12 +4295,11 @@ recurrence <br /><code><a href='#enum'>enum</a></code> | The frequency at which 
 calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar this day belongs to
   
 
-  
-  
+
+
 
 ### Update
 Updates an existing unavailable time.
-
 
 
 #### Invocation
@@ -4363,29 +4308,29 @@ Updates an existing unavailable time.
 
 ```shell
 curl -XPUT /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -d '{
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
   "recurrence": "weekly"
 }'
 ```
 
 `PUT /v1/unavailable_times/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f", 
-  "date": "2019-01-02", 
-  "all_day": false, 
-  "start_time": "12:00:00", 
-  "end_time": "14:30:00", 
-  "recurrence": "weekly", 
-  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4403,11 +4348,10 @@ end_time <br /><code><a href='#optional'>optional</a> <a href='#string'>string</
 recurrence <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
   
 
-  
-  
+
+
 
 ### Delete
-
 
 
 
@@ -4423,7 +4367,7 @@ curl -XDELETE /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 ```
 
 `DELETE /v1/unavailable_times/:id`
-  
+
 
 > Example Response
 
@@ -4441,12 +4385,11 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Find
 Finds unavailable times, using param filters.
-
 
 
 #### Invocation
@@ -4458,7 +4401,7 @@ curl -XGET /v1/unavailable_times
 ```
 
 `GET /v1/unavailable_times`
-  
+
 
 > Example Response
 
@@ -4467,21 +4410,21 @@ curl -XGET /v1/unavailable_times
   {
     "data": [
       {
-        "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f", 
-        "date": "2019-01-02", 
-        "all_day": false, 
-        "start_time": "12:00:00", 
-        "end_time": "14:30:00", 
-        "recurrence": "weekly", 
-        "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4", 
-        "updated_at": "2019-03-01T12:10:11.10+00:00", 
+        "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+        "date": "2019-01-02",
+        "all_day": false,
+        "start_time": "12:00:00",
+        "end_time": "14:30:00",
+        "recurrence": "weekly",
+        "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+        "updated_at": "2019-03-01T12:10:11.10+00:00",
         "created_at": "2019-03-01T12:10:11.10+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.275564+00:00", 
-        "page[to]": "2019-06-20T01:01:29.275582+00:00", 
+        "page[from]": "2019-07-11T19:24:08.754984+00:00",
+        "page[to]": "2019-07-11T19:24:08.755012+00:00",
         "page[size]": 50
       }
     }
@@ -4499,9 +4442,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Workers
 
@@ -4528,19 +4471,19 @@ Workers are assigned to [patients](#patients) as the patient's primary worker vi
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
-  "active": "True", 
-  "updated_at": "2018-09-12T01:27:32.125123+00:00", 
+  ],
+  "active": "True",
+  "updated_at": "2018-09-12T01:27:32.125123+00:00",
   "created_at": "2018-09-12T01:27:32.125229+00:00"
 }
 ```
@@ -4561,12 +4504,11 @@ active <br /><code><a href='#boolean'>boolean</a></code> | The worker account is
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single worker.
-
 
 
 #### Invocation
@@ -4578,25 +4520,25 @@ curl -XGET /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 ```
 
 `GET /v1/workers/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
-  "active": "True", 
-  "updated_at": "2018-09-12T01:27:32.125123+00:00", 
+  ],
+  "active": "True",
+  "updated_at": "2018-09-12T01:27:32.125123+00:00",
   "created_at": "2018-09-12T01:27:32.125229+00:00"
 }
 ```
@@ -4609,8 +4551,8 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 ### Create
 
@@ -4624,47 +4566,46 @@ your implementation manager or customer success manager to have this functionali
 
 
 
-
 #### Invocation
 
 > Example Request
 
 ```shell
 curl -XPOST /v1/workers -d '{
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
+  ],
   "active": "True"
 }'
 ```
 
 `POST /v1/workers -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
-  "active": "True", 
-  "updated_at": "2018-09-12T01:27:32.125123+00:00", 
+  ],
+  "active": "True",
+  "updated_at": "2018-09-12T01:27:32.125123+00:00",
   "created_at": "2018-09-12T01:27:32.125229+00:00"
 }
 ```
@@ -4684,8 +4625,8 @@ role_ids <br /><code><a href='#list(string)'>list(string)</a></code> | The human
 active <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
   
 
-  
-  
+
+
 
 ### Update
 
@@ -4698,47 +4639,46 @@ your implementation manager or customer success manager to have this functionali
 
 
 
-
 #### Invocation
 
 > Example Request
 
 ```shell
 curl -XPUT /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
+  ],
   "active": "True"
 }'
 ```
 
 `PUT /v1/workers/:id -d { }`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-  "email": "developer@welkinhealth.com", 
-  "first_name": "Emily", 
-  "last_name": "Smith", 
-  "phone_number": "+15555555555", 
-  "timezone": "US/Eastern", 
-  "gender": "Female", 
+  "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
   "role_ids": [
-    "cde", 
+    "cde",
     "admin"
-  ], 
-  "active": "True", 
-  "updated_at": "2018-09-12T01:27:32.125123+00:00", 
+  ],
+  "active": "True",
+  "updated_at": "2018-09-12T01:27:32.125123+00:00",
   "created_at": "2018-09-12T01:27:32.125229+00:00"
 }
 ```
@@ -4759,13 +4699,12 @@ role_ids <br /><code><a href='#optional'>optional</a> <a href='#list(string)'>li
 active <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
   
 
-  
-  
+
+
 
 
 ### Find
 Finds workers, using param filters.
-
 
 
 #### Invocation
@@ -4777,7 +4716,7 @@ curl -XGET /v1/workers
 ```
 
 `GET /v1/workers`
-  
+
 
 > Example Response
 
@@ -4786,26 +4725,26 @@ curl -XGET /v1/workers
   {
     "data": [
       {
-        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f", 
-        "email": "developer@welkinhealth.com", 
-        "first_name": "Emily", 
-        "last_name": "Smith", 
-        "phone_number": "+15555555555", 
-        "timezone": "US/Eastern", 
-        "gender": "Female", 
+        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+        "email": "developer@welkinhealth.com",
+        "first_name": "Emily",
+        "last_name": "Smith",
+        "phone_number": "+15555555555",
+        "timezone": "US/Eastern",
+        "gender": "Female",
         "role_ids": [
-          "cde", 
+          "cde",
           "admin"
-        ], 
-        "active": "True", 
-        "updated_at": "2018-09-12T01:27:32.125123+00:00", 
+        ],
+        "active": "True",
+        "updated_at": "2018-09-12T01:27:32.125123+00:00",
         "created_at": "2018-09-12T01:27:32.125229+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.286943+00:00", 
-        "page[to]": "2019-06-20T01:01:29.286962+00:00", 
+        "page[from]": "2019-07-11T19:24:08.775011+00:00",
+        "page[to]": "2019-07-11T19:24:08.775041+00:00",
         "page[size]": 50
       }
     }
@@ -4823,9 +4762,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 ## Working Hours
 
@@ -4851,13 +4790,13 @@ represents their working times on that day. Working hours link to a [worker's](#
 
 ```json
 {
-  "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79", 
-  "day": "Monday", 
-  "day_off": false, 
-  "start_time": "08:00:00", 
-  "end_time": "17:00:00", 
-  "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79",
+  "day": "Monday",
+  "day_off": false,
+  "start_time": "08:00:00",
+  "end_time": "17:00:00",
+  "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4874,12 +4813,11 @@ calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar
 updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
 created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
   
-  
-  
+
+
 
 ### Get
 Retrieves a single working hour.
-
 
 
 #### Invocation
@@ -4891,19 +4829,19 @@ curl -XGET /v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79
 ```
 
 `GET /v1/working_hours/:id`
-  
+
 
 > Example Response
 
 ```json
 {
-  "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79", 
-  "day": "Monday", 
-  "day_off": false, 
-  "start_time": "08:00:00", 
-  "end_time": "17:00:00", 
-  "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa", 
-  "updated_at": "2019-03-01T12:10:11.10+00:00", 
+  "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79",
+  "day": "Monday",
+  "day_off": false,
+  "start_time": "08:00:00",
+  "end_time": "17:00:00",
+  "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa",
+  "updated_at": "2019-03-01T12:10:11.10+00:00",
   "created_at": "2019-03-01T12:10:11.10+00:00"
 }
 ```
@@ -4916,15 +4854,14 @@ param | description
 id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
   
 
-  
-  
+
+
 
 
 
 
 ### Find
 Finds working hours, using param filters.
-
 
 
 #### Invocation
@@ -4936,7 +4873,7 @@ curl -XGET /v1/working_hours
 ```
 
 `GET /v1/working_hours`
-  
+
 
 > Example Response
 
@@ -4945,20 +4882,20 @@ curl -XGET /v1/working_hours
   {
     "data": [
       {
-        "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79", 
-        "day": "Monday", 
-        "day_off": false, 
-        "start_time": "08:00:00", 
-        "end_time": "17:00:00", 
-        "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa", 
-        "updated_at": "2019-03-01T12:10:11.10+00:00", 
+        "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79",
+        "day": "Monday",
+        "day_off": false,
+        "start_time": "08:00:00",
+        "end_time": "17:00:00",
+        "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa",
+        "updated_at": "2019-03-01T12:10:11.10+00:00",
         "created_at": "2019-03-01T12:10:11.10+00:00"
       }
-    ], 
+    ],
     "meta": {
       "current": {
-        "page[from]": "2019-06-20T01:01:29.292147+00:00", 
-        "page[to]": "2019-06-20T01:01:29.292166+00:00", 
+        "page[from]": "2019-07-11T19:24:08.783174+00:00",
+        "page[to]": "2019-07-11T19:24:08.783202+00:00",
         "page[size]": 50
       }
     }
@@ -4976,9 +4913,9 @@ page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>iso
 page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
   
 
-  
-  
-  
+
+
+
 
 
 # Additional Information
