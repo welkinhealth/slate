@@ -323,16 +323,16 @@ via this api only records that the message was sent to the <a href="#patients">p
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-automatically_sent <br /><code><a href='#boolean'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
-sent_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
+direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types'>string</a></code> | Text of the message
+automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
+sent_at <br /><code><a href='#types'>isodatetime</a></code> | Date and time when the message was sent
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -374,7 +374,7 @@ curl -XGET /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -431,12 +431,12 @@ curl -XPOST /v1/app_messages -d '{
 
 param | description
 - | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
+direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types'>string</a></code> | Text of the message
+sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
 
 
 
@@ -486,8 +486,8 @@ curl -XPUT /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
 
 
 
@@ -544,10 +544,10 @@ curl -XGET /v1/app_messages
 
 param | description
 - | -
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -600,14 +600,14 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-spec_id <br /><code><a href='#string'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
-spec_name <br /><code><a href='#string'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
-spec_version <br /><code><a href='#string'>string</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients)
-model <br /><code><a href='#json'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
+spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
+spec_version <br /><code><a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -654,7 +654,7 @@ curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -722,12 +722,12 @@ curl -XPOST /v1/assessment_responses -d '{
 
 param | description
 - | -
-spec_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
-spec_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
-spec_version <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients)
-model <br /><code><a href='#anything'>anything</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
-title <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The title of the assessment response to be displayed in the timeline.
+spec_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
+spec_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
+spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
+title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment response to be displayed in the timeline.
 
 
 
@@ -790,9 +790,9 @@ curl -XGET /v1/assessment_responses
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -848,19 +848,19 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-calendar_id <br /><code><a href='#guid'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients)
-user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-is_all_day <br /><code><a href='#boolean'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
-start_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#date'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-outcome <br /><code><a href='#enum'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
-modality <br /><code><a href='#enum'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
-appointment_type <br /><code><a href='#string'>string</a></code> | Appointment prompt to be used for this event (see note for details)
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
+is_all_day <br /><code><a href='#types'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
+outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
+modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
+appointment_type <br /><code><a href='#types'>string</a></code> | Appointment prompt to be used for this event (see note for details)
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -903,7 +903,7 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -955,14 +955,14 @@ curl -XPOST /v1/calendar_events -d '{
 
 param | description
 - | -
-calendar_id <br /><code><a href='#guid'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients)
-user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-start_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-modality <br /><code><a href='#enum'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
-appointment_type <br /><code><a href='#string'>string</a></code> | Appointment prompt to be used for this event (see note for details)
+calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients)
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
+modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
+appointment_type <br /><code><a href='#types'>string</a></code> | Appointment prompt to be used for this event (see note for details)
 
 
 
@@ -1010,11 +1010,11 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-start_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-outcome <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no-show`)
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
+outcome <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 
 
 
@@ -1072,9 +1072,9 @@ curl -XGET /v1/calendar_events
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1110,10 +1110,10 @@ coach [Working Hours](#working-hours) to [Workers](#workers).
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-worker_id <br /><code><a href='#guid'>guid</a></code> | The ID of the worker who's calendar this is
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+worker_id <br /><code><a href='#types'>guid</a></code> | The ID of the worker who's calendar this is
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -1149,7 +1149,7 @@ curl -XGET /v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -1202,9 +1202,9 @@ curl -XGET /v1/calendars
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1309,7 +1309,7 @@ curl -XGET /v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -1387,9 +1387,9 @@ curl -XGET /v1/care_flows
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1435,14 +1435,14 @@ phone number is added to the patient.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-conversation_type <br /><code><a href='#enum'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
-title <br /><code><a href='#string'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
-phone_number_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient's](#patients) phone number which will be included in this conversation. This ID will be `null` for email and in-app message conversations.
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
+conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
+title <br /><code><a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
+phone_number_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient's](#patients) phone number which will be included in this conversation. This ID will be `null` for email and in-app message conversations.
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -1481,8 +1481,8 @@ curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -1531,9 +1531,9 @@ curl -XPOST /v1/conversations -d '{
 
 param | description
 - | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-conversation_type <br /><code><a href='#enum'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
-title <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
+conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
+title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
 
 
 
@@ -1588,10 +1588,10 @@ curl -XGET /v1/conversations
 
 param | description
 - | -
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1638,12 +1638,12 @@ same type will have different effects within the Welkin Portal.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-body <br /><code><a href='#json'>json</a></code> | The content of the custom date type record
-patient_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient](#patients)
-type_name <br /><code><a href='#string'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
+patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
+type_name <br /><code><a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -1687,7 +1687,7 @@ curl -XGET /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -1742,9 +1742,9 @@ curl -XPOST /v1/custom_data_type_records -d '{
 
 param | description
 - | -
-body <br /><code><a href='#anything'>anything</a></code> | The content of the custom date type record
-patient_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient](#patients)
-type_name <br /><code><a href='#string'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
+patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
+type_name <br /><code><a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 
 
 
@@ -1797,8 +1797,8 @@ curl -XPUT /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d 
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-body <br /><code><a href='#anything'>anything</a></code> | The content of the custom date type record
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
 
 
 
@@ -1857,10 +1857,10 @@ curl -XGET /v1/custom_data_type_records
 
 param | description
 - | -
-type_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1910,16 +1910,16 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-email <br /><code><a href='#email'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
-friendly_name <br /><code><a href='#string'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
-verified <br /><code><a href='#boolean'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
-opted_in_to_email <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
-automatic_recipient <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
+friendly_name <br /><code><a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+verified <br /><code><a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
+opted_in_to_email <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
+automatic_recipient <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -1960,7 +1960,7 @@ curl -XGET /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -2013,13 +2013,13 @@ curl -XPOST /v1/email_addresses -d '{
 
 param | description
 - | -
-email <br /><code><a href='#email'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
-friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
-verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
-opted_in_to_email <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
-automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
+email <br /><code><a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
+opted_in_to_email <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
 
 
 
@@ -2067,12 +2067,12 @@ curl -XPUT /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
-friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
-verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
-opted_in_to_email <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
-automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
+opted_in_to_email <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
 
 
 
@@ -2128,11 +2128,11 @@ curl -XGET /v1/email_addresses
 
 param | description
 - | -
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2174,11 +2174,11 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-resource <br /><code><a href='#string'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#string'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -2221,11 +2221,11 @@ curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-resource <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+resource <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -2268,10 +2268,10 @@ curl -XPOST /v1/external_ids -d '{
 
 param | description
 - | -
-resource <br /><code><a href='#string'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#string'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#guid'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -2323,13 +2323,13 @@ curl -XGET /v1/external_ids
 
 param | description
 - | -
-resource <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+resource <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2373,12 +2373,12 @@ includes the file preview and the attachment type.
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
-worker_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | ID of the worker who is attaching the file
-attachment_type <br /><code><a href='#string'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
-description <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Text description or notes about the file being attached
-file_upload_ids <br /><code><a href='#list(guid)'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
+worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the worker who is attaching the file
+attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
+description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
+file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
 
 
 
@@ -2418,7 +2418,7 @@ curl -XGET /v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -2467,11 +2467,11 @@ curl -XPOST /v1/file_attachments -d '{
 
 param | description
 - | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
-worker_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the worker who is attaching the file
-attachment_type <br /><code><a href='#string'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
-description <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Text description or notes about the file being attached
-file_upload_ids <br /><code><a href='#list(guid)'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
+worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the worker who is attaching the file
+attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
+description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
+file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
 
 
 
@@ -2527,9 +2527,9 @@ curl -XGET /v1/file_attachments
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2565,9 +2565,9 @@ profile one they have been attached via the [File Attachments](#file-attachments
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-mime_type <br /><code><a href='#enum'>enum</a></code> | MIME type of the file being uploaded. Accepted MINE types: `image/tiff`, `image/jpeg`, `image/png`, `application/pdf`
-url <br /><code><a href='#string'>string</a></code> | URL of the file, including access tokens, of the file on Amazon S3. Note, the example URL has been truncated for display purposes.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+mime_type <br /><code><a href='#types'>enum</a></code> | MIME type of the file being uploaded. Accepted MINE types: `image/tiff`, `image/jpeg`, `image/png`, `application/pdf`
+url <br /><code><a href='#types'>string</a></code> | URL of the file, including access tokens, of the file on Amazon S3. Note, the example URL has been truncated for display purposes.
 
 
 
@@ -2639,7 +2639,7 @@ curl -XGET /v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -2688,9 +2688,9 @@ curl -XGET /v1/file_uploads
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2745,15 +2745,15 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-status <br /><code><a href='#enum'>enum</a></code> | Status of the task. Possible options are, `unattempted`, `running`, `failed`, or `succeeded`
-patient_id <br /><code><a href='#guid'>guid</a></code> | The ID of the [patient](#patients)
-ref_ids <br /><code><a href='#array'>array</a> <a href='#string'>string</a></code> | Array of external IDs associated with the tasks, linking the task to the resource in external systems.
-job_id <br /><code><a href='#string'>string</a></code> | Groups related tasks together
-task_name <br /><code><a href='#string'>string</a></code> | The name of the task prefixed by the name of the job
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
-errors <br /><code><a href='#array'>array</a> <a href='#integration-errors'>integration-errors</a></code> | Array of all the errors that resulted from this specific task. Note, these errors do not roll up to parent tasks.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+status <br /><code><a href='#types'>enum</a></code> | Status of the task. Possible options are, `unattempted`, `running`, `failed`, or `succeeded`
+patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
+ref_ids <br /><code><a href='#types'>array</a> <a href='#types'>string</a></code> | Array of external IDs associated with the tasks, linking the task to the resource in external systems.
+job_id <br /><code><a href='#types'>string</a></code> | Groups related tasks together
+task_name <br /><code><a href='#types'>string</a></code> | The name of the task prefixed by the name of the job
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+errors <br /><code><a href='#types'>array</a> <a href='#types'>integration-errors</a></code> | Array of all the errors that resulted from this specific task. Note, these errors do not roll up to parent tasks.
 
 
 
@@ -2827,7 +2827,7 @@ curl -XGET /v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -2837,7 +2837,12 @@ id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
 
 
 ### Find
+
+
 Finds integration tasks, using param filters.
+
+
+
 
 
 #### Invocation
@@ -2893,12 +2898,12 @@ curl -XGET /v1/integration_tasks
 
 param | description
 - | -
-job_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Groups related tasks together
-task_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The name of the task prefixed by the name of the job
-ref_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | 
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+job_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Groups related tasks together
+task_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The name of the task prefixed by the name of the job
+ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> |
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2977,28 +2982,81 @@ generation.
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-phase <br /><code><a href='#enum'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-primary_worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-coach_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-timezone <br /><code><a href='#timezone'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#string'>string</a></code> | First name of this patient
-last_name <br /><code><a href='#string'>string</a></code> | Last name of this patient
-birthday <br /><code><a href='#isodate'>isodate</a></code> | Date of birth of this patient
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
-street <br /><code><a href='#string'>string</a></code> | Street address of this patient
-street_line_two <br /><code><a href='#string'>string</a></code> | Second line of this patient's street address
-city <br /><code><a href='#string'>string</a></code> | City of this patient's address
-county <br /><code><a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#zip_code'>zip_code</a></code> | Zip code of this patient's address in five digit form
-state <br /><code><a href='#state'>state</a></code> | Two character abbreviation of the state in which this patient resides
-country <br /><code><a href='#country'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#language'>language</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
-gender <br /><code><a href='#string'>string</a></code> | Gender of this patient
-height <br /><code><a href='#string'>string</a></code> | The two digit height of this patient in inches.
-weight <br /><code><a href='#string'>string</a></code> | The weight of this patient in pounds.
-smokes <br /><code><a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
+first_name <br /><code><a href='#types'>string</a></code> | First name of this patient
+last_name <br /><code><a href='#types'>string</a></code> | Last name of this patient
+birthday <br /><code><a href='#types'>isodate</a></code> | Date of birth of this patient
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+street <br /><code><a href='#types'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#types'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#types'>string</a></code> | City of this patient's address
+county <br /><code><a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#types'>zip_code</a></code> | Zip code of this patient's address in five digit form
+state <br /><code><a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#types'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#types'>language</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#types'>string</a></code> | Gender of this patient
+height <br /><code><a href='#types'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#types'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+
+
+
+
+### Get
+Retrieves a single patient.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c
+```
+
+`GET /v1/patients/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "gender": "Female",
+  "height": "72",
+  "primary_language": "english",
+  "smokes": "false",
+  "weight": "175",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -3082,28 +3140,28 @@ curl -XPOST /v1/patients -d '{
 
 param | description
 - | -
-phase <br /><code><a href='#provider_code'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-primary_worker_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-coach_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-timezone <br /><code><a href='#timezone'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#name'>name</a></code> | First name of this patient
-last_name <br /><code><a href='#name'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#birthday'>birthday</a></code> | Date of birth of this patient
-street <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Street address of this patient
-street_line_two <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Second line of this patient's street address
-city <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | City of this patient's address
-county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Zip code of this patient's address in five digit form
-state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
-country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
-gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of this patient
-height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The two digit height of this patient in inches.
-weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The weight of this patient in pounds.
-smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
-email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
-external_ids <br /><code><a href='#optional'>optional</a> <a href='#list(object)'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
-phone <br /><code><a href='#optional'>optional</a> <a href='#e164_phone'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
+phase <br /><code><a href='#types'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
+first_name <br /><code><a href='#types'>name</a></code> | First name of this patient
+last_name <br /><code><a href='#types'>name</a></code> | Last name of this patient
+birthday <br /><code><a href='#types'>birthday</a></code> | Date of birth of this patient
+street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
+county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five digit form
+state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
+height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
+external_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
+phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
 
 
 
@@ -3176,26 +3234,26 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-phase <br /><code><a href='#optional'>optional</a> <a href='#provider_code'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-primary_worker_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-coach_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-timezone <br /><code><a href='#optional'>optional</a> <a href='#timezone'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | First name of this patient
-last_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date of birth of this patient
-street <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Street address of this patient
-street_line_two <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Second line of this patient's street address
-city <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | City of this patient's address
-county <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Zip code of this patient's address in five digit form
-state <br /><code><a href='#optional'>optional</a> <a href='#address_state'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
-country <br /><code><a href='#optional'>optional</a> <a href='#country'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
-gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of this patient
-height <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The two digit height of this patient in inches.
-weight <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The weight of this patient in pounds.
-smokes <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+phase <br /><code><a href='#types'>optional</a> <a href='#types'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
+first_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | First name of this patient
+last_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Last name of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date of birth of this patient
+street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
+county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five digit form
+state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
+height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
 
 
 
@@ -3263,9 +3321,9 @@ curl -XGET /v1/patients
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3323,20 +3381,20 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#guid'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
-phone_number_type <br /><code><a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
-verified <br /><code><a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
+verified <br /><code><a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -3381,7 +3439,7 @@ curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -3442,17 +3500,17 @@ curl -XPOST /v1/phone_numbers -d '{
 
 param | description
 - | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
-phone_number_type <br /><code><a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
-verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+patient_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -3508,16 +3566,16 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#optional'>optional</a> <a href='#e164_phone'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
-phone_number_type <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
-verified <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -3554,7 +3612,7 @@ curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -3613,13 +3671,11 @@ curl -XGET /v1/phone_numbers
 
 param | description
 - | -
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
-
-
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3662,15 +3718,15 @@ to quickly navigate to view details about the people and places in a [patient's]
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-start_date <br /><code><a href='#date'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
-end_date <br /><code><a href='#date'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
-archived_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | The date when the relationship was archived (hidden from [workers](#workers) in Welkin).
-entity_1_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
-entity_2_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
-relationship_type_id <br /><code><a href='#string'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+start_date <br /><code><a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
+end_date <br /><code><a href='#types'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
+archived_at <br /><code><a href='#types'>isodatetime</a></code> | The date when the relationship was archived (hidden from [workers](#workers) in Welkin).
+entity_1_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
+entity_2_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
+relationship_type_id <br /><code><a href='#types'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
 
 
 
@@ -3711,7 +3767,7 @@ curl -XGET /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -3759,11 +3815,11 @@ curl -XPOST /v1/relationship_records -d '{
 
 param | description
 - | -
-start_date <br /><code><a href='#date'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
-end_date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
-entity_1_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
-entity_2_id <br /><code><a href='#guid'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
-relationship_type_id <br /><code><a href='#string'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
+start_date <br /><code><a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
+end_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
+entity_1_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
+entity_2_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
+relationship_type_id <br /><code><a href='#types'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
 
 
 
@@ -3808,9 +3864,9 @@ curl -XPUT /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-start_date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
-end_date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+start_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
+end_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
 
 
 
@@ -3857,7 +3913,7 @@ curl -XDELETE /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -3912,11 +3968,11 @@ curl -XGET /v1/relationship_records
 
 param | description
 - | -
-relationship_type_id <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
-entity_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | The ID of an entity to find relationships for. This entity can fulfill entity 1 or entity 2 in the relationship.
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+relationship_type_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
+entity_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of an entity to find relationships for. This entity can fulfill entity 1 or entity 2 in the relationship.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3962,16 +4018,16 @@ profile.
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
-worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-automatically_sent <br /><code><a href='#boolean'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
-sent_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
+direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types'>string</a></code> | Text of the message
+automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
+sent_at <br /><code><a href='#types'>isodatetime</a></code> | Date and time when the message was sent
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -4013,7 +4069,7 @@ curl -XGET /v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -4073,14 +4129,14 @@ curl -XPOST /v1/sms_messages -d '{
 
 param | description
 - | -
-patient_id <br /><code><a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
-worker_id <br /><code><a href='#guid'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#guid'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
-direction <br /><code><a href='#enum'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#string'>string</a></code> | Text of the message
-automatically_sent <br /><code><a href='#boolean'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
-sent_at <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | Date and time when the message was sent
-welkin_send <br /><code><a href='#boolean'>boolean</a></code> | Indicates if Welkin should send the message for outbound SMS messages
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
+direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types'>string</a></code> | Text of the message
+automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
+sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
+welkin_send <br /><code><a href='#types'>boolean</a></code> | Indicates if Welkin should send the message for outbound SMS messages
 
 
 
@@ -4138,10 +4194,10 @@ curl -XGET /v1/sms_messages
 
 param | description
 - | -
-patient_id <br /><code><a href='#optional'>optional</a> <a href='#guid'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4186,15 +4242,15 @@ are linked to a [worker](#workers)'s [Calendar](#calendars).
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-date <br /><code><a href='#string'>string</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
-all_day <br /><code><a href='#boolean'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#string'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#string'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
-recurrence <br /><code><a href='#enum'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
-calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar this day belongs to
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+date <br /><code><a href='#types'>string</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
+start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+recurrence <br /><code><a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
+calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -4235,7 +4291,7 @@ curl -XGET /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -4287,12 +4343,12 @@ curl -XPOST /v1/unavailable_times -d '{
 
 param | description
 - | -
-date <br /><code><a href='#date'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
-all_day <br /><code><a href='#boolean'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
-recurrence <br /><code><a href='#enum'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
-calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar this day belongs to
+date <br /><code><a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+recurrence <br /><code><a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
+calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
 
 
 
@@ -4340,12 +4396,12 @@ curl -XPUT /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-date <br /><code><a href='#optional'>optional</a> <a href='#date'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
-all_day <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
-recurrence <br /><code><a href='#optional'>optional</a> <a href='#enum'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+all_day <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+recurrence <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
 
 
 
@@ -4382,7 +4438,7 @@ curl -XDELETE /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -4437,9 +4493,9 @@ curl -XGET /v1/unavailable_times
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4491,18 +4547,18 @@ Workers are assigned to [patients](#patients) as the patient's primary worker vi
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-email <br /><code><a href='#string'>string</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#string'>string</a></code> | Worker's first name
-last_name <br /><code><a href='#string'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#string'>string</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#string'>string</a></code> | Timezone in which the worker's working hours should be represented
-gender <br /><code><a href='#string'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
-role_ids <br /><code><a href='#list(string)'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-roles <br /><code><a href='#list(string)'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
-active <br /><code><a href='#boolean'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types'>string</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
+last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
+phone_number <br /><code><a href='#types'>string</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types'>string</a></code> | Timezone in which the worker's working hours should be represented
+gender <br /><code><a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
+role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
+roles <br /><code><a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
+active <br /><code><a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -4548,7 +4604,7 @@ curl -XGET /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -4615,14 +4671,14 @@ curl -XPOST /v1/workers -d '{
 
 param | description
 - | -
-email <br /><code><a href='#email'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#name'>name</a></code> | Worker's first name
-last_name <br /><code><a href='#name'>name</a></code> | Worker's last name
-phone_number <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#timezone'>timezone</a></code> | Timezone in which the worker's working hours should be represented
-gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
-role_ids <br /><code><a href='#list(string)'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-active <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
+email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+first_name <br /><code><a href='#types'>name</a></code> | Worker's first name
+last_name <br /><code><a href='#types'>name</a></code> | Worker's last name
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
+gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
+role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
+active <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 
 
 
@@ -4688,15 +4744,15 @@ curl -XPUT /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-email <br /><code><a href='#optional'>optional</a> <a href='#email'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | Worker's first name
-last_name <br /><code><a href='#optional'>optional</a> <a href='#name'>name</a></code> | Worker's last name
-phone_number <br /><code><a href='#optional'>optional</a> <a href='#phone'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#optional'>optional</a> <a href='#timezone'>timezone</a></code> | Timezone in which the worker's working hours should be represented
-gender <br /><code><a href='#optional'>optional</a> <a href='#string'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
-role_ids <br /><code><a href='#optional'>optional</a> <a href='#list(string)'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-active <br /><code><a href='#optional'>optional</a> <a href='#boolean'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+first_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Worker's first name
+last_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Worker's last name
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
+gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
+role_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
+active <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 
 
 
@@ -4757,9 +4813,9 @@ curl -XGET /v1/workers
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4804,14 +4860,14 @@ represents their working times on that day. Working hours link to a [worker's](#
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
-day <br /><code><a href='#enum'>enum</a></code> | The day of the week that these working hours apply to. Possible options are `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, or `Sunday`
-day_off <br /><code><a href='#boolean'>boolean</a></code> | `true` if a worker has designated this as a non-working day
-start_time <br /><code><a href='#string'>string</a></code> | The start time of a worker's work day in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#string'>string</a></code> | The ending time of a worker's work day (inclusive) in their local timezone. Uses 24-hour time notation
-calendar_id <br /><code><a href='#guid'>guid</a></code> | The ID of the calendar this day belongs to
-updated_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
-created_at <br /><code><a href='#isodatetime'>isodatetime</a></code> | Datetime the resource was created
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+day <br /><code><a href='#types'>enum</a></code> | The day of the week that these working hours apply to. Possible options are `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, or `Sunday`
+day_off <br /><code><a href='#types'>boolean</a></code> | `true` if a worker has designated this as a non-working day
+start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's work day in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>string</a></code> | The ending time of a worker's work day (inclusive) in their local timezone. Uses 24-hour time notation
+calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 
 
@@ -4851,7 +4907,7 @@ curl -XGET /v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79
 
 param | description
 - | -
-id <br /><code><a href='#guid'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 
@@ -4908,9 +4964,9 @@ curl -XGET /v1/working_hours
 
 param | description
 - | -
-page[from] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#optional'>optional</a> <a href='#isodatetime'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4919,79 +4975,6 @@ page[size] <br /><code><a href='#optional'>optional</a> <a href='#integer'>integ
 
 
 # Additional Information
-
-## Types
-
-type | definition | example
-- | - | -
-boolean | JSON style boolean | `true`
-email | `string` representing an email address | `"support@welkinhealth.com"`
-enum | `string` with predefined set of values (also known as an enumeration) | `"Female"`
-guid | `string` with 36 characters separated into groups by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
-integer | Counting numbers with no decimal place including zero and negative numbers | `42`
-isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
-isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
-json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
-list(x) | JSON list of objects of type `x` | `["a", "b", "c"]`
-e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
-state | `string` of the capitalized two character United States state abbreviation | `"CA"`
-string | Any quoted set of ASCII characters with no length restriction | `"Welcome to Welkin's APIs"`
-timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
-zip_code | `string` of a five digit United States zip code | `"94110"`
-
-<aside>GUIDs are global unique identifiers for objects within Welkin. These IDs are long lived for resources and are unique within and across resources.</aside>
-
-## Errors
-
-Requests to the common apis are transactional. Any errors that occur in the course of serving
-a request will fail the operation. In the case of failure, errors will be collected in the `errors`
-key in the following format
-
-field | Meaning
----------- | -------
-status <br /> `int` | The http status code of the error. If client logic relies on this value, consider using the response's top-level http status code instead (more below).
-code <br /> `string` | A string identifier of the welkin-specific error. Refer to the table below.
-title <br /> `string` | A human-readable title explaining the class of error.
-detail <br /> `string` | A human-readable description of the specific error instance.
-extra <br /> `json` | Optional values that provide additional context on the failure.
-
-
-> Example Response
-
-```json
-  {
-    "errors": [{
-      "status": 400,
-      "code": "parse_exception",
-      "title": "Parse Exception",
-      "detail": "Failed to parse guid at .id",
-      "extra": {
-        "path": ".id"
-      }
-    }]
-  }
-```
-
-Note that each error is assigned both an integer status and a string code. The code strings
-represent stable identifiers for welkin-specific errors. Each code string offers a more detailed
-classification of the error response than an http status allows. A list of common welkin error
-codes, and their corresponding http status is shown below:
-
-Welkin Code | Http Status| Description
-- | - | -
-parse_exception | 400 | The json body of the request is invalid.
-uniqueness_exception | 400 | The request attempted to create a duplicate resource.
-bad_request | 400 | The request is invalid for other reasons.
-unauthorized | 401 | The credentials used for the request are invalid.
-forbidden | 403 | The requester does not have access.
-not_found | 404 | The route or resource requested does not exist.
-resource_not_found | 404 | One or multiple secondary resources could not be found.
-internal_server_error | 500 | Welkin failed to process the request. We're looking into it.
-
-When handling welkin errors, it is correct to use the http status code of the response OR the
-string codes of individual errors, depending on the needs of the client code. While the body of
-the response can contain multiple errors, the http response will always have a single
-integer status code, indicating the primary cause of failure.
 
 ## Batch creation of resources
 
@@ -5045,7 +5028,81 @@ base type | sub type | base type key | plurality
 [patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_date_type_records` | one to many
 [email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
 [phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
+[calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
+
+## Errors
+
+Requests to the common apis are transactional. Any errors that occur in the course of serving
+a request will fail the operation. In the case of failure, errors will be collected in the `errors`
+key in the following format
+
+field | Meaning
+---------- | -------
+status <br /> `int` | The http status code of the error. If client logic relies on this value, consider using the response's top-level http status code instead (more below).
+code <br /> `string` | A string identifier of the welkin-specific error. Refer to the table below.
+title <br /> `string` | A human-readable title explaining the class of error.
+detail <br /> `string` | A human-readable description of the specific error instance.
+extra <br /> `json` | Optional values that provide additional context on the failure.
+
+
+> Example Response
+
+```json
+  {
+    "errors": [{
+      "status": 400,
+      "code": "parse_exception",
+      "title": "Parse Exception",
+      "detail": "Failed to parse guid at .id",
+      "extra": {
+        "path": ".id"
+      }
+    }]
+  }
+```
+
+Note that each error is assigned both an integer status and a string code. The code strings
+represent stable identifiers for welkin-specific errors. Each code string offers a more detailed
+classification of the error response than an http status allows. A list of common welkin error
+codes, and their corresponding http status is shown below:
+
+Welkin Code | Http Status| Description
+- | - | -
+parse_exception | 400 | The json body of the request is invalid.
+uniqueness_exception | 400 | The request attempted to create a duplicate resource.
+bad_request | 400 | The request is invalid for other reasons.
+unauthorized | 401 | The credentials used for the request are invalid.
+forbidden | 403 | The requester does not have access.
+not_found | 404 | The route or resource requested does not exist.
+resource_not_found | 404 | One or multiple secondary resources could not be found.
+internal_server_error | 500 | Welkin failed to process the request. We're looking into it.
+
+When handling welkin errors, it is correct to use the http status code of the response OR the
+string codes of individual errors, depending on the needs of the client code. While the body of
+the response can contain multiple errors, the http response will always have a single
+integer status code, indicating the primary cause of failure.
+
+## Types
+
+type | definition | example
+- | - | -
+boolean | JSON style boolean | `true`
+email | `string` representing an email address | `"support@welkinhealth.com"`
+enum | `string` with predefined set of values (also known as an enumeration) | `"Female"`
+guid | `string` with 36 characters separated into groups by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
+integer | Counting numbers with no decimal place including zero and negative numbers | `42`
+isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
+isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
+json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
+list(x) | JSON list of objects of type `x` | `["a", "b", "c"]`
+e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
+state | `string` of the capitalized two character United States state abbreviation | `"CA"`
+string | Any quoted set of ASCII characters with no length restriction | `"Welcome to Welkin's APIs"`
+timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
+zip_code | `string` of a five digit United States zip code | `"94110"`
+
+<aside>GUIDs are global unique identifiers for objects within Welkin. These IDs are long lived for resources and are unique within and across resources.</aside>
 
 

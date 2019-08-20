@@ -10,6 +10,11 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
+## August 19th, 2019
+* **[added]** Patient `Get` method to documentation. This functionality already existed but was not documented.
+
+* **[added]** Batch creation of Calendar Events and their External IDs. You can now create an External ID while creating a Calendar Event.
+
 ## June 18th, 2019
 * **[added]** Worker `Create` and `Update` methods. You can now create and update worker accounts via Welkin APIs. In order to create or update workers you must have this functionality turned on by Welkin. Please contact your implementation manager or customer success manager to have this functionality enabled.
 
