@@ -209,7 +209,9 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <a href="/">
+        <img src="images/logo.png" class="logo" alt="Logo" />
+      </a>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
@@ -506,6 +508,49 @@
                           </li>
                           <li>
                             <a href="#phone-numbers-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#profile-phone-numbers" class="toc-h2 toc-link" data-title="Profile Phone Numbers">Profile Phone Numbers</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#profile-phone-numbers-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#profile-phone-numbers-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
+                          </li>
+                          <li>
+                            <a href="#profile-phone-numbers-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
+                          </li>
+                          <li>
+                            <a href="#profile-phone-numbers-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                          </li>
+                          <li>
+                            <a href="#profile-phone-numbers-delete" class="toc-h3 toc-link" data-title="API Reference">Delete</a>
+                          </li>
+                          <li>
+                            <a href="#profile-phone-numbers-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#profiles" class="toc-h2 toc-link" data-title="Profiles">Profiles</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#profiles-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#profiles-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
+                          </li>
+                          <li>
+                            <a href="#profiles-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
+                          </li>
+                          <li>
+                            <a href="#profiles-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                          </li>
+                          <li>
+                            <a href="#profiles-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
                           </li>
                       </ul>
                   </li>
@@ -1477,7 +1522,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"appointment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake_call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359240+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359873+00:00"</span><span class="w">
@@ -1527,7 +1572,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>modality <br /><code><a href='#types'>enum</a></code></td>
-<td>Mode via which the event will take place (<code>call</code>, <code>visit</code>, <code>video</code>)</td>
+<td>Mode via which the event will take place (<code>call</code> or <code>visit</code>)</td>
 </tr>
 <tr>
 <td>appointment_type <br /><code><a href='#types'>string</a></code></td>
@@ -1563,7 +1608,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"appointment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake_call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359240+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359873+00:00"</span><span class="w">
@@ -1592,7 +1637,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call"
 }'</span>
 </code></pre>
@@ -1609,7 +1654,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"appointment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake_call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359240+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359873+00:00"</span><span class="w">
@@ -1647,7 +1692,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>modality <br /><code><a href='#types'>enum</a></code></td>
-<td>Mode via which the event will take place (<code>call</code>, <code>visit</code>, <code>video</code>)</td>
+<td>Mode via which the event will take place (<code>call</code> or <code>visit</code>)</td>
 </tr>
 <tr>
 <td>appointment_type <br /><code><a href='#types'>string</a></code></td>
@@ -1679,7 +1724,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"appointment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake_call"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359240+00:00"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359873+00:00"</span><span class="w">
@@ -1736,7 +1781,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
         </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"modality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"appointment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intake_call"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359240+00:00"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-10T18:56:19.359873+00:00"</span><span class="w">
@@ -4661,6 +4706,598 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 <td>Maximum number of items to include in the response</td>
 </tr>
 </tbody></table>
+<h2 id='profile-phone-numbers'>Profile Phone Numbers</h2>
+<p>Manage the available phone based contact methods for a <a href="#profiles">profile</a>. Phone based contact methods are
+call and sms.</p>
+
+<p>Each profile phone number has its own consents and opt in status. When setting the consent flags on a phone number
+make sure that you have a record of how and when consent was received from the profile.</p>
+<h3 id='profile-phone-numbers-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-4057b25acc2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9a75cd83-7247-4d6b-a1dd-00e1aca2219f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+15555555555"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"landline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main number"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_call_recording"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_voicemail"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"automatic_recipient"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123172+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123301+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+<tr>
+<td>profile_id <br /><code><a href='#types'>guid</a></code></td>
+<td>The identifier of the <a href="#profiles">profile</a> to which this phone number is associated.</td>
+</tr>
+<tr>
+<td>phone_number <br /><code><a href='#types'>e164_phone</a></code></td>
+<td>The phone number to be associated with the profile. Must be in international, E.164 format.</td>
+</tr>
+<tr>
+<td>phone_number_type <br /><code><a href='#types'>enum</a></code></td>
+<td>(<code>cell</code>, <code>landline</code>, <code>other</code>)</td>
+</tr>
+<tr>
+<td>friendly_name <br /><code><a href='#types'>string</a></code></td>
+<td>Name of the phone number to help the <a href="#workers">worker</a> differentiate between profile phone numbers</td>
+</tr>
+<tr>
+<td>verified <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if you have confirmed this phone number is owned by the <a href="#profiles">profile</a> by calling this number and confirming the <a href="#profiles">profile&#39;s</a> identity details. Default <code>false</code></td>
+</tr>
+<tr>
+<td>archived <br /><code><a href='#types'></a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>opted_in_to_sms <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving SMS at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_call_recording <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to calls at this number being recorded. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_voicemail <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving voicemail at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_phone <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving calls at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>automatic_recipient <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>updated_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was last updated</td>
+</tr>
+<tr>
+<td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was created</td>
+</tr>
+</tbody></table>
+<h3 id='profile-phone-numbers-get'>Get</h3>
+<p>Retrieves a single profile phone number.</p>
+<h4 id='profile-phone-numbers-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XGET /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+</code></pre>
+<p><code>GET /v1/profile_phone_numbers/:id</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-4057b25acc2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9a75cd83-7247-4d6b-a1dd-00e1aca2219f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+15555555555"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"landline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main number"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_call_recording"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_voicemail"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"automatic_recipient"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123172+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123301+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profile-phone-numbers-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+</tbody></table>
+<h3 id='profile-phone-numbers-create'>Create</h3><h4 id='profile-phone-numbers-create-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XPOST /v1/profile_phone_numbers -d <span class="s1">''</span>
+</code></pre>
+<p><code>POST /v1/profile_phone_numbers -d { }</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-4057b25acc2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9a75cd83-7247-4d6b-a1dd-00e1aca2219f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+15555555555"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"landline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main number"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_call_recording"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_voicemail"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"automatic_recipient"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123172+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123301+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profile-phone-numbers-create-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='profile-phone-numbers-update'>Update</h3>
+<p>Updates an existing profile phone number.</p>
+<h4 id='profile-phone-numbers-update-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XPUT /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d <span class="s1">'{
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}'</span>
+</code></pre>
+<p><code>PUT /v1/profile_phone_numbers/:id -d { }</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-4057b25acc2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9a75cd83-7247-4d6b-a1dd-00e1aca2219f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+15555555555"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"landline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main number"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_call_recording"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_voicemail"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opted_in_to_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"automatic_recipient"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123172+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123301+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profile-phone-numbers-update-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+<tr>
+<td>phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code></td>
+<td>The phone number to be associated with the profile. Must be in international, E.164 format.</td>
+</tr>
+<tr>
+<td>phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code></td>
+<td>(<code>cell</code>, <code>landline</code>, <code>other</code>)</td>
+</tr>
+<tr>
+<td>friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code></td>
+<td>Name of the phone number to help the <a href="#workers">worker</a> differentiate between profile phone numbers</td>
+</tr>
+<tr>
+<td>verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if you have confirmed this phone number is owned by the <a href="#profiles">profile</a> by calling this number and confirming the <a href="#profiles">profile&#39;s</a> identity details. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving SMS at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to calls at this number being recorded. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving voicemail at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving calls at this number. Default <code>false</code></td>
+</tr>
+<tr>
+<td>automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code></td>
+<td><code>true</code> only if the <a href="#profiles">profile</a> has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default <code>false</code></td>
+</tr>
+</tbody></table>
+<h3 id='profile-phone-numbers-delete'>Delete</h3><h4 id='profile-phone-numbers-delete-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XDELETE /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+</code></pre>
+<p><code>DELETE /v1/profile_phone_numbers/:id</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profile-phone-numbers-delete-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+</tbody></table>
+<h3 id='profile-phone-numbers-find'>Find</h3>
+<p>Finds profile phone numbers, using param filters.</p>
+<h4 id='profile-phone-numbers-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XGET /v1/profile_phone_numbers
+</code></pre>
+<p><code>GET /v1/profile_phone_numbers</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c9a72425-f433-4c6c-9d95-4057b25acc2f"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9a75cd83-7247-4d6b-a1dd-00e1aca2219f"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+15555555555"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone_number_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"landline"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"friendly_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main number"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opted_in_to_sms"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opted_in_to_call_recording"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opted_in_to_voicemail"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opted_in_to_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"automatic_recipient"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123172+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.123301+00:00"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T12:37:12.300100+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T12:38:12.300100+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h4 id='profile-phone-numbers-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code></td>
+<td>The identifier of the <a href="#profiles">profile</a> to which this phone number is associated.</td>
+</tr>
+<tr>
+<td>page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>The earliest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>The latest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code></td>
+<td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
+<h2 id='profiles'>Profiles</h2>
+<p>Profiles represent non-patient entities in Welkin. These could be family members, loved ones, care givers, doctors,
+clinic locations, regions, patient cohorts, and many more. <a href="#relationship_records">Relationships</a> link Profiles to
+<a href="#patients">Patients</a>, <a href="#workers">Workers</a>, and other Profiles.</p>
+
+<p>In <a href="https://workshop.welkinhealth.com">Workshop</a> you can define the set of fields on each Profile type. You can also
+define the <a href="#relationship_records">Relationships</a> which link them.</p>
+<h3 id='profiles-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_profile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+<tr>
+<td>profile_type_name <br /><code><a href='#types'>string</a></code></td>
+<td>Name of the Profile spec as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+</tr>
+<tr>
+<td>body <br /><code><a href='#types'>json</a></code></td>
+<td>A JSON object representing the fields that are required for that Profile type</td>
+</tr>
+<tr>
+<td>updated_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was last updated</td>
+</tr>
+<tr>
+<td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was created</td>
+</tr>
+</tbody></table>
+<h3 id='profiles-get'>Get</h3>
+<p>Retrieves a single profile.</p>
+<h4 id='profiles-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XGET /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c
+</code></pre>
+<p><code>GET /v1/profiles/:id</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_profile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profiles-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+</tbody></table>
+<h3 id='profiles-create'>Create</h3>
+<p>Creates a new profile.</p>
+<h4 id='profiles-create-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XPOST /v1/profiles -d <span class="s1">'{
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}'</span>
+</code></pre>
+<p><code>POST /v1/profiles -d { }</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_profile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profiles-create-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile_type_name <br /><code><a href='#types'>string</a></code></td>
+<td>Name of the Profile spec as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+</tr>
+<tr>
+<td>body <br /><code><a href='#types'>json</a></code></td>
+<td>A JSON object representing the fields that are required for that Profile type</td>
+</tr>
+</tbody></table>
+<h3 id='profiles-update'>Update</h3>
+<p>Updates an existing profile.</p>
+<h4 id='profiles-update-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XPUT /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -d <span class="s1">'{
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}'</span>
+</code></pre>
+<p><code>PUT /v1/profiles/:id -d { }</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_profile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='profiles-update-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+<tr>
+<td>body <br /><code><a href='#types'>json</a></code></td>
+<td>A JSON object representing the fields that are required for that Profile type</td>
+</tr>
+</tbody></table>
+<h3 id='profiles-find'>Find</h3>
+<p>Finds profiles, using param filters.</p>
+<h4 id='profiles-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XGET /v1/profiles
+</code></pre>
+<p><code>GET /v1/profiles</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"profile_type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_profile"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grace"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hopper"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906-12-09"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"current"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"page[from]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T12:37:12.300100+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"page[to]"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15T12:38:12.300100+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"page[size]"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h4 id='profiles-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile_type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code></td>
+<td>Name of the Profile spec as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+</tr>
+<tr>
+<td>page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>The earliest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>The latest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code></td>
+<td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
 <h2 id='relationship-records'>Relationship Records</h2>
 <p>Relationships link <a href="#patients">patients</a>, <a href="#workers">worker</a>, and profiles together allowing <a href="#workers">workers</a>
 to visualize the care network of a patient. Relationships also allow <a href="#workers">workers</a>
@@ -6113,6 +6750,12 @@ represents their working times on that day. Working hours link to a <a href="#wo
 <td><a href="#calendar_events">calendar events</a></td>
 <td><a href="#external-ids">external ids</a></td>
 <td><code>external_ids</code></td>
+<td>one to many</td>
+</tr>
+<tr>
+<td><a href="#profiles">profile</a></td>
+<td><a href="#profile-phone-numbers">profile phone numbers</a></td>
+<td><code>profile_phone_numbers</code></td>
 <td>one to many</td>
 </tr>
 </tbody></table>
