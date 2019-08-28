@@ -838,7 +838,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call",
   "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
@@ -857,7 +857,7 @@ start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetim
 end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
-modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
+modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
 appointment_type <br /><code><a href='#types'>string</a></code> | Appointment prompt to be used for this event (see note for details)
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -891,7 +891,7 @@ curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call",
   "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
@@ -924,7 +924,7 @@ curl -XPOST /v1/calendar_events -d '{
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call"
 }'
 ```
@@ -943,7 +943,7 @@ curl -XPOST /v1/calendar_events -d '{
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call",
   "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
@@ -961,7 +961,7 @@ user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></cod
 start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call`, `visit`, `video`)
+modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
 appointment_type <br /><code><a href='#types'>string</a></code> | Appointment prompt to be used for this event (see note for details)
 
 
@@ -998,7 +998,7 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed",
-  "modality": "phone",
+  "modality": "call",
   "appointment_type": "intake_call",
   "updated_at": "2018-09-10T18:56:19.359240+00:00",
   "created_at": "2018-09-10T18:56:19.359873+00:00"
@@ -1050,7 +1050,7 @@ curl -XGET /v1/calendar_events
         "start_time": "2018-09-10T18:56:19.357228+00:00",
         "end_time": "2018-09-10T18:56:19.357540+00:00",
         "outcome": "completed",
-        "modality": "phone",
+        "modality": "call",
         "appointment_type": "intake_call",
         "updated_at": "2018-09-10T18:56:19.359240+00:00",
         "created_at": "2018-09-10T18:56:19.359873+00:00"
@@ -3680,6 +3680,591 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
+
+## Profile Phone Numbers
+
+
+Manage the available phone based contact methods for a [profile](#profiles). Phone based contact methods are
+call and sms.
+
+Each profile phone number has its own consents and opt in status. When setting the consent flags on a phone number
+make sure that you have a record of how and when consent was received from the profile.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "archived": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
+  "created_at": "2018-09-12T01:27:32.123301+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+profile_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
+phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
+verified <br /><code><a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
+archived <br /><code><a href='#types'></a></code> | 
+opted_in_to_sms <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+
+
+
+
+### Get
+Retrieves a single profile phone number.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+```
+
+`GET /v1/profile_phone_numbers/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "archived": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
+  "created_at": "2018-09-12T01:27:32.123301+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Create
+
+
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/profile_phone_numbers -d ''
+```
+
+`POST /v1/profile_phone_numbers -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "archived": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
+  "created_at": "2018-09-12T01:27:32.123301+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+
+
+
+
+
+
+### Update
+Updates an existing profile phone number.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPUT /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}'
+```
+
+`PUT /v1/profile_phone_numbers/:id -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "archived": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false,
+  "updated_at": "2018-09-12T01:27:32.123172+00:00",
+  "created_at": "2018-09-12T01:27:32.123301+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
+phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+
+
+
+
+
+### Delete
+
+
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XDELETE /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+```
+
+`DELETE /v1/profile_phone_numbers/:id`
+
+
+> Example Response
+
+```json
+{
+  "data": null
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Find
+Finds profile phone numbers, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/profile_phone_numbers
+```
+
+`GET /v1/profile_phone_numbers`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+        "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+        "phone_number": "+15555555555",
+        "phone_number_type": "landline",
+        "friendly_name": "main number",
+        "verified": false,
+        "archived": false,
+        "opted_in_to_sms": true,
+        "opted_in_to_call_recording": false,
+        "opted_in_to_voicemail": false,
+        "opted_in_to_phone": true,
+        "automatic_recipient": false,
+        "updated_at": "2018-09-12T01:27:32.123172+00:00",
+        "created_at": "2018-09-12T01:27:32.123301+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+profile_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+## Profiles
+
+
+Profiles represent non-patient entities in Welkin. These could be family members, loved ones, care givers, doctors,
+clinic locations, regions, patient cohorts, and many more. [Relationships](#relationship_records) link Profiles to
+[Patients](#patients), [Workers](#workers), and other Profiles.
+
+In [Workshop](https://workshop.welkinhealth.com) you can define the set of fields on each Profile type. You can also
+define the [Relationships](#relationship_records) which link them.
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  },
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+profile_type_name <br /><code><a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
+body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+
+
+
+
+### Get
+Retrieves a single profile.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c
+```
+
+`GET /v1/profiles/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  },
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Create
+Creates a new profile.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/profiles -d '{
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}'
+```
+
+`POST /v1/profiles -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  },
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+profile_type_name <br /><code><a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
+body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
+
+
+
+
+
+### Update
+Updates an existing profile.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPUT /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}'
+```
+
+`PUT /v1/profiles/:id -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  },
+  "updated_at": "2018-09-12T01:27:32.108773+00:00",
+  "created_at": "2018-09-12T01:27:32.109872+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
+
+
+
+
+
+
+### Find
+Finds profiles, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/profiles
+```
+
+`GET /v1/profiles`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+        "profile_type_name": "test_profile",
+        "body": {
+          "first_name": "Grace",
+          "last_name": "Hopper",
+          "birthday": "1906-12-09",
+          "gender": "Female"
+        },
+        "updated_at": "2018-09-12T01:27:32.108773+00:00",
+        "created_at": "2018-09-12T01:27:32.109872+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+profile_type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
 ## Relationship Records
 
 
@@ -5029,6 +5614,7 @@ base type | sub type | base type key | plurality
 [email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
 [phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
 [calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
+[profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
 

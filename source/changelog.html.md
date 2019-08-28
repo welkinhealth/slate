@@ -10,6 +10,9 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
+## August 27th, 2019
+* **[added]** Profiles and Profile Phone Numbers added to the Welkin API. You can now create and update Profile instances through the API. Definitions of Profiles are created in Workshop.
+
 ## August 19th, 2019
 * **[added]** Patient `Get` method to documentation. This functionality already existed but was not documented.
 
