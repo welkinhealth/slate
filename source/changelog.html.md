@@ -10,6 +10,9 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
+## October 1st, 2019
+* **[added]** Assessment Responses now include the Worker ID of the worker who filled out the assessment or most recently edited the assessment. The worker who filled out the assessment can also be set when it is created.
+
 ## August 27th, 2019
 * **[added]** Profiles and Profile Phone Numbers added to the Welkin API. You can now create and update Profile instances through the API. Definitions of Profiles are created in Workshop.
 

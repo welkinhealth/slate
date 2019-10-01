@@ -583,6 +583,7 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
     "insurance_provider": "Acme Insurance",
     "plan_type": "SILVER",
@@ -605,6 +606,7 @@ spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the 
 spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 spec_version <br /><code><a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+worker_id <br /><code><a href='#types'>optional guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -635,6 +637,7 @@ curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
     "insurance_provider": "Acme Insurance",
     "plan_type": "SILVER",
@@ -679,6 +682,7 @@ curl -XPOST /v1/assessment_responses -d '{
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
     "insurance_provider": "Acme Insurance",
     "plan_type": "SILVER",
@@ -703,6 +707,7 @@ curl -XPOST /v1/assessment_responses -d '{
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
     "insurance_provider": "Acme Insurance",
     "plan_type": "SILVER",
@@ -726,6 +731,7 @@ spec_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></c
 spec_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+worker_id <br /><code><a href='#types'>optional guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment response to be displayed in the timeline.
 
@@ -761,6 +767,7 @@ curl -XGET /v1/assessment_responses
         "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
         "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
         "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+        "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
         "model": {
           "insurance_provider": "Acme Insurance",
           "plan_type": "SILVER",
