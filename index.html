@@ -1266,6 +1266,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
   </span><span class="nt">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span><span class="w">
@@ -1306,6 +1307,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td>ID of the <a href="#patients">patient</a></td>
 </tr>
 <tr>
+<td>worker_id <br /><code><a href='#types'>optional guid</a></code></td>
+<td>ID of the <a href="#workers">worker</a> who created or most recently edited this assessment response. This is only set if the assessment was completed by a <a href="#workers">worker</a> and not by the <a href="#patients">patient</a>.</td>
+</tr>
+<tr>
 <td>model <br /><code><a href='#types'>json</a></code></td>
 <td>Response data for assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
@@ -1336,6 +1341,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
   </span><span class="nt">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span><span class="w">
@@ -1371,6 +1377,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
     "insurance_provider": "Acme Insurance",
     "plan_type": "SILVER",
@@ -1393,6 +1400,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
   </span><span class="nt">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span><span class="w">
@@ -1429,6 +1437,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td>ID of the <a href="#patients">patient</a></td>
 </tr>
 <tr>
+<td>worker_id <br /><code><a href='#types'>optional guid</a></code></td>
+<td>ID of the <a href="#workers">worker</a> who created or most recently edited this assessment response. This is only set if the assessment was completed by a <a href="#workers">worker</a> and not by the <a href="#patients">patient</a>.</td>
+</tr>
+<tr>
 <td>model <br /><code><a href='#types'>json</a></code></td>
 <td>Response data for assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
@@ -1458,6 +1470,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
         </span><span class="nt">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span><span class="w">
