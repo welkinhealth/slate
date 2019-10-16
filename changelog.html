@@ -220,6 +220,9 @@
             <a href="#api-updates" class="toc-h1 toc-link" data-title="API Updates">API Updates</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#october-16th-2019" class="toc-h2 toc-link" data-title="October 16th, 2019">October 16th, 2019</a>
+                  </li>
+                  <li>
                     <a href="#october-1st-2019" class="toc-h2 toc-link" data-title="October 1st, 2019">October 1st, 2019</a>
                   </li>
                   <li>
@@ -247,6 +250,16 @@ This document was started in June 2019 and covers all changes made since that da
 <p><strong>Welkin&#39;s API is in active development.</strong> We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.</p>
 <h1 id='api-updates'>API Updates</h1>
 <p>Updates are listed by the day the api or documentation was released.</p>
+<h2 id='october-16th-2019'>October 16th, 2019</h2>
+<ul>
+<li><p><strong>[added]</strong> FIND Custom Data Type Records by Patient ID, <code>patient_id</code> and fixed FIND by <code>type_name</code>. <a href="/#custom-data-type-records-find">Custom Data Type FIND</a></p></li>
+<li><p><strong>[added]</strong> GET and FIND for Visits (in person meetings between workers and patients). <a href="/#visits">Visits</a></p></li>
+<li><p><strong>[changed]</strong> Clarified documentation for Assessment Responses and which fields are required. <a href="/#assessment-responses">Assessment Reponses</a></p></li>
+<li><p><strong>[changed]</strong> Clarified documentation for Calendar Events and which fields are required. <a href="/#calendar-events">Calendar Events</a></p></li>
+<li><p><strong>[changed]</strong> Clarified documentation for Care Flows and their Model. <a href="/#care-flows-model-care_flow">Care Flows Model</a></p></li>
+<li><p><strong>[changed]</strong> Other minor typos and documentation bugs. No functional changes.</p></li>
+<li><p><strong>[fixed]</strong> FIND by <code>patient_id</code> now works correctly for SMS Messages and App Messages. <a href="/#sms-messages-find">SMS Messages FIND</a> <a href="/#app-messages-find">App Messages FIND</a></p></li>
+</ul>
 <h2 id='october-1st-2019'>October 1st, 2019</h2>
 <ul>
 <li><strong>[added]</strong> Assessment Responses now include the Worker ID of the worker who filled out the assessment or most recently edited the assessment. The worker who filled out the assessment can also be set when it is created.</li>
