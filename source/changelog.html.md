@@ -10,6 +10,15 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
+## October 16th, 2019
+* **[added]** FIND Custom Data Type Records by Patient ID, `patient_id` and fixed FIND by `type_name`. [Custom Data Type FIND](/#custom-data-type-records-find)
+
+* **[added]** GET and FIND for Visits (in person meetings between workers and patients). [Visits](/#visits)
+* **[changed]** Clarified documentation for Assessment Responses and which fields are required. [Assessment Reponses](/#assessment-responses)
+* **[changed]** Clarified documentation for Calendar Events and which fields are required. [Calendar Events](/#calendar-events)
+* **[changed]** Clarified documentation for Care Flows and their Model. [Care Flows Model](/#care-flows-model-care_flow)
+* **[changed]** Other minor typos and documentation bugs. No functional changes.
+
 ## October 1st, 2019
 * **[added]** Assessment Responses now include the Worker ID of the worker who filled out the assessment or most recently edited the assessment. The worker who filled out the assessment can also be set when it is created.
 

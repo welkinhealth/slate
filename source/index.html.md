@@ -605,8 +605,8 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
 spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 spec_version <br /><code><a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
-worker_id <br /><code><a href='#types'>optional guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -727,11 +727,11 @@ curl -XPOST /v1/assessment_responses -d '{
 
 param | description
 - | -
-spec_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
-spec_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
+spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
+spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
-worker_id <br /><code><a href='#types'>optional guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
+worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment response to be displayed in the timeline.
 
@@ -963,8 +963,8 @@ curl -XPOST /v1/calendar_events -d '{
 param | description
 - | -
 calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients)
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
 start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
@@ -1235,22 +1235,29 @@ changes made to the Care Flow will not be reflected in the template it originate
 
 
 
-
+### Model
+field | type | description
+- | - | -
+patient_id | `guid` | The ID of the [patient](#patients)
+id | `string` | Description of the overall Care Flow
+care_flow | `json` | A [care_flow object](#care-flow-model-care_flow)
+updated_at | `isodatetime` | Datetime the resource was last updated
+created_at | `isodatetime` | Datetime the resource was created
 
 ### Model care_flow
 field | type | description
 - | - | -
 title | `string` | Title of the overall Care Flow
 description | `string` | Description of the overall Care Flow
-goals | `list` | List of [goal objects](#model-goal)
+goals | `list` | List of [goal objects](#care-flow-model-goal)
 
-### Model Goal
+### Model goal
 field | type | description
 - | - | -
 title | `string` | Title of the Care Flow goal
-tasks | `list` | List of [goal intervention objects](#model-intervention)
+tasks | `list` | List of [goal intervention objects](#care-flow-model-intervention)
 
-### Model Intervention
+### Model intervention
 field | type | description | optional
 - | - | - | -
 description | `string` | Title of the Care Flow intervention | required
@@ -1864,6 +1871,7 @@ curl -XGET /v1/custom_data_type_records
 
 param | description
 - | -
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ID of the [patient](#patients)
 type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
@@ -2023,7 +2031,7 @@ param | description
 email <br /><code><a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
 friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
 verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
 opted_in_to_email <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
 automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
@@ -3508,7 +3516,7 @@ curl -XPOST /v1/phone_numbers -d '{
 param | description
 - | -
 patient_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
 phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
@@ -3814,7 +3822,18 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 > Example Request
 
 ```shell
-curl -XPOST /v1/profile_phone_numbers -d ''
+curl -XPOST /v1/profile_phone_numbers -d '{
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}'
 ```
 
 `POST /v1/profile_phone_numbers -d { }`
@@ -3846,7 +3865,16 @@ curl -XPOST /v1/profile_phone_numbers -d ''
 
 param | description
 - | -
-
+profile_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
+phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
+verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -5067,6 +5095,163 @@ curl -XGET /v1/unavailable_times
         "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
         "updated_at": "2019-03-01T12:10:11.10+00:00",
         "created_at": "2019-03-01T12:10:11.10+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+## Visits
+
+Visits record an in-person meeting between [workers](#workers)
+and [patients](#patients).
+
+
+
+
+
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "assessment_response_id": null,
+  "disposition": "completed",
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00",
+  "updated_at": "2019-09-27T20:45:12.176691+00:00",
+  "created_at": "2019-09-27T20:45:12.176691+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) participant in the visit.  Only one worker can be part of a visit.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
+calendar_event_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
+assessment_response_id <br /><code><a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
+disposition <br /><code><a href='#types'>string</a></code> | The outcome of the visit, if it has resolved; `completed` is the most common, but it may include `no_show`.
+start_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the starting time of the visit
+end_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the ending time of the visit
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+
+
+
+
+### Get
+Retrieves a single visit.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9
+```
+
+`GET /v1/visits/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "assessment_response_id": null,
+  "disposition": "completed",
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00",
+  "updated_at": "2019-09-27T20:45:12.176691+00:00",
+  "created_at": "2019-09-27T20:45:12.176691+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+
+
+
+### Find
+Finds visits, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/visits
+```
+
+`GET /v1/visits`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+        "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+        "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+        "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+        "assessment_response_id": null,
+        "disposition": "completed",
+        "start_time": "2019-09-28T21:45:11.093557+00:00",
+        "end_time": "2019-09-28T21:45:11.093557+00:00",
+        "updated_at": "2019-09-27T20:45:12.176691+00:00",
+        "created_at": "2019-09-27T20:45:12.176691+00:00"
       }
     ],
     "meta": {
