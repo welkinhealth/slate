@@ -18,6 +18,7 @@ Updates are listed by the day the api or documentation was released.
 * **[changed]** Clarified documentation for Calendar Events and which fields are required. [Calendar Events](/#calendar-events)
 * **[changed]** Clarified documentation for Care Flows and their Model. [Care Flows Model](/#care-flows-model-care_flow)
 * **[changed]** Other minor typos and documentation bugs. No functional changes.
+* **[fixed]** FIND by `patient_id` now works correctly for SMS Messages and App Messages. [SMS Messages FIND](/#sms-messages-find) [App Messages FIND](/#app-messages-find)
 
 ## October 1st, 2019
 * **[added]** Assessment Responses now include the Worker ID of the worker who filled out the assessment or most recently edited the assessment. The worker who filled out the assessment can also be set when it is created.
