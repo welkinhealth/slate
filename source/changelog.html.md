@@ -1,4 +1,4 @@
-# Welkin API Change Log
+# Welkin API Changelog
 
 This document outlines the changes that Welkin has made to our external API.
 This document was started in June 2019 and covers all changes made since that date.
@@ -9,6 +9,9 @@ This document was started in June 2019 and covers all changes made since that da
 
 # API Updates
 Updates are listed by the day the api or documentation was released.
+
+## October 16th, 2019
+* **[changed]** External IDs are no longer provisional. No functional changes were made to the External ID resource. [External IDs](/#external-ids)
 
 ## October 16th, 2019
 * **[added]** FIND Custom Data Type Records by Patient ID, `patient_id` and fixed FIND by `type_name`. [Custom Data Type FIND](/#custom-data-type-records-find)

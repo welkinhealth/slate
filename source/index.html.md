@@ -58,8 +58,6 @@ Once you obtain an access token, the token can be passed as an Authorization hea
 
 More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
-A simple guide to understanding JWT can be found in this [Medium article](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec).
-
 **Token endpoint**: `https://api.welkinhealth.com/v1/token`
 
 **Expected JWT fields**
@@ -563,6 +561,7 @@ The data format of assessment responses created via this API must match existing
 created in [Workshop](https://workshop.welkinhealth.com).
 
 Similarly, Assessments completed in Welkin can be retrieved via this API.
+
 
 
 
@@ -2154,16 +2153,14 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
-## External Ids (provisional)
-
+## External Ids
 
 
 Welkin APIs and systems communicate via GUIDs. All communications with Welkin's standard API must be made using
 Welkin's GUIDs. In rare cases, custom integrations are supported by mapping Welkin IDs to a set of external IDs.
 To learn more about custom integrations, [drop us a line](https://welkinhealth.com/contact-us/).
 
-<aside>Duplicate entries for the same Welkin ID within a single namespace will be rejected.</aside>
-
+<aside>Duplicate entries for the same Welkin ID or same External ID within a single namespace will be rejected.</aside>
 
 
 
@@ -2190,6 +2187,89 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+
+
+
+
+### Get
+Retrieves a single external id.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
+```
+
+`GET /v1/external_ids/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Create
+Creates a new external id.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/external_ids -d '{
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}'
+```
+
+`POST /v1/external_ids -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
 resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
 namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
 external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
@@ -2241,52 +2321,6 @@ resource <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></
 namespace <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
 external_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
 welkin_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
-
-
-
-
-
-### Create
-Creates a new external id.
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XPOST /v1/external_ids -d '{
-  "resource": "patient",
-  "namespace": "ehr",
-  "external_id": "abc-123",
-  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-}'
-```
-
-`POST /v1/external_ids -d { }`
-
-
-> Example Response
-
-```json
-{
-  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patient",
-  "namespace": "ehr",
-  "external_id": "abc-123",
-  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -2915,7 +2949,7 @@ param | description
 - | -
 job_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Groups related tasks together
 task_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The name of the task prefixed by the name of the job
-ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> |
+ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | 
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
@@ -3175,7 +3209,7 @@ height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
 email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
-external_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(object)</a></code> | (Provisional) A convenience field which creates a patient and an [external id mapping](#external-ids-provisional) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids-provisional) endpoint.
+external_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(object)</a></code> | A convenience field which creates a patient and an [external id mapping](#external-ids) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids) endpoint.
 phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
 
 
@@ -5809,6 +5843,14 @@ base type | sub type | base type key | plurality
 [profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
+
+## Changelog
+
+[Click here to view Welkin's API Changelog.](/changelog.html)
+
+## Data Exports
+
+[Click here to view Welkin's Data Exports documentation.](/data_exports.html)
 
 ## Errors
 
