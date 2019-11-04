@@ -214,11 +214,14 @@
       </a>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#welkin-api-change-log" class="toc-h1 toc-link" data-title="Welkin API Change Log">Welkin API Change Log</a>
+            <a href="#welkin-api-changelog" class="toc-h1 toc-link" data-title="Welkin API Changelog">Welkin API Changelog</a>
           </li>
           <li>
             <a href="#api-updates" class="toc-h1 toc-link" data-title="API Updates">API Updates</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#november-4th-2019" class="toc-h2 toc-link" data-title="November 4th, 2019">November 4th, 2019</a>
+                  </li>
                   <li>
                     <a href="#october-16th-2019" class="toc-h2 toc-link" data-title="October 16th, 2019">October 16th, 2019</a>
                   </li>
@@ -241,7 +244,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='welkin-api-change-log'>Welkin API Change Log</h1>
+        <h1 id='welkin-api-changelog'>Welkin API Changelog</h1>
 <p>This document outlines the changes that Welkin has made to our external API.
 This document was started in June 2019 and covers all changes made since that date.</p>
 
@@ -250,6 +253,10 @@ This document was started in June 2019 and covers all changes made since that da
 <p><strong>Welkin&#39;s API is in active development.</strong> We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.</p>
 <h1 id='api-updates'>API Updates</h1>
 <p>Updates are listed by the day the api or documentation was released.</p>
+<h2 id='november-4th-2019'>November 4th, 2019</h2>
+<ul>
+<li><strong>[changed]</strong> External IDs are no longer provisional. No functional changes were made to the External ID resource. <a href="/#external-ids">External IDs</a></li>
+</ul>
 <h2 id='october-16th-2019'>October 16th, 2019</h2>
 <ul>
 <li><p><strong>[added]</strong> FIND Custom Data Type Records by Patient ID, <code>patient_id</code> and fixed FIND by <code>type_name</code>. <a href="/#custom-data-type-records-find">Custom Data Type FIND</a></p></li>

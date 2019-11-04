@@ -401,19 +401,22 @@
                       </ul>
                   </li>
                   <li>
-                    <a href="#external-ids-provisional" class="toc-h2 toc-link" data-title="External Ids (provisional)">External Ids (provisional)</a>
+                    <a href="#external-ids" class="toc-h2 toc-link" data-title="External Ids">External Ids</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#external-ids-provisional-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                            <a href="#external-ids-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
                           </li>
                           <li>
-                            <a href="#external-ids-provisional-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                            <a href="#external-ids-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
                           </li>
                           <li>
-                            <a href="#external-ids-provisional-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
+                            <a href="#external-ids-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
                           </li>
                           <li>
-                            <a href="#external-ids-provisional-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                            <a href="#external-ids-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                          </li>
+                          <li>
+                            <a href="#external-ids-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
                           </li>
                       </ul>
                   </li>
@@ -677,6 +680,12 @@
                     <a href="#batch-creation-of-resources" class="toc-h2 toc-link" data-title="Batch creation of resources">Batch creation of resources</a>
                   </li>
                   <li>
+                    <a href="#changelog" class="toc-h2 toc-link" data-title="Changelog">Changelog</a>
+                  </li>
+                  <li>
+                    <a href="#data-exports" class="toc-h2 toc-link" data-title="Data Exports">Data Exports</a>
+                  </li>
+                  <li>
                     <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
                   </li>
                   <li>
@@ -743,8 +752,6 @@
 <p>Once you obtain an access token, the token can be passed as an Authorization header along with the keyword <code>Bearer</code>.</p>
 
 <p>More information on the JWT protocol can be found at <a href="https://jwt.io/">jwt.io</a>.</p>
-
-<p>A simple guide to understanding JWT can be found in this <a href="https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec">Medium article</a>.</p>
 
 <p><strong>Token endpoint</strong>: <code>https://api.welkinhealth.com/v1/token</code></p>
 
@@ -3004,13 +3011,13 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 <td>Maximum number of items to include in the response</td>
 </tr>
 </tbody></table>
-<h2 id='external-ids-provisional'>External Ids (provisional)</h2>
+<h2 id='external-ids'>External Ids</h2>
 <p>Welkin APIs and systems communicate via GUIDs. All communications with Welkin&#39;s standard API must be made using
 Welkin&#39;s GUIDs. In rare cases, custom integrations are supported by mapping Welkin IDs to a set of external IDs.
 To learn more about custom integrations, <a href="https://welkinhealth.com/contact-us/">drop us a line</a>.</p>
 
-<aside>Duplicate entries for the same Welkin ID within a single namespace will be rejected.</aside>
-<h3 id='external-ids-provisional-model'>Model</h3>
+<aside>Duplicate entries for the same Welkin ID or same External ID within a single namespace will be rejected.</aside>
+<h3 id='external-ids-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
 </blockquote>
@@ -3049,9 +3056,90 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 <td>ID of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 </tbody></table>
-<h3 id='external-ids-provisional-update'>Update</h3>
+<h3 id='external-ids-get'>Get</h3>
+<p>Retrieves a single external id.</p>
+<h4 id='external-ids-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
+</code></pre>
+<p><code>GET /v1/external_ids/:id</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76c5662c-1e16-4cfa-bbad-900e721a290b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ehr"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"welkin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6cf56d8-a62d-4581-8339-91c846960041"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='external-ids-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier</td>
+</tr>
+</tbody></table>
+<h3 id='external-ids-create'>Create</h3>
+<p>Creates a new external id.</p>
+<h4 id='external-ids-create-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -XPOST /v1/external_ids -d <span class="s1">'{
+  "resource": "patient",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}'</span>
+</code></pre>
+<p><code>POST /v1/external_ids -d { }</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76c5662c-1e16-4cfa-bbad-900e721a290b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ehr"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"welkin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6cf56d8-a62d-4581-8339-91c846960041"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='external-ids-create-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>resource <br /><code><a href='#types'>string</a></code></td>
+<td>String name of the resource collection that this ID is associated with. For example <code>workers</code></td>
+</tr>
+<tr>
+<td>namespace <br /><code><a href='#types'>string</a></code></td>
+<td>Snake cased string separating mappings of the same Welkin ID to multiple external IDs</td>
+</tr>
+<tr>
+<td>external_id <br /><code><a href='#types'>string</a></code></td>
+<td>ID of the resource in 3rd party system. Can be any string format</td>
+</tr>
+<tr>
+<td>welkin_id <br /><code><a href='#types'>guid</a></code></td>
+<td>ID of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
+</tr>
+</tbody></table>
+<h3 id='external-ids-update'>Update</h3>
 <p>Updates an existing external id.</p>
-<h4 id='external-ids-provisional-update-invocation'>Invocation</h4>
+<h4 id='external-ids-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -3074,7 +3162,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
   </span><span class="nt">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc-123"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"welkin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6cf56d8-a62d-4581-8339-91c846960041"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='external-ids-provisional-update-params'>Params</h4>
+</span></code></pre><h4 id='external-ids-update-params'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -3102,58 +3190,9 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 <td>ID of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
 </tr>
 </tbody></table>
-<h3 id='external-ids-provisional-create'>Create</h3>
-<p>Creates a new external id.</p>
-<h4 id='external-ids-provisional-create-invocation'>Invocation</h4>
-<blockquote>
-<p>Example Request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -XPOST /v1/external_ids -d <span class="s1">'{
-  "resource": "patient",
-  "namespace": "ehr",
-  "external_id": "abc-123",
-  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-}'</span>
-</code></pre>
-<p><code>POST /v1/external_ids -d { }</code></p>
-
-<blockquote>
-<p>Example Response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76c5662c-1e16-4cfa-bbad-900e721a290b"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ehr"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc-123"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"welkin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e6cf56d8-a62d-4581-8339-91c846960041"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='external-ids-provisional-create-params'>Params</h4>
-<table><thead>
-<tr>
-<th>param</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>resource <br /><code><a href='#types'>string</a></code></td>
-<td>String name of the resource collection that this ID is associated with. For example <code>workers</code></td>
-</tr>
-<tr>
-<td>namespace <br /><code><a href='#types'>string</a></code></td>
-<td>Snake cased string separating mappings of the same Welkin ID to multiple external IDs</td>
-</tr>
-<tr>
-<td>external_id <br /><code><a href='#types'>string</a></code></td>
-<td>ID of the resource in 3rd party system. Can be any string format</td>
-</tr>
-<tr>
-<td>welkin_id <br /><code><a href='#types'>guid</a></code></td>
-<td>ID of the resource within Welkin. Must be a valid existing Welkin GUID.</td>
-</tr>
-</tbody></table>
-<h3 id='external-ids-provisional-find'>Find</h3>
+<h3 id='external-ids-find'>Find</h3>
 <p>Finds external ids, using param filters.</p>
-<h4 id='external-ids-provisional-find-invocation'>Invocation</h4>
+<h4 id='external-ids-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -3184,7 +3223,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre><h4 id='external-ids-provisional-find-params'>Params</h4>
+</span></code></pre><h4 id='external-ids-find-params'>Params</h4>
 <table><thead>
 <tr>
 <th>param</th>
@@ -4151,7 +4190,7 @@ generation.</p>
 </tr>
 <tr>
 <td>external_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(object)</a></code></td>
-<td>(Provisional) A convenience field which creates a patient and an <a href="#external-ids-provisional">external id mapping</a> at the same time. The ID of this mapping can be fetched from the <a href="#external-ids-provisional">external ids</a> endpoint.</td>
+<td>A convenience field which creates a patient and an <a href="#external-ids">external id mapping</a> at the same time. The ID of this mapping can be fetched from the <a href="#external-ids">external ids</a> endpoint.</td>
 </tr>
 <tr>
 <td>phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code></td>
@@ -7042,6 +7081,10 @@ represents their working times on that day. Working hours link to a <a href="#wo
 </tbody></table>
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
+<h2 id='changelog'>Changelog</h2>
+<p><a href="changelog.html">Click here to view Welkin&#39;s API Changelog.</a></p>
+<h2 id='data-exports'>Data Exports</h2>
+<p><a href="data_exports.html">Click here to view Welkin&#39;s Data Exports documentation.</a></p>
 <h2 id='errors'>Errors</h2>
 <p>Requests to the common apis are transactional. Any errors that occur in the course of serving
 a request will fail the operation. In the case of failure, errors will be collected in the <code>errors</code>
