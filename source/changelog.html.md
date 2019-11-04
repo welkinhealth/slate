@@ -10,7 +10,7 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
-## October 16th, 2019
+## November 4th, 2019
 * **[changed]** External IDs are no longer provisional. No functional changes were made to the External ID resource. [External IDs](/#external-ids)
 
 ## October 16th, 2019
