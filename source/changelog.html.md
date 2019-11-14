@@ -10,7 +10,7 @@ This document was started in June 2019 and covers all changes made since that da
 # API Updates
 Updates are listed by the day the api or documentation was released.
 
-## November 413th, 2019
+## November 13th, 2019
 * **[fixed]** [Batch creation](/#batch-creation-of-resources) of [Custom Data Type Records](/#custom-data-type-records) as part of a POST to the [Patients](/#patients) endpoint now functions as expected.
 
 ## November 4th, 2019
