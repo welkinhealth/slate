@@ -5836,7 +5836,7 @@ base type | sub type | base type key | plurality
 [patient](#patients) | [email addresses](#email-addresses) | `email_addresses` | one to many
 [patient](#patients) | [external ids](#external-ids) | `external_ids` | one to many
 [patient](#patients) | [phone numbers](#phone-numbers) | `phone_numbers` | one to many
-[patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_date_type_records` | one to many
+[patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
 [email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
 [phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
 [calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
