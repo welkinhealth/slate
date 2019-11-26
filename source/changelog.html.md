@@ -1,13 +1,24 @@
 # Welkin API Changelog
 
-This document outlines the changes that Welkin has made to our external API.
+This document outlines the changes that Welkin has made to our external APIs and Data Exports.
+
 This document was started in June 2019 and covers all changes made since that date.
 
-**API Documentation URL:** [https://developers.welkinhealth.com](https://developers.welkinhealth.com)
+**Data API Documentation URL:** [https://developers.welkinhealth.com](https://developers.welkinhealth.com)
 
-**Welkin's API is in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.
+**Apps API Documentation URL:** [https://developers.welkinhealth.com/app_frontend_api.html](https://developers.welkinhealth.com/app_frontend_api.html)
 
-# API Updates
+**Data Exports Documentation URL:** [https://developers.welkinhealth.com/data_exports.html](https://developers.welkinhealth.com/data_exports.html)
+
+**Welkin's APIs and Exports are in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the APIs. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.
+
+# Apps API Updates
+Updates are listed by the day the api or documentation was released.
+
+## December 10th, 2019
+* **[released]** Version 1 of the Apps API has been released and is available to select Welkin customers. Please speak to your account manager.
+
+# Data API Updates
 Updates are listed by the day the api or documentation was released.
 
 ## November 13th, 2019
