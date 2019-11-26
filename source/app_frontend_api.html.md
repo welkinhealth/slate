@@ -2,14 +2,14 @@
 
 Welkin Apps can be embedded into the Welkin experience to augment the features available natively in Welkin. These apps are developed separately and displayed within an iFrame inside Welkin's Care Staff interface. Welkin Apps have access to all the data stored within Welkin via the [Data API](https://developers.welkinhealth.com/#overview)
 
-**Welkin's Apps framework is in active development. Expect changes and improvements.**
-
 # Apps API Overview
 The Welkin Apps Frontend API enables Welkin and an embedded App to communicate and call functions on each other. This tight integration allows for a seamless experience across areas of Welkin functionality. For example, an App needs to be able to tell Welkin to make visible the iFrame containing the App or to transition Welkin to a specific patient's profile. An App also needs to be informed when its parent page is updated.
 
 Browsers do not allow content within iFrames to directly access the content of the containing page nor can the containing page access the content of the iframe. In Welkin's case this means that plugins are prevented from accessing information that they shouldn't have access to or modifying the entire user experience in ways they shouldn't be able to. It also means that without a communication conduit there is no way to make Apps and Welkin feel like a single experience.
 
 To enable Apps to have limited control over Welkin's UI we have exposed an API via which Apps can perform actions like telling Welkin to navigate the user to a specific patient page.
+
+**Welkin's Apps API is in active development. Expect changes and improvements.**
 
 ## Example use case
 A call center management system needs to navigate the worker to a patient page when the worker answers a call from a patient.
