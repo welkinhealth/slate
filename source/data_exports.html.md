@@ -11,7 +11,7 @@ Welkin's Standard Data Exports are intended to cover all data types exposed in C
 Welkin is continuing to develop data exports to reach this goal. Over the coming months Welkin will increase the fields and files available via data exports.
 
 # What's currently included?
-**Last updated 10/29/19**
+**Last updated 11/25/19**
 
 * Alerts
 * Assessments and Assessment Responses
