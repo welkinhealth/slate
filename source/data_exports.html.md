@@ -14,6 +14,7 @@ Welkin is continuing to develop data exports to reach this goal. Over the coming
 **Last updated 10/29/19**
 
 * Alerts
+* Assessments and Assessment Responses
 * Care Plans
 * Custom Data Type Records
 * Inbound Phone Calls
@@ -22,6 +23,7 @@ Welkin is continuing to develop data exports to reach this goal. Over the coming
 * Phase Changes
 * Scheduled Events
 * Tasks
+* Workers
 
 # Updates to Exports
 

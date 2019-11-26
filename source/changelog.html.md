@@ -47,3 +47,12 @@ Updates are listed by the day the api or documentation was released.
 * **[documented]** Clarified documentation on how webhook notifications are secured in Welkin.
 * **[documented]** Clarified example of how to upload files via Welkin's API.
 * **[documented]** Clarified how Conversations resource works with emails and app messages.
+
+
+# Data Exports Updates
+Updates are listed by the day the data export or documentation was released.
+
+## November 25th, 2019
+* **[added]** Assessment and Assessment responses are now included in Data Exports
+* **[added]** Workers are now included in Data Exports
+* **[added]** Outcome of Calendar Events have been added to the Calendar Events export file
