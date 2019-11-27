@@ -4,7 +4,7 @@
 
 Apps allow Welkin's customers to integrate tools that they already use to create a single workflow within Welkin. Welkin supports showing UI built by 3rd parties within the Welkin experience. This UI extensibility is called an App in the Welkin ecosystem. Welkin loads these external tools, once configured, into secure containers within the Welkin Care Staff interface.
 
-Welkin Apps have access to all the data stored within Welkin via the [Data API](https://developers.welkinhealth.com/#overview).
+Welkin Apps have access to all the data stored within Welkin via the [Data API](/).
 
 # Getting Started
 
@@ -24,13 +24,13 @@ When launched, the App will be loaded into an iFrame within Welkin's UI. The ifr
 
 To load the iframe Welkin will send parameters via a POST request, which indicate the coach who is logged in and if applicable which patient’s profile they are looking at. These parameters are encoded in a JWT and signed with App specific credentials. The App will then redirect to the appropriate URL after the JWT is verified, which is the URL that will be displayed in the iFrame.
 
-The App will have full control over the content (subject to iFrame sandbox restrictions) shown within the iFrame but will have no direct access to the rest of the Welkin page. If the App needs to control functionality within Welkin it must communicate via the [Apps API](https://developers.welkinhealth.com/apps_frontend_api.html). If the App needs data from Welkin it must access it via the [Data API](https://developers.welkinhealth.com). If the App needs to post data back to Welkin that too must happen via the [Data API](https://developers.welkinhealth.com).
+The App will have full control over the content (subject to iFrame sandbox restrictions) shown within the iFrame but will have no direct access to the rest of the Welkin page. If the App needs to control functionality within Welkin it must communicate via the [Apps API](/apps_frontend_api.html). If the App needs data from Welkin it must access it via the [Data API](/). If the App needs to post data back to Welkin that too must happen via the [Data API](/).
 
 # Frontend API
 
-Welkin Apps can interact with the Welkin UI via the [Apps API](https://developers.welkinhealth.com/apps_frontend_api.html). This frontend javascript API allows apps to control the Welkin UI and receive updates on changes to the UI.
+Welkin Apps can interact with the Welkin UI via the [Apps API](/apps_frontend_api.html). This frontend javascript API allows apps to control the Welkin UI and receive updates on changes to the UI.
 
-**[Apps API Documentation](https://developers.welkinhealth.com/apps_frontend_api.html)**
+**[Apps API Documentation](/apps_frontend_api.html)**
 
 # How are Apps invoked?
 
@@ -68,7 +68,7 @@ Once Welkin adds the app to the Welkin environment configuration, the App's loca
 
 ```js
 // this is a simplified example because the client_id and client_secret would not be transmitted to the browser
-function send_app_request(client_id, client_secret, patient_id, worker_id, provider_id):
+function send_app_request(client_id, client_secret, patient_id, worker_id, provider_id)
   let claim = {
     'iss': client_id,
     'aud': audience,
@@ -108,3 +108,15 @@ iframe Sandbox settings:
 
 ## Tear down
 The 3rd party app should respond gracefully to being closed either because the Welkin iframe was closed or Welkin's window was closed. There will not be any notification sent to the App that the app is being closed.
+
+# Example Apps
+
+These example apps are intended to be starting points for working with the Welkin API and are not intended to be used directly with patient data.
+
+## Simple Patient Action App
+Demonstrates the use of JWT to authenticate Apps
+[code on Glitch.com](https://glitch.com/~welkin-simple-3pa)
+
+## Video Chat
+Demonstrates the use of Welkin's Data API to get data from Welkin and post results back to Welkin.
+[code on Glitch.com](https://glitch.com/~welkin-videochat)
