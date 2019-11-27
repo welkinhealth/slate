@@ -5,6 +5,8 @@ Browsers do not allow content within iFrames to directly access the content of t
 
 To enable Apps to have limited control over Welkin's UI we have exposed an API via which Apps can perform actions like telling Welkin to navigate the user to a specific patient page.
 
+For info on the Apps Framework see [Apps Framework Overview](/apps_framework.html)
+
 **Welkin's Apps API is in active development. Expect changes and improvements.**
 
 ## Example use case

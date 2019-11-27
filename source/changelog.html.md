@@ -6,7 +6,7 @@ This document was started in June 2019 and covers all changes made since that da
 
 **Data API Documentation URL:** [https://developers.welkinhealth.com](/)
 
-**Apps API Documentation URL:** [https://developers.welkinhealth.com/app_frontend_api.html](/app_frontend_api.html)
+**Apps API Documentation URL:** [https://developers.welkinhealth.com/app_frontend_api.html](/apps_frontend_api.html)
 
 **Data Exports Documentation URL:** [https://developers.welkinhealth.com/data_exports.html](/data_exports.html)
 
@@ -15,8 +15,8 @@ This document was started in June 2019 and covers all changes made since that da
 # Apps API Updates
 Updates are listed by the day the api or documentation was released.
 
-## December 10th, 2019
-* **[released]** Version 1 of the Apps API has been released and is available to select Welkin customers. Please speak to your account manager.
+## November 26th, 2019
+* **[released]** Documentation Only preview of the [Apps API](/apps_frontend_api.html) has been released and is available to select Welkin customers. Please speak to your account manager for details.
 
 # Data API Updates
 Updates are listed by the day the api or documentation was released.
