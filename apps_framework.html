@@ -1,0 +1,387 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="apps_framework" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="/">
+        <img src="images/logo.png" class="logo" alt="Logo" />
+      </a>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#welkin-apps-overview" class="toc-h1 toc-link" data-title="Welkin Apps Overview">Welkin Apps Overview</a>
+          </li>
+          <li>
+            <a href="#what-are-welkin-apps" class="toc-h1 toc-link" data-title="What are Welkin Apps?">What are Welkin Apps?</a>
+          </li>
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started">Getting Started</a>
+          </li>
+          <li>
+            <a href="#example-use-case" class="toc-h1 toc-link" data-title="Example use case">Example use case</a>
+          </li>
+          <li>
+            <a href="#functional-overview-of-apps" class="toc-h1 toc-link" data-title="Functional overview of Apps">Functional overview of Apps</a>
+          </li>
+          <li>
+            <a href="#frontend-api" class="toc-h1 toc-link" data-title="Frontend API">Frontend API</a>
+          </li>
+          <li>
+            <a href="#how-are-apps-invoked" class="toc-h1 toc-link" data-title="How are Apps invoked?">How are Apps invoked?</a>
+          </li>
+          <li>
+            <a href="#ui-configuration" class="toc-h1 toc-link" data-title="UI configuration">UI configuration</a>
+          </li>
+          <li>
+            <a href="#welkin-39-s-responsibilities" class="toc-h1 toc-link" data-title="Welkin's responsibilities">Welkin's responsibilities</a>
+          </li>
+          <li>
+            <a href="#developer-responsibilities" class="toc-h1 toc-link" data-title="Developer responsibilities">Developer responsibilities</a>
+          </li>
+          <li>
+            <a href="#technical-details" class="toc-h1 toc-link" data-title="Technical details">Technical details</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#jwt-auth-claim" class="toc-h2 toc-link" data-title="JWT auth claim">JWT auth claim</a>
+                  </li>
+                  <li>
+                    <a href="#default-iframe-dimensions" class="toc-h2 toc-link" data-title="Default iFrame dimensions">Default iFrame dimensions</a>
+                  </li>
+                  <li>
+                    <a href="#iframe-sandboxing" class="toc-h2 toc-link" data-title="iFrame sandboxing">iFrame sandboxing</a>
+                  </li>
+                  <li>
+                    <a href="#tear-down" class="toc-h2 toc-link" data-title="Tear down">Tear down</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#example-apps" class="toc-h1 toc-link" data-title="Example Apps">Example Apps</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#simple-patient-action-app" class="toc-h2 toc-link" data-title="Simple Patient Action App">Simple Patient Action App</a>
+                  </li>
+                  <li>
+                    <a href="#video-chat" class="toc-h2 toc-link" data-title="Video Chat">Video Chat</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='welkin-apps-overview'>Welkin Apps Overview</h1><h1 id='what-are-welkin-apps'>What are Welkin Apps?</h1>
+<p>Apps allow Welkin&#39;s customers to integrate tools that they already use to create a single workflow within Welkin. Welkin supports showing UI built by 3rd parties within the Welkin experience. This UI extensibility is called an App in the Welkin ecosystem. Welkin loads these external tools, once configured, into secure containers within the Welkin Care Staff interface.</p>
+
+<p>Welkin Apps have access to all the data stored within Welkin via the <a href="/">Data API</a>.</p>
+<h1 id='getting-started'>Getting Started</h1>
+<p>Welkin Apps are currently in limited release and you must contact your Welkin Account Manager to get started. They will help guide you through starting the development process.</p>
+<h1 id='example-use-case'>Example use case</h1>
+<p>A call center management system needs to navigate the worker to a patient page when the worker answers a call from a patient.</p>
+
+<p>A call center management system also needs to update the UI within the App depending on if the user is on a patient profile or the inbox. On the patient profile the action in the App might be to call one of the patient&#39;s phone numbers. On the inbox the primary action might be management of the upcoming call schedule.</p>
+
+<p>A worker might minimize the call center management system to see more of the Welkin UI but when a call comes in the App needs to open the App so that the worker is aware of the inbound call.</p>
+<h1 id='functional-overview-of-apps'>Functional overview of Apps</h1>
+<p>When launched, the App will be loaded into an iFrame within Welkin&#39;s UI. The iframe container will show above the timeline and other Welkin UI similar to the appointment scheduler and assessments view.</p>
+
+<p>To load the iframe Welkin will send parameters via a POST request, which indicate the coach who is logged in and if applicable which patient’s profile they are looking at. These parameters are encoded in a JWT and signed with App specific credentials. The App will then redirect to the appropriate URL after the JWT is verified, which is the URL that will be displayed in the iFrame.</p>
+
+<p>The App will have full control over the content (subject to iFrame sandbox restrictions) shown within the iFrame but will have no direct access to the rest of the Welkin page. If the App needs to control functionality within Welkin it must communicate via the <a href="apps_frontend_api.html">Apps API</a>. If the App needs data from Welkin it must access it via the <a href="/">Data API</a>. If the App needs to post data back to Welkin that too must happen via the <a href="/">Data API</a>.</p>
+<h1 id='frontend-api'>Frontend API</h1>
+<p>Welkin Apps can interact with the Welkin UI via the <a href="apps_frontend_api.html">Apps API</a>. This frontend javascript API allows apps to control the Welkin UI and receive updates on changes to the UI.</p>
+
+<p><strong><a href="apps_frontend_api.html">Apps API Documentation</a></strong></p>
+<h1 id='how-are-apps-invoked'>How are Apps invoked?</h1>
+<p>Apps can be invoked from the Action Bar as patient specific actions which will be performed by the App. This invocation method is often used when the trigger for interacting with the app is a Care Staff member&#39;s desire to perform a specific action.</p>
+
+<p>Apps can also be invoked as persistent components of the Welkin UI which are visible across all pages in the Welkin UI. These persistent experiences are often used when the trigger for interacting with the App&#39;s functionality comes from an outside source like an inbound phone call.</p>
+
+<p>As an App developer it is up to you to decide how users will access your UI within Welkin.</p>
+<h1 id='ui-configuration'>UI configuration</h1>
+<p>As an App developer you must supply Welkin with an icon representing your App, the action bar button text (if applicable), and provide the Authentication url for the App. Welkin will then use this information to configure your App.</p>
+
+<p>Once Welkin adds the app to the Welkin environment configuration, the App&#39;s location in the action bar can be configured via Workshop.</p>
+<h1 id='welkin-39-s-responsibilities'>Welkin&#39;s responsibilities</h1>
+<ul>
+<li>Issue and share security credentials for authenticating the App</li>
+<li>Configure the name and icon of the App</li>
+<li>Configure the App for Welkin environment configurations</li>
+</ul>
+<h1 id='developer-responsibilities'>Developer responsibilities</h1>
+<ul>
+<li>Develop the App web frontend code, to be displayed within the iframe</li>
+<li>Develop the server to receive App requests from Welkin and serve the aforementioned frontend code
+
+<ul>
+<li>The app should be fully loaded and displayed within 1 second of receiving the authentication request. If full loading takes longer than this a loading spinner should be displayed.</li>
+<li>Clicks within the app should react immediately giving the user feedback on the actions they&#39;ve taken.</li>
+</ul></li>
+<li>Develop the POST endpoint for receiving authentication information and redirect requests to the App ui</li>
+<li>Make any updates to Welkin data via Welkin&#39;s Data APIs developers.welkinhealth.com as a result of actions taken within the App</li>
+<li>Push notifications or other communications to patient if the App has a patient facing component</li>
+</ul>
+<h1 id='technical-details'>Technical details</h1><h2 id='jwt-auth-claim'>JWT auth claim</h2>
+<blockquote>
+<p>Example request from Welkin (javascript)</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// this is a simplified example because the client_id and client_secret would not be transmitted to the browser</span>
+<span class="kd">function</span> <span class="nx">send_app_request</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">patient_id</span><span class="p">,</span> <span class="nx">worker_id</span><span class="p">,</span> <span class="nx">provider_id</span><span class="p">)</span>
+  <span class="kd">let</span> <span class="nx">claim</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'iss'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>
+    <span class="s1">'aud'</span><span class="p">:</span> <span class="nx">audience</span><span class="p">,</span>
+    <span class="s1">'exp'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
+    <span class="s1">'welkin_patient_id'</span><span class="p">:</span> <span class="nx">patient_id</span><span class="p">,</span>
+    <span class="s1">'welkin_worker_id'</span><span class="p">:</span> <span class="nx">worker_id</span><span class="p">,</span>
+    <span class="s1">'welkin_provider_id'</span><span class="p">:</span> <span class="nx">provider_id</span><span class="p">,</span>
+  <span class="p">};</span>
+  <span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">claim</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">algorithm</span><span class="o">=</span><span class="s1">'HS256'</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'token'</span><span class="p">:</span> <span class="nx">token</span>
+  <span class="p">};</span>
+
+  <span class="c1">// resp should include the content based on the redirect to be shown in the iFrame</span>
+  <span class="nx">resp</span> <span class="o">=</span> <span class="nx">requests</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'https://www.example.com/test/app'</span><span class="p">,</span> <span class="nx">data</span><span class="o">=</span><span class="nx">body</span><span class="p">);</span>
+</code></pre>
+<p>Welkin will send a POST request to the App, which will include the patient_id (if the app is configured as a patient action), worker_id, and provider_id in the JWT payload. The JWT will be included in the request body. When the request is received by the App, it will need to decode the JWT with it&#39;s credentials, and then will redirect (HTTP response 302) to the url that serves the content which will be displayed in the iFrame.</p>
+<h2 id='default-iframe-dimensions'>Default iFrame dimensions</h2>
+<p>Width: <code>750px</code></p>
+
+<p>Height: <code>Dynamic</code> (dependent on browser height)</p>
+
+<p>Width can be configured by Welkin engineering if required.</p>
+<h2 id='iframe-sandboxing'>iFrame sandboxing</h2>
+<p>The content within the iframe will be able to use javascript but will only have access to the DOM of the content within the iframe. As the App developer you will need to ensure that the App can function within the following set of security restrictions.</p>
+
+<p>iframe Sandbox settings:</p>
+
+<ul>
+<li><code>allow-scripts</code></li>
+<li><code>allow-same-origin</code></li>
+<li><code>allow-forms</code></li>
+<li><code>allow-popups</code></li>
+<li><code>allow=&quot;camera; microphone&quot;</code></li>
+</ul>
+<h2 id='tear-down'>Tear down</h2>
+<p>The 3rd party app should respond gracefully to being closed either because the Welkin iframe was closed or Welkin&#39;s window was closed. There will not be any notification sent to the App that the app is being closed.</p>
+<h1 id='example-apps'>Example Apps</h1>
+<p>These example apps are intended to be starting points for working with the Welkin API and are not intended to be used directly with patient data.</p>
+<h2 id='simple-patient-action-app'>Simple Patient Action App</h2>
+<p>Demonstrates the use of JWT to authenticate Apps
+<a href="https://glitch.com/~welkin-simple-3pa">code on Glitch.com</a></p>
+<h2 id='video-chat'>Video Chat</h2>
+<p>Demonstrates the use of Welkin&#39;s Data API to get data from Welkin and post results back to Welkin.
+<a href="https://glitch.com/~welkin-videochat">code on Glitch.com</a></p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

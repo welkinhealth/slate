@@ -1,0 +1,570 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="apps_frontend_api" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="/">
+        <img src="images/logo.png" class="logo" alt="Logo" />
+      </a>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#apps-api-overview" class="toc-h1 toc-link" data-title="Apps API Overview">Apps API Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#example-use-case" class="toc-h2 toc-link" data-title="Example use case">Example use case</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#api-communication-model" class="toc-h1 toc-link" data-title="API Communication Model">API Communication Model</a>
+          </li>
+          <li>
+            <a href="#messagechannel-setup" class="toc-h1 toc-link" data-title="MessageChannel setup">MessageChannel setup</a>
+          </li>
+          <li>
+            <a href="#security" class="toc-h1 toc-link" data-title="Security">Security</a>
+          </li>
+          <li>
+            <a href="#app-to-welkin-messages" class="toc-h1 toc-link" data-title="App to Welkin messages">App to Welkin messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#welkin_function" class="toc-h2 toc-link" data-title="welkin_function">welkin_function</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#welkin-to-app-messages" class="toc-h1 toc-link" data-title="Welkin to App messages">Welkin to App messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#current_state" class="toc-h2 toc-link" data-title="current_state">current_state</a>
+                  </li>
+                  <li>
+                    <a href="#event_notification" class="toc-h2 toc-link" data-title="event_notification">event_notification</a>
+                  </li>
+                  <li>
+                    <a href="#function_response-not-currently-available" class="toc-h2 toc-link" data-title="function_response (not currently available)">function_response (not currently available)</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='apps-api-overview'>Apps API Overview</h1>
+<p>The Welkin Apps Frontend API enables Welkin and an embedded App to communicate and call functions on each other. This tight integration allows for a seamless experience across areas of Welkin functionality. For example, an App needs to be able to tell Welkin to make visible the iFrame containing the App or to transition Welkin to a specific patient&#39;s profile. An App also needs to be informed when its parent page is updated.</p>
+
+<p>Browsers do not allow content within iFrames to directly access the content of the containing page nor can the containing page access the content of the iframe. In Welkin&#39;s case this means that plugins are prevented from accessing information that they shouldn&#39;t have access to or modifying the entire user experience in ways they shouldn&#39;t be able to. It also means that without a communication conduit there is no way to make Apps and Welkin feel like a single experience.</p>
+
+<p>To enable Apps to have limited control over Welkin&#39;s UI we have exposed an API via which Apps can perform actions like telling Welkin to navigate the user to a specific patient page.</p>
+
+<p>For info on the Apps Framework see <a href="apps_framework.html">Apps Framework Overview</a></p>
+
+<p><strong>Welkin&#39;s Apps API is in active development. Expect changes and improvements.</strong></p>
+<h2 id='example-use-case'>Example use case</h2>
+<p>A call center management system needs to navigate the worker to a patient page when the worker answers a call from a patient.</p>
+
+<p>A call center management system also needs to update the UI within the App depending on if the user is on a patient profile or the inbox. On the patient profile the action in the App might be to call one of the patient&#39;s phone numbers. On the inbox the primary action might be management of the upcoming call schedule.</p>
+
+<p>A worker might minimize the call center management system to see more of the Welkin UI but when a call comes in the App needs to open the App so that the worker is aware of the inbound call.</p>
+<h1 id='api-communication-model'>API Communication Model</h1>
+<p>Welkin&#39;s Frontend App API utilizes <code>MessageChannel</code> API to transmit messages between Apps in iFrames and Welkin&#39;s UI. The MessageChannel APIs are part of the HTML spec and supported by all modern browsers.</p>
+
+<p>A MessageChannel is setup between Welkin and the unique instance of the App. Once each iFramed instance of the App has loaded it is sent a <code>PostMessage</code> to establish a permanent MessageChannel. All future communications between Welkin&#39;s UI and the App are sent via the MessageChanel.</p>
+
+<p>Once the MessageChannel is established between Welkin and the App then the App can call methods on Welkin and Welkin can send state change updates and method responses back to the App. The available methods are documented below.</p>
+
+<p>MessageChannels only support the transmission of text and thus a message format has been defined which Welkin uses to encode and decode method calls between Welkin and Apps. Due to the asynchronous nature of MessageChannel messages, the App must include a <code>call_id</code> when sending method call messages to Welkin so that response messages are tied to that same <code>call_id</code>.</p>
+
+<p>Reference documents for <code>MessageChannel</code> API:
+* <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage doc by Mozilla</a>
+* <a href="https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API">Channel Messaging doc by Mozilla</a></p>
+<h1 id='messagechannel-setup'>MessageChannel setup</h1>
+<blockquote>
+<p>Example Welkin code</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'app_instance_1'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageChannel</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">port1</span> <span class="o">=</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">port1</span><span class="p">;</span>
+<span class="c1">// Not shown here: event listener which Welkin uses to receives messages back on port1 of the Channel</span>
+
+<span class="c1">// Wait for the iframe to load</span>
+<span class="nx">iframe</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Transfer port2 to the iframe</span>
+    <span class="kd">var</span> <span class="nb">window</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="s1">'welkin_init'</span><span class="p">,</span> <span class="s1">'app.welkin-video-chat.com'</span><span class="p">,</span> <span class="p">[</span><span class="nx">channel</span><span class="p">.</span><span class="nx">port2</span><span class="p">]);</span>
+
+    <span class="c1">// Transfer the first state message from Welkin to plugin</span>
+    <span class="nx">port1</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">state_update</span><span class="p">,</span> <span class="s1">'app.welkin-video-chat.com'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Example App code</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">port2</span><span class="p">;</span> <span class="c1">// This port will receive all future messages from Welkin</span>
+
+<span class="c1">// Listen for the initial port transfer message</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="nx">initPort</span><span class="p">);</span>
+
+<span class="c1">// Setup the transferred port</span>
+<span class="kd">function</span> <span class="nx">initPort</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">origin</span> <span class="o">!==</span> <span class="s2">"https://coach.welkinhealth.com"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="s2">"welkin_init"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">port2</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">ports</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+    <span class="c1">// Add a Message listener to the port to accept future messages</span>
+    <span class="nx">port2</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">messageHandler</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>When Welkin loads the iFrame containing the App, Welkin will send a postMessage to the iFrame with a message which contains a MessageChannel port reference. The App will then validate that the message came from Welkin (see example code below). Once the App has verified the message origin then it will store the MessageChannel port for future message passing to and from Welkin.</p>
+
+<p>After the first message from Welkin, all communications between Welkin and the plugin will happen via the MessageChannel and no additional postMessages will be sent directly to the iFrame by Welkin.</p>
+
+<p>The example at right sends the channel <code>port2</code> to the plugin and then sends a message over that channel.</p>
+
+<p>General example of PostMessages and ChannelMessages <a href="https://github.com/mdn/dom-examples/tree/master/channel-messaging-multimessage">available on github</a> not by Welkin</p>
+<h1 id='security'>Security</h1>
+<p><code>targetOrigin</code> param of <code>Window.postMessage(...)</code> will be set to the domain of the App which ensures that the message is only sent to windows that contain content from the App&#39;s domain. This ensures that the MessageChannel is established with the correct App and is not visible to any other party.</p>
+
+<p>The plugin should validate that the <code>MessageEvent.origin</code> is <code>https://coach.welkinhealth.com</code> to ensure that the PostMessage is from Welkin and that you&#39;re only accepting a MessageChannel from Welkin.</p>
+
+<p>Once a MessageChannel has been sent from Welkin frontend to the App then communications will only be visible to Welkin and that instance of the plugin.</p>
+<h1 id='app-to-welkin-messages'>App to Welkin messages</h1>
+<p>These messages allow the App to control functionality within Welkin.</p>
+<h2 id='welkin_function'>welkin_function</h2>
+<p>An App calls a Welkin function to make changes to Welkin and send information to Welkin.</p>
+
+<blockquote>
+<p>Example welkin_function message</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"welkin_function"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"function"</span><span class="p">:</span><span class="w"> </span><span class="s2">"navigate_to"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edb98143-e9d1-42c1-1197-6de2db454d27"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>message</code> object fields:</p>
+
+<ul>
+<li><code>function</code>
+
+<ul>
+<li>Name of the function that the App is calling on the Welkin UI.</li>
+</ul></li>
+<li><code>params</code>
+
+<ul>
+<li>If the function takes parameters then a list of parameters can be specified.</li>
+</ul></li>
+<li><code>call_id</code>
+
+<ul>
+<li>The App assigns each invocation of a method call a unique ID so that the app can match the response message to the method invocation.</li>
+</ul></li>
+</ul>
+<h4 id='welkin_function-available-functions'>Available Functions:</h4>
+<ul>
+<li><code>open_frame</code>
+
+<ul>
+<li>Opens the container of this plugin. Can be called even if the App frame is already open.</li>
+<li>No return values.</li>
+</ul></li>
+<li><code>collapse_frame</code>
+
+<ul>
+<li>Collapses the container of this plugin. Can be called even if the App frame is already collapsed.</li>
+<li>No return values.</li>
+</ul></li>
+<li><code>close_frame</code>
+
+<ul>
+<li>Removes the container for this App instance from the DOM. This will terminate this instance of the App.</li>
+<li>No return values.</li>
+</ul></li>
+<li><code>navigate_to</code>
+
+<ul>
+<li>Tells Welkin to navigate to a specific patient or page. For example, switch the current patient being displayed. This should not be called automatically by the App but rather only in response to user input by the worker so that the worker can confirm that they are ready.</li>
+<li>Parameters:
+
+<ul>
+<li><code>page_type</code> Specifies what page type the UI is being navigated to. (possible values: &quot;<code>patient</code>&quot;, &quot;<code>inbox</code>&quot;)</li>
+<li><code>page_id</code> (possible values: ID of a patient if page is a patient otherwise &quot;<code>None</code>&quot;)</li>
+</ul></li>
+<li>Return:
+
+<ul>
+<li>Status <code>200</code> if the page could be navigated.</li>
+<li>Status <code>404</code> if that <code>resource_id</code> doesn&#39;t exist or can&#39;t be accessed by the worker.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id='welkin-to-app-messages'>Welkin to App messages</h1>
+<p>These messages notify Apps of changes and events that have happened in Welkin. The App is not required to respond to any of these messages. Welkin doesn&#39;t require any response to these messages.</p>
+<h2 id='current_state'>current_state</h2>
+<p>Welkin notifies an App about the current state of the Welkin UI and the App&#39;s container. These messages are sent to all Apps whenever a change is made to Welkin UI state. These messages are sent to specific Apps when changes are made to their container.</p>
+
+<blockquote>
+<p>Example current_state message</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"current_state"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"parent_page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"parent_page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65982b40-270f-4d29-8020-11f6298dd847"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"frame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expanded"</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>message.state</code> fields:</p>
+
+<ul>
+<li><p><code>parent_page_type</code></p>
+
+<ul>
+<li>What type of page is the Welkin UI currently showing.</li>
+<li>Values:
+
+<ul>
+<li><code>patient</code></li>
+<li><code>worker_profile</code></li>
+<li><code>profile</code></li>
+<li><code>search</code></li>
+<li><code>inbox</code></li>
+<li><code>admin</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>parent_page_id</code></p>
+
+<ul>
+<li>What is the resource ID of the page that the Welkin UI is currently showing. For example, the patient ID if the worker is on a patient record.</li>
+<li>Values:
+
+<ul>
+<li>guid of a patient or profile if the <code>parent_page_type</code> is <code>patient</code> or <code>profile</code></li>
+<li>Otherwise <code>null</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>frame</code></p>
+
+<ul>
+<li>Enum representing if the frame containing this instance of the App is currently expanded or collapsed on the Welkin screen.</li>
+<li>Values:
+
+<ul>
+<li><code>collapsed</code></li>
+<li><code>expanded</code></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>More fields will be added to the <code>state</code> object as Welkin expands the capabilities of the Apps API.</p>
+<h2 id='event_notification'>event_notification</h2>
+<p>Welkin tells an App about an event that took place in Welkin.
+Note: There are currently no supported event notifications utilizing this API.</p>
+
+<p><code>message</code> object fields:</p>
+
+<ul>
+<li><code>event</code>
+
+<ul>
+<li>field tells the App what type of event took place and what the parameters are for that event</li>
+</ul></li>
+<li><code>event_notification_id</code>
+
+<ul>
+<li>field contains a guid which uniquely identifies this event and is used to identify responses from the App to event notifications.</li>
+</ul></li>
+<li><code>params</code>
+
+<ul>
+<li>field contain the information specific to this instance of the event type</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>Example event_notification message</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event_notification"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"click_to_call"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-555-1234"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"event_notification_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30f27b3a-5c03-48cf-9bec-90a2d68ece9d"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Example:</strong></p>
+
+<p>A Care Staff member clicked on a phone number and the App has been configured to respond to click to call actions. Welkin notifies the app of this click to call event.</p>
+<h2 id='function_response-not-currently-available'>function_response (not currently available)</h2>
+<p>Welkin responds to method call from Apps to update the app with the result of the method.</p>
+
+<blockquote>
+<p>Example function_response message</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"method_response"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"return"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"field_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"field_n"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>message</code> object fields:</p>
+
+<ul>
+<li><code>call_id</code>
+
+<ul>
+<li>The response references the <code>call_id</code> which initiated the method</li>
+</ul></li>
+<li><code>status_code</code>
+
+<ul>
+<li>Indicates if the method succeeded or had an error. Uses http status codes.</li>
+</ul></li>
+<li><code>return</code>
+
+<ul>
+<li>A method might return values to the plugin which are serialized as JSON and included here.</li>
+</ul></li>
+</ul>
+
+<p>After the method has completed the state of the App container or Welkin might have changed. In this case Welkin will send a <code>current_state</code> message as with all changes to state.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
