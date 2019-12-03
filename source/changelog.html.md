@@ -21,6 +21,12 @@ Updates are listed by the day the api or documentation was released.
 # Data API Updates
 Updates are listed by the day the api or documentation was released.
 
+## December 2nd, 2019
+* **[added]** GET and FIND for Calls APIs released. [Calls](/#calls)
+
+* **[added]** PUT and POST for Visits (in person meetings between workers and patients). [Visits](/#visits)
+* **[deprecated]** Disposition field on [calendar events](#calendar_events) is deprecated.
+
 ## November 13th, 2019
 * **[fixed]** [Batch creation](/#batch-creation-of-resources) of [Custom Data Type Records](/#custom-data-type-records) as part of a POST to the [Patients](/#patients) endpoint now functions as expected.
 
