@@ -25,7 +25,7 @@ def get_token(client_id, client_secret, scope, endpoint, audience):
   claim = {
     'iss': client_id,
     'aud': audience,
-    'exp': arrow.utcnow().replace(seconds=3600).timestamp,
+    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': scope,
   }
   assertion = jwt.encode(claim, client_secret, algorithm='HS256')
@@ -128,7 +128,7 @@ def create_jwt(client_id, client_secret, audience):
   claim = {
     'iss': client_id,
     'aud': audience,
-    'exp': arrow.utcnow().replace(seconds=3600).timestamp,
+    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': 'welkin',
   }
   assertion = jwt.encode(claim, client_secret, algorithm='HS256')
@@ -188,7 +188,7 @@ def get_token(client_id, client_secret, audience, endpoint):
   claim = {
     'iss': client_id,
     'aud': audience,
-    'exp': arrow.utcnow().replace(seconds=3600).timestamp,
+    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': 'welkin',
   }
   assertion = jwt.encode(claim, client_secret, algorithm='HS256')
@@ -1217,6 +1217,167 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+## Calls
+
+
+Calls record that a call was completed between a [worker](#workers) and a [patient](#patients).
+These calls are attached to a [calendar event](#calendar_events) if a call was initiated from a calendar event.
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "call_type": "outbound",
+  "from_number": "+14155555555",
+  "to_number": "+15085555555",
+  "start_time": "2019-03-05T21:03:23.102699+00:00",
+  "duration": 200,
+  "calendar_event_id": "cd1483be-e029-4e23-ac8a-b4ebcededb04",
+  "worker_id": "32f0e2b4-7643-4926-a128-9666c81446cb",
+  "patient_id": "ee2a33d3-1793-4967-9836-85f68afea893",
+  "audio_url": "",
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
+  "created_at": "2018-09-12T01:27:32.036062+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+call_type <br /><code><a href='#types'>enum</a></code> | The direction of the call. `inbound` or `outbound`
+from_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number in E.164 format from which the call orginated.
+to_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number in E.164 format to which the call was placed.
+start_time <br /><code><a href='#types'>isodatetime</a></code> | The datetime when the call was initiated.
+duration <br /><code><a href='#types'>integer</a></code> | The amount of time that the call lasted.
+calendar_event_id <br /><code><a href='#types'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who participated in the call.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the patient who participated in the call.
+audio_url <br /><code><a href='#types'>string</a></code> | URL at which you can listen to the recorded audio of the call if a recording exists.
+
+
+
+
+### Get
+Retrieves a single call.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+```
+
+`GET /v1/calls/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+  "call_type": "outbound",
+  "from_number": "+14155555555",
+  "to_number": "+15085555555",
+  "start_time": "2019-03-05T21:03:23.102699+00:00",
+  "duration": 200,
+  "calendar_event_id": "cd1483be-e029-4e23-ac8a-b4ebcededb04",
+  "worker_id": "32f0e2b4-7643-4926-a128-9666c81446cb",
+  "patient_id": "ee2a33d3-1793-4967-9836-85f68afea893",
+  "audio_url": "",
+  "updated_at": "2018-09-12T01:27:32.035940+00:00",
+  "created_at": "2018-09-12T01:27:32.036062+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+
+
+
+### Find
+Finds calls, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/calls
+```
+
+`GET /v1/calls`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+        "call_type": "outbound",
+        "from_number": "+14155555555",
+        "to_number": "+15085555555",
+        "start_time": "2019-03-05T21:03:23.102699+00:00",
+        "duration": 200,
+        "calendar_event_id": "cd1483be-e029-4e23-ac8a-b4ebcededb04",
+        "worker_id": "32f0e2b4-7643-4926-a128-9666c81446cb",
+        "patient_id": "ee2a33d3-1793-4967-9836-85f68afea893",
+        "audio_url": "",
+        "updated_at": "2018-09-12T01:27:32.035940+00:00",
+        "created_at": "2018-09-12T01:27:32.036062+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the patient who participated in the call.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
 ## Care Flows
 
 
@@ -2176,7 +2337,7 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2215,7 +2376,7 @@ curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2243,7 +2404,7 @@ Creates a new external id.
 
 ```shell
 curl -XPOST /v1/external_ids -d '{
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2258,7 +2419,7 @@ curl -XPOST /v1/external_ids -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2289,7 +2450,7 @@ Updates an existing external id.
 
 ```shell
 curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2304,7 +2465,7 @@ curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patient",
+  "resource": "patients",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2350,7 +2511,7 @@ curl -XGET /v1/external_ids
     "data": [
       {
         "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-        "resource": "patient",
+        "resource": "patients",
         "namespace": "ehr",
         "external_id": "abc-123",
         "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2997,7 +3158,6 @@ generation.
 
 
 
-
 ### Model
 
 > Example Response
@@ -3143,13 +3303,7 @@ curl -XPOST /v1/patients -d '{
   "gender": "Female",
   "height": "72",
   "weight": "175",
-  "smokes": "false",
-  "external_ids": [
-    {
-      "external_id": "abc-123",
-      "namespace": "ehr"
-    }
-  ]
+  "smokes": "false"
 }'
 ```
 
@@ -3209,7 +3363,6 @@ height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
 email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
-external_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(object)</a></code> | A convenience field which creates a patient and an [external id mapping](#external-ids) at the same time. The ID of this mapping can be fetched from the [external ids](#external-ids) endpoint.
 phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
 
 
@@ -5183,7 +5336,6 @@ and [patients](#patients).
   "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
   "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
   "assessment_response_id": null,
-  "disposition": "completed",
   "start_time": "2019-09-28T21:45:11.093557+00:00",
   "end_time": "2019-09-28T21:45:11.093557+00:00",
   "updated_at": "2019-09-27T20:45:12.176691+00:00",
@@ -5199,7 +5351,7 @@ worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#wor
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
 calendar_event_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
 assessment_response_id <br /><code><a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
-disposition <br /><code><a href='#types'>string</a></code> | The outcome of the visit, if it has resolved; `completed` is the most common, but it may include `no_show`.
+disposition <br /><code><a href='#types'>enum</a></code> | (Deprecated) This field will always return None.
 start_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the starting time of the visit
 end_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the ending time of the visit
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -5232,7 +5384,6 @@ curl -XGET /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9
   "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
   "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
   "assessment_response_id": null,
-  "disposition": "completed",
   "start_time": "2019-09-28T21:45:11.093557+00:00",
   "end_time": "2019-09-28T21:45:11.093557+00:00",
   "updated_at": "2019-09-27T20:45:12.176691+00:00",
@@ -5248,6 +5399,103 @@ param | description
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
+
+
+
+### Create
+Creates a new visit.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/visits -d '{
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00"
+}'
+```
+
+`POST /v1/visits -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "assessment_response_id": null,
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00",
+  "updated_at": "2019-09-27T20:45:12.176691+00:00",
+  "created_at": "2019-09-27T20:45:12.176691+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) participant in the visit.  Only one worker can be part of a visit.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
+calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
+assessment_response_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
+start_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the starting time of the visit
+end_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the ending time of the visit
+
+
+
+
+
+### Update
+Updates an existing visit.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPUT /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9 -d '{
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb"
+}'
+```
+
+`PUT /v1/visits/:id -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "assessment_response_id": null,
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00",
+  "updated_at": "2019-09-27T20:45:12.176691+00:00",
+  "created_at": "2019-09-27T20:45:12.176691+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
+assessment_response_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
 
 
 
@@ -5281,7 +5529,6 @@ curl -XGET /v1/visits
         "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
         "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
         "assessment_response_id": null,
-        "disposition": "completed",
         "start_time": "2019-09-28T21:45:11.093557+00:00",
         "end_time": "2019-09-28T21:45:11.093557+00:00",
         "updated_at": "2019-09-27T20:45:12.176691+00:00",
@@ -5319,6 +5566,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 Workers have access to the Welkin Portal and provide care to [patients](#patients).
 
 Workers are assigned to [patients](#patients) as the patient's primary worker via <br />`patient.primary_worker_id`
+
 
 
 
@@ -5841,6 +6089,7 @@ base type | sub type | base type key | plurality
 [phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
 [calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
 [profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
+[worker](#workers) | [external ids](#external-ids) | `external_ids` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
 
