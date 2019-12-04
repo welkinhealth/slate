@@ -1260,8 +1260,8 @@ to_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number 
 start_time <br /><code><a href='#types'>isodatetime</a></code> | The datetime when the call was initiated.
 duration <br /><code><a href='#types'>integer</a></code> | The amount of time that the call lasted.
 calendar_event_id <br /><code><a href='#types'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
-worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who participated in the call.
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the patient who participated in the call.
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who participated in the call.
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who participated in the call.
 audio_url <br /><code><a href='#types'>string</a></code> | URL at which you can listen to the recorded audio of the call if a recording exists.
 
 
@@ -1368,7 +1368,7 @@ curl -XGET /v1/calls
 param | description
 - | -
 calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the patient who participated in the call.
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who participated in the call.
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
@@ -2337,7 +2337,7 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2376,7 +2376,7 @@ curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2404,7 +2404,7 @@ Creates a new external id.
 
 ```shell
 curl -XPOST /v1/external_ids -d '{
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2419,7 +2419,7 @@ curl -XPOST /v1/external_ids -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2450,7 +2450,7 @@ Updates an existing external id.
 
 ```shell
 curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2465,7 +2465,7 @@ curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
 ```json
 {
   "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-  "resource": "patients",
+  "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
@@ -2511,7 +2511,7 @@ curl -XGET /v1/external_ids
     "data": [
       {
         "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-        "resource": "patients",
+        "resource": "calendar_events",
         "namespace": "ehr",
         "external_id": "abc-123",
         "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
