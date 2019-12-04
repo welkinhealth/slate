@@ -6081,14 +6081,19 @@ Current supported batch creation relationships:
 
 base type | sub type | base type key | plurality
 - | - | - | -
+[calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
+[custom data type records](#custom-data-type-records) | [patients](#patients) | `patient` | one to one
+[email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
+[external ids](#external-ids) | [calendar events](#calendar-events) | `calendar_event` | one to one
+[external ids](#external-ids) | [patients](#patients) | `patient` | one to one
+[external ids](#external-ids) | [workers](#workers) | `worker` | one to one
+[patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
 [patient](#patients) | [email addresses](#email-addresses) | `email_addresses` | one to many
 [patient](#patients) | [external ids](#external-ids) | `external_ids` | one to many
 [patient](#patients) | [phone numbers](#phone-numbers) | `phone_numbers` | one to many
-[patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
-[email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
 [phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
-[calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
 [profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
+[profile phone numbers](#profile-phone-numbers) | [profile](#profiles) | `profile` | one to one
 [worker](#workers) | [external ids](#external-ids) | `external_ids` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
