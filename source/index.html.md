@@ -1577,11 +1577,10 @@ Conversations track the text-based conversations between [workers](#workers) and
 
 Text-based communication methods supported by Welkin are: SMS, email, and in-app messaging.
 
-<aside>Only 3rd party app conversations can be created via this API. There is only one SMS conversation per
+<aside>Only in-app and email conversations can be created via this API. There is only one SMS conversation per
 <a href="#patients">patient</a> <a href="#phone-numbers">phone number</a> and that conversation is automatically created when the
 phone number is added to the patient.</aside>
 
-<aside>Emails are not currently exposed in Welkin's APIs.</aside>
 
 
 
@@ -1601,6 +1600,7 @@ phone number is added to the patient.</aside>
   "conversation_type": "app",
   "title": "App",
   "phone_number_id": null,
+  "email_address_ids": null,
   "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1645,6 +1645,7 @@ curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
   "conversation_type": "app",
   "title": "App",
   "phone_number_id": null,
+  "email_address_ids": null,
   "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1695,6 +1696,7 @@ curl -XPOST /v1/conversations -d '{
   "conversation_type": "app",
   "title": "App",
   "phone_number_id": null,
+  "email_address_ids": null,
   "updated_at": "2018-09-12T01:27:32.031245+00:00",
   "created_at": "2018-09-12T01:27:32.031362+00:00"
 }
@@ -1708,6 +1710,7 @@ param | description
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
 conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
 title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
+email_address_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(guid)</a></code> | The [patient email addresses](#email-addresses) included in this conversation.
 
 
 
@@ -1742,6 +1745,7 @@ curl -XGET /v1/conversations
         "conversation_type": "app",
         "title": "App",
         "phone_number_id": null,
+        "email_address_ids": null,
         "updated_at": "2018-09-12T01:27:32.031245+00:00",
         "created_at": "2018-09-12T01:27:32.031362+00:00"
       }
@@ -2305,6 +2309,242 @@ param | description
 - | -
 patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
 user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+## Email Messages
+
+
+Email messages can be viewed and created from the [conversation](#conversations) view of the [Patient](#patients)
+profile.
+Email messages can also be sent to patients via this API endpoint. Email messages sent from patients are received
+and recorded in Welkin when the patient responds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
+  "direction": "outbound",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "automatically_sent": "false",
+  "footer": "If you are experiencing a life-threatening emergency, please call 911.",
+  "sent_at": "2019-10-13T01:32:12.000000+00:00",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
+direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient](#patients) of the messages must also be the same as the patient in the conversation.
+subject <br /><code><a href='#types'>string</a></code> | Subject of the message
+body_html <br /><code><a href='#types'>html_template</a></code> | HTML body of the message
+body_text <br /><code><a href='#types'>string</a></code> | Text body of the message
+footer <br /><code><a href='#types'>string</a></code> | The content of the message footer which was appended to the bottom of the message automatically by Welkin before it was sent. This will be blank if footers have not been configured for the Wekin environment being used.
+sent_at <br /><code><a href='#types'>isodatatime</a></code> | The time when the messages was sent. For `inbound` emails this is the time when Welkin received the message.
+automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent by a [worker](#workers), or via automated process. Only applies to `outbound` messages.
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+
+
+
+
+### Get
+Retrieves a single email message.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b
+```
+
+`GET /v1/email_messages/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
+  "direction": "outbound",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "automatically_sent": "false",
+  "footer": "If you are experiencing a life-threatening emergency, please call 911.",
+  "sent_at": "2019-10-13T01:32:12.000000+00:00",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Create
+
+
+Send an email message through Welkin to the [patient](#patients).
+
+If you omit `body_text` or `body_html`, Welkin will use the other field to populate the missing one.
+
+You can provide an existing `conversation_id`, or provide a `conversation` object to batch-create a conversation for
+this message.
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/email_messages -d '{
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "automatically_sent": "false"
+}'
+```
+
+`POST /v1/email_messages -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+  "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
+  "direction": "outbound",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "automatically_sent": "false",
+  "footer": "If you are experiencing a life-threatening emergency, please call 911.",
+  "sent_at": "2019-10-13T01:32:12.000000+00:00",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
+conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient](#patients) of the messages must also be the same as the patient in the conversation.
+subject <br /><code><a href='#types'>string</a></code> | Subject of the message
+body_html <br /><code><a href='#types'>optional</a> <a href='#types'>html_template</a></code> | HTML body of the message
+body_text <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text body of the message
+automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent by a [worker](#workers), or via automated process. Only applies to `outbound` messages.
+
+
+
+
+
+
+
+### Find
+Finds email messages, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/email_messages
+```
+
+`GET /v1/email_messages`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+        "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
+        "direction": "outbound",
+        "subject": "This is a test email subject",
+        "body_text": "This is a sample email body",
+        "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+        "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+        "automatically_sent": "false",
+        "footer": "If you are experiencing a life-threatening emergency, please call 911.",
+        "sent_at": "2019-10-13T01:32:12.000000+00:00",
+        "updated_at": "2018-09-12T01:27:32.033666+00:00",
+        "created_at": "2018-09-12T01:27:32.033816+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
@@ -3158,6 +3398,7 @@ generation.
 
 
 
+
 ### Model
 
 > Example Response
@@ -3167,6 +3408,7 @@ generation.
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "provider_id_number": "7IHnPI80",
   "timezone": "US/Pacific",
   "first_name": "Grace",
   "last_name": "Hopper",
@@ -3213,6 +3455,7 @@ gender <br /><code><a href='#types'>string</a></code> | Gender of this patient
 height <br /><code><a href='#types'>string</a></code> | The two digit height of this patient in inches.
 weight <br /><code><a href='#types'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+provider_id_number <br /><code><a href='#types'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
 
 
 
@@ -3239,6 +3482,7 @@ curl -XGET /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "provider_id_number": "7IHnPI80",
   "timezone": "US/Pacific",
   "first_name": "Grace",
   "last_name": "Hopper",
@@ -3303,7 +3547,8 @@ curl -XPOST /v1/patients -d '{
   "gender": "Female",
   "height": "72",
   "weight": "175",
-  "smokes": "false"
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
 }'
 ```
 
@@ -3317,6 +3562,7 @@ curl -XPOST /v1/patients -d '{
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "provider_id_number": "7IHnPI80",
   "timezone": "US/Pacific",
   "first_name": "Grace",
   "last_name": "Hopper",
@@ -3362,6 +3608,7 @@ gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
 weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+provider_id_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
 email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
 phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
 
@@ -3396,7 +3643,8 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "gender": "Female",
   "height": "72",
   "weight": "175",
-  "smokes": "false"
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
 }'
 ```
 
@@ -3410,6 +3658,7 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "provider_id_number": "7IHnPI80",
   "timezone": "US/Pacific",
   "first_name": "Grace",
   "last_name": "Hopper",
@@ -3456,6 +3705,7 @@ gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
 weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
 smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+provider_id_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
 
 
 
@@ -3487,6 +3737,7 @@ curl -XGET /v1/patients
         "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
         "phase": "intake",
         "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+        "provider_id_number": "7IHnPI80",
         "timezone": "US/Pacific",
         "first_name": "Grace",
         "last_name": "Hopper",
@@ -6082,19 +6333,21 @@ Current supported batch creation relationships:
 base type | sub type | base type key | plurality
 - | - | - | -
 [calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
+[conversations](#conversations) | [email messages](#email-messages) | `email_messages` | one to many
 [custom data type records](#custom-data-type-records) | [patients](#patients) | `patient` | one to one
-[email addresses](#email-addresses) | [patient](#patients) | `patient` | one to one
+[email addresses](#email-addresses) | [patients](#patients) | `patient` | one to one
+[email messages](#email-messages) | [conversations](#conversations) | `conversation` | one to one
 [external ids](#external-ids) | [calendar events](#calendar-events) | `calendar_event` | one to one
 [external ids](#external-ids) | [patients](#patients) | `patient` | one to one
 [external ids](#external-ids) | [workers](#workers) | `worker` | one to one
-[patient](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
-[patient](#patients) | [email addresses](#email-addresses) | `email_addresses` | one to many
-[patient](#patients) | [external ids](#external-ids) | `external_ids` | one to many
-[patient](#patients) | [phone numbers](#phone-numbers) | `phone_numbers` | one to many
-[phone numbers](#phone-numbers) | [patient](#patients) | `patient` | one to one
+[patients](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
+[patients](#patients) | [email addresses](#email-addresses) | `email_addresses` | one to many
+[patients](#patients) | [external ids](#external-ids) | `external_ids` | one to many
+[patients](#patients) | [phone numbers](#phone-numbers) | `phone_numbers` | one to many
+[phone numbers](#phone-numbers) | [patients](#patients) | `patient` | one to one
 [profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
-[profile phone numbers](#profile-phone-numbers) | [profile](#profiles) | `profile` | one to one
-[worker](#workers) | [external ids](#external-ids) | `external_ids` | one to many
+[profile phone numbers](#profile-phone-numbers) | [profiles](#profiles) | `profile` | one to one
+[workers](#workers) | [external ids](#external-ids) | `external_ids` | one to many
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
 
