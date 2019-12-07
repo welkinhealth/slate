@@ -24,7 +24,7 @@ Updates are listed by the day the api or documentation was released.
 ## December 9nd, 2019
 * **[added]** GET, PUT, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
 
-* **[added]** Provider ID Number to [Patients](/#patients)
+* **[added]** Provider ID Number added to [Patients](/#patients) endpoint.
 * **[changed]** Conversations can now be of `type in-app` or `email`. [Conversations](#conversations)
 
 ## December 2nd, 2019

@@ -1614,6 +1614,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
 conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
 title <br /><code><a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
+email_address_ids <br /><code><a href='#types'>guid</a></code> | The [patient email addresses](#email-addresses) included in this conversation.
 phone_number_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient's](#patients) phone number which will be included in this conversation. This ID will be `null` for email and in-app message conversations.
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -2367,7 +2368,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
 sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
 direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient](#patients) of the messages must also be the same as the patient in the conversation.
+conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient_id](#patients) of a newly created email will be the same as the patient in the conversation.
 subject <br /><code><a href='#types'>string</a></code> | Subject of the message
 body_html <br /><code><a href='#types'>html_template</a></code> | HTML body of the message
 body_text <br /><code><a href='#types'>string</a></code> | Text body of the message
@@ -2480,7 +2481,7 @@ curl -XPOST /v1/email_messages -d '{
 param | description
 - | -
 sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
-conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient](#patients) of the messages must also be the same as the patient in the conversation.
+conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient_id](#patients) of a newly created email will be the same as the patient in the conversation.
 subject <br /><code><a href='#types'>string</a></code> | Subject of the message
 body_html <br /><code><a href='#types'>optional</a> <a href='#types'>html_template</a></code> | HTML body of the message
 body_text <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text body of the message
