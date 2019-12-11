@@ -4,22 +4,20 @@ This document outlines the changes that Welkin has made to our external APIs and
 
 This document was started in June 2019 and covers all changes made since that date.
 
-**Data API Documentation URL:** [https://developers.welkinhealth.com](/)
-
-**Apps API Documentation URL:** [https://developers.welkinhealth.com/app_frontend_api.html](/apps_frontend_api.html)
-
-**Data Exports Documentation URL:** [https://developers.welkinhealth.com/data_exports.html](/data_exports.html)
-
 **Welkin's APIs and Exports are in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the APIs. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.
 
 # Apps API Updates
 Updates are listed by the day the api or documentation was released.
+
+**Apps API Documentation URL:** [https://developers.welkinhealth.com/app_frontend_api.html](/apps_frontend_api.html)
 
 ## November 26th, 2019
 * **[released]** Documentation Only preview of the [Apps API](/apps_frontend_api.html) has been released and is available to select Welkin customers. Please speak to your account manager for details.
 
 # Data API Updates
 Updates are listed by the day the api or documentation was released.
+
+**Data API Documentation URL:** [https://developers.welkinhealth.com](/)
 
 ## December 16nd, 2019
 * **[added]** GET, PUT, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
@@ -75,6 +73,8 @@ Updates are listed by the day the api or documentation was released.
 
 # Data Exports Updates
 Updates are listed by the day the data export or documentation was released.
+
+**Data Exports Documentation URL:** [https://developers.welkinhealth.com/data_exports.html](/data_exports.html)
 
 ## December 16th, 2019
 * **[added]** Relationships and Profiles are now included in Data Exports
