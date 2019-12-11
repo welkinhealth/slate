@@ -410,11 +410,6 @@ html, body {
     border-top: none;
   }
 
-  h2:first-of-type {
-    // margin-top: $h1-margin-bottom * -1;
-    border-top: none;
-  }
-
   h3, h4, h5, h6 {
     @extend %header-font;
     font-size: 18px;
