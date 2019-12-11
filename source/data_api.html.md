@@ -275,6 +275,26 @@ You can pull large batches of data from Welkin at anytime using the *Find* endpo
 
 The example here pulls patients created or updated during the time range June 15th 2018 to September 30th 2018.
 
+## Find by POST
+> Example Request
+
+```shell
+curl -XPOST /v1/phone_numbers/find -d '{
+  "phone_number"="+15555555555",
+  "page[from]"=2018-06-15T10:30:01,
+  "page[to]"=2018-09-30T10:29:59,
+  "page[size]"=10
+}'
+```
+
+Security best practices dictates keeping PII and PHI out of URLs (in the path or in query parameters) because information in URLs can be inadvertently exposed via client, network, proxy and server logs and other mechanisms.
+
+Accordingly, Welkin supports sending sensitive API parameters as a part of a POST body for performing *find* actions. This is accomplished via the *Find By Post* methods of this API.
+
+The *Find By Post* request URL is `/v1/<resource_type>/find`
+
+Parameters for *Find By Post* requests are sent in the request body.
+
 # API Reference
 
 
@@ -552,6 +572,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Assessment Responses
 
 
@@ -799,6 +820,7 @@ param | description
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -1087,6 +1109,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Calendars
 
 
@@ -1211,6 +1234,7 @@ param | description
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -1372,6 +1396,7 @@ patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -1777,6 +1802,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Custom Data Type Records
 
 
@@ -2041,6 +2067,7 @@ type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a><
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -2787,6 +2814,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## File Attachments
 
 
@@ -2981,6 +3009,7 @@ param | description
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -3784,6 +3813,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Phone Numbers
 
 
@@ -4127,6 +4157,73 @@ param | description
 - | -
 patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
 user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+### Find By Post
+
+Searches the collection, returning a list of matching resources. This `find by post` endpoint is a POST request.
+Parameters must be included in the request body and not as URL parameters.
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/phone_numbers/find
+```
+
+`POST /v1/phone_numbers/find`
+
+
+> Example Response
+
+```json
+[
+  {
+    "data": [
+      {
+        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+        "phone_number": "+15555555555",
+        "phone_number_type": "landline",
+        "friendly_name": "main number",
+        "verified": false,
+        "opted_in_to_sms": true,
+        "opted_in_to_call_recording": false,
+        "opted_in_to_voicemail": false,
+        "opted_in_to_phone": true,
+        "automatic_recipient": false,
+        "updated_at": "2018-09-12T01:27:32.123172+00:00",
+        "created_at": "2018-09-12T01:27:32.123301+00:00"
+      }
+    ],
+    "meta": {
+      "current": {
+        "page[from]": "2019-01-15T12:37:12.300100+00:00",
+        "page[to]": "2019-01-15T12:38:12.300100+00:00",
+        "page[size]": 50
+      }
+    }
+  }
+]
+```
+
+#### Params
+
+
+param | description
+- | -
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
@@ -4486,6 +4583,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Profiles
 
 
@@ -4733,6 +4831,7 @@ profile_type_name <br /><code><a href='#types'>optional</a> <a href='#types'>str
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -5038,6 +5137,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Sms Messages
 
 
@@ -5257,6 +5357,7 @@ patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -5561,6 +5662,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Visits
 
 Visits record an in-person meeting between [workers](#workers)
@@ -5806,6 +5908,7 @@ param | description
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -6133,6 +6236,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Working Hours
 
 
@@ -6278,6 +6382,7 @@ param | description
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
