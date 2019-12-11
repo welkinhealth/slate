@@ -21,11 +21,12 @@ Updates are listed by the day the api or documentation was released.
 # Data API Updates
 Updates are listed by the day the api or documentation was released.
 
-## December 9nd, 2019
+## December 16nd, 2019
 * **[added]** GET, PUT, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
 
 * **[added]** Provider ID Number added to [Patients](/#patients) endpoint.
 * **[changed]** Conversations can now be of `type in-app` or `email`. [Conversations](#conversations)
+* **[added]** Find by POST for Phone Numbers. [Phone Number Find by POST](#phone-numbers-find-by-post)
 
 ## December 2nd, 2019
 * **[added]** GET and FIND for Calls APIs released. [Calls](/#calls)
