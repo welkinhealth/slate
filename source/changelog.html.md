@@ -76,8 +76,8 @@ Updates are listed by the day the api or documentation was released.
 # Data Exports Updates
 Updates are listed by the day the data export or documentation was released.
 
-## December 9th, 2019
-* **[added]** Relationships are now included in Data Exports
+## December 16th, 2019
+* **[added]** Relationships and Profiles are now included in Data Exports
 
 ## November 25th, 2019
 * **[added]** Assessment and Assessment responses are now included in Data Exports

@@ -21,6 +21,8 @@ Welkin is continuing to develop data exports to reach this goal. Over the coming
 * Outbound Phone Calls
 * Patients
 * Phase Changes
+* Profiles
+* Relationships
 * Scheduled Events
 * Tasks
 * Workers
