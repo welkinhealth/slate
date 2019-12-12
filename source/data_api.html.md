@@ -2346,6 +2346,7 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+
 ## Email Messages
 
 
@@ -2576,6 +2577,7 @@ patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
 
 
 
@@ -3619,7 +3621,7 @@ curl -XPOST /v1/patients -d '{
 
 param | description
 - | -
-phase <br /><code><a href='#types'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
