@@ -178,7 +178,7 @@ html, body {
     padding-top: 6px;
     text-transform: uppercase;
     font-weight: 600;
-    color: black;
+    color: $nav-header-text;
     font-size: 14px;
   }
 
@@ -282,7 +282,7 @@ html, body {
   margin-left: $nav-width;
   position: relative;
   z-index: 10;
-  // background-color: $main-bg;
+  background-color: $main-bg;
   min-height: 100%;
 
   padding-bottom: 1px; // prevent margin overflow
@@ -383,7 +383,7 @@ html, body {
     padding-top: 48px;
     margin-bottom: $h1-margin-bottom;
     margin-top: 32px;
-    background-color: #fdfdfd;
+    //background-color: $main-text;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -426,7 +426,7 @@ html, body {
 
   h4 {
     font-size: 16px;
-    color: #26A7BF;
+    color: $h4-text;
     font-weight: 500;
     margin-bottom: 0;
     padding-bottom: 0.8em;
@@ -490,7 +490,7 @@ html, body {
   }
 
   code {
-    background-color: #E9F6F8;
+    background-color: $code-snippet-bg;
     padding: 3px;
     border-radius: 3px;
     @extend %break-words;
@@ -498,7 +498,7 @@ html, body {
 
     a {
       text-decoration: none;
-      color: inherit;
+      color: $code-snippet-text;
     }
   }
 
@@ -524,7 +524,7 @@ html, body {
   aside:before {
     content: "Note: ";
     vertical-align: baseline;
-    color:#E54B57 ;
+    color:$aside-note-text;
   }
 
   aside.notice:before {
@@ -537,6 +537,10 @@ html, body {
 
   aside.success:before {
     @extend %icon-ok-sign;
+  }
+
+  a {
+    color: $link-text;
   }
 
   .search-highlight {
