@@ -35,7 +35,7 @@ You can now see the docs at [http://localhost:4567](http://localhost:4567). Whoa
 3. Run the markdown generator:
 
 ```shell
-python okapi/scripts/run_doc.py --target=docs.index > ../slate/source/index.html.md
+python okapi/scripts/run_doc.py --target=docs.index > ../slate/source/data_api.html.md
 ```
 
 Slate Contributors
