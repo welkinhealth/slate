@@ -1,4 +1,4 @@
-# Welkin API Changelog
+# API Changelog
 
 This document outlines the changes that Welkin has made to our external APIs and Data Exports.
 
