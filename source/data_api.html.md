@@ -6459,10 +6459,6 @@ base type | sub type | base type key | plurality
 
 <aside>If creation of one of the resources fails then the entire transaction fails and none of the resources are created in Welkin.</aside>
 
-## Changelog
-
-[Click here to view Welkin's API Changelog.](/changelog.html)
-
 ## Errors
 
 Requests to the common apis are transactional. Any errors that occur in the course of serving
