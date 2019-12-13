@@ -124,10 +124,10 @@ Welkin supports two authentication flows for the notifications. Both have the sa
 
 ```python
 # Create the JWT
-def create_jwt(client_id, client_secret, audience):
+def create_jwt(client_id, client_secret, notify_url):
   claim = {
     'iss': client_id,
-    'aud': audience,
+    'aud': notify_url,
     'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': 'welkin',
   }
@@ -137,7 +137,7 @@ def create_jwt(client_id, client_secret, audience):
 # The token to be used for making notification requests
 token = create_jwt('<client_id>',
                 '<client_secret>',
-                '<client_audience_url>')
+                '<client_notify_url>')
 
 headers = {"Authorization": "Bearer { }".format(token)}
 
@@ -153,6 +153,8 @@ In this model the JWT is not exchanged for an access token but is used directly 
 
 Expected scope for the notify endpoint: `welkin`
 
+The JWT `audience` field will be the same as the `notify_url` where notifications are being sent.
+
 Hash algorithm used by Welkin in creating the JWT: `HS256`
 
 **To be provided to Welkin:**
@@ -160,7 +162,6 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `client_id` - identifies Welkin in the customer's system
 * `client_secret` - must be transmitted securely to Welkin
 * `notify_url` - url at which the customer will receive the webhooks
-* `jwt_audience_url` - can be the same as the notify_url
 * list of api resources for which notifications should be sent
 
 > Example notification from Welkin to Customer (url truncated)
@@ -184,10 +185,10 @@ curl -X POST \
 JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
 
 # Welkin gets an access token from customer
-def get_token(client_id, client_secret, audience, endpoint):
+def get_token(client_id, client_secret, endpoint):
   claim = {
     'iss': client_id,
-    'aud': audience,
+    'aud': endpoint,
     'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': 'welkin',
   }
@@ -203,8 +204,7 @@ def get_token(client_id, client_secret, audience, endpoint):
 # The token to be used for making notification requests
 token = get_token('<client_id>',
                   '<client_secret>',
-                  '<client_jwt_audience_url>',
-                  '<client_token_endpoint_url>'
+                  '<token_endpoint_url>'
                   )
 
 headers = {"Authorization": "Bearer { }".format(token)}
@@ -221,6 +221,8 @@ In this model we send two requests, first to get an access token and then to sen
 
 Expected scope for the notify endpoint: `welkin`
 
+The JWT `audience` field will be the same as the `token_endpoint_url` where the JWT is exchanged for an access token.
+
 Hash algorithm used by Welkin in creating the JWT: `HS256`
 
 **To be provided to Welkin:**
@@ -229,7 +231,6 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `client_secret` - must be transmitted securely to Welkin
 * `notify_url` - url at which the customer will receive the webhooks
 * `token_endpoint_url` - url from which Welkin will request access tokens
-* `jwt_audience_url` - can be the same as the notify_url
 * list of api resources for which notifications should be sent
 
 > Example request for access token from Welkin to Customer
