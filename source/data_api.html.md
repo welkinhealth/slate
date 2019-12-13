@@ -6463,10 +6463,6 @@ base type | sub type | base type key | plurality
 
 [Click here to view Welkin's API Changelog.](/changelog.html)
 
-## Data Exports
-
-[Click here to view Welkin's Data Exports documentation.](/data_exports.html)
-
 ## Errors
 
 Requests to the common apis are transactional. Any errors that occur in the course of serving
