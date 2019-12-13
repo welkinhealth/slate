@@ -4590,11 +4590,11 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 Profiles represent non-patient entities in Welkin. These could be family members, loved ones, care givers, doctors,
-clinic locations, regions, patient cohorts, and many more. [Relationships](#relationship_records) link Profiles to
+clinic locations, regions, patient cohorts, and many more. [Relationships](#relationship-records) link Profiles to
 [Patients](#patients), [Workers](#workers), and other Profiles.
 
 In [Workshop](https://workshop.welkinhealth.com) you can define the set of fields on each Profile type. You can also
-define the [Relationships](#relationship_records) which link them.
+define the [Relationships](#relationship-records) which link them.
 
 
 

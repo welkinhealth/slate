@@ -51,6 +51,6 @@ Welkin's Data API **[Deprecation Policy](/deprecation_policy.html)**
 
 ## Integration Tools
 
-
+Integration Tools is a section of Workshop (Welkin's codeless configuration tool), which allows you to configure Apps and other integrations. You can configure which systems have access to data within Welkin and how they access it.
 
 Learn about how to use Welkin's **[Integration Tools](/integration_tools.html)**
