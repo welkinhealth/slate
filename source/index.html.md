@@ -1,4 +1,4 @@
-# Overview
+# Platform Overview
 
 Welkin’s goal is to empower you, our customers, to deliver patient-centered care. Our APIs exists in support of this goal. Whether it’s data kept within our platform, or your pre-existing systems, we think you should have complete, real-time access and agency over your own data.
 

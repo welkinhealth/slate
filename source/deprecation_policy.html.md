@@ -1,4 +1,4 @@
-# Welkin's Data API Deprecation Policy
+# Data API Deprecation Policy
 
 Policy last updated 8/12/19
 
