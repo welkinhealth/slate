@@ -20,12 +20,27 @@ Credentials created in Integration Tools are active as soon as they are created 
 
 # Webhooks
 
+Webhooks specified via Integration Tools send notifications to Apps and Integrations when data is updated in Welkin.
 
+In Integration Tools you select the destination for these webhooks, the method used to secure the data transfer of webhooks, and the credentials used in the selected security method.
 
-# Environments verse Configurations
+When Welkin adds new API endpoints we will not automatically opt in notifications to be sent for those new data types. You must explicitly opt in for each type of notification you want to receive.
 
+You can pause webhooks from this page which prevents us from sending webhooks to your system.
 
+# Environments vs Configurations
 
+Environments in Welkin are the entities the house and separate patient data. Each Environment has a separate set of patients and workers.
+
+Configurations in Welkin are the collection of settings which define how Welkin will work.
+
+Configurations are published to Environments and control how that Environment will operate.
+
+Integrations and Apps are attached to specific Environments. Credentials give these Apps access to only the data housed within that Environment.
+
+The data housed within an Environment is controlled by the schema defined in the Configuration which is applied to that Environment.
+
+Integration Tools edits Environments and not Configurations.
 
 # Limitations
 
@@ -33,20 +48,26 @@ Credentials created in Integration Tools are active as soon as they are created 
 
 Currently you can only configure one webhook per environment. This limits how many services can receive data from Welkin via webhook.
 
+## Webhooks must used valid credential
+
+You can only select valid credentials for securing Webhooks. If you try to invalidate credentials you must first remove them from use with Webhooks.
+
 # Credential procedures
 
 In the event that you believe one of your access Credentials has been compromised the following procedure should be followed to rotate your Credentials.
 
 A credential could be compromised in the following ways including but not limited to:
+
 * a outside entity gaining access to your credential storage system
 * a credential is shared via an insecure channel
 * an employee past or present had access to a credential that they should not have
 
 To rotate credentials follow these steps:
+
 1. On the Credentials page generate a new Credential (client secret) for the effected Client.
-2) Begin using this new Credential for sending requests to Welkin
-3) Add this new Credential to the set of possible keys that are valid for verifying the signature on our Webhook notifications
-4) On the Credentials page invalidate your old credentials thus ceasing access to Welkin data for the old Credential
-5) On the Webhooks page update the keys used for signing our Webhook notifications
-6) Remove the old credentials from validating the signature of the Webhooks
-7) Rotation process is complete
+2. Begin using this new Credential for sending requests to Welkin
+3. Add this new Credential to the set of possible keys that are valid for verifying the signature on our Webhook notifications
+4. On the Credentials page invalidate your old credentials thus ceasing access to Welkin data for the old Credential
+5. On the Webhooks page update the keys used for signing our Webhook notifications
+6. Remove the old credentials from validating the signature of the Webhooks
+7. Rotation process is complete
