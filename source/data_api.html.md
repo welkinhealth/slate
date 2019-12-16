@@ -77,7 +77,9 @@ Welkin's APIs work using a “ping and pull” model. This means our APIs notify
 
 The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
 
-Webhook notifications are delayed up to 60 seconds, from the time the resource is changed in Welkin.
+Webhook notifications are sent every `60` seconds. This means that notifications might be sent `60` seconds from the time the resource is changed in Welkin.
+
+The webhook HTTP requests will timeout after `30` seconds if the notified service does not respond.
 
 **An example of Welkin’s data sync could look like the following:**
 
@@ -288,7 +290,7 @@ curl -XPOST /v1/phone_numbers/find -d '{
 }'
 ```
 
-Security best practices dictates keeping PII and PHI out of URLs (in the path or in query parameters) because information in URLs can be inadvertently exposed via client, network, proxy and server logs and other mechanisms.
+Security best practices dictate keeping PII and PHI out of URLs (in the path or in query parameters) because information in URLs can be inadvertently exposed via client, network, proxy and server logs and other mechanisms.
 
 Accordingly, Welkin supports sending sensitive API parameters as a part of a POST body for performing *find* actions. This is accomplished via the *Find By Post* methods of this API.
 
@@ -3480,7 +3482,7 @@ street <br /><code><a href='#types'>string</a></code> | Street address of this p
 street_line_two <br /><code><a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>zip_code</a></code> | Zip code of this patient's address in five digit form
+zip_code <br /><code><a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
 state <br /><code><a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#types'>language</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
@@ -3633,7 +3635,7 @@ street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five digit form
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
 state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
@@ -3730,7 +3732,7 @@ street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></co
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five digit form
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
 state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]

@@ -1,12 +1,16 @@
 # Integration Tools
 
-Integration Tools is a section of Workshop (Welkin's codeless configuration tool), which allows you to configure Apps and other integrations. You can configure which systems have access to data within Welkin and how they access it.
+Integration tools, accessed in Workshop (Welkin's codeless configuration tool), which allows you to configure Apps and other integrations. You can configure which systems have access to data within Welkin and how they access it.
 
 # Overview
 
-Integration Tools allows developers and program directors to manage their integrations with Welkin without contacting a member of the Welkin professional services team. This is a self serve tool for managing how data flows out of Welkin via Welkin's APIs.
+Integration Tools allows developers and program directors to manage their integrations with Welkin without contacting Developer Support. This is a self serve tool for managing how data flows out of Welkin via Welkin's APIs.
 
-Integration Tools is broken into 3 main sections. Credentials for setting up access credentials. Webhooks for getting notifcations about changes to data in Welkin. Environments for selecting which Welkin instance/environment you want to configure integrations for.
+Integration Tools supports:
+
+* Credentials for setting up access credentials.
+* Webhooks for getting notifications about changes to data in Welkin.
+* Environments for selecting which Welkin instance/environment you want to configure integrations for.
 
 # Credentials
 
@@ -17,6 +21,10 @@ Each App or Integration you configure for your Welkin Environment should have it
 Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is [documented here](/data_api.html/#authentication).
 
 <aside>When you invalidate Credentials in Integration Tools, Access Tokens are NOT invalidated. They will expire as normal. The credentials will no longer be valid for generating new Access Tokens.</aside>
+
+<aside>Once invalidated, credentials can not be re-activated. A verification screen will be presented to confirm that you really want to invalidate the selected credential.</aside>
+
+<aside>If you are using a credential to verify requests sent to an App, please contact Developer Support before invalidating a credential to get Welin's help in migrating your App.</aside>
 
 # Webhooks
 
@@ -30,7 +38,7 @@ You can pause webhooks from this page which prevents us from sending webhooks to
 
 # Environments vs Configurations
 
-Environments in Welkin are the entities the house and separate patient data. Each Environment has a separate set of patients and workers.
+Environments in Welkin are the entities that house and separate patient data. Each Environment has a separate set of patients and workers. For example, your Test and Live Environments use versions of the same Configuration but house different sets of workers and patients. Some Welkin customers also have a Sandbox which has one configuration called Sandbox and two environments called Sandbox Test and Sandbox Live.
 
 Configurations in Welkin are the collection of settings which define how Welkin will work.
 
@@ -48,7 +56,7 @@ Integration Tools edits Environments and not Configurations.
 
 Currently you can only configure one webhook per environment. This limits how many services can receive data from Welkin via webhook.
 
-## Webhooks must used valid credential
+## Webhooks must use valid credential
 
 You can only select valid credentials for securing Webhooks. If you try to invalidate credentials you must first remove them from use with Webhooks.
 
@@ -64,7 +72,7 @@ A credential could be compromised in the following ways including but not limite
 
 To rotate credentials follow these steps:
 
-1. On the Credentials page generate a new Credential (client secret) for the effected Client.
+1. On the Credentials page generate a new Credential (client secret) for the affected Client.
 2. Begin using this new Credential for sending requests to Welkin
 3. Add this new Credential to the set of possible keys that are valid for verifying the signature on our Webhook notifications
 4. On the Credentials page invalidate your old credentials thus ceasing access to Welkin data for the old Credential
