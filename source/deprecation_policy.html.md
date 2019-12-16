@@ -85,7 +85,7 @@ For example, if v2 is released on January 2nd, 2020, then v1 will be discontinue
 
 See definitions section above.
 
-### Will everything Core remain completely unchanged in a version?
+### Will everything remain completely unchanged in a version?
 
 No. Welkin may add new API endpoints, add new optional request fields to existing endpoints, add new fields to API responses, and enable HTTP request types to existing endpoints, at any time without changing the API version. Once added the mentioned additions will not be removed or changed without following this deprecation policy.
 

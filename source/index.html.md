@@ -8,8 +8,7 @@ Using Welkin's APIs will allow you to keep your systems in sync with Welkin and 
 **Welkin's APIs are in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect that we will add additional optional fields to resource schemas and new resource types to Welkin's APIs. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition. [See API Versioning and Update Policy](/version_policy.html)
 
 # Apps Framework
-
-Apps allow you to integrate Welkin with tools that you already use to create a single workflow within the Welkin UI. With Apps, Welkin supports showing UI built by 3rd parties as part of the Welkin experience.
+Apps allow you to integrate tools that you already use with Welkin to create a single workflow within the Welkin UI. With Apps, Welkin supports showing UI built by 3rd parties as part of the Welkin experience.
 
 Learn about how to use Welkin's **[App Framework](/apps_framework.html)**
 
