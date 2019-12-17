@@ -20,7 +20,7 @@ Updates are listed by the day the api or documentation was released.
 **Data API Documentation URL:** [https://developers.welkinhealth.com](/)
 
 ## December 16nd, 2019
-* **[added]** GET, PUT, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
+* **[added]** GET, POST, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
 
 * **[added]** Provider ID Number added to [Patients](/#patients) endpoint.
 * **[changed]** Conversations can now be of `type in-app` or `email`. [Conversations](#conversations)
