@@ -24,7 +24,7 @@ Credentials created in Integration Tools are active as soon as they are created 
 
 <aside>Once invalidated, credentials can not be re-activated. A verification screen will be presented to confirm that you really want to invalidate the selected credential.</aside>
 
-<aside>If you are using a credential to verify requests sent to an App, please contact Developer Support before invalidating a credential to get Welin's help in migrating your App.</aside>
+<aside>If you are using a credential to verify requests sent to an App, please contact Developer Support before invalidating a credential to get Welkin's help in migrating your App.</aside>
 
 # Webhooks
 
