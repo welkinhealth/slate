@@ -1,0 +1,344 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="integration_tools" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="/">
+        <img src="images/logo.png" class="logo" alt="Logo" />
+      </a>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#integration-tools" class="toc-h1 toc-link" data-title="Integration Tools">Integration Tools</a>
+          </li>
+          <li>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+          </li>
+          <li>
+            <a href="#credentials" class="toc-h1 toc-link" data-title="Credentials">Credentials</a>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+          </li>
+          <li>
+            <a href="#environments-vs-configurations" class="toc-h1 toc-link" data-title="Environments vs Configurations">Environments vs Configurations</a>
+          </li>
+          <li>
+            <a href="#limitations" class="toc-h1 toc-link" data-title="Limitations">Limitations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#one-webhook-per-environment" class="toc-h2 toc-link" data-title="One webhook per environment">One webhook per environment</a>
+                  </li>
+                  <li>
+                    <a href="#webhooks-must-use-valid-credential" class="toc-h2 toc-link" data-title="Webhooks must use valid credential">Webhooks must use valid credential</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#credential-procedures" class="toc-h1 toc-link" data-title="Credential procedures">Credential procedures</a>
+          </li>
+      </ul>
+      <ul class="toc-footer">
+        <li><a href="/apps_frontend_api.html">Apps API</a></li>
+        <li><a href="/apps_framework.html">Apps Framework</a></li>
+        <li><a href="/changelog.html">Changelog</a></li>
+        <li><a href="/data_api.html">Data API</a></li>
+        <li><a href="/data_exports.html">Data Exports</a></li>
+        <li><a href="/deprecation_policy.html">Deprecation Policy</a></li>
+        <li><a href="/integration_tools.html">Integration Tools</a></li>
+        <li><a href="/index.html">Platform Overview</a></li>
+    </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='integration-tools'>Integration Tools</h1>
+<p>Integration tools, accessed in Workshop (Welkin&#39;s codeless configuration tool), which allows you to configure Apps and other integrations. You can configure which systems have access to data within Welkin and how they access it.</p>
+<h1 id='overview'>Overview</h1>
+<p>Integration Tools allows developers and program directors to manage their integrations with Welkin without contacting Developer Support. This is a self serve tool for managing how data flows out of Welkin via Welkin&#39;s APIs.</p>
+
+<p>Integration Tools supports:</p>
+
+<ul>
+<li>Credentials for setting up access credentials.</li>
+<li>Webhooks for getting notifications about changes to data in Welkin.</li>
+<li>Environments for selecting which Welkin instance/environment you want to configure integrations for.</li>
+</ul>
+<h1 id='credentials'>Credentials</h1>
+<p>Credentials issued via Integration Tools grants Apps and Integrations access to all the data in the Welkin environment. These <code>client_id</code> and <code>client_secret</code> pair generated by Integration Tools is for syncing data for your entire Welkin environment and is not scoped to specific patients or workers within your Environment.</p>
+
+<p>Each App or Integration you configure for your Welkin Environment should have its own set of credentials for accessing data. Granting separate credentials for each system which has access to Welkin data ensures that if you want to disable a single system you can do this without effecting others.</p>
+
+<p>Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is <a href="/data_api.html/#authentication">documented here</a>.</p>
+
+<aside>When you invalidate Credentials in Integration Tools, Access Tokens are NOT invalidated. They will expire as normal. The credentials will no longer be valid for generating new Access Tokens.</aside>
+
+<aside>Once invalidated, credentials can not be re-activated. A verification screen will be presented to confirm that you really want to invalidate the selected credential.</aside>
+
+<aside>If you are using a credential to verify requests sent to an App, please contact Developer Support before invalidating a credential to get Welkin's help in migrating your App.</aside>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Webhooks specified via Integration Tools send notifications to Apps and Integrations when data is updated in Welkin.</p>
+
+<p>In Integration Tools you select the destination for these webhooks, the method used to secure the data transfer of webhooks, and the credentials used in the selected security method.</p>
+
+<p>When Welkin adds new API endpoints we will not automatically opt in notifications to be sent for those new data types. You must explicitly opt in for each type of notification you want to receive.</p>
+
+<p>You can pause webhooks from this page which prevents us from sending webhooks to your system.</p>
+<h1 id='environments-vs-configurations'>Environments vs Configurations</h1>
+<p>Environments in Welkin are the entities that house and separate patient data. Each Environment has a separate set of patients and workers. For example, your Test and Live Environments use versions of the same Configuration but house different sets of workers and patients. Some Welkin customers also have a Sandbox which has one configuration called Sandbox and two environments called Sandbox Test and Sandbox Live.</p>
+
+<p>Configurations in Welkin are the collection of settings which define how Welkin will work.</p>
+
+<p>Configurations are published to Environments and control how that Environment will operate.</p>
+
+<p>Integrations and Apps are attached to specific Environments. Credentials give these Apps access to only the data housed within that Environment.</p>
+
+<p>The data housed within an Environment is controlled by the schema defined in the Configuration which is applied to that Environment.</p>
+
+<p>Integration Tools edits Environments and not Configurations.</p>
+<h1 id='limitations'>Limitations</h1><h2 id='one-webhook-per-environment'>One webhook per environment</h2>
+<p>Currently you can only configure one webhook per environment. This limits how many services can receive data from Welkin via webhook.</p>
+<h2 id='webhooks-must-use-valid-credential'>Webhooks must use valid credential</h2>
+<p>You can only select valid credentials for securing Webhooks. If you try to invalidate credentials you must first remove them from use with Webhooks.</p>
+<h1 id='credential-procedures'>Credential procedures</h1>
+<p>In the event that you believe one of your access Credentials has been compromised the following procedure should be followed to rotate your Credentials.</p>
+
+<p>A credential could be compromised in the following ways including but not limited to:</p>
+
+<ul>
+<li>a outside entity gaining access to your credential storage system</li>
+<li>a credential is shared via an insecure channel</li>
+<li>an employee past or present had access to a credential that they should not have</li>
+</ul>
+
+<p>To rotate credentials follow these steps:</p>
+
+<ol>
+<li>On the Credentials page generate a new Credential (client secret) for the affected Client.</li>
+<li>Begin using this new Credential for sending requests to Welkin</li>
+<li>Add this new Credential to the set of possible keys that are valid for verifying the signature on our Webhook notifications</li>
+<li>On the Credentials page invalidate your old credentials thus ceasing access to Welkin data for the old Credential</li>
+<li>On the Webhooks page update the keys used for signing our Webhook notifications</li>
+<li>Remove the old credentials from validating the signature of the Webhooks</li>
+<li>Rotation process is complete</li>
+</ol>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src=“https://www.googletagmanager.com/gtag/js?id=UA-46806789-2”></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag(‘js’, new Date());
+      gtag(‘config’, ‘UA-46806789-2’);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,404 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="deprecation_policy" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="/">
+        <img src="images/logo.png" class="logo" alt="Logo" />
+      </a>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#data-api-deprecation-policy" class="toc-h1 toc-link" data-title="Data API Deprecation Policy">Data API Deprecation Policy</a>
+          </li>
+          <li>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+          </li>
+          <li>
+            <a href="#why-does-welkin-have-versions" class="toc-h1 toc-link" data-title="Why does Welkin have versions?">Why does Welkin have versions?</a>
+          </li>
+          <li>
+            <a href="#version-schedule" class="toc-h1 toc-link" data-title="Version Schedule">Version Schedule</a>
+          </li>
+          <li>
+            <a href="#how-will-welkin-notify-developers-when-an-api-version-is-deprecated-and-discontinued" class="toc-h1 toc-link" data-title="How will Welkin notify developers when an API version is deprecated and discontinued?">How will Welkin notify developers when an API version is deprecated and discontinued?</a>
+          </li>
+          <li>
+            <a href="#definitions" class="toc-h1 toc-link" data-title="Definitions">Definitions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#integration-tools-version" class="toc-h2 toc-link" data-title="Version">Version</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-non-backwards-compatible-changes" class="toc-h2 toc-link" data-title="Non-backwards-compatible changes">Non-backwards-compatible changes</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-deprecation" class="toc-h2 toc-link" data-title="Deprecation">Deprecation</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-discontinued" class="toc-h2 toc-link" data-title="Discontinued">Discontinued</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#faqs" class="toc-h1 toc-link" data-title="FAQS">FAQS</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#integration-tools-what-is-the-latest-welkin-rest-api-version" class="toc-h2 toc-link" data-title="What is the latest Welkin REST API version?">What is the latest Welkin REST API version?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-what-is-the-length-of-the-migration-period" class="toc-h2 toc-link" data-title="What is the length of the migration period?">What is the length of the migration period?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-what-constitutes-a-non-backwards-compatible-change-for-welkin-39-s-platform-api" class="toc-h2 toc-link" data-title="What constitutes a non-backwards-compatible change for Welkin's Platform API?">What constitutes a non-backwards-compatible change for Welkin's Platform API?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-will-everything-remain-completely-unchanged-in-a-version" class="toc-h2 toc-link" data-title="Will everything remain completely unchanged in a version?">Will everything remain completely unchanged in a version?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-what-happens-if-developers-don-39-t-specify-a-version-for-a-call-to-the-data-api" class="toc-h2 toc-link" data-title="What happens if developers don't specify a version for a call to the Data API?">What happens if developers don't specify a version for a call to the Data API?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-can-an-app-make-calls-to-versions-older-than-the-current-version" class="toc-h2 toc-link" data-title="Can an app make calls to versions older than the current version?">Can an app make calls to versions older than the current version?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-does-this-mean-welkin-will-release-an-api-version-every-3-months-and-developers-will-have-to-update-their-code-frequently" class="toc-h2 toc-link" data-title="Does this mean Welkin will release an API version every 3 months and developers will have to update their code frequently?">Does this mean Welkin will release an API version every 3 months and developers will have to update their code frequently?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-are-all-endpoints-versioned-at-the-same-time" class="toc-h2 toc-link" data-title="Are all endpoints versioned at the same time?">Are all endpoints versioned at the same time?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-how-are-welkin-39-s-change-notification-webhooks-versioned" class="toc-h2 toc-link" data-title="How are Welkin's change notification webhooks versioned?">How are Welkin's change notification webhooks versioned?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-how-does-this-policy-get-updated" class="toc-h2 toc-link" data-title="How does this policy get updated?">How does this policy get updated?</a>
+                  </li>
+                  <li>
+                    <a href="#integration-tools-does-welkin-have-a-beta-program-for-the-data-api" class="toc-h2 toc-link" data-title="Does Welkin have a Beta program for the Data API?">Does Welkin have a Beta program for the Data API?</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+      <ul class="toc-footer">
+        <li><a href="/apps_frontend_api.html">Apps API</a></li>
+        <li><a href="/apps_framework.html">Apps Framework</a></li>
+        <li><a href="/changelog.html">Changelog</a></li>
+        <li><a href="/data_api.html">Data API</a></li>
+        <li><a href="/data_exports.html">Data Exports</a></li>
+        <li><a href="/deprecation_policy.html">Deprecation Policy</a></li>
+        <li><a href="/integration_tools.html">Integration Tools</a></li>
+        <li><a href="/index.html">Platform Overview</a></li>
+    </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='data-api-deprecation-policy'>Data API Deprecation Policy</h1>
+<p>Policy last updated 8/12/19</p>
+<h1 id='overview'>Overview</h1>
+<p>Welkin&#39;s API supports versioning so that as Welkin&#39;s Data API evolves and grows, integration developers can adapt to changes over time without interruption to their patient and staff experience. Welkin&#39;s versioning system and process outlined below provides for a migration period anytime a non-backwards-compatible change is made to the Data API. This migration period gives developers time to update their code and migrate their integration to the new version before the old version is discontinued.</p>
+<h1 id='why-does-welkin-have-versions'>Why does Welkin have versions?</h1>
+<p>Welkin has API versions to give developers building Welkin integrations ample time to understand upcoming non-backwards-compatible changes and migrate their code in advance of when an API endpoint will change.</p>
+
+<p>Welkin releases new features to the Data API regularly and as the product evolves there will be changes to the Data API endpoints which don&#39;t work with previously implemented integrations. To ensure that these changes don&#39;t break existing integrations, a deprecation and migration period is provided in which both the deprecated version of the Data API and the new version will operate in parallel.</p>
+<h1 id='version-schedule'>Version Schedule</h1>
+<p>Welkin provides a <strong>3 month migration</strong> period after a new version is released in which both versions will operate. Welkin will discontinue support for deprecated versions of the Data API no earlier than 3 months after the subsequent version is released. Welkin will notify customers with as much notice as possible before the 3-month migration period begins.</p>
+
+<p>For example: If API version v2 is released on March 25th, 2019, and API version v3 is released August 7th, 2019, then v2 would be discontinued no earlier than November 7th, 2019, 3 months after the release of v3.</p>
+
+<p>After the deprecation period has elapsed, requests made with the discontinued version number to endpoints which remain unchanged will be routed internally by Welkin to the oldest active version. Requests made with the discontinued version number to endpoints which have changed will return a 400 error indicating that the endpoint has changed and the request is invalid.</p>
+
+<p>Below is an example release timeline:</p>
+
+<p><img src="images/api_versions_deprecation_timeline_121019.png" alt="api_versions_deprecation_timeline_121019" /></p>
+
+<p>Developers can find specific information about our versions, non-backwards-compatible changes, and release dates on our <a href="changelog.html">changelog page</a>.</p>
+<h1 id='how-will-welkin-notify-developers-when-an-api-version-is-deprecated-and-discontinued'>How will Welkin notify developers when an API version is deprecated and discontinued?</h1>
+<p>Welkin will use commercially reasonable methods to notify developers using the Data API of the following: new API versions, deprecations of API versions, and discontinuations of API version.</p>
+
+<p>These notifications will be sent via the developers listserve, posts on Welkin&#39;s knowledge base, and programmatically via API response headers. Welkin&#39;s Customer Success Managers will also communicate with customers to inform them as to which changes are likely to affect their implementations of Welkin.</p>
+
+<p>Emails will be sent to the developers listserve when a new API version is released (thus deprecating the old version) and when an API version is going to be discontinued.</p>
+
+<p>All API responses will contain a <code>x-current-api-version</code> header which will be set to the current version of the Data API, a <code>x-api-deprecated</code> header when calling any deprecated API versions, and a <code>x-api-discontinued</code> header when calling any discontinued API versions.</p>
+<h1 id='definitions'>Definitions</h1>
+<p>Terms used in this policy have specific meaning. They are defined below.</p>
+<h3 id='integration-tools-version'>Version</h3>
+<p>This refers to the version number found in the URL path of any API request, for example: <code>GET /v{version_number}/patients</code>.  This style of versioning is known as URI versioning.</p>
+<h3 id='integration-tools-non-backwards-compatible-changes'>Non-backwards-compatible changes</h3>
+<p>Non-backwards-compatible changes are any changes that require developers to make changes to maintain existing functionality. Breaking changes include things like:</p>
+
+<ul>
+<li>Removing a parameter from a request or response schema</li>
+<li>Modifying the name for any parameters or endpoints</li>
+<li>Change in the type of a parameter</li>
+<li>Adding a required parameter</li>
+<li>Changing the semantics of a parameter value</li>
+<li>Changes to error codes or error messages to existing endpoints</li>
+<li>Removal of an API endpoint</li>
+<li>Change in defined behavior of an endpoint</li>
+</ul>
+<h3 id='integration-tools-deprecation'>Deprecation</h3>
+<p>Deprecated versions or products will be discontinued in the future and it is recommended that developers cease to use these API versions.</p>
+<h3 id='integration-tools-discontinued'>Discontinued</h3>
+<p>Once an API version is discontinued, use of the corresponding version in requests to Welkin&#39;s API will result in Welkin routing requests to unchanged endpoints to the oldest available version. See <a href="#version-schedule">Version Schedule</a> for details.</p>
+<h1 id='faqs'>FAQS</h1>
+<p>Answers to frequently asked questions.</p>
+<h3 id='integration-tools-what-is-the-latest-welkin-rest-api-version'>What is the latest Welkin REST API version?</h3>
+<p>Developers can find specific info about our versions, non backwards compatible changes, and release dates on our <a href="changelog.html">changelog page</a>.</p>
+<h3 id='integration-tools-what-is-the-length-of-the-migration-period'>What is the length of the migration period?</h3>
+<p><strong>3 months</strong>. After the three month migration period has elapsed, Welkin may discontinue an API version at any time.</p>
+
+<p>For example, if v2 is released on January 2nd, 2020, then v1 will be discontinued on or after March 2nd, 2020.</p>
+
+<p><img src="images/webhook_versions_deprecation_timeline_121019.png" alt="webhook_versions_deprecation_timeline_121019" /></p>
+<h3 id='integration-tools-what-constitutes-a-non-backwards-compatible-change-for-welkin-39-s-platform-api'>What constitutes a non-backwards-compatible change for Welkin&#39;s Platform API?</h3>
+<p>See definitions section above.</p>
+<h3 id='integration-tools-will-everything-remain-completely-unchanged-in-a-version'>Will everything remain completely unchanged in a version?</h3>
+<p>No. Welkin may add new API endpoints, add new optional request fields to existing endpoints, add new fields to API responses, and enable HTTP request types to existing endpoints, at any time without changing the API version. Once added the mentioned additions will not be removed or changed without following this deprecation policy.</p>
+
+<p>Welkin reserves the right to make non-backwards-compatible changes to any API with a short deprecation and discontinuation period for urgent issues related to security, privacy, or system stability. These changes will be very rare, but they can happen. Welkin will take commercially reasonable steps to mitigate the effect of these changes on its customers.</p>
+<h3 id='integration-tools-what-happens-if-developers-don-39-t-specify-a-version-for-a-call-to-the-data-api'>What happens if developers don&#39;t specify a version for a call to the Data API?</h3>
+<p>Developers must include a version number in their requests to the Welkin API. Unversioned requests are not supported.</p>
+<h3 id='integration-tools-can-an-app-make-calls-to-versions-older-than-the-current-version'>Can an app make calls to versions older than the current version?</h3>
+<p>Yes. An app can make calls to any version of the Data API that is currently active. Calls to discontinued versions will be routed internally by Welkin to the oldest available version if the endpoint being called has not had non-backwards-compatible changes between the two versions. An HTTP response header will be set indicating that the version called is discontinued.</p>
+<h3 id='integration-tools-does-this-mean-welkin-will-release-an-api-version-every-3-months-and-developers-will-have-to-update-their-code-frequently'>Does this mean Welkin will release an API version every 3 months and developers will have to update their code frequently?</h3>
+<p>No. Welkin&#39;s API deprecation policy only specifies the minimum length of time developers have to migrate and the process by which a migration would be facilitated. Additionally, this policy and required migration only applies for non-backwards-compatible changes.</p>
+
+<p>Welkin adds new features to the Data API regularly, but it is infrequent that these changes are non-backwards-compatible. Developers only need to make changes to their code when non-backwards-compatible changes have been made to endpoints they use.</p>
+<h3 id='integration-tools-are-all-endpoints-versioned-at-the-same-time'>Are all endpoints versioned at the same time?</h3>
+<p>Yes. API versions apply across all endpoints regardless of if they have a non-backwards-compatible change or not. Which endpoints have non-backwards-compatible changes will be listed in the release notes and notifications.</p>
+
+<p>Note, as mentioned in <a href="#can-an-app-make-calls-to-versions-older-than-the-current-version">Can an app make calls to versions older than the current version?</a> if the changes made to the Data API do not affect a specific integration they can continue to call the Data API with old versions.</p>
+<h3 id='integration-tools-how-are-welkin-39-s-change-notification-webhooks-versioned'>How are Welkin&#39;s change notification webhooks versioned?</h3>
+<p>The data change notifications that Welkin sends to subscribed services contain a versioned url. For details on how change notifications work in the Welkin API you can find <a href="data_api.html#update-notifications">the documentation here</a>.</p>
+
+<p>The format of these webhooks is also versioned and the format may change per this policy.</p>
+
+<p>In the Welkin <a href="integration_tools.html">Integration Tools</a>, developers will be able to select the version of the Data API that the webhooks use for their integration. Developers can change this setting at the time of their choosing.</p>
+
+<p>When an API version is discontinued, if a developer has not updated the webhook version in Integration Tools, Welkin will send the oldest active version of webhooks to that integration.</p>
+<h3 id='integration-tools-how-does-this-policy-get-updated'>How does this policy get updated?</h3>
+<p>API versions are released under the version of this policy that was live on the date that the API version was released. Changes to this policy take effect on future versions of the Data API and will be communicated via the channels set out for notifying developers of API versions. Changes to this policy do not affect API versions that are currently in use.</p>
+<h3 id='integration-tools-does-welkin-have-a-beta-program-for-the-data-api'>Does Welkin have a Beta program for the Data API?</h3>
+<p>Yes. Welkin occasionally releases new features to select customers as part of betas. These beta programs and features are not subject to this policy and are managed on a case by case basis with the customers currently in each beta.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src=“https://www.googletagmanager.com/gtag/js?id=UA-46806789-2”></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag(‘js’, new Date());
+      gtag(‘config’, ‘UA-46806789-2’);
+    </script>
+  </body>
+</html>
