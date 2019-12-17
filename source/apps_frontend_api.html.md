@@ -27,6 +27,7 @@ Once the MessageChannel is established between Welkin and the App then the App c
 MessageChannels only support the transmission of text and thus a message format has been defined which Welkin uses to encode and decode method calls between Welkin and Apps. Due to the asynchronous nature of MessageChannel messages, the App must include a `call_id` when sending method call messages to Welkin so that response messages are tied to that same `call_id`.
 
 Reference documents for `MessageChannel` API:
+
 * [postMessage doc by Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)
 * [Channel Messaging doc by Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API)
 
