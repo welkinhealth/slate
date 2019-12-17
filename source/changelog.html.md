@@ -17,36 +17,36 @@ Updates are listed by the day the api or documentation was released.
 # Data API Updates
 Updates are listed by the day the api or documentation was released.
 
-**Data API Documentation URL:** [https://developers.welkinhealth.com](/)
+**Data API Documentation URL:** [https://developers.welkinhealth.com](/data_api.html)
 
 ## December 16nd, 2019
-* **[added]** GET, POST, and FIND for Email Messages APIs released. [Email Messages](/#email-messages)
+* **[added]** GET, POST, and FIND for Email Messages APIs released. [Email Messages](/data_api.html#email-messages)
 
-* **[added]** Provider ID Number added to [Patients](/#patients) endpoint.
-* **[changed]** Conversations can now be of `type in-app` or `email`. [Conversations](#conversations)
-* **[added]** Find by POST for Phone Numbers. [Phone Number Find by POST](#phone-numbers-find-by-post)
+* **[added]** Provider ID Number added to [Patients](/data_api.html#patients) endpoint.
+* **[changed]** Conversations can now be of `type in-app` or `email`. [Conversations](/data_api.html#conversations)
+* **[added]** Find by POST for Phone Numbers. [Phone Number Find by POST](/data_api.html#phone-numbers-find-by-post)
 
 ## December 2nd, 2019
-* **[added]** GET and FIND for Calls APIs released. [Calls](/#calls)
+* **[added]** GET and FIND for Calls APIs released. [Calls](/data_api.html#calls)
 
-* **[added]** PUT and POST for Visits (in person meetings between workers and patients). [Visits](/#visits)
-* **[deprecated]** Disposition field on [calendar events](#calendar_events) is deprecated.
+* **[added]** PUT and POST for Visits (in person meetings between workers and patients). [Visits](/data_api.html#visits)
+* **[deprecated]** Disposition field on [calendar events](/data_api.html#calendar_events) is deprecated.
 
 ## November 13th, 2019
-* **[fixed]** [Batch creation](/#batch-creation-of-resources) of [Custom Data Type Records](/#custom-data-type-records) as part of a POST to the [Patients](/#patients) endpoint now functions as expected.
+* **[fixed]** [Batch creation](/data_api.html#batch-creation-of-resources) of [Custom Data Type Records](/data_api.html#custom-data-type-records) as part of a POST to the [Patients](/data_api.html#patients) endpoint now functions as expected.
 
 ## November 4th, 2019
-* **[changed]** External IDs are no longer provisional. No functional changes were made to the External ID resource. [External IDs](/#external-ids)
+* **[changed]** External IDs are no longer provisional. No functional changes were made to the External ID resource. [External IDs](/data_api.html#external-ids)
 
 ## October 16th, 2019
-* **[added]** FIND Custom Data Type Records by Patient ID, `patient_id` and fixed FIND by `type_name`. [Custom Data Type FIND](/#custom-data-type-records-find)
+* **[added]** FIND Custom Data Type Records by Patient ID, `patient_id` and fixed FIND by `type_name`. [Custom Data Type FIND](/data_api.html#custom-data-type-records-find)
 
-* **[added]** GET and FIND for Visits (in person meetings between workers and patients). [Visits](/#visits)
-* **[changed]** Clarified documentation for Assessment Responses and which fields are required. [Assessment Reponses](/#assessment-responses)
-* **[changed]** Clarified documentation for Calendar Events and which fields are required. [Calendar Events](/#calendar-events)
-* **[changed]** Clarified documentation for Care Flows and their Model. [Care Flows Model](/#care-flows-model-care_flow)
+* **[added]** GET and FIND for Visits (in person meetings between workers and patients). [Visits](/data_api.html#visits)
+* **[changed]** Clarified documentation for Assessment Responses and which fields are required. [Assessment Reponses](/data_api.html#assessment-responses)
+* **[changed]** Clarified documentation for Calendar Events and which fields are required. [Calendar Events](/data_api.html#calendar-events)
+* **[changed]** Clarified documentation for Care Flows and their Model. [Care Flows Model](/data_api.html#care-flows-model-care_flow)
 * **[changed]** Other minor typos and documentation bugs. No functional changes.
-* **[fixed]** FIND by `patient_id` now works correctly for SMS Messages and App Messages. [SMS Messages FIND](/#sms-messages-find) [App Messages FIND](/#app-messages-find)
+* **[fixed]** FIND by `patient_id` now works correctly for SMS Messages and App Messages. [SMS Messages FIND](/data_api.html#sms-messages-find) [App Messages FIND](/data_api.html#app-messages-find)
 
 ## October 1st, 2019
 * **[added]** Assessment Responses now include the Worker ID of the worker who filled out the assessment or most recently edited the assessment. The worker who filled out the assessment can also be set when it is created.
