@@ -2288,6 +2288,42 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 
+### Delete
+
+
+
+
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XDELETE /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+```
+
+`DELETE /v1/email_addresses/:id`
+
+
+> Example Response
+
+```json
+{
+  "data": null
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
 
 ### Find
 Finds email addresses, using param filters.
