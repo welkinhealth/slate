@@ -77,9 +77,9 @@ Welkin's APIs work using a “ping and pull” model. This means our APIs notify
 
 The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
 
-Webhook notifications are sent every `60` seconds. This means that notifications might be sent `60` seconds from the time the resource is changed in Welkin.
+Webhook notifications are sent every `60` seconds. This means that notifications might be sent at most `60` seconds from the time the resource is changed in Welkin.
 
-The webhook HTTP requests will timeout after `30` seconds if the notified service does not respond.
+<aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
 
 **An example of Welkin’s data sync could look like the following:**
 
@@ -274,9 +274,75 @@ curl -X POST \
 curl -XGET /v1/patients?page[from]=2018-06-15T10:30:01&page[to]=2018-09-30T10:29:59&page[size]=10
 ```
 
-You can pull large batches of data from Welkin at anytime using the *Find* endpoint for any API resource. These endpoints support filtering by time ranges. If your system misses notifications or needs data from a specific time range you should use the *Find* endpoints to pull data for the missing time range.
+> Example Response
 
-The example here pulls patients created or updated during the time range June 15th 2018 to September 30th 2018.
+```json
+  {
+    "data": [
+      {
+        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+        "first_name": "Grace",
+        "last_name": "Hopper",
+        "updated_at": "2018-09-12T01:27:32.108773+00:00",
+        "created_at": "2018-09-12T01:27:32.109872+00:00"
+      }
+    ],
+    "links": {
+      "href": {
+          "current": "https://api.welkinhealth.com/v1/patients?resource_name=patients&page[size]=50&page[%5B]from]=2018-06-15T10:30:01",
+          "next": "https://api.welkinhealth.com/v1/patients?resource_name=patients&page[size]=50&page[%5B]from]=2018-07-13T21:56:43"
+      },
+      "current": {
+          "href": "https://api.welkinhealth.com/v1/patients?resource_name=patients&page[size]=50&page[%5B]from]=2018-06-15T10:30:01",
+          "meta": {
+              "page[to]": "2018-09-30T10:29:59+00:00",
+              "page[size]": 50,
+              "page[from]": "2018-06-15T10:30:01"
+          }
+      },
+      "meta": {
+        "current": {
+          "page[to]": "2018-09-30T10:29:59+00:00",
+          "page[size]": 50,
+          "page[from]": "2018-06-15T10:30:01"
+        },
+        "next": {
+          "page[to]": "2018-09-30T10:29:59+00:00",
+          "page[size]": 50,
+          "page[from]": "2018-07-13T21:56:43"
+        }
+      },
+      "next": {
+        "href": "https://api.welkinhealth.com/v1/patients?resource_name=patients&page[size]=50&page[%5B]from]=2018-07-13T21:56:43",
+        "meta": {
+          "page[to]": "2018-09-30T10:29:59+00:00",
+          "page[size]": 50,
+          "page[from]": "2018-07-13T21:56:43"
+        }
+      }
+    }
+  }
+```
+
+You can pull large batches of data from Welkin at anytime using the *Find* endpoint for any API resource. These endpoints support filtering by time ranges. If you need data from a specific time range you should use the *Find* endpoints to pull data for the specific time range.
+
+*Find* URLs are sent as part of [Update Notifications](#update-notifications)
+<br/><br/><br/>
+If a record has been modified multiple times it will only be returned by the *Find* endpoint once. It will be included in the page of results that encompass the records current updated_at time.
+
+For example:
+
+* 10/1/19 10:00 AM, New patient created.
+* 10/1/19 11:00 AM, Patient address updated in UI.
+* 10/1/19 11:05 AM, Patient address updated again in UI.
+
+*Find* will only return one record for the above patient in the page encompassing 10/1/19 11:05 AM.
+<br/><br/><br/>
+Data is paginated and the `links` section of the response indicates how to navigate the pagination. Making a GET request on the `next` url will give you next batch of results. There will be a next URL until you reach the end of the results for your Find query.
+
+Make sure to fully follow the pagination links when receiving [Update Notifications](#update-notifications) to ensure you load all the data.
+
+Full `links` fields are elided in each `FIND` example response below for each method.
 
 ## Find by POST
 > Example Request
@@ -533,31 +599,23 @@ curl -XGET /v1/app_messages
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
-        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
-        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
-        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
-        "direction": "inbound",
-        "contents": "Hi Developer, Welcome to Welkin Health.",
-        "automatically_sent": false,
-        "sent_at": "2018-09-12T01:27:32.045046+00:00",
-        "updated_at": "2018-09-12T01:27:32.045196+00:00",
-        "created_at": "2018-09-12T01:27:32.045336+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+      "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+      "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+      "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+      "direction": "inbound",
+      "contents": "Hi Developer, Welcome to Welkin Health.",
+      "automatically_sent": false,
+      "sent_at": "2018-09-12T01:27:32.045046+00:00",
+      "updated_at": "2018-09-12T01:27:32.045196+00:00",
+      "created_at": "2018-09-12T01:27:32.045336+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -613,8 +671,7 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
     "active": true,
     "years_active": 2,
     "last_hcp_visit": "2018-07-14",
-    "pain_scale": 0.4,
-    "completed_at": "2018-08-12T10:20:15"
+    "pain_scale": 0.4
   },
   "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
@@ -667,8 +724,7 @@ curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
     "active": true,
     "years_active": 2,
     "last_hcp_visit": "2018-07-14",
-    "pain_scale": 0.4,
-    "completed_at": "2018-08-12T10:20:15"
+    "pain_scale": 0.4
   },
   "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
@@ -712,8 +768,7 @@ curl -XPOST /v1/assessment_responses -d '{
     "active": true,
     "years_active": 2,
     "last_hcp_visit": "2018-07-14",
-    "pain_scale": 0.4,
-    "completed_at": "2018-08-12T10:20:15"
+    "pain_scale": 0.4
   },
   "title": "some_string"
 }'
@@ -737,8 +792,7 @@ curl -XPOST /v1/assessment_responses -d '{
     "active": true,
     "years_active": 2,
     "last_hcp_visit": "2018-07-14",
-    "pain_scale": 0.4,
-    "completed_at": "2018-08-12T10:20:15"
+    "pain_scale": 0.4
   },
   "updated_at": "2018-09-12T01:27:32.024836+00:00",
   "created_at": "2018-09-12T01:27:32.025031+00:00"
@@ -751,12 +805,12 @@ curl -XPOST /v1/assessment_responses -d '{
 param | description
 - | -
 spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
-spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
-spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
+spec_name <br /><code><a href='#types'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Version ID of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
 worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
-title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment response to be displayed in the timeline.
+title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment to be shown on the [patient's](#patients) timeline.
 
 
 
@@ -782,37 +836,28 @@ curl -XGET /v1/assessment_responses
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
-        "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
-        "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
-        "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
-        "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
-        "model": {
-          "insurance_provider": "Acme Insurance",
-          "plan_type": "SILVER",
-          "active": true,
-          "years_active": 2,
-          "last_hcp_visit": "2018-07-14",
-          "pain_scale": 0.4,
-          "completed_at": "2018-08-12T10:20:15"
-        },
-        "updated_at": "2018-09-12T01:27:32.024836+00:00",
-        "created_at": "2018-09-12T01:27:32.025031+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
+      "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+      "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+      "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+      "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
+      "model": {
+        "insurance_provider": "Acme Insurance",
+        "plan_type": "SILVER",
+        "active": true,
+        "years_active": 2,
+        "last_hcp_visit": "2018-07-14",
+        "pain_scale": 0.4
+      },
+      "updated_at": "2018-09-12T01:27:32.024836+00:00",
+      "created_at": "2018-09-12T01:27:32.025031+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1070,32 +1115,24 @@ curl -XGET /v1/calendar_events
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
-        "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
-        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
-        "is_all_day": false,
-        "start_time": "2018-09-10T18:56:19.357228+00:00",
-        "end_time": "2018-09-10T18:56:19.357540+00:00",
-        "outcome": "completed",
-        "modality": "call",
-        "appointment_type": "intake_call",
-        "updated_at": "2018-09-10T18:56:19.359240+00:00",
-        "created_at": "2018-09-10T18:56:19.359873+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "f2baaf15-94d2-415d-b3e6-7409b643d297",
+      "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+      "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+      "is_all_day": false,
+      "start_time": "2018-09-10T18:56:19.357228+00:00",
+      "end_time": "2018-09-10T18:56:19.357540+00:00",
+      "outcome": "completed",
+      "modality": "call",
+      "appointment_type": "intake_call",
+      "updated_at": "2018-09-10T18:56:19.359240+00:00",
+      "created_at": "2018-09-10T18:56:19.359873+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1208,25 +1245,17 @@ curl -XGET /v1/calendars
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
-        "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5",
-        "updated_at": "2018-09-12T01:27:32.028059+00:00",
-        "created_at": "2018-09-12T01:27:32.028187+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+      "worker_id": "f9850af8-2ab0-4542-b281-cf4d5442bbd5",
+      "updated_at": "2018-09-12T01:27:32.028059+00:00",
+      "created_at": "2018-09-12T01:27:32.028187+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1360,33 +1389,25 @@ curl -XGET /v1/calls
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
-        "call_type": "outbound",
-        "from_number": "+14155555555",
-        "to_number": "+15085555555",
-        "start_time": "2019-03-05T21:03:23.102699+00:00",
-        "duration": 200,
-        "calendar_event_id": "cd1483be-e029-4e23-ac8a-b4ebcededb04",
-        "worker_id": "32f0e2b4-7643-4926-a128-9666c81446cb",
-        "patient_id": "ee2a33d3-1793-4967-9836-85f68afea893",
-        "audio_url": "",
-        "updated_at": "2018-09-12T01:27:32.035940+00:00",
-        "created_at": "2018-09-12T01:27:32.036062+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+      "call_type": "outbound",
+      "from_number": "+14155555555",
+      "to_number": "+15085555555",
+      "start_time": "2019-03-05T21:03:23.102699+00:00",
+      "duration": 200,
+      "calendar_event_id": "cd1483be-e029-4e23-ac8a-b4ebcededb04",
+      "worker_id": "32f0e2b4-7643-4926-a128-9666c81446cb",
+      "patient_id": "ee2a33d3-1793-4967-9836-85f68afea893",
+      "audio_url": "",
+      "updated_at": "2018-09-12T01:27:32.035940+00:00",
+      "created_at": "2018-09-12T01:27:32.036062+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1538,50 +1559,42 @@ curl -XGET /v1/care_flows
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "c68a80d4-95ea-4f61-bf90-615d70bea591",
-        "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
-        "care_flow": {
-          "title": "patient needs at least 30min exercise per day",
-          "description": "increase daily exercise",
-          "goals": [
-            {
-              "title": "Make a plan",
-              "tasks": [
-                {
-                  "description": "Help the patient decide what type of exercise they can commit to doing.",
-                  "due_date": "2018-08-07T00:00:00+00:00",
-                  "worker_id": null,
-                  "completed_by_worker_id": null,
-                  "completed_at": null
-                },
-                {
-                  "description": "Make sure there is a written record of the patient's new exercise plan",
-                  "due_date": "2018-08-10T00:00:00+00:00",
-                  "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
-                  "completed_by_worker_id": null,
-                  "completed_at": null
-                }
-              ]
-            }
-          ]
-        },
-        "updated_at": "2018-09-12T01:27:32.029691+00:00",
-        "created_at": "2018-09-12T01:27:32.029817+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "c68a80d4-95ea-4f61-bf90-615d70bea591",
+      "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+      "care_flow": {
+        "title": "patient needs at least 30min exercise per day",
+        "description": "increase daily exercise",
+        "goals": [
+          {
+            "title": "Make a plan",
+            "tasks": [
+              {
+                "description": "Help the patient decide what type of exercise they can commit to doing.",
+                "due_date": "2018-08-07T00:00:00+00:00",
+                "worker_id": null,
+                "completed_by_worker_id": null,
+                "completed_at": null
+              },
+              {
+                "description": "Make sure there is a written record of the patient's new exercise plan",
+                "due_date": "2018-08-10T00:00:00+00:00",
+                "worker_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+                "completed_by_worker_id": null,
+                "completed_at": null
+              }
+            ]
+          }
+        ]
+      },
+      "updated_at": "2018-09-12T01:27:32.029691+00:00",
+      "created_at": "2018-09-12T01:27:32.029817+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1737,7 +1750,7 @@ curl -XPOST /v1/conversations -d '{
 param | description
 - | -
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
+conversation_type <br /><code><a href='#types'>enum</a></code> | Only `app` is supported for creating conversations. SMS conversations are created automatically when a [phone number](#phone-numbers) is created.
 title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
 email_address_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(guid)</a></code> | The [patient email addresses](#email-addresses) included in this conversation.
 
@@ -1765,29 +1778,21 @@ curl -XGET /v1/conversations
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
-        "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
-        "conversation_type": "app",
-        "title": "App",
-        "phone_number_id": null,
-        "email_address_ids": null,
-        "updated_at": "2018-09-12T01:27:32.031245+00:00",
-        "created_at": "2018-09-12T01:27:32.031362+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+      "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+      "conversation_type": "app",
+      "title": "App",
+      "phone_number_id": null,
+      "email_address_ids": null,
+      "updated_at": "2018-09-12T01:27:32.031245+00:00",
+      "created_at": "2018-09-12T01:27:32.031362+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -1902,7 +1907,14 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
+
+
 Creates a new custom data type record.
+
+<aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
+in Welkin.</aside>
+
+
 
 
 #### Invocation
@@ -2031,33 +2043,25 @@ curl -XGET /v1/custom_data_type_records
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
-        "body": {
-          "name": "Frank Smith",
-          "suffix": "MD",
-          "practice_name": "Boston Medical Group",
-          "office_id": "e32ac52",
-          "specialty": "internal medicine"
-        },
-        "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
-        "type_name": "hcp",
-        "updated_at": "2018-09-12T01:27:32.033666+00:00",
-        "created_at": "2018-09-12T01:27:32.033816+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+      "body": {
+        "name": "Frank Smith",
+        "suffix": "MD",
+        "practice_name": "Boston Medical Group",
+        "office_id": "e32ac52",
+        "specialty": "internal medicine"
+      },
+      "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+      "type_name": "hcp",
+      "updated_at": "2018-09-12T01:27:32.033666+00:00",
+      "created_at": "2018-09-12T01:27:32.033816+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -2177,10 +2181,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
-
-
-
-
+Creates a new email address.
 
 
 #### Invocation
@@ -2307,30 +2308,22 @@ curl -XGET /v1/email_addresses
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
-        "email": "developer@welkinhealth.com",
-        "friendly_name": "developer contact",
-        "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
-        "verified": false,
-        "opted_in_to_email": true,
-        "automatic_recipient": false,
-        "updated_at": "2018-09-12T01:27:32.035940+00:00",
-        "created_at": "2018-09-12T01:27:32.036062+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0546cc93-7695-49c1-ab5e-3daf3fde12bd",
+      "email": "developer@welkinhealth.com",
+      "friendly_name": "developer contact",
+      "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+      "verified": false,
+      "opted_in_to_email": true,
+      "automatic_recipient": false,
+      "updated_at": "2018-09-12T01:27:32.035940+00:00",
+      "created_at": "2018-09-12T01:27:32.036062+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -2542,33 +2535,25 @@ curl -XGET /v1/email_messages
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-        "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
-        "direction": "outbound",
-        "subject": "This is a test email subject",
-        "body_text": "This is a sample email body",
-        "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
-        "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
-        "automatically_sent": "false",
-        "footer": "If you are experiencing a life-threatening emergency, please call 911.",
-        "sent_at": "2019-10-13T01:32:12.000000+00:00",
-        "updated_at": "2018-09-12T01:27:32.033666+00:00",
-        "created_at": "2018-09-12T01:27:32.033816+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+      "patient_id": "e6cf56d8-a62d-4581-8339-91c846960041",
+      "direction": "outbound",
+      "subject": "This is a test email subject",
+      "body_text": "This is a sample email body",
+      "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+      "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+      "automatically_sent": "false",
+      "footer": "If you are experiencing a life-threatening emergency, please call 911.",
+      "sent_at": "2019-10-13T01:32:12.000000+00:00",
+      "updated_at": "2018-09-12T01:27:32.033666+00:00",
+      "created_at": "2018-09-12T01:27:32.033816+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -2779,26 +2764,18 @@ curl -XGET /v1/external_ids
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
-        "resource": "calendar_events",
-        "namespace": "ehr",
-        "external_id": "abc-123",
-        "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "76c5662c-1e16-4cfa-bbad-900e721a290b",
+      "resource": "calendar_events",
+      "namespace": "ehr",
+      "external_id": "abc-123",
+      "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -2981,29 +2958,21 @@ curl -XGET /v1/file_attachments
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
-        "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
-        "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
-        "attachment_type": "x-ray",
-        "description": "Right leg",
-        "file_upload_ids": [
-          "efbcc819-f25f-4bf4-afd4-198a035d5340"
-        ]
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "b43694f1-ed2d-4e0d-a9ee-65a7e093efee",
+      "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+      "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+      "attachment_type": "x-ray",
+      "description": "Right leg",
+      "file_upload_ids": [
+        "efbcc819-f25f-4bf4-afd4-198a035d5340"
+      ]
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -3148,24 +3117,16 @@ curl -XGET /v1/file_uploads
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "efbcc819-f25f-4bf4-afd4-198a035d5340",
-        "mime_type": "image/png",
-        "url": "https://welkin-photos-prod-bdb45be0-464e.s3.amazonaws.com/2ab9791d-86f1-e50?AWSAccessKeyId=ASIA&Expires=153924&x-amz-security-token=FQoGZXdz&Signature=FjSiY"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "efbcc819-f25f-4bf4-afd4-198a035d5340",
+      "mime_type": "image/png",
+      "url": "https://welkin-photos-prod-bdb45be0-464e.s3.amazonaws.com/2ab9791d-86f1-e50?AWSAccessKeyId=ASIA&Expires=153924&x-amz-security-token=FQoGZXdz&Signature=FjSiY"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -3344,38 +3305,30 @@ curl -XGET /v1/integration_tasks
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "9bf1e295-47f5-4027-a382-008c860694c2",
-        "status": "failed",
-        "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-        "ref_ids": [
-          "abc123",
-          "cdf456"
-        ],
-        "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c",
-        "task_name": "kiwihealth_pull.process_item",
-        "updated_at": "2018-09-12T01:27:32.041332+00:00",
-        "created_at": "2018-09-12T01:27:32.041464+00:00",
-        "errors": [
-          {
-            "code": "patient_not_found",
-            "message": "There is no patient with that ID."
-          }
-        ]
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "9bf1e295-47f5-4027-a382-008c860694c2",
+      "status": "failed",
+      "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+      "ref_ids": [
+        "abc123",
+        "cdf456"
+      ],
+      "job_id": "8bf1e295-4944-1027-d382-0c36846acd4c",
+      "task_name": "kiwihealth_pull.process_item",
+      "updated_at": "2018-09-12T01:27:32.041332+00:00",
+      "created_at": "2018-09-12T01:27:32.041464+00:00",
+      "errors": [
+        {
+          "code": "patient_not_found",
+          "message": "There is no patient with that ID."
+        }
+      ]
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -3385,7 +3338,7 @@ param | description
 - | -
 job_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Groups related tasks together
 task_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The name of the task prefixed by the name of the job
-ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | 
+ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | An external ID associated with the task, linking the task to the resource in external systems.
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
@@ -3630,7 +3583,7 @@ coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></co
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
 first_name <br /><code><a href='#types'>name</a></code> | First name of this patient
 last_name <br /><code><a href='#types'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>birthday</a></code> | Date of birth of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>birthday</a></code> | Date of birth of this patient
 street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
@@ -3727,7 +3680,7 @@ coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></co
 timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
 first_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | First name of this patient
 last_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date of birth of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>birthday</a></code> | Date of birth of this patient
 street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
@@ -3765,43 +3718,35 @@ curl -XGET /v1/patients
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-        "phase": "intake",
-        "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
-        "provider_id_number": "7IHnPI80",
-        "timezone": "US/Pacific",
-        "first_name": "Grace",
-        "last_name": "Hopper",
-        "birthday": "1906-12-09",
-        "gender": "Female",
-        "height": "72",
-        "primary_language": "english",
-        "smokes": "false",
-        "weight": "175",
-        "street": "3265 17th St",
-        "street_line_two": "#304",
-        "city": "San Francisco",
-        "county": "San Francisco County",
-        "zip_code": "94110",
-        "state": "CA",
-        "country": "US",
-        "updated_at": "2018-09-12T01:27:32.108773+00:00",
-        "created_at": "2018-09-12T01:27:32.109872+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+      "phase": "intake",
+      "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+      "provider_id_number": "7IHnPI80",
+      "timezone": "US/Pacific",
+      "first_name": "Grace",
+      "last_name": "Hopper",
+      "birthday": "1906-12-09",
+      "gender": "Female",
+      "height": "72",
+      "primary_language": "english",
+      "smokes": "false",
+      "weight": "175",
+      "street": "3265 17th St",
+      "street_line_two": "#304",
+      "city": "San Francisco",
+      "county": "San Francisco County",
+      "zip_code": "94110",
+      "state": "CA",
+      "country": "US",
+      "updated_at": "2018-09-12T01:27:32.108773+00:00",
+      "created_at": "2018-09-12T01:27:32.109872+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -3935,10 +3880,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
-
-
-
-
+Creates a new phone number.
 
 
 #### Invocation
@@ -4006,7 +3948,12 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 ### Update
+
+
 Updates an existing phone number.
+
+
+
 
 
 #### Invocation
@@ -4056,7 +4003,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number.
 phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
@@ -4071,10 +4018,7 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 ### Delete
-
-
-
-
+Deletes a single phone number.
 
 
 #### Invocation
@@ -4125,34 +4069,26 @@ curl -XGET /v1/phone_numbers
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
-        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
-        "phone_number": "+15555555555",
-        "phone_number_type": "landline",
-        "friendly_name": "main number",
-        "verified": false,
-        "opted_in_to_sms": true,
-        "opted_in_to_call_recording": false,
-        "opted_in_to_voicemail": false,
-        "opted_in_to_phone": true,
-        "automatic_recipient": false,
-        "updated_at": "2018-09-12T01:27:32.123172+00:00",
-        "created_at": "2018-09-12T01:27:32.123301+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+      "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+      "phone_number": "+15555555555",
+      "phone_number_type": "landline",
+      "friendly_name": "main number",
+      "verified": false,
+      "opted_in_to_sms": true,
+      "opted_in_to_call_recording": false,
+      "opted_in_to_voicemail": false,
+      "opted_in_to_phone": true,
+      "automatic_recipient": false,
+      "updated_at": "2018-09-12T01:27:32.123172+00:00",
+      "created_at": "2018-09-12T01:27:32.123301+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -4191,34 +4127,26 @@ curl -XPOST /v1/phone_numbers/find
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
-        "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
-        "phone_number": "+15555555555",
-        "phone_number_type": "landline",
-        "friendly_name": "main number",
-        "verified": false,
-        "opted_in_to_sms": true,
-        "opted_in_to_call_recording": false,
-        "opted_in_to_voicemail": false,
-        "opted_in_to_phone": true,
-        "automatic_recipient": false,
-        "updated_at": "2018-09-12T01:27:32.123172+00:00",
-        "created_at": "2018-09-12T01:27:32.123301+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+      "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+      "phone_number": "+15555555555",
+      "phone_number_type": "landline",
+      "friendly_name": "main number",
+      "verified": false,
+      "opted_in_to_sms": true,
+      "opted_in_to_call_recording": false,
+      "opted_in_to_voicemail": false,
+      "opted_in_to_phone": true,
+      "automatic_recipient": false,
+      "updated_at": "2018-09-12T01:27:32.123172+00:00",
+      "created_at": "2018-09-12T01:27:32.123301+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -4352,10 +4280,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
-
-
-
-
+Creates a new profile phone number.
 
 
 #### Invocation
@@ -4488,10 +4413,7 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 ### Delete
-
-
-
-
+Deletes a single profile phone number.
 
 
 #### Invocation
@@ -4542,35 +4464,27 @@ curl -XGET /v1/profile_phone_numbers
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
-        "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
-        "phone_number": "+15555555555",
-        "phone_number_type": "landline",
-        "friendly_name": "main number",
-        "verified": false,
-        "archived": false,
-        "opted_in_to_sms": true,
-        "opted_in_to_call_recording": false,
-        "opted_in_to_voicemail": false,
-        "opted_in_to_phone": true,
-        "automatic_recipient": false,
-        "updated_at": "2018-09-12T01:27:32.123172+00:00",
-        "created_at": "2018-09-12T01:27:32.123301+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "c9a72425-f433-4c6c-9d95-4057b25acc2f",
+      "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+      "phone_number": "+15555555555",
+      "phone_number_type": "landline",
+      "friendly_name": "main number",
+      "verified": false,
+      "archived": false,
+      "opted_in_to_sms": true,
+      "opted_in_to_call_recording": false,
+      "opted_in_to_voicemail": false,
+      "opted_in_to_phone": true,
+      "automatic_recipient": false,
+      "updated_at": "2018-09-12T01:27:32.123172+00:00",
+      "created_at": "2018-09-12T01:27:32.123301+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -4800,31 +4714,23 @@ curl -XGET /v1/profiles
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-        "profile_type_name": "test_profile",
-        "body": {
-          "first_name": "Grace",
-          "last_name": "Hopper",
-          "birthday": "1906-12-09",
-          "gender": "Female"
-        },
-        "updated_at": "2018-09-12T01:27:32.108773+00:00",
-        "created_at": "2018-09-12T01:27:32.109872+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+      "profile_type_name": "test_profile",
+      "body": {
+        "first_name": "Grace",
+        "last_name": "Hopper",
+        "birthday": "1906-12-09",
+        "gender": "Female"
+      },
+      "updated_at": "2018-09-12T01:27:32.108773+00:00",
+      "created_at": "2018-09-12T01:27:32.109872+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -5100,30 +5006,22 @@ curl -XGET /v1/relationship_records
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-        "relationship_type_id": "family_member",
-        "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
-        "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
-        "start_date": "2018-02-02",
-        "end_date": "2018-12-17",
-        "archived_at": null,
-        "updated_at": "2018-09-12T01:27:32.108773+00:00",
-        "created_at": "2018-09-12T01:27:32.109872+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+      "relationship_type_id": "family_member",
+      "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+      "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+      "start_date": "2018-02-02",
+      "end_date": "2018-12-17",
+      "archived_at": null,
+      "updated_at": "2018-09-12T01:27:32.108773+00:00",
+      "created_at": "2018-09-12T01:27:32.109872+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -5326,31 +5224,23 @@ curl -XGET /v1/sms_messages
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
-        "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
-        "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
-        "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
-        "direction": "inbound",
-        "contents": "Hi Developer, Welcome to Welkin Health.",
-        "automatically_sent": false,
-        "sent_at": "2018-09-12T01:27:32.045046+00:00",
-        "updated_at": "2018-09-12T01:27:32.045196+00:00",
-        "created_at": "2018-09-12T01:27:32.045336+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0adfd8b0-3497-48fc-8ffa-eb2add2cde26",
+      "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+      "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+      "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+      "direction": "inbound",
+      "contents": "Hi Developer, Welcome to Welkin Health.",
+      "automatically_sent": false,
+      "sent_at": "2018-09-12T01:27:32.045046+00:00",
+      "updated_at": "2018-09-12T01:27:32.045196+00:00",
+      "created_at": "2018-09-12T01:27:32.045336+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -5463,10 +5353,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
-
-
-
-
+Creates a new unavailable time.
 
 
 #### Invocation
@@ -5573,10 +5460,7 @@ recurrence <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></
 
 
 ### Delete
-
-
-
-
+Deletes a single unavailable time.
 
 
 #### Invocation
@@ -5627,30 +5511,22 @@ curl -XGET /v1/unavailable_times
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
-        "date": "2019-01-02",
-        "all_day": false,
-        "start_time": "12:00:00",
-        "end_time": "14:30:00",
-        "recurrence": "weekly",
-        "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
-        "updated_at": "2019-03-01T12:10:11.10+00:00",
-        "created_at": "2019-03-01T12:10:11.10+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "7bbe0d77-9deb-4e81-8aff-6fb5d112e85f",
+      "date": "2019-01-02",
+      "all_day": false,
+      "start_time": "12:00:00",
+      "end_time": "14:30:00",
+      "recurrence": "weekly",
+      "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4",
+      "updated_at": "2019-03-01T12:10:11.10+00:00",
+      "created_at": "2019-03-01T12:10:11.10+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -5879,30 +5755,22 @@ curl -XGET /v1/visits
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
-        "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
-        "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
-        "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
-        "assessment_response_id": null,
-        "start_time": "2019-09-28T21:45:11.093557+00:00",
-        "end_time": "2019-09-28T21:45:11.093557+00:00",
-        "updated_at": "2019-09-27T20:45:12.176691+00:00",
-        "created_at": "2019-09-27T20:45:12.176691+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "2238a503-7ac6-4b4a-b43f-ff8c9d931ae9",
+      "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+      "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+      "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+      "assessment_response_id": null,
+      "start_time": "2019-09-28T21:45:11.093557+00:00",
+      "end_time": "2019-09-28T21:45:11.093557+00:00",
+      "updated_at": "2019-09-27T20:45:12.176691+00:00",
+      "created_at": "2019-09-27T20:45:12.176691+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -6196,35 +6064,27 @@ curl -XGET /v1/workers
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
-        "email": "developer@welkinhealth.com",
-        "first_name": "Emily",
-        "last_name": "Smith",
-        "phone_number": "+15555555555",
-        "timezone": "US/Eastern",
-        "gender": "Female",
-        "role_ids": [
-          "cde",
-          "admin"
-        ],
-        "active": "True",
-        "updated_at": "2018-09-12T01:27:32.125123+00:00",
-        "created_at": "2018-09-12T01:27:32.125229+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+      "email": "developer@welkinhealth.com",
+      "first_name": "Emily",
+      "last_name": "Smith",
+      "phone_number": "+15555555555",
+      "timezone": "US/Eastern",
+      "gender": "Female",
+      "role_ids": [
+        "cde",
+        "admin"
+      ],
+      "active": "True",
+      "updated_at": "2018-09-12T01:27:32.125123+00:00",
+      "created_at": "2018-09-12T01:27:32.125229+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -6354,29 +6214,21 @@ curl -XGET /v1/working_hours
 > Example Response
 
 ```json
-[
-  {
-    "data": [
-      {
-        "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79",
-        "day": "Monday",
-        "day_off": false,
-        "start_time": "08:00:00",
-        "end_time": "17:00:00",
-        "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa",
-        "updated_at": "2019-03-01T12:10:11.10+00:00",
-        "created_at": "2019-03-01T12:10:11.10+00:00"
-      }
-    ],
-    "meta": {
-      "current": {
-        "page[from]": "2019-01-15T12:37:12.300100+00:00",
-        "page[to]": "2019-01-15T12:38:12.300100+00:00",
-        "page[size]": 50
-      }
+{
+  "data": [
+    {
+      "id": "fd6eb4a3-fa06-4b95-91f2-eea0e050da79",
+      "day": "Monday",
+      "day_off": false,
+      "start_time": "08:00:00",
+      "end_time": "17:00:00",
+      "calendar_id": "36872ac5-7c8d-4d15-9e5c-8e2a1bed7aaa",
+      "updated_at": "2019-03-01T12:10:11.10+00:00",
+      "created_at": "2019-03-01T12:10:11.10+00:00"
     }
-  }
-]
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
 ```
 
 #### Params
@@ -6443,7 +6295,7 @@ Current supported batch creation relationships:
 
 base type | sub type | base type key | plurality
 - | - | - | -
-[calendar events](#calendar_events) | [external ids](#external-ids) | `external_ids` | one to many
+[calendar events](#calendar-events) | [external ids](#external-ids) | `external_ids` | one to many
 [conversations](#conversations) | [email messages](#email-messages) | `email_messages` | one to many
 [custom data type records](#custom-data-type-records) | [patients](#patients) | `patient` | one to one
 [email addresses](#email-addresses) | [patients](#patients) | `patient` | one to one
