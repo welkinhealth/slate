@@ -9,6 +9,12 @@ $(function() {
     window.recacheHeights();
     window.refreshToc();
   });
+
+  $('a').on('click', function() {
+    if ($(this).attr('href').startsWith('#')) {
+      gtag('config', gtagcode, { 'page_path': location.pathname + $(this).attr('href') });
+    }
+  });
 });
 
 window.onpopstate = function() {
