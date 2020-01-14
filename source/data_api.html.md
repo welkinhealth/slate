@@ -2069,7 +2069,7 @@ curl -XGET /v1/custom_data_type_records
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ID of the [patient](#patients)
+patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of the [patient](#patients)
 type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
@@ -2836,7 +2836,7 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
-worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the worker who is attaching the file
+worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the worker who is attaching the file
 attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
 description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
 file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
@@ -3504,12 +3504,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 
 
 ### Create
-
-
 Creates a new patient.
-
-
-
 
 
 #### Invocation
@@ -5298,10 +5293,10 @@ are linked to a [worker](#workers)'s [Calendar](#calendars).
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-date <br /><code><a href='#types'>string</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+date <br /><code><a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
 all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
 recurrence <br /><code><a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
 calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
@@ -6376,7 +6371,7 @@ enum | `string` with predefined set of values (also known as an enumeration) | `
 guid | `string` with 36 characters separated into groups by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
 integer | Counting numbers with no decimal place including zero and negative numbers | `42`
 isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
-isodate | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
+date | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
 json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
 list(x) | JSON list of objects of type `x` | `["a", "b", "c"]`
 e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
