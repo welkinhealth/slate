@@ -5830,14 +5830,14 @@ Workers are assigned to [patients](#patients) as the patient's primary worker vi
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-email <br /><code><a href='#types'>string</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>string</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#types'>string</a></code> | Timezone in which the worker's working hours should be represented
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-roles <br /><code><a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
+roles <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
 active <br /><code><a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -5956,7 +5956,7 @@ param | description
 email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
