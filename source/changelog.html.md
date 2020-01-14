@@ -19,6 +19,12 @@ Updates are listed by the day the api or documentation was released.
 
 **Data API Documentation URL:** [https://developers.welkinhealth.com](/data_api.html)
 
+## January 20th, 2020
+* **[added]** GET, POST, PUT, and FIND for [Event Labels](/data_api.html#event-labels) APIs released.
+
+* **[added]** DELETE added to [Email Addresses](/data_api.html#email-addresses).
+* **[changed]** Birthday is now optional when creating [Patients](/data_api.html#patients).
+
 ## December 16nd, 2019
 * **[added]** GET, POST, and FIND for Email Messages APIs released. [Email Messages](/data_api.html#email-messages)
 
