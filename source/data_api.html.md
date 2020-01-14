@@ -5954,9 +5954,9 @@ curl -XPOST /v1/workers -d '{
 param | description
 - | -
 email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#types'>name</a></code> | Worker's first name
-last_name <br /><code><a href='#types'>name</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
+last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
@@ -5973,6 +5973,7 @@ Updates an existing worker.
 
 In order to update workers you must have this functionality enabled by Welkin. Please contact
 your implementation manager or customer success manager to have this functionality enabled for your program.
+
 
 
 
@@ -6028,9 +6029,9 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Worker's first name
-last_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+first_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Worker's first name
+last_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Worker's last name
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
@@ -6366,15 +6367,15 @@ integer status code, indicating the primary cause of failure.
 type | definition | example
 - | - | -
 boolean | JSON style boolean | `true`
+date | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
+e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
 email | `string` representing an email address | `"support@welkinhealth.com"`
 enum | `string` with predefined set of values (also known as an enumeration) | `"Female"`
 guid | `string` with 36 characters separated into groups by dashes 8-4-4-4-12. | `"45ceeba9-4944-43d1-b34d-0c36846acd4c"`
 integer | Counting numbers with no decimal place including zero and negative numbers | `42`
 isodatetime | `string` following [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a date and time in UTC | `"2018-09-15T15:20:01"`
-date | `string` following the [isodatetime format](https://en.wikipedia.org/wiki/ISO_8601) representing a day in the local timezone of the [worker](#workers) or [patient](#patients) | `"2018-09-15"`
 json | `string` following [JSON format](https://en.wikipedia.org/wiki/JSON). Welkin may require the `json` to have a specific format depending on API endpoint. | `"{"foo": "bar"}"`
 list(x) | JSON list of objects of type `x` | `["a", "b", "c"]`
-e164_phone | `string` representing an international, E.164 formatted phone number without extensions or other dialing information. Country code must be included. | `"+15555551234"`
 state | `string` of the capitalized two character United States state abbreviation | `"CA"`
 string | Any quoted set of ASCII characters with no length restriction | `"Welcome to Welkin's APIs"`
 timezone | `string` following [iana tz format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `"US/Pacific"`
