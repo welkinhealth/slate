@@ -929,8 +929,8 @@ calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
 is_all_day <br /><code><a href='#types'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
@@ -2836,9 +2836,9 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
-worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the worker who is attaching the file
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who is attaching the file
 attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
-description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
+description <br /><code><a href='#types'>string</a></code> | Text description or notes about the file being attached
 file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
 
 
@@ -3428,7 +3428,7 @@ coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
 first_name <br /><code><a href='#types'>string</a></code> | First name of this patient
 last_name <br /><code><a href='#types'>string</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>isodate</a></code> | Date of birth of this patient
+birthday <br /><code><a href='#types'>date</a></code> | Date of birth of this patient
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 street <br /><code><a href='#types'>string</a></code> | Street address of this patient
@@ -3438,7 +3438,7 @@ county <br /><code><a href='#types'>string</a></code> | County in which this pat
 zip_code <br /><code><a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
 state <br /><code><a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#types'>language</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+primary_language <br /><code><a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
 gender <br /><code><a href='#types'>string</a></code> | Gender of this patient
 height <br /><code><a href='#types'>string</a></code> | The two digit height of this patient in inches.
 weight <br /><code><a href='#types'>string</a></code> | The weight of this patient in pounds.
@@ -3576,15 +3576,15 @@ phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of car
 primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#types'>name</a></code> | First name of this patient
-last_name <br /><code><a href='#types'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>optional</a> <a href='#types'>birthday</a></code> | Date of birth of this patient
+first_name <br /><code><a href='#types'>string</a></code> | First name of this patient
+last_name <br /><code><a href='#types'>string</a></code> | Last name of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
 street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
-state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
+state <br /><code><a href='#types'>optional</a> <a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
 gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
@@ -3669,19 +3669,19 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phase <br /><code><a href='#types'>optional</a> <a href='#types'>provider_code</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+phase <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | First name of this patient
-last_name <br /><code><a href='#types'>optional</a> <a href='#types'>name</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>optional</a> <a href='#types'>birthday</a></code> | Date of birth of this patient
+first_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | First name of this patient
+last_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Last name of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
 street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
-state <br /><code><a href='#types'>optional</a> <a href='#types'>address_state</a></code> | Two character abbreviation of the state in which this patient resides
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
+state <br /><code><a href='#types'>optional</a> <a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
 primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
 gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
@@ -5295,8 +5295,8 @@ param | description
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 date <br /><code><a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
 all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
 recurrence <br /><code><a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
 calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
@@ -5833,11 +5833,11 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+phone_number <br /><code><a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-roles <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
+roles <br /><code><a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
 active <br /><code><a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
