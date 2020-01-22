@@ -929,8 +929,8 @@ calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
 is_all_day <br /><code><a href='#types'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
-start_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
@@ -1912,7 +1912,8 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 Creates a new custom data type record.
 
 <aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
-in Welkin.</aside>
+in Welkin. In Welkin we will show the values from the latest created record. In Welkin edits to a
+single value sidebar will not create a new record but rather update the latest record.</aside>
 
 
 
@@ -2289,6 +2290,39 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 
+### Delete
+Deletes a single email address.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XDELETE /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+```
+
+`DELETE /v1/email_addresses/:id`
+
+
+> Example Response
+
+```json
+{
+  "data": null
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
 
 ### Find
 Finds email addresses, using param filters.
@@ -2572,6 +2606,236 @@ page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a
 
 
 
+## Event Labels
+
+
+Event Labels are used to classify the outcome of a [call](#calls) or [visit](#visits). [Workers](#workers) can
+label events after they complete either from the timeline or in the prompt shown at the end of the call.
+Event Labels are available in Welkin's analytics to help track the outcomes of events.
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
+entity_id <br /><code><a href='#types'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
+entity_type <br /><code><a href='#types'></a></code> | The type of the `entity_id` object (either `call` or `visit`).
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+
+
+
+
+### Get
+Retrieves a single event label.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
+```
+
+`GET /v1/event_labels/:id`
+
+
+> Example Response
+
+```json
+{
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+
+
+
+
+
+### Create
+Creates a new event label.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST /v1/event_labels -d '{
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4"
+}'
+```
+
+`POST /v1/event_labels -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
+entity_id <br /><code><a href='#types'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
+
+
+
+
+
+### Update
+Updates an existing event label.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPUT /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  }
+}'
+```
+
+`PUT /v1/event_labels/:id -d { }`
+
+
+> Example Response
+
+```json
+{
+  "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "updated_at": "2018-09-12T01:27:32.033666+00:00",
+  "created_at": "2018-09-12T01:27:32.033816+00:00"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
+
+
+
+
+
+
+### Find
+Finds event labels, using param filters.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET /v1/event_labels
+```
+
+`GET /v1/event_labels`
+
+
+> Example Response
+
+```json
+{
+  "data": [
+    {
+      "id": "07ae21f7-c60e-42cb-ab7a-c80a3c445cc7",
+      "body": {
+        "welkin_default": "completed",
+        "follow_up": "no"
+      },
+      "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+      "updated_at": "2018-09-12T01:27:32.033666+00:00",
+      "created_at": "2018-09-12T01:27:32.033816+00:00"
+    }
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+
 ## External Ids
 
 
@@ -2838,7 +3102,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who is attaching the file
 attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
-description <br /><code><a href='#types'>string</a></code> | Text description or notes about the file being attached
+description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
 file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
 
 
@@ -3428,17 +3692,17 @@ coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
 first_name <br /><code><a href='#types'>string</a></code> | First name of this patient
 last_name <br /><code><a href='#types'>string</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>date</a></code> | Date of birth of this patient
+birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 street <br /><code><a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>string</a></code> | City of this patient's address
 county <br /><code><a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
-state <br /><code><a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
+zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
+state <br /><code><a href='#types'>optional</a> <a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
 country <br /><code><a href='#types'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
 gender <br /><code><a href='#types'>string</a></code> | Gender of this patient
 height <br /><code><a href='#types'>string</a></code> | The two digit height of this patient in inches.
 weight <br /><code><a href='#types'>string</a></code> | The weight of this patient in pounds.
@@ -3943,12 +4207,7 @@ automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>b
 
 
 ### Update
-
-
 Updates an existing phone number.
-
-
-
 
 
 #### Invocation
@@ -3998,7 +4257,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number.
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number. This will also remove the existing [conversation](#conversations) associated with this phone number.
 phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
 verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
@@ -5833,11 +6092,11 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
 gender <br /><code><a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
 role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-roles <br /><code><a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
+roles <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | (Deprecated) The database/code ID of the roles that a worker has. This is deprecated due to the fact that these IDs are not exposed or controllable in workshop.
 active <br /><code><a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
