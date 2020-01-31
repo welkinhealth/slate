@@ -18,7 +18,7 @@ Credentials issued via Integration Tools grants Apps and Integrations access to 
 
 Each App or Integration you configure for your Welkin Environment should have its own set of credentials for accessing data. Granting separate credentials for each system which has access to Welkin data ensures that if you want to disable a single system you can do this without effecting others.
 
-Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is [documented here](/data_api.html/#authentication).
+Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is [documented here](/data_api.html#authentication).
 
 <aside>When you invalidate Credentials in Integration Tools, Access Tokens are NOT invalidated. They will expire as normal. The credentials will no longer be valid for generating new Access Tokens.</aside>
 
