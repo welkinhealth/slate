@@ -1,3 +1,11 @@
+---
+title: Welkin Apps API Reference
+
+search: false
+
+rhs: true
+---
+
 # Apps API Overview
 The Welkin Apps Frontend API enables Welkin and an embedded App to communicate and call functions on each other. This tight integration allows for a seamless experience across areas of Welkin functionality. For example, an App needs to be able to tell Welkin to make visible the iFrame containing the App or to transition Welkin to a specific patient's profile. An App also needs to be informed when its parent page is updated.
 
