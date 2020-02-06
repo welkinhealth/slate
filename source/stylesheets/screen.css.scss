@@ -293,7 +293,6 @@ html, body {
   // I know, it's hackish, but it's the simplist way to make the left
   // half of the content always this background color.
   .dark-box {
-    width: $examples-width;
     background-color: $examples-bg;
     position: absolute;
     right: 0;
@@ -306,6 +305,10 @@ html, body {
     z-index: 50;
     border-bottom: 5px solid $lang-select-active-bg;
   }
+}
+
+.rhs .page-wrapper .dark-box {
+  width: $examples-width;
 }
 
 .lang-selector {
@@ -344,6 +347,12 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 // This is all the stuff with the light background in the left half of the page
 
+.rhs .content {
+  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+    margin-right: $examples-width;
+  }
+}
+
 .content {
   // fixes webkit rendering bug for some: see #538
   -webkit-transform: translateZ(0);
@@ -358,7 +367,6 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: $examples-width;
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
@@ -557,13 +565,18 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 // This is all the stuff that appears in the right half of the page
 
+.rhs .content {
+  pre, blockquote {
+    width: $examples-width;
+  }
+}
+
 .content {
   pre, blockquote {
     background-color: $code-bg;
     color: #fff;
 
     margin: 0;
-    width: $examples-width;
 
     float:right;
     clear:right;
@@ -586,6 +599,21 @@ html, body {
     padding-top: 2em;
     padding-bottom: 2em;
     padding: 2em $main-padding;
+    counter-reset: line;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+
+    & code div:before {
+      box-sizing: inherit;
+      counter-increment: line;
+      content: counter(line);
+      display: inline-block;
+      border-right: 1px solid #ddd;
+      padding: 0 .5em;
+      margin-right: .5em;
+      color: #888;
+      width: 1.5em;
+    }
   }
 
   blockquote {
