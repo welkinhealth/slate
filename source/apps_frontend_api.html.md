@@ -98,17 +98,17 @@ Once a MessageChannel has been sent from Welkin frontend to the App then communi
 
 These messages allow the App to control functionality within Welkin.
 
-## welkin_function
+## welkin_method
 
-An App calls a Welkin function to make changes to Welkin and send information to Welkin.
+An App calls a Welkin method to make changes to Welkin and send information to Welkin.
 
-> Example welkin_function message
+> Example welkin_method message
 
 ```json
 {
-   "message_type": "welkin_function",
+   "message_type": "welkin_method",
    "message": {
-      "function": "navigate_to",
+      "method": "navigate_to",
       "params": {
           "page_type": "patient",
           "page_id": "edb98143-e9d1-42c1-1197-6de2db454d27"
@@ -120,20 +120,20 @@ An App calls a Welkin function to make changes to Welkin and send information to
 
 `message` object fields:
 
-* `function`
-  * Name of the function that the App is calling on the Welkin UI.
+* `method`
+  * Name of the method that the App is calling on the Welkin UI.
 * `params`
-  * If the function takes parameters then a list of parameters can be specified.
+  * If the method takes parameters then a list of parameters can be specified.
 * `call_id`
   * The App assigns each invocation of a method call a unique ID so that the app can match the response message to the method invocation.
 
-#### Available Functions:
+#### Available Methods:
 
 * `open_frame`
   * Opens the container of this plugin. Can be called even if the App frame is already open.
   * No return values.
-* `collapse_frame`
-  * Collapses the container of this plugin. Can be called even if the App frame is already collapsed.
+* `minimize_frame`
+  * Minimizes the container of this plugin. Can be called even if the App frame is already minimized.
   * No return values.
 * `close_frame`
   * Removes the container for this App instance from the DOM. This will terminate this instance of the App.
