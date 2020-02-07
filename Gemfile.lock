@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/alexkunger/middleman-syntax.git
+  revision: b08f2444a64dfb6b21922b580906271911df0d31
+  ref: b08f244
+  specs:
+    middleman-syntax (3.2.0)
+      middleman-core (>= 3.2)
+      rouge (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -76,9 +85,6 @@ GEM
     middleman-sprockets (4.1.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
-    middleman-syntax (3.2.0)
-      middleman-core (>= 3.2)
-      rouge (~> 3.2)
     mini_portile2 (2.3.0)
     minitest (5.10.1)
     nokogiri (1.8.2)
@@ -117,7 +123,7 @@ DEPENDENCIES
   middleman (~> 4.2.1)
   middleman-autoprefixer (~> 2.7.0)
   middleman-sprockets (~> 4.1.0)
-  middleman-syntax (~> 3.2.0)
+  middleman-syntax!
   nokogiri (~> 1.8.2)
   redcarpet (~> 3.4.0)
   rouge (= 3.15.0)
