@@ -379,7 +379,7 @@ html, body {
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &>h3, &>div {
+  &>h1, &>h2, &>h3 {
     clear:both;
   }
 
@@ -609,7 +609,6 @@ html, body {
       content: counter(line);
       display: inline-block;
       border-right: 1px solid #ddd;
-      padding: 0 .5em;
       margin-right: .5em;
       color: #888;
       width: 1.5em;
