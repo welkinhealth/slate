@@ -32,7 +32,7 @@ $nav-subitem-bg: none;
 $nav-active-bg: none;
 $nav-active-parent-bg: none; // parent links of the current section
 $lang-select-border: #000 !default;
-$lang-select-bg: #1E2224 !default;
+$lang-select-bg: #fff !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
 $main-bg: #FFFFFF !default;
@@ -49,7 +49,7 @@ $nav-text: #5A6677 !default;
 $nav-header-text: $main-text !default;
 $nav-active-text: #00A0BD !default;
 $nav-active-parent-text: $nav-text; // parent links of the current section
-$lang-select-text: #fff !default; // color of unselected language tab text
+$lang-select-text: $main-text !default; // color of unselected language tab text
 $lang-select-active-text: #fff !default; // color of selected language tab text
 $lang-select-pressed-text: #fff !default; // color of language tab text when mouse is pressed
 $aside-note-text: #F64747 !default;

@@ -573,7 +573,7 @@ html, body {
 
 .content {
   pre, blockquote {
-    background-color: $code-bg;
+    background-color: $examples-bg;
     color: #fff;
 
     margin: 0;
@@ -685,5 +685,5 @@ html, body {
 }
 
 .highlight, .highlight .w {
-  background-color: $code-bg;
+  background-color: $examples-bg;
 }
