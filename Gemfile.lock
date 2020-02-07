@@ -76,9 +76,9 @@ GEM
     middleman-sprockets (4.1.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
-    middleman-syntax (3.0.0)
+    middleman-syntax (3.2.0)
       middleman-core (>= 3.2)
-      rouge (~> 2.0)
+      rouge (~> 3.2)
     mini_portile2 (2.3.0)
     minitest (5.10.1)
     nokogiri (1.8.2)
@@ -96,7 +96,7 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     redcarpet (3.4.0)
-    rouge (2.0.1)
+    rouge (3.15.0)
     sass (3.4.23)
     servolux (0.12.0)
     sprockets (3.7.2)
@@ -117,13 +117,13 @@ DEPENDENCIES
   middleman (~> 4.2.1)
   middleman-autoprefixer (~> 2.7.0)
   middleman-sprockets (~> 4.1.0)
-  middleman-syntax (~> 3.0.0)
+  middleman-syntax (~> 3.2.0)
   nokogiri (~> 1.8.2)
   redcarpet (~> 3.4.0)
-  rouge (= 2.0.1)
+  rouge (= 3.15.0)
 
 RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
