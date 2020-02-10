@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/alexkunger/middleman-syntax.git
-  revision: b08f2444a64dfb6b21922b580906271911df0d31
-  ref: b08f244
+  remote: https://github.com/middleman/middleman-syntax.git
+  revision: ad7bcde8eb14f1fa79d943511949670cd93de91e
+  ref: ad7bcde
   specs:
     middleman-syntax (3.2.0)
       middleman-core (>= 3.2)
