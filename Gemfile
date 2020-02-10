@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Middleman
 gem 'middleman', '~>4.2.1'
-gem 'middleman-syntax', git: 'https://github.com/alexkunger/middleman-syntax.git', ref: 'b08f244'
+gem 'middleman-syntax', git: 'https://github.com/middleman/middleman-syntax.git', ref: 'ad7bcde'
 gem 'middleman-autoprefixer', '~> 2.7.0'
 gem 'middleman-sprockets', '~> 4.1.0'
 gem 'rouge', '3.15.0'
