@@ -51,7 +51,7 @@
 .highlight .cs {
   color: #75715e;
 }
-.highlight .c, .highlight .cd {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
   color: #75715e;
 }
 .highlight .err {
@@ -135,7 +135,7 @@
 .highlight .s1 {
   color: #e6db74;
 }
-.highlight .s {
+.highlight .s, .highlight .sa, .highlight .dl {
   color: #e6db74;
 }
 .highlight .na {
@@ -150,41 +150,52 @@
 .highlight .ne {
   color: #a6e22e;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a6e22e;
 }
 .highlight .vc {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .nn {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .nl {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .ni {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .bp {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .vg {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .vi {
   color: #ffffff;
+  background-color: #272822;
 }
-.highlight .nv {
+.highlight .nv, .highlight .vm {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .w {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .n, .highlight .py, .highlight .nx {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .ow {
   color: #f92672;
@@ -264,7 +275,7 @@
     </ul>
     </div>
     <div class="page-wrapper">
-      <div class="dark-box"></div>
+
       <div class="content">
         <h1 id='integration-tools'>Integration Tools</h1>
 <p>Integration tools, accessed in Workshop (Welkin&#39;s codeless configuration tool), which allows you to configure Apps and other integrations. You can configure which systems have access to data within Welkin and how they access it.</p>
@@ -283,7 +294,7 @@
 
 <p>Each App or Integration you configure for your Welkin Environment should have its own set of credentials for accessing data. Granting separate credentials for each system which has access to Welkin data ensures that if you want to disable a single system you can do this without effecting others.</p>
 
-<p>Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is <a href="/data_api.html/#authentication">documented here</a>.</p>
+<p>Credentials created in Integration Tools are active as soon as they are created and can be used to generate access tokens. Access tokens are short lived and are used to make calls to the API. Details on this token exchange process is <a href="data_api.html#authentication">documented here</a>.</p>
 
 <aside>When you invalidate Credentials in Integration Tools, Access Tokens are NOT invalidated. They will expire as normal. The credentials will no longer be valid for generating new Access Tokens.</aside>
 
@@ -338,8 +349,7 @@
 </ol>
 
       </div>
-      <div class="dark-box">
-      </div>
+
     </div>
   </body>
 </html>

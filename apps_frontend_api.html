@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Documentation</title>
+    <title>Welkin Apps API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -51,7 +51,7 @@
 .highlight .cs {
   color: #75715e;
 }
-.highlight .c, .highlight .cd {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
   color: #75715e;
 }
 .highlight .err {
@@ -135,7 +135,7 @@
 .highlight .s1 {
   color: #e6db74;
 }
-.highlight .s {
+.highlight .s, .highlight .sa, .highlight .dl {
   color: #e6db74;
 }
 .highlight .na {
@@ -150,41 +150,52 @@
 .highlight .ne {
   color: #a6e22e;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a6e22e;
 }
 .highlight .vc {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .nn {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .nl {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .ni {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .bp {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .vg {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .vi {
   color: #ffffff;
+  background-color: #272822;
 }
-.highlight .nv {
+.highlight .nv, .highlight .vm {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .w {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .n, .highlight .py, .highlight .nx {
   color: #ffffff;
+  background-color: #272822;
 }
 .highlight .ow {
   color: #f92672;
@@ -243,7 +254,7 @@
             <a href="#app-to-welkin-messages" class="toc-h1 toc-link" data-title="App to Welkin messages">App to Welkin messages</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#welkin_function" class="toc-h2 toc-link" data-title="welkin_function">welkin_function</a>
+                    <a href="#welkin_method" class="toc-h2 toc-link" data-title="welkin_method">welkin_method</a>
                   </li>
               </ul>
           </li>
@@ -273,8 +284,10 @@
         <li><a href="/index.html">Platform Overview</a></li>
     </ul>
     </div>
+      <div class="rhs">
     <div class="page-wrapper">
-      <div class="dark-box"></div>
+        <div class="dark-box"></div>
+
       <div class="content">
         <h1 id='apps-api-overview'>Apps API Overview</h1>
 <p>The Welkin Apps Frontend API enables Welkin and an embedded App to communicate and call functions on each other. This tight integration allows for a seamless experience across areas of Welkin functionality. For example, an App needs to be able to tell Welkin to make visible the iFrame containing the App or to transition Welkin to a specific patient&#39;s profile. An App also needs to be informed when its parent page is updated.</p>
@@ -311,46 +324,46 @@
 <blockquote>
 <p>Example Welkin code</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'app_instance_1'</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageChannel</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">port1</span> <span class="o">=</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">port1</span><span class="p">;</span>
-<span class="c1">// Not shown here: event listener which Welkin uses to receives messages back on port1 of the Channel</span>
-
-<span class="c1">// Wait for the iframe to load</span>
-<span class="nx">iframe</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
-
-<span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Transfer port2 to the iframe</span>
-    <span class="kd">var</span> <span class="nb">window</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
-    <span class="nb">window</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="s1">'welkin_init'</span><span class="p">,</span> <span class="s1">'app.welkin-video-chat.com'</span><span class="p">,</span> <span class="p">[</span><span class="nx">channel</span><span class="p">.</span><span class="nx">port2</span><span class="p">]);</span>
-
-    <span class="c1">// Transfer the first state message from Welkin to plugin</span>
-    <span class="nx">port1</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">state_update</span><span class="p">,</span> <span class="s1">'app.welkin-video-chat.com'</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre>
+<div class="highlight"><pre class="highlight javascript"><code><div class="line-1"><span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">app_instance_1</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">var</span> <span class="nx">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageChannel</span><span class="p">();</span>
+</div><div class="line-4"><span class="kd">var</span> <span class="nx">port1</span> <span class="o">=</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">port1</span><span class="p">;</span>
+</div><div class="line-5"><span class="c1">// Not shown here: event listener which Welkin uses to receives messages back on port1 of the Channel</span>
+</div><div class="line-6">
+</div><div class="line-7"><span class="c1">// Wait for the iframe to load</span>
+</div><div class="line-8"><span class="nx">iframe</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onLoad</span><span class="p">);</span>
+</div><div class="line-9">
+</div><div class="line-10"><span class="kd">function</span> <span class="nx">onLoad</span><span class="p">()</span> <span class="p">{</span>
+</div><div class="line-11">    <span class="c1">// Transfer port2 to the iframe</span>
+</div><div class="line-12">    <span class="kd">var</span> <span class="nb">window</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
+</div><div class="line-13">    <span class="nb">window</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="dl">'</span><span class="s1">welkin_init</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">app.welkin-video-chat.com</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="nx">channel</span><span class="p">.</span><span class="nx">port2</span><span class="p">]);</span>
+</div><div class="line-14">
+</div><div class="line-15">    <span class="c1">// Transfer the first state message from Welkin to plugin</span>
+</div><div class="line-16">    <span class="nx">port1</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">state_update</span><span class="p">,</span> <span class="dl">'</span><span class="s1">app.welkin-video-chat.com</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-17"><span class="p">}</span>
+</div></code></pre></div>
 <blockquote>
 <p>Example App code</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">port2</span><span class="p">;</span> <span class="c1">// This port will receive all future messages from Welkin</span>
-
-<span class="c1">// Listen for the initial port transfer message</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="nx">initPort</span><span class="p">);</span>
-
-<span class="c1">// Setup the transferred port</span>
-<span class="kd">function</span> <span class="nx">initPort</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">origin</span> <span class="o">!==</span> <span class="s2">"https://coach.welkinhealth.com"</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="s2">"welkin_init"</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">port2</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">ports</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-
-    <span class="c1">// Add a Message listener to the port to accept future messages</span>
-    <span class="nx">port2</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">messageHandler</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
+<div class="highlight"><pre class="highlight javascript"><code><div class="line-1"><span class="kd">var</span> <span class="nx">port2</span><span class="p">;</span> <span class="c1">// This port will receive all future messages from Welkin</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="c1">// Listen for the initial port transfer message</span>
+</div><div class="line-4"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="nx">initPort</span><span class="p">);</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="c1">// Setup the transferred port</span>
+</div><div class="line-7"><span class="kd">function</span> <span class="nx">initPort</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</div><div class="line-8">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">origin</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">https://coach.welkinhealth.com</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+</div><div class="line-9">        <span class="k">return</span><span class="p">;</span>
+</div><div class="line-10">    <span class="p">}</span>
+</div><div class="line-11">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">welkin_init</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+</div><div class="line-12">        <span class="k">return</span><span class="p">;</span>
+</div><div class="line-13">    <span class="p">}</span>
+</div><div class="line-14">    <span class="nx">port2</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">ports</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</div><div class="line-15">
+</div><div class="line-16">    <span class="c1">// Add a Message listener to the port to accept future messages</span>
+</div><div class="line-17">    <span class="nx">port2</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">messageHandler</span><span class="p">;</span>
+</div><div class="line-18"><span class="p">}</span>
+</div></code></pre></div>
 <p>When Welkin loads the iFrame containing the App, Welkin will send a postMessage to the iFrame with a message which contains a MessageChannel port reference. The App will then validate that the message came from Welkin (see example code below). Once the App has verified the message origin then it will store the MessageChannel port for future message passing to and from Welkin.</p>
 
 <p>After the first message from Welkin, all communications between Welkin and the plugin will happen via the MessageChannel and no additional postMessages will be sent directly to the iFrame by Welkin.</p>
@@ -366,36 +379,36 @@
 <p>Once a MessageChannel has been sent from Welkin frontend to the App then communications will only be visible to Welkin and that instance of the plugin.</p>
 <h1 id='app-to-welkin-messages'>App to Welkin messages</h1>
 <p>These messages allow the App to control functionality within Welkin.</p>
-<h2 id='welkin_function'>welkin_function</h2>
-<p>An App calls a Welkin function to make changes to Welkin and send information to Welkin.</p>
+<h2 id='welkin_method'>welkin_method</h2>
+<p>An App calls a Welkin method to make changes to Welkin and send information to Welkin.</p>
 
 <blockquote>
-<p>Example welkin_function message</p>
+<p>Example welkin_method message</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"welkin_function"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"function"</span><span class="p">:</span><span class="w"> </span><span class="s2">"navigate_to"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edb98143-e9d1-42c1-1197-6de2db454d27"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span><span class="w">
-   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">   </span><span class="nl">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"welkin_method"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"navigate_to"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">      </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-6"><span class="w">          </span><span class="nl">"page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">          </span><span class="nl">"page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edb98143-e9d1-42c1-1197-6de2db454d27"</span>
+</div><div class="line-8"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-9"><span class="w">      </span><span class="nl">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span>
+</div><div class="line-10"><span class="w">   </span><span class="p">}</span>
+</div><div class="line-11"><span class="p">}</span>
+</div></code></pre></div>
 <p><code>message</code> object fields:</p>
 
 <ul>
-<li><code>function</code>
+<li><code>method</code>
 
 <ul>
-<li>Name of the function that the App is calling on the Welkin UI.</li>
+<li>Name of the method that the App is calling on the Welkin UI.</li>
 </ul></li>
 <li><code>params</code>
 
 <ul>
-<li>If the function takes parameters then a list of parameters can be specified.</li>
+<li>If the method takes parameters then a list of parameters can be specified.</li>
 </ul></li>
 <li><code>call_id</code>
 
@@ -403,7 +416,7 @@
 <li>The App assigns each invocation of a method call a unique ID so that the app can match the response message to the method invocation.</li>
 </ul></li>
 </ul>
-<h4 id='welkin_function-available-functions'>Available Functions:</h4>
+<h4 id='welkin_method-available-methods'>Available Methods:</h4>
 <ul>
 <li><code>open_frame</code>
 
@@ -411,10 +424,10 @@
 <li>Opens the container of this plugin. Can be called even if the App frame is already open.</li>
 <li>No return values.</li>
 </ul></li>
-<li><code>collapse_frame</code>
+<li><code>minimize_frame</code>
 
 <ul>
-<li>Collapses the container of this plugin. Can be called even if the App frame is already collapsed.</li>
+<li>Minimizes the container of this plugin. Can be called even if the App frame is already minimized.</li>
 <li>No return values.</li>
 </ul></li>
 <li><code>close_frame</code>
@@ -449,17 +462,17 @@
 <blockquote>
 <p>Example current_state message</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"current_state"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"parent_page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"parent_page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65982b40-270f-4d29-8020-11f6298dd847"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"frame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expanded"</span><span class="w">
-       </span><span class="p">}</span><span class="w">
-   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">   </span><span class="nl">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"current_state"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-5"><span class="w">          </span><span class="nl">"parent_page_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">          </span><span class="nl">"parent_page_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65982b40-270f-4d29-8020-11f6298dd847"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">          </span><span class="nl">"frame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expanded"</span>
+</div><div class="line-8"><span class="w">       </span><span class="p">}</span>
+</div><div class="line-9"><span class="w">   </span><span class="p">}</span>
+</div><div class="line-10"><span class="p">}</span>
+</div></code></pre></div>
 <p><code>message.state</code> fields:</p>
 
 <ul>
@@ -530,17 +543,17 @@ Note: There are currently no supported event notifications utilizing this API.</
 <blockquote>
 <p>Example event_notification message</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event_notification"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"click_to_call"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-555-1234"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"event_notification_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30f27b3a-5c03-48cf-9bec-90a2d68ece9d"</span><span class="w">
-   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">   </span><span class="nl">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event_notification"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"click_to_call"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">      </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-6"><span class="w">          </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-555-1234"</span>
+</div><div class="line-7"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"event_notification_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30f27b3a-5c03-48cf-9bec-90a2d68ece9d"</span>
+</div><div class="line-9"><span class="w">   </span><span class="p">}</span>
+</div><div class="line-10"><span class="p">}</span>
+</div></code></pre></div>
 <p><strong>Example:</strong></p>
 
 <p>A Care Staff member clicked on a phone number and the App has been configured to respond to click to call actions. Welkin notifies the app of this click to call event.</p>
@@ -550,18 +563,18 @@ Note: There are currently no supported event notifications utilizing this API.</
 <blockquote>
 <p>Example function_response message</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"method_response"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"return"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"field_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"field_n"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">   </span><span class="nl">"message_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"method_response"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"call_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca40142-f8e1-43d0-bd88-8da2eb656d62"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">      </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">      </span><span class="nl">"return"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-7"><span class="w">          </span><span class="nl">"field_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">          </span><span class="nl">"field_n"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span>
+</div><div class="line-9"><span class="w">      </span><span class="p">}</span>
+</div><div class="line-10"><span class="w">   </span><span class="p">}</span>
+</div><div class="line-11"><span class="p">}</span>
+</div></code></pre></div>
 <p><code>message</code> object fields:</p>
 
 <ul>
@@ -585,8 +598,10 @@ Note: There are currently no supported event notifications utilizing this API.</
 <p>After the method has completed the state of the App container or Welkin might have changed. In this case Welkin will send a <code>current_state</code> message as with all changes to state.</p>
 
       </div>
-      <div class="dark-box">
-      </div>
+
+        <div class="dark-box">
+        </div>
     </div>
+      </div>
   </body>
 </html>
