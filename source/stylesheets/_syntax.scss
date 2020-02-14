@@ -1,7 +1,7 @@
 /* welkin "soft" variant of monokai */
 
 .highlight .hll { background-color: #49483e }
-.highlight  { background: #272822; color: #f8f8f2 }
+.highlight  { background: $examples-bg; color: #f8f8f2 }
 .highlight .c { color: #75715e } /* Comment */
 .highlight .err { color: #960050; background-color: #1e0010 } /* Error */
 .highlight .k { color: #00b0cf } /* Keyword */

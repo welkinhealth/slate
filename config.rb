@@ -21,7 +21,7 @@ set :images_dir, 'images'
 set :fonts_dir, 'fonts'
 
 # Activate the syntax highlighter
-activate :syntax
+activate :syntax, :line_numbers_div => true
 ready do
   require './lib/multilang.rb'
 end

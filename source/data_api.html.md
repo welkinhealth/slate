@@ -1,3 +1,16 @@
+---
+title: Welkin Data API Reference
+
+language_tabs:
+  - python
+  - javascript
+  - shell
+
+search: true
+
+rhs: true
+---
+
 # Data API Overview
 
 Welkin’s goal is to empower you, our customers, to deliver patient-centered care. Our API exists in support of this goal. Whether it’s data kept within our platform, or your pre-existing systems, we think you should have complete, real-time access and agency over your own data.
@@ -16,15 +29,20 @@ This documentation outlines the data types available via Welkin’s APIs and the
 **Welkin's API is in active development.** We will be making backwards compatible changes over the coming months with little or no advanced notice. You should expect Welkin to add additional optional fields to resource schemas and new resource types to the API. Your integration should be built with this understanding and should not break with the addition of new fields or resource types. Use of strict schema validation is not recommended. Breaking changes will be communicated in advance of rollout and we will work with you to make the transition.
 
 ## Authentication
-> Example token fetch (PYTHON)
+
+> Example token fetch
 
 ```python
+import arrow
+import jwt
+import requests
+
 JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
 
-def get_token(client_id, client_secret, scope, endpoint, audience):
+def get_welkin_api_token(client_id, client_secret, scope, endpoint):
   claim = {
     'iss': client_id,
-    'aud': audience,
+    'aud': endpoint,
     'exp': arrow.utcnow().shift(seconds=3600).timestamp,
     'scope': scope,
   }
@@ -37,19 +55,82 @@ def get_token(client_id, client_secret, scope, endpoint, audience):
   token = resp.json()['access_token']
   return token
 
-token = get_token('<client_id>',
-                  '<client_secret>',
-                  'all',
-                  'https://api.welkinhealth.com/v1/token',
-                  'https://api.welkinhealth.com/v1/token')
+token = get_welkin_api_token('<client_id>',
+                             '<client_secret>',
+                             'all',
+                             'https://api.welkinhealth.com/v1/token')
 ```
 
-> Example token usage (PYTHON)
+```javascript
+const axios = require('axios');
+const jwt_simple = require('jwt-simple');
+const querystring = require('querystring');
+
+const JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
+const WELKIN_TOKEN_URL = 'https://api.welkinhealth.com/v1/token';
+const WELKIN_ACCESS_TOKEN = '';
+
+function get_welkin_api_token(client_id, client_secret, scope, endpoint) {
+  const token_data = {
+    'iss': client_id,
+    'aud': endpoint,
+    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
+    'scope': scope,
+  }
+  const token = jwt_simple.encode(token_data, , 'HS256');
+  try {
+    const res = await axios({
+      method: 'post',
+      url: endpoint,
+      data: querystring.stringify(
+        {'assertion': token.toString(),
+        'grant_type': JWT_BEARER_URI
+        }
+      )
+    });
+    return res.data.access_token;
+  } catch (e) {
+    console.log('error could not get access token');
+    return '';
+  }
+}
+
+WELKIN_ACCESS_TOKEN = get_welkin_api_token(process.env.WELKIN_CLIENT_ID,
+                                           process.env.WELKIN_SECRET,
+                                           'all',
+                                           WELKIN_TOKEN_URL);
+```
+
+```shell
+CURL example not available
+```
+
+> Example token usage
 
 ```python
+import requests
+
 headers = {"Authorization": "Bearer <token>"}
 
-resp = requests.post('https://api.welkinhealth.com/v1/patients', headers=headers).json()
+resp = requests.get("https://api.welkinhealth.com/v1/patients", headers=headers).json()
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {'Authorization': 'Bearer <token>'}
+const url = 'https://api.welkinhealth.com/v1/patients';
+
+try {
+  const res = await axios.get(url, {headers: headers});
+  const data = res.data.data;
+} catch (e) {
+  console.log("couldn't get data from Welkin");
+}
+```
+
+```shell
+CURL example not available
 ```
 
 Welkin's APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. This ensures that data stored within Welkin remains secure and is not accessible by unauthorized parties.
@@ -78,6 +159,8 @@ Welkin's APIs work using a “ping and pull” model. This means our APIs notify
 The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
 
 Webhook notifications are sent every `60` seconds. This means that notifications might be sent at most `60` seconds from the time the resource is changed in Welkin.
+
+Welkin will only send notifications for updates which have happened in the last `24` hours. If you pause webhook delivery for more than 24 hours, or webhook delivery fails for more than 24 hours, you should use *Find* endpoints to query for any resources which may have changed since the last webhook you received.
 
 <aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
 
@@ -124,7 +207,22 @@ Welkin supports two authentication flows for the notifications. Both have the sa
 
 > Example Welkin side code (for illustration only)
 
+```shell
+curl -X POST \
+  'https://customer.com/notify' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <JWT>' \
+  -d '[ { "resource": "patients",
+          "from": "2018-05-14T23:34:05.647496",
+          "to": "2018-05-15T23:35:05.647496",
+          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'
+```
+
 ```python
+import arrow
+import jwt
+import requests
+
 # Create the JWT
 def create_jwt(client_id, client_secret, notify_url):
   claim = {
@@ -143,10 +241,59 @@ token = create_jwt('<client_id>',
 
 headers = {"Authorization": "Bearer { }".format(token)}
 
+# Metadata about each resource type which has changed
+data = [ { "resource": "patients",
+           "from": "2018-05-14T23:34:05.647496",
+           "to": "2018-05-15T23:35:05.647496",
+           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
+
 # Welkin sends the actual notification
 requests.post('<client_notify_url>',
               headers=headers,
-              data="the notification content")
+              data=data)
+```
+
+```javascript
+const axios = require('axios');
+const jwt_simple = require('jwt-simple');
+
+// Create the JWT
+function create_jwt(client_id, client_secret, notify_url) {
+  const claim = {
+    'iss': client_id,
+    'aud': notify_url,
+    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
+    'scope': 'welkin',
+  }
+  const assertion = jwt_simple.encode(claim, , 'HS256');
+  return assertion;
+}
+
+# The token to be used for making notification requests
+const token = create_jwt('<client_id>',
+                '<client_secret>',
+                '<client_notify_url>')
+
+const headers = {"Authorization": "Bearer " + token};
+
+const data = [ { "resource": "patients",
+           "from": "2018-05-14T23:34:05.647496",
+           "to": "2018-05-15T23:35:05.647496",
+           "href": "https://api.welkinhealth.com/v1/patients ..." } ];
+
+# Welkin sends the actual notification
+try {
+  const res = await axios({
+    method: 'post',
+    url: '<client_notify_url>',
+    headers: headers,
+    data: data
+  });
+  return res.data.access_token;
+} catch (e) {
+  console.log('error could not get access token');
+  return '';
+}
 ```
 
 A JWT is included as the Bearer Token on each notification request.
@@ -166,24 +313,15 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `notify_url` - url at which the customer will receive the webhooks
 * list of api resources for which notifications should be sent
 
-> Example notification from Welkin to Customer (url truncated)
-
-```shell
-curl -X POST \
-  'https://customer.com/notify' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <JWT>' \
-  -d '[ { "resource": "patients",
-          "from": "2018-05-14T23:34:05.647496",
-          "to": "2018-05-15T23:35:05.647496",
-          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'
-```
-
 ### Token exchange
 
 > Example Welkin side code (for illustration only)
 
 ```python
+import arrow
+import jwt
+import requests
+
 JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
 
 # Welkin gets an access token from customer
@@ -211,10 +349,84 @@ token = get_token('<client_id>',
 
 headers = {"Authorization": "Bearer { }".format(token)}
 
+# Metadata about each resource type which has changed
+data = [ { "resource": "patients",
+           "from": "2018-05-14T23:34:05.647496",
+           "to": "2018-05-15T23:35:05.647496",
+           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
+
 # Welkin sends the actual notification
 requests.post('<client_notify_url>',
               headers=headers,
-              data="the notification content")
+              data=data)
+```
+
+```javascript
+const axios = require('axios');
+const jwt_simple = require('jwt-simple');
+
+// Create the JWT
+function create_jwt(client_id, client_secret, notify_url) {
+  const claim = {
+    'iss': client_id,
+    'aud': notify_url,
+    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
+    'scope': 'welkin',
+  }
+  const assertion = jwt_simple.encode(claim, , 'HS256');
+  return assertion;
+}
+
+function get_customer_webhook_token(client_id, client_secret, endpoint) {
+  const token = create_jwt(client_id, client_secret, endpoint);
+
+  const JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
+
+  try {
+    const res = await axios({
+      method: 'post',
+      url: endpoint,
+      data: querystring.stringify(
+        {'assertion': token.toString(),
+        'grant_type': JWT_BEARER_URI
+        }
+      )
+    });
+    return res.data.access_token;
+  } catch (e) {
+    console.log('error could not get access token');
+    return '';
+  }
+}
+
+const token = get_customer_webhook_token("<customer client id>",
+                     "<customer client secret>",
+                     "<customer token url>");
+
+const headers = {"Authorization": "Bearer " + token};
+
+const data = [ { "resource": "patients",
+           "from": "2018-05-14T23:34:05.647496",
+           "to": "2018-05-15T23:35:05.647496",
+           "href": "https://api.welkinhealth.com/v1/patients ..." } ];
+
+# Welkin sends the actual notification
+try {
+  const res = await axios({
+    method: 'post',
+    url: '<client_notify_url>',
+    headers: headers,
+    data: data
+  });
+  return res.data.access_token;
+} catch (e) {
+  console.log('error could not get access token');
+  return '';
+}
+```
+
+```shell
+CURL example not available
 ```
 
 A JWT sent as a Bearer Token to your Token endpoint is exchanged for an access token which is then used when sending the notifications.
@@ -246,9 +458,74 @@ curl -X POST \
       }'
 ```
 
-> Example token response from Customer
+```javascript
+const axios = require('axios');
+const jwt_simple = require('jwt-simple');
+const querystring = require('querystring');
+
+const JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
+
+function get_customer_webhook_token(client_id, client_secret, endpoint) {
+  const token_data = {
+    'iss': client_id,
+    'aud': endpoint,
+    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
+    'scope': 'welkin',
+  }
+  const token = jwt_simple.encode(token_data, , 'HS256');
+  try {
+    const res = await axios({
+      method: 'post',
+      url: endpoint,
+      data: querystring.stringify(
+        {'assertion': token.toString(),
+        'grant_type': JWT_BEARER_URI
+        }
+      )
+    });
+    return res.data.access_token;
+  } catch (e) {
+    console.log('error could not get access token');
+    return '';
+  }
+}
+
+get_customer_webhook_token("<customer client id>",
+                     "<customer client secret>",
+                     "<customer token url>");
+```
 
 ```python
+import arrow
+import jwt
+import requests
+
+JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+
+def get_customer_webhook_token(client_id, client_secret, endpoint):
+  claim = {
+    'iss': client_id,
+    'aud': endpoint,
+    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
+    'scope': 'welkin',
+  }
+  assertion = jwt.encode(claim, client_secret, algorithm='HS256')
+  params = {
+    'assertion': assertion,
+    'grant_type': JWT_BEARER_URI
+  }
+  resp = requests.post(endpoint, data=params)
+  token = resp.json()['access_token']
+  return token
+
+token = get_customer_webhook_token('<customer client id>',
+                             '<customer client secret>',
+                             '<customer token url>')
+```
+
+> Example token response from Customer
+
+```json
 {
   "access_token": "<token>"
 }
@@ -267,11 +544,71 @@ curl -X POST \
           "href": "https://api.welkinhealth.com/v1/patients ..." } ]'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer { }".format("<token from exchange>")}
+
+# Metadata about each resource type which has changed
+data = [ { "resource": "patients",
+           "from": "2018-05-14T23:34:05.647496",
+           "to": "2018-05-15T23:35:05.647496",
+           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
+
+# Welkin sends the actual notification
+requests.post('<client_notify_url>',
+              headers=headers,
+              data=data)
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer " + "<token from exchange>"};
+
+// Metadata about each resource type which has changed
+const data = [ { "resource": "patients",
+                 "from": "2018-05-14T23:34:05.647496",
+                 "to": "2018-05-15T23:35:05.647496",
+                 "href": "https://api.welkinhealth.com/v1/patients ..." } ];
+
+const response = await axios({method: 'post', url: '<client_notify_url>', headers: headers, data: data});
+```
+
 ## Find endpoints
 > Example Request
 
 ```shell
 curl -XGET /v1/patients?page[from]=2018-06-15T10:30:01&page[to]=2018-09-30T10:29:59&page[size]=10
+```
+
+```javascript
+const axios = require('axios');
+
+const url = 'https://api.welkinhealth.com/v1/patients?page[from]=2018-06-15T10:30:01&page[to]=2018-09-30T10:29:59&page[size]=10';
+
+function get_by_post() {
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url
+    });
+    return res.data;
+  } catch (e) {
+    console.log('error could not get data from Welkin');
+    return '';
+  }
+}
+```
+
+```python
+import requests
+
+url = 'https://api.welkinhealth.com/v1/patients?page[from]=2018-06-15T10:30:01&page[to]=2018-09-30T10:29:59&page[size]=10'
+
+headers = {"Authorization": "Bearer { }".format(<access_token>)}
+
+response = requests.get(url, headers=headers)
 ```
 
 > Example Response
@@ -356,6 +693,50 @@ curl -XPOST /v1/phone_numbers/find -d '{
 }'
 ```
 
+```javascript
+const axios = require('axios');
+
+const data = {"phone_number": "+15555555555",
+              "page[from]": "2018-06-15T10:30:01",
+              "page[to]": "2018-09-30T10:29:59",
+              "page[size]": "10"
+             };
+
+const url = 'https://api.welkinhealth.com/v1/phone_numbers/find';
+
+function get_by_post() {
+  try {
+    const res = await axios({
+      method: 'post',
+      url: url,
+      data: data
+    });
+    return res.data;
+  } catch (e) {
+    console.log('error could not get data from Welkin');
+    return '';
+  }
+}
+```
+
+```python
+import requests
+
+url = 'https://api.welkinhealth.com/v1/phone_numbers/find'
+
+headers = {"Authorization": "Bearer { }".format(<access_token>)}
+
+data = {"phone_number": "+15555555555",
+        "page[from]": "2018-06-15T10:30:01",
+        "page[to]": "2018-09-30T10:29:59",
+        "page[size]": "10"
+       }
+
+response = requests.post(url,
+                         headers=headers,
+                         data=data)
+```
+
 Security best practices dictate keeping PII and PHI out of URLs (in the path or in query parameters) because information in URLs can be inadvertently exposed via client, network, proxy and server logs and other mechanisms.
 
 Accordingly, Welkin supports sending sensitive API parameters as a part of a POST body for performing *find* actions. This is accomplished via the *Find By Post* methods of this API.
@@ -436,6 +817,26 @@ Retrieves a single app message.
 curl -XGET /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/app_messages/:id`
 
 
@@ -493,6 +894,43 @@ curl -XPOST /v1/app_messages -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+}
+url = 'https://api.welkinhealth.com/v1/app_messages'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/app_messages';
+const data = {
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/app_messages -d { }`
 
 
@@ -548,6 +986,33 @@ curl -XPUT /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+}
+url = 'https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26';
+const data = {
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/app_messages/:id -d { }`
 
 
@@ -591,6 +1056,26 @@ Finds app messages, using param filters.
 
 ```shell
 curl -XGET /v1/app_messages
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/app_messages'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/app_messages';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/app_messages`
@@ -706,6 +1191,26 @@ Retrieves a single assessment response.
 curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/assessment_responses/:id`
 
 
@@ -774,6 +1279,59 @@ curl -XPOST /v1/assessment_responses -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "spec_id": "some_string",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
+  "model": {
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4
+  },
+  "title": "some_string"
+}
+url = 'https://api.welkinhealth.com/v1/assessment_responses'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/assessment_responses';
+const data = {
+  "spec_id": "some_string",
+  "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
+  "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
+  "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
+  "model": {
+    "insurance_provider": "Acme Insurance",
+    "plan_type": "SILVER",
+    "active": true,
+    "years_active": 2,
+    "last_hcp_visit": "2018-07-14",
+    "pain_scale": 0.4
+  },
+  "title": "some_string"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/assessment_responses -d { }`
 
 
@@ -828,6 +1386,26 @@ Finds assessment responses, using param filters.
 
 ```shell
 curl -XGET /v1/assessment_responses
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/assessment_responses'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/assessment_responses';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/assessment_responses`
@@ -953,6 +1531,26 @@ Retrieves a single calendar event.
 curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/calendar_events/:id`
 
 
@@ -1003,6 +1601,45 @@ curl -XPOST /v1/calendar_events -d '{
   "modality": "call",
   "appointment_type": "intake_call"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "modality": "call",
+  "appointment_type": "intake_call"
+}
+url = 'https://api.welkinhealth.com/v1/calendar_events'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/calendar_events';
+const data = {
+  "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
+  "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "modality": "call",
+  "appointment_type": "intake_call"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/calendar_events -d { }`
@@ -1060,6 +1697,37 @@ curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed"
+}
+url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297';
+const data = {
+  "start_time": "2018-09-10T18:56:19.357228+00:00",
+  "end_time": "2018-09-10T18:56:19.357540+00:00",
+  "outcome": "completed"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/calendar_events/:id -d { }`
 
 
@@ -1107,6 +1775,26 @@ Finds calendar events, using param filters.
 
 ```shell
 curl -XGET /v1/calendar_events
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calendar_events'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/calendar_events';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/calendar_events`
@@ -1199,6 +1887,26 @@ Retrieves a single calendar.
 curl -XGET /v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/calendars/:id`
 
 
@@ -1237,6 +1945,26 @@ Finds calendars, using param filters.
 
 ```shell
 curl -XGET /v1/calendars
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calendars'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/calendars';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/calendars`
@@ -1335,6 +2063,26 @@ Retrieves a single call.
 curl -XGET /v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/calls/:id`
 
 
@@ -1381,6 +2129,26 @@ Finds calls, using param filters.
 
 ```shell
 curl -XGET /v1/calls
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/calls'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/calls';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/calls`
@@ -1488,6 +2256,26 @@ Retrieves a single care flow.
 curl -XGET /v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/care_flows/:id`
 
 
@@ -1551,6 +2339,26 @@ Finds care flows, using param filters.
 
 ```shell
 curl -XGET /v1/care_flows
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/care_flows'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/care_flows';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/care_flows`
@@ -1675,6 +2483,26 @@ Retrieves a single conversation.
 curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/conversations/:id`
 
 
@@ -1726,6 +2554,37 @@ curl -XPOST /v1/conversations -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
+  "title": "App"
+}
+url = 'https://api.welkinhealth.com/v1/conversations'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/conversations';
+const data = {
+  "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
+  "conversation_type": "app",
+  "title": "App"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/conversations -d { }`
 
 
@@ -1770,6 +2629,26 @@ Finds conversations, using param filters.
 
 ```shell
 curl -XGET /v1/conversations
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/conversations'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/conversations';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/conversations`
@@ -1873,6 +2752,26 @@ Retrieves a single custom data type record.
 curl -XGET /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/custom_data_type_records/:id`
 
 
@@ -1936,6 +2835,49 @@ curl -XPOST /v1/custom_data_type_records -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "body": {
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
+    "specialty": "internal medicine"
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp"
+}
+url = 'https://api.welkinhealth.com/v1/custom_data_type_records'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/custom_data_type_records';
+const data = {
+  "body": {
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
+    "specialty": "internal medicine"
+  },
+  "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "type_name": "hcp"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/custom_data_type_records -d { }`
 
 
@@ -1991,6 +2933,45 @@ curl -XPUT /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d 
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "body": {
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
+    "specialty": "internal medicine"
+  }
+}
+url = 'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7';
+const data = {
+  "body": {
+    "name": "Frank Smith",
+    "suffix": "MD",
+    "practice_name": "Boston Medical Group",
+    "office_id": "e32ac52",
+    "specialty": "internal medicine"
+  }
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/custom_data_type_records/:id -d { }`
 
 
@@ -2036,6 +3017,26 @@ Finds custom data type records, using param filters.
 
 ```shell
 curl -XGET /v1/custom_data_type_records
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/custom_data_type_records'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/custom_data_type_records';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/custom_data_type_records`
@@ -2151,6 +3152,26 @@ Retrieves a single email address.
 curl -XGET /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/email_addresses/:id`
 
 
@@ -2199,6 +3220,45 @@ curl -XPOST /v1/email_addresses -d '{
   "opted_in_to_email": true,
   "automatic_recipient": false
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/email_addresses'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_addresses';
+const data = {
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/email_addresses -d { }`
@@ -2255,6 +3315,41 @@ curl -XPUT /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd';
+const data = {
+  "email": "developer@welkinhealth.com",
+  "friendly_name": "developer contact",
+  "verified": false,
+  "opted_in_to_email": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/email_addresses/:id -d { }`
 
 
@@ -2302,6 +3397,26 @@ Deletes a single email address.
 curl -XDELETE /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd'
+
+resp = requests.delete(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd';
+
+const response = await axios({method: 'delete', url: url, headers: headers});
+
+```
+
 `DELETE /v1/email_addresses/:id`
 
 
@@ -2334,6 +3449,26 @@ Finds email addresses, using param filters.
 
 ```shell
 curl -XGET /v1/email_addresses
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/email_addresses'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_addresses';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/email_addresses`
@@ -2451,6 +3586,26 @@ Retrieves a single email message.
 curl -XGET /v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/email_messages/:id`
 
 
@@ -2511,6 +3666,41 @@ curl -XPOST /v1/email_messages -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "automatically_sent": "false"
+}
+url = 'https://api.welkinhealth.com/v1/email_messages'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_messages';
+const data = {
+  "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
+  "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
+  "subject": "This is a test email subject",
+  "body_text": "This is a sample email body",
+  "automatically_sent": "false"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/email_messages -d { }`
 
 
@@ -2561,6 +3751,26 @@ Finds email messages, using param filters.
 
 ```shell
 curl -XGET /v1/email_messages
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/email_messages'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/email_messages';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/email_messages`
@@ -2661,6 +3871,26 @@ Retrieves a single event label.
 curl -XGET /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/event_labels/:id`
 
 
@@ -2706,6 +3936,41 @@ curl -XPOST /v1/event_labels -d '{
   },
   "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4"
+}
+url = 'https://api.welkinhealth.com/v1/event_labels'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/event_labels';
+const data = {
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  },
+  "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/event_labels -d { }`
@@ -2755,6 +4020,39 @@ curl -XPUT /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  }
+}
+url = 'https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7';
+const data = {
+  "body": {
+    "welkin_default": "completed",
+    "follow_up": "no"
+  }
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/event_labels/:id -d { }`
 
 
@@ -2796,6 +4094,26 @@ Finds event labels, using param filters.
 
 ```shell
 curl -XGET /v1/event_labels
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/event_labels'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/event_labels';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/event_labels`
@@ -2890,6 +4208,26 @@ Retrieves a single external id.
 curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/external_ids/:id`
 
 
@@ -2931,6 +4269,39 @@ curl -XPOST /v1/external_ids -d '{
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "resource": "calendar_events",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}
+url = 'https://api.welkinhealth.com/v1/external_ids'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/external_ids';
+const data = {
+  "resource": "calendar_events",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/external_ids -d { }`
@@ -2979,6 +4350,39 @@ curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "resource": "calendar_events",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+}
+url = 'https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b';
+const data = {
+  "resource": "calendar_events",
+  "namespace": "ehr",
+  "external_id": "abc-123",
+  "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/external_ids/:id -d { }`
 
 
@@ -3020,6 +4424,26 @@ Finds external ids, using param filters.
 
 ```shell
 curl -XGET /v1/external_ids
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/external_ids'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/external_ids';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/external_ids`
@@ -3120,6 +4544,26 @@ Retrieves a single file attachment.
 curl -XGET /v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/file_attachments/:id`
 
 
@@ -3169,6 +4613,45 @@ curl -XPOST /v1/file_attachments -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
+  "file_upload_ids": [
+    "efbcc819-f25f-4bf4-afd4-198a035d5340"
+  ]
+}
+url = 'https://api.welkinhealth.com/v1/file_attachments'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/file_attachments';
+const data = {
+  "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
+  "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
+  "attachment_type": "x-ray",
+  "description": "Right leg",
+  "file_upload_ids": [
+    "efbcc819-f25f-4bf4-afd4-198a035d5340"
+  ]
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/file_attachments -d { }`
 
 
@@ -3214,6 +4697,26 @@ Finds file attachments, using param filters.
 
 ```shell
 curl -XGET /v1/file_attachments
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/file_attachments'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/file_attachments';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/file_attachments`
@@ -3339,6 +4842,26 @@ Retrieves a single file upload.
 curl -XGET /v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/file_uploads/:id`
 
 
@@ -3373,6 +4896,26 @@ Finds file uploads, using param filters.
 
 ```shell
 curl -XGET /v1/file_uploads
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/file_uploads'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/file_uploads';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/file_uploads`
@@ -3505,6 +5048,26 @@ Retrieves a single integration task.
 curl -XGET /v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/integration_tasks/:id`
 
 
@@ -3561,6 +5124,26 @@ Finds integration tasks, using param filters.
 
 ```shell
 curl -XGET /v1/integration_tasks
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/integration_tasks'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/integration_tasks';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/integration_tasks`
@@ -3724,6 +5307,26 @@ Retrieves a single patient.
 curl -XGET /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/patients/:id`
 
 
@@ -3797,6 +5400,69 @@ curl -XPOST /v1/patients -d '{
   "smokes": "false",
   "provider_id_number": "7IHnPI80"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
+}
+url = 'https://api.welkinhealth.com/v1/patients'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patients';
+const data = {
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/patients -d { }`
@@ -3895,6 +5561,69 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
+}
+url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+const data = {
+  "phase": "intake",
+  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
+  "timezone": "US/Pacific",
+  "first_name": "Grace",
+  "last_name": "Hopper",
+  "birthday": "1906-12-09",
+  "street": "3265 17th St",
+  "street_line_two": "#304",
+  "city": "San Francisco",
+  "county": "San Francisco County",
+  "zip_code": "94110",
+  "state": "CA",
+  "country": "US",
+  "primary_language": "english",
+  "gender": "Female",
+  "height": "72",
+  "weight": "175",
+  "smokes": "false",
+  "provider_id_number": "7IHnPI80"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/patients/:id -d { }`
 
 
@@ -3969,6 +5698,26 @@ Finds patients, using param filters.
 
 ```shell
 curl -XGET /v1/patients
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patients'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patients';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/patients`
@@ -4104,6 +5853,26 @@ Retrieves a single phone number.
 curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/phone_numbers/:id`
 
 
@@ -4160,6 +5929,53 @@ curl -XPOST /v1/phone_numbers -d '{
   "opted_in_to_phone": true,
   "automatic_recipient": false
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/phone_numbers'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/phone_numbers';
+const data = {
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/phone_numbers -d { }`
@@ -4228,6 +6044,49 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+const data = {
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/phone_numbers/:id -d { }`
 
 
@@ -4283,6 +6142,26 @@ Deletes a single phone number.
 curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.delete(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+
+const response = await axios({method: 'delete', url: url, headers: headers});
+
+```
+
 `DELETE /v1/phone_numbers/:id`
 
 
@@ -4315,6 +6194,26 @@ Finds phone numbers, using param filters.
 
 ```shell
 curl -XGET /v1/phone_numbers
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/phone_numbers'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/phone_numbers';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/phone_numbers`
@@ -4372,7 +6271,41 @@ Parameters must be included in the request body and not as URL parameters.
 > Example Request
 
 ```shell
-curl -XPOST /v1/phone_numbers/find
+curl -XPOST /v1/phone_numbers/find -d '{
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phone_number": "+15555555555"
+}'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/phone_numbers/find'
+data = {
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phone_number": "+15555555555"
+}
+
+resp = requests.post(url,headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/phone_numbers/find';
+const data = {
+  "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
+  "phone_number": "+15555555555"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/phone_numbers/find`
@@ -4498,6 +6431,26 @@ Retrieves a single profile phone number.
 curl -XGET /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/profile_phone_numbers/:id`
 
 
@@ -4554,6 +6507,51 @@ curl -XPOST /v1/profile_phone_numbers -d '{
   "opted_in_to_phone": true,
   "automatic_recipient": false
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/profile_phone_numbers'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profile_phone_numbers';
+const data = {
+  "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/profile_phone_numbers -d { }`
@@ -4622,6 +6620,49 @@ curl -XPUT /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+}
+url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+const data = {
+  "phone_number": "+15555555555",
+  "phone_number_type": "landline",
+  "friendly_name": "main number",
+  "verified": false,
+  "opted_in_to_sms": true,
+  "opted_in_to_call_recording": false,
+  "opted_in_to_voicemail": false,
+  "opted_in_to_phone": true,
+  "automatic_recipient": false
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/profile_phone_numbers/:id -d { }`
 
 
@@ -4678,6 +6719,26 @@ Deletes a single profile phone number.
 curl -XDELETE /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
+
+resp = requests.delete(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f';
+
+const response = await axios({method: 'delete', url: url, headers: headers});
+
+```
+
 `DELETE /v1/profile_phone_numbers/:id`
 
 
@@ -4710,6 +6771,26 @@ Finds profile phone numbers, using param filters.
 
 ```shell
 curl -XGET /v1/profile_phone_numbers
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/profile_phone_numbers'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profile_phone_numbers';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/profile_phone_numbers`
@@ -4815,6 +6896,26 @@ Retrieves a single profile.
 curl -XGET /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/profiles/:id`
 
 
@@ -4864,6 +6965,45 @@ curl -XPOST /v1/profiles -d '{
     "gender": "Female"
   }
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}
+url = 'https://api.welkinhealth.com/v1/profiles'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profiles';
+const data = {
+  "profile_type_name": "test_profile",
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/profiles -d { }`
@@ -4917,6 +7057,43 @@ curl -XPUT /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+}
+url = 'https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+const data = {
+  "body": {
+    "first_name": "Grace",
+    "last_name": "Hopper",
+    "birthday": "1906-12-09",
+    "gender": "Female"
+  }
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/profiles/:id -d { }`
 
 
@@ -4960,6 +7137,26 @@ Finds profiles, using param filters.
 
 ```shell
 curl -XGET /v1/profiles
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/profiles'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/profiles';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/profiles`
@@ -5066,6 +7263,26 @@ Retrieves a single relationship record.
 curl -XGET /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/relationship_records/:id`
 
 
@@ -5112,6 +7329,41 @@ curl -XPOST /v1/relationship_records -d '{
   "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
   "relationship_type_id": "family_member"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "relationship_type_id": "family_member"
+}
+url = 'https://api.welkinhealth.com/v1/relationship_records'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/relationship_records';
+const data = {
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17",
+  "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
+  "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
+  "relationship_type_id": "family_member"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/relationship_records -d { }`
@@ -5163,6 +7415,35 @@ curl -XPUT /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17"
+}
+url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+const data = {
+  "start_date": "2018-02-02",
+  "end_date": "2018-12-17"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/relationship_records/:id -d { }`
 
 
@@ -5212,6 +7493,26 @@ the data.
 curl -XDELETE /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+
+resp = requests.delete(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+
+const response = await axios({method: 'delete', url: url, headers: headers});
+
+```
+
 `DELETE /v1/relationship_records/:id`
 
 
@@ -5252,6 +7553,26 @@ Finds relationship records, using param filters.
 
 ```shell
 curl -XGET /v1/relationship_records
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/relationship_records'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/relationship_records';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/relationship_records`
@@ -5360,6 +7681,26 @@ Retrieves a single sms message.
 curl -XGET /v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/sms_messages/:id`
 
 
@@ -5420,6 +7761,45 @@ curl -XPOST /v1/sms_messages -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+}
+url = 'https://api.welkinhealth.com/v1/sms_messages'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/sms_messages';
+const data = {
+  "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
+  "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
+  "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
+  "direction": "inbound",
+  "contents": "Hi Developer, Welcome to Welkin Health.",
+  "automatically_sent": false,
+  "sent_at": "2018-09-12T01:27:32.045046+00:00"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
 `POST /v1/sms_messages -d { }`
 
 
@@ -5470,6 +7850,26 @@ Finds sms messages, using param filters.
 
 ```shell
 curl -XGET /v1/sms_messages
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/sms_messages'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/sms_messages';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/sms_messages`
@@ -5576,6 +7976,26 @@ Retrieves a single unavailable time.
 curl -XGET /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/unavailable_times/:id`
 
 
@@ -5623,6 +8043,43 @@ curl -XPOST /v1/unavailable_times -d '{
   "recurrence": "weekly",
   "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4"
+}
+url = 'https://api.welkinhealth.com/v1/unavailable_times'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/unavailable_times';
+const data = {
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly",
+  "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/unavailable_times -d { }`
@@ -5678,6 +8135,41 @@ curl -XPUT /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly"
+}
+url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f';
+const data = {
+  "date": "2019-01-02",
+  "all_day": false,
+  "start_time": "12:00:00",
+  "end_time": "14:30:00",
+  "recurrence": "weekly"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/unavailable_times/:id -d { }`
 
 
@@ -5725,6 +8217,26 @@ Deletes a single unavailable time.
 curl -XDELETE /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f'
+
+resp = requests.delete(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f';
+
+const response = await axios({method: 'delete', url: url, headers: headers});
+
+```
+
 `DELETE /v1/unavailable_times/:id`
 
 
@@ -5757,6 +8269,26 @@ Finds unavailable times, using param filters.
 
 ```shell
 curl -XGET /v1/unavailable_times
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/unavailable_times'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/unavailable_times';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/unavailable_times`
@@ -5861,6 +8393,26 @@ Retrieves a single visit.
 curl -XGET /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/visits/:id`
 
 
@@ -5907,6 +8459,41 @@ curl -XPOST /v1/visits -d '{
   "start_time": "2019-09-28T21:45:11.093557+00:00",
   "end_time": "2019-09-28T21:45:11.093557+00:00"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00"
+}
+url = 'https://api.welkinhealth.com/v1/visits'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/visits';
+const data = {
+  "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
+  "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
+  "start_time": "2019-09-28T21:45:11.093557+00:00",
+  "end_time": "2019-09-28T21:45:11.093557+00:00"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/visits -d { }`
@@ -5958,6 +8545,33 @@ curl -XPUT /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9 -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb"
+}
+url = 'https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9';
+const data = {
+  "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/visits/:id -d { }`
 
 
@@ -6001,6 +8615,26 @@ Finds visits, using param filters.
 
 ```shell
 curl -XGET /v1/visits
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/visits'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/visits';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/visits`
@@ -6116,6 +8750,26 @@ Retrieves a single worker.
 curl -XGET /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/workers/:id`
 
 
@@ -6181,6 +8835,53 @@ curl -XPOST /v1/workers -d '{
   ],
   "active": "True"
 }'
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
+  "role_ids": [
+    "cde",
+    "admin"
+  ],
+  "active": "True"
+}
+url = 'https://api.welkinhealth.com/v1/workers'
+
+resp = requests.post(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/workers';
+const data = {
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
+  "role_ids": [
+    "cde",
+    "admin"
+  ],
+  "active": "True"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
 ```
 
 `POST /v1/workers -d { }`
@@ -6257,6 +8958,53 @@ curl -XPUT /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
 }'
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
+  "role_ids": [
+    "cde",
+    "admin"
+  ],
+  "active": "True"
+}
+url = 'https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f'
+
+resp = requests.put(url, headers=headers, data=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f';
+const data = {
+  "email": "developer@welkinhealth.com",
+  "first_name": "Emily",
+  "last_name": "Smith",
+  "phone_number": "+15555555555",
+  "timezone": "US/Eastern",
+  "gender": "Female",
+  "role_ids": [
+    "cde",
+    "admin"
+  ],
+  "active": "True"
+};
+
+const response = await axios({method: 'put', url: url, headers: headers, data: data});
+
+```
+
 `PUT /v1/workers/:id -d { }`
 
 
@@ -6311,6 +9059,26 @@ Finds workers, using param filters.
 
 ```shell
 curl -XGET /v1/workers
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/workers'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/workers';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/workers`
@@ -6419,6 +9187,26 @@ Retrieves a single working hour.
 curl -XGET /v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79
 ```
 
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
 `GET /v1/working_hours/:id`
 
 
@@ -6461,6 +9249,26 @@ Finds working hours, using param filters.
 
 ```shell
 curl -XGET /v1/working_hours
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/working_hours'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/working_hours';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
 ```
 
 `GET /v1/working_hours`

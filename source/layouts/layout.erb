@@ -121,24 +121,36 @@ under the License.
         <% end %>
     </ul>
     </div>
+    <% if current_page.data.rhs %>
+      <div class="rhs">
+    <% end %>
     <div class="page-wrapper">
-      <div class="dark-box"></div>
+      <% if current_page.data.rhs %>
+        <div class="dark-box"></div>
+      <% end %>
+
       <div class="content">
         <%= page_content %>
       </div>
-      <div class="dark-box">
-        <% if language_tabs.any? %>
-          <div class="lang-selector">
-            <% language_tabs.each do |lang| %>
-              <% if lang.is_a? Hash %>
-                <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-              <% else %>
-                <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+
+      <% if current_page.data.rhs %>
+        <div class="dark-box">
+          <% if language_tabs.any? %>
+            <div class="lang-selector">
+              <% language_tabs.each do |lang| %>
+                <% if lang.is_a? Hash %>
+                  <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+                <% else %>
+                  <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
+    <% if current_page.data.rhs %>
+      </div>
+    <% end %>
   </body>
 </html>

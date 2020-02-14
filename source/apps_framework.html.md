@@ -1,3 +1,11 @@
+---
+title: Welkin Apps Framework
+
+search: false
+
+rhs: true
+---
+
 # Apps Framework Overview
 
 # What are Welkin Apps?
