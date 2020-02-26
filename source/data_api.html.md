@@ -864,7 +864,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -960,12 +960,12 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
-direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#types'>string</a></code> | Text of the message
-sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+worker_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
+direction <br /><code><a href='#types' class='required'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types' class='required'>string</a></code> | Text of the message
+sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the message was sent
 
 
 
@@ -1044,8 +1044,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the message was sent
 
 
 
@@ -1114,10 +1114,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1249,7 +1249,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -1372,13 +1372,13 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
-spec_name <br /><code><a href='#types'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
-spec_version <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | Version ID of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
-worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
-model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
-title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title of the assessment to be shown on the [patient's](#patients) timeline.
+spec_id <br /><code><a href='#types' class='required'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
+spec_name <br /><code><a href='#types' class='required'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+spec_version <br /><code><a href='#types' class='optional'>guid</a></code> | Version ID of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
+worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
+model <br /><code><a href='#types' class='required'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
+title <br /><code><a href='#types' class='optional'>string</a></code> | The title of the assessment to be shown on the [patient's](#patients) timeline.
 
 
 
@@ -1453,9 +1453,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1589,7 +1589,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -1682,14 +1682,14 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
-user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
-appointment_type <br /><code><a href='#types'>string</a></code> | Appointment prompt to be used for this event (see note for details)
+calendar_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients)
+user_id <br /><code><a href='#types' class='required'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
+modality <br /><code><a href='#types' class='required'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
+appointment_type <br /><code><a href='#types' class='required'>string</a></code> | Appointment prompt to be used for this event (see note for details)
 
 
 
@@ -1770,11 +1770,11 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
-day <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
-outcome <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
+outcome <br /><code><a href='#types' class='optional'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 
 
 
@@ -1844,9 +1844,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -1944,7 +1944,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -2009,9 +2009,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2130,7 +2130,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -2203,11 +2203,11 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who participated in the call.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+calendar_event_id <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of the [calendar event](#calendar_events) from which this call was initiated if the call was started as part of a scheduled calendar event.
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) who participated in the call.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2233,35 +2233,35 @@ changes made to the Care Flow will not be reflected in the template it originate
 
 
 ### Model
-field | type | description
-- | - | -
-patient_id | `guid` | The ID of the [patient](#patients)
-id | `string` | Description of the overall Care Flow
-care_flow | `json` | A [care_flow object](#care-flow-model-care_flow)
-updated_at | `isodatetime` | Datetime the resource was last updated
-created_at | `isodatetime` | Datetime the resource was created
+field | description
+- | -
+patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
+id <br /><code><a href='#types'>guid</a></code> | Description of the overall Care Flow
+care_flow <br /><code><a href='#types'>json</a></code> | A [care_flow object](#care-flow-model-care_flow)
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
 ### Model care_flow
-field | type | description
-- | - | -
-title | `string` | Title of the overall Care Flow
-description | `string` | Description of the overall Care Flow
-goals | `list` | List of [goal objects](#care-flow-model-goal)
+field | description
+- | -
+title <br /><code><a href='#types'>string</a></code> | Title of the overall Care Flow
+description <br /><code><a href='#types'>string</a></code> | Description of the overall Care Flow
+goals <br /><code><a href='#types'>string</a></code> | List of [goal objects](#care-flow-model-goal)
 
 ### Model goal
-field | type | description
-- | - | -
-title | `string` | Title of the Care Flow goal
-tasks | `list` | List of [goal intervention objects](#care-flow-model-intervention)
+field | description
+- | -
+title <br /><code><a href='#types'>string</a></code> | Title of the Care Flow goal
+tasks <br /><code><a href='#types'>list</a></code> | List of [goal intervention objects](#care-flow-model-intervention)
 
 ### Model intervention
-field | type | description | optional
-- | - | - | -
-description | `string` | Title of the Care Flow intervention | required
-reminder_date | `isodatetime` | Due date for the intervention | optional
-completed_at | `isodatetime` | Date the intervention was marked completed | optional
-completed_by_worker_id | `guid` | ID of the [worker](#workers) who completed this intervention | optional
-worker_id | `guid` | ID of the [worker](#workers) who this intervention is assigned to | optional
+field | description
+- | -
+description <br /><code><a href='#types'>string</a></code> | Title of the Care Flow intervention
+reminder_date <br /><code><a href='#types'>isodatetime</a></code> | Due date for the intervention
+completed_at <br /><code><a href='#types'>isodatetime</a></code> | Date the intervention was marked completed
+completed_by_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who completed this intervention
+worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who this intervention is assigned to
 
 
 ### Get
@@ -2342,7 +2342,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -2432,9 +2432,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2550,8 +2550,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -2634,10 +2634,10 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-conversation_type <br /><code><a href='#types'>enum</a></code> | Only `app` is supported for creating conversations. SMS conversations are created automatically when a [phone number](#phone-numbers) is created.
-title <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
-email_address_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(guid)</a></code> | The [patient email addresses](#email-addresses) included in this conversation.
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
+conversation_type <br /><code><a href='#types' class='required'>enum</a></code> | Only `app` is supported for creating conversations. SMS conversations are created automatically when a [phone number](#phone-numbers) is created.
+title <br /><code><a href='#types' class='optional'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
+email_address_ids <br /><code><a href='#types' class='optional'>list(guid)</a></code> | The [patient email addresses](#email-addresses) included in this conversation.
 
 
 
@@ -2705,10 +2705,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -2827,7 +2827,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -2935,9 +2935,9 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
-patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
-type_name <br /><code><a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+body <br /><code><a href='#types' class='required'>json</a></code> | The content of the custom data type record
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the [patient](#patients)
+type_name <br /><code><a href='#types' class='required'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
 
 
 
@@ -3031,8 +3031,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types' class='required'>json</a></code> | The content of the custom data type record
 
 
 
@@ -3103,11 +3103,11 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of the [patient](#patients)
-type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of the [patient](#patients)
+type_name <br /><code><a href='#types' class='optional'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3230,7 +3230,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -3321,13 +3321,13 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-email <br /><code><a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
-opted_in_to_email <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
+email <br /><code><a href='#types' class='required'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types' class='required'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
+opted_in_to_email <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
 
 
 
@@ -3412,12 +3412,12 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
-opted_in_to_email <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types' class='optional'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
+opted_in_to_email <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive emails at this email address. If False, then no emails of any kind can be sent to this address. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) as consented to receive automated emails at this email address. Default `false`
 
 
 
@@ -3471,7 +3471,7 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -3538,11 +3538,11 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
+user_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) ID of the [patient](#patients) which this email address is associated with.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3673,7 +3673,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -3770,12 +3770,12 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
-conversation_id <br /><code><a href='#types'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient_id](#patients) of a newly created email will be the same as the patient in the conversation.
-subject <br /><code><a href='#types'>string</a></code> | Subject of the message
-body_html <br /><code><a href='#types'>optional</a> <a href='#types'>html_template</a></code> | HTML body of the message
-body_text <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text body of the message
-automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent by a [worker](#workers), or via automated process. Only applies to `outbound` messages.
+sender_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
+conversation_id <br /><code><a href='#types' class='required'>guid</a></code> | The [conversation](#conversations) that contains this message. This must refer to a conversation with `conversation_type` `"email"`. The [patient_id](#patients) of a newly created email will be the same as the patient in the conversation.
+subject <br /><code><a href='#types' class='required'>string</a></code> | Subject of the message
+body_html <br /><code><a href='#types' class='optional'>html_template</a></code> | HTML body of the message
+body_text <br /><code><a href='#types' class='optional'>string</a></code> | Text body of the message
+automatically_sent <br /><code><a href='#types' class='required'>boolean</a></code> | Denotes whether the message was created and sent by a [worker](#workers), or via automated process. Only applies to `outbound` messages.
 
 
 
@@ -3847,10 +3847,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -3958,7 +3958,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -4042,8 +4042,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
-entity_id <br /><code><a href='#types'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
+body <br /><code><a href='#types' class='required'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
+entity_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
 
 
 
@@ -4124,8 +4124,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types' class='required'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
 
 
 
@@ -4192,9 +4192,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4298,7 +4298,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -4376,10 +4376,10 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+resource <br /><code><a href='#types' class='required'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types' class='required'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types' class='required'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -4457,11 +4457,11 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-resource <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+resource <br /><code><a href='#types' class='optional'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types' class='optional'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types' class='optional'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
 
 
 
@@ -4525,13 +4525,13 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-resource <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
-namespace <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
-external_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
-welkin_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+resource <br /><code><a href='#types' class='optional'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
+namespace <br /><code><a href='#types' class='optional'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
+external_id <br /><code><a href='#types' class='optional'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
+welkin_id <br /><code><a href='#types' class='optional'>string</a></code> | ID of the resource within Welkin. Must be a valid existing Welkin GUID.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4643,7 +4643,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -4733,11 +4733,11 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
-worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the worker who is attaching the file
-attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
-description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
-file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
+worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the worker who is attaching the file
+attachment_type <br /><code><a href='#types' class='required'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
+description <br /><code><a href='#types' class='optional'>string</a></code> | Text description or notes about the file being attached
+file_upload_ids <br /><code><a href='#types' class='required'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
 
 
 
@@ -4805,9 +4805,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -4940,7 +4940,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -5001,9 +5001,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -5162,7 +5162,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -5245,12 +5245,12 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-job_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Groups related tasks together
-task_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The name of the task prefixed by the name of the job
-ref_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | An external ID associated with the task, linking the task to the resource in external systems.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+job_id <br /><code><a href='#types' class='optional'>string</a></code> | Groups related tasks together
+task_name <br /><code><a href='#types' class='optional'>string</a></code> | The name of the task prefixed by the name of the job
+ref_id <br /><code><a href='#types' class='optional'>string</a></code> | An external ID associated with the task, linking the task to the resource in external systems.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -5428,7 +5428,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -5568,28 +5568,28 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#types'>string</a></code> | First name of this patient
-last_name <br /><code><a href='#types'>string</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
-street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
-street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
-city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
-county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
-state <br /><code><a href='#types'>optional</a> <a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
-country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
-gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
-height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
-weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
-smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
-provider_id_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
-email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
-phone <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
+phase <br /><code><a href='#types' class='required'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+coach_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+timezone <br /><code><a href='#types' class='required'>timezone</a></code> | Timezone in which this [patient](#patients) lives
+first_name <br /><code><a href='#types' class='required'>string</a></code> | First name of this patient
+last_name <br /><code><a href='#types' class='required'>string</a></code> | Last name of this patient
+birthday <br /><code><a href='#types' class='optional'>date</a></code> | Date of birth of this patient
+street <br /><code><a href='#types' class='optional'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#types' class='optional'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#types' class='optional'>string</a></code> | City of this patient's address
+county <br /><code><a href='#types' class='optional'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#types' class='optional'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
+state <br /><code><a href='#types' class='optional'>state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#types' class='optional'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#types' class='optional'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#types' class='optional'>string</a></code> | Gender of this patient
+height <br /><code><a href='#types' class='optional'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#types' class='optional'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+provider_id_number <br /><code><a href='#types' class='optional'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
+email <br /><code><a href='#types' class='optional'>email</a></code> | (Deprecated) Email addresses should be created via the [email address](#email-addresses) endpoint.
+phone <br /><code><a href='#types' class='optional'>e164_phone</a></code> | (Deprecated) Phone numbers should be created via the [phone number](#phone-numbers) endpoint.
 
 
 
@@ -5729,27 +5729,27 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phase <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-primary_worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-coach_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
-timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
-first_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | First name of this patient
-last_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Last name of this patient
-birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
-street <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Street address of this patient
-street_line_two <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Second line of this patient's street address
-city <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | City of this patient's address
-county <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
-zip_code <br /><code><a href='#types'>optional</a> <a href='#types'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
-state <br /><code><a href='#types'>optional</a> <a href='#types'>state</a></code> | Two character abbreviation of the state in which this patient resides
-country <br /><code><a href='#types'>optional</a> <a href='#types'>country</a></code> | Country in which this patient lives
-primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
-gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of this patient
-height <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The two digit height of this patient in inches.
-weight <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The weight of this patient in pounds.
-smokes <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` or `false` for whether this patient smokes.
-provider_id_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+phase <br /><code><a href='#types' class='optional'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+primary_worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+coach_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
+timezone <br /><code><a href='#types' class='optional'>timezone</a></code> | Timezone in which this [patient](#patients) lives
+first_name <br /><code><a href='#types' class='optional'>string</a></code> | First name of this patient
+last_name <br /><code><a href='#types' class='optional'>string</a></code> | Last name of this patient
+birthday <br /><code><a href='#types' class='optional'>date</a></code> | Date of birth of this patient
+street <br /><code><a href='#types' class='optional'>string</a></code> | Street address of this patient
+street_line_two <br /><code><a href='#types' class='optional'>string</a></code> | Second line of this patient's street address
+city <br /><code><a href='#types' class='optional'>string</a></code> | City of this patient's address
+county <br /><code><a href='#types' class='optional'>string</a></code> | County in which this patient lives. If unknown then this can be left out.
+zip_code <br /><code><a href='#types' class='optional'>zip_code</a></code> | Zip code of this patient's address in five or nine digit form. `94115` or `94115-4619`
+state <br /><code><a href='#types' class='optional'>state</a></code> | Two character abbreviation of the state in which this patient resides
+country <br /><code><a href='#types' class='optional'>country</a></code> | Country in which this patient lives
+primary_language <br /><code><a href='#types' class='optional'>enum</a></code> | This patient's primary language. Available options are ["english", "spanish", "vietnamese", "tagalog", "chinese", "arabic", "korean", "punjabi", "russian", "other"]
+gender <br /><code><a href='#types' class='optional'>string</a></code> | Gender of this patient
+height <br /><code><a href='#types' class='optional'>string</a></code> | The two digit height of this patient in inches.
+weight <br /><code><a href='#types' class='optional'>string</a></code> | The weight of this patient in pounds.
+smokes <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` or `false` for whether this patient smokes.
+provider_id_number <br /><code><a href='#types' class='optional'>string</a></code> | ID of the patient in 3rd party system. Can be any string format.
 
 
 
@@ -5830,9 +5830,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -5971,7 +5971,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -6078,17 +6078,17 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
-phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types' class='required'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+phone_number <br /><code><a href='#types' class='required'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+phone_number_type <br /><code><a href='#types' class='required'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -6189,16 +6189,16 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number. This will also remove the existing [conversation](#conversations) associated with this phone number.
-phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number. This will also remove the existing [conversation](#conversations) associated with this phone number.
+phone_number_type <br /><code><a href='#types' class='optional'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [patient](#patients) by calling this number and confirming the [patient's](#patients) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [patient](#patients) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -6252,7 +6252,7 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -6323,11 +6323,11 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -6415,12 +6415,12 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
-user_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
+user_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
+phone_number <br /><code><a href='#types' class='optional'>string</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -6556,7 +6556,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -6661,16 +6661,16 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-profile_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
-phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
-phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+profile_id <br /><code><a href='#types' class='required'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
+phone_number <br /><code><a href='#types' class='required'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
+phone_number_type <br /><code><a href='#types' class='required'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -6772,16 +6772,16 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
-phone_number_type <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
-friendly_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
-verified <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
-opted_in_to_sms <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
-opted_in_to_call_recording <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
-opted_in_to_voicemail <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
-opted_in_to_phone <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
-automatic_recipient <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
+phone_number_type <br /><code><a href='#types' class='optional'>enum</a></code> | (`cell`, `landline`, `other`)
+friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
+verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
+opted_in_to_sms <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
+opted_in_to_call_recording <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
+opted_in_to_voicemail <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
+opted_in_to_phone <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving calls at this number. Default `false`
+automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving automated SMS messages at this number. Default `false`
 
 
 
@@ -6835,7 +6835,7 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -6907,10 +6907,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-profile_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+profile_id <br /><code><a href='#types' class='optional'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -7023,7 +7023,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -7115,8 +7115,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-profile_type_name <br /><code><a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
-body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
+profile_type_name <br /><code><a href='#types' class='required'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
+body <br /><code><a href='#types' class='required'>json</a></code> | A JSON object representing the fields that are required for that Profile type
 
 
 
@@ -7205,8 +7205,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+body <br /><code><a href='#types' class='required'>json</a></code> | A JSON object representing the fields that are required for that Profile type
 
 
 
@@ -7275,10 +7275,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-profile_type_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+profile_type_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -7395,7 +7395,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -7480,11 +7480,11 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-start_date <br /><code><a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
-end_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
-entity_1_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
-entity_2_id <br /><code><a href='#types'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
-relationship_type_id <br /><code><a href='#types'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
+start_date <br /><code><a href='#types' class='required'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
+end_date <br /><code><a href='#types' class='optional'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
+entity_1_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 1 as defined in [Workshop](https://workshop.welkinhealth.com).
+entity_2_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the entity ([patient](#patients), [worker](#workers), or profile) filling the role of entity 2 as defined in [Workshop](https://workshop.welkinhealth.com).
+relationship_type_id <br /><code><a href='#types' class='required'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
 
 
 
@@ -7560,9 +7560,9 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-start_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
-end_date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+start_date <br /><code><a href='#types' class='optional'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
+end_date <br /><code><a href='#types' class='optional'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
 
 
 
@@ -7631,7 +7631,7 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -7698,11 +7698,11 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-relationship_type_id <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
-entity_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | The ID of an entity to find relationships for. This entity can fulfill entity 1 or entity 2 in the relationship.
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+relationship_type_id <br /><code><a href='#types' class='optional'>string</a></code> | The ID of the relationship type as defined in [Workshop](https://workshop.welkinhealth.com). This relationship type defines the roles that entity 1 and entity 2 fulfill in the relationship.
+entity_id <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of an entity to find relationships for. This entity can fulfill entity 1 or entity 2 in the relationship.
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -7822,7 +7822,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -7923,14 +7923,14 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
-worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
-conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
-direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
-contents <br /><code><a href='#types'>string</a></code> | Text of the message
-automatically_sent <br /><code><a href='#types'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
-sent_at <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the message was sent
-welkin_send <br /><code><a href='#types'>boolean</a></code> | Indicates if Welkin should send the message for outbound SMS messages
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
+worker_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
+conversation_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
+direction <br /><code><a href='#types' class='required'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
+contents <br /><code><a href='#types' class='required'>string</a></code> | Text of the message
+automatically_sent <br /><code><a href='#types' class='required'>boolean</a></code> | Denotes whether the message was created and sent from Welkin by a [worker](#workers), or via automated process
+sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the message was sent
+welkin_send <br /><code><a href='#types' class='required'>boolean</a></code> | Indicates if Welkin should send the message for outbound SMS messages
 
 
 
@@ -8000,10 +8000,10 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -8120,7 +8120,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -8208,12 +8208,12 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-date <br /><code><a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
-all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
-recurrence <br /><code><a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
-calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the calendar this day belongs to
+date <br /><code><a href='#types' class='required'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+all_day <br /><code><a href='#types' class='required'>boolean</a></code> | `true` if this unavailability will last the whole day
+start_time <br /><code><a href='#types' class='optional'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types' class='optional'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+recurrence <br /><code><a href='#types' class='required'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
+calendar_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID of the calendar this day belongs to
 
 
 
@@ -8298,12 +8298,12 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-date <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
-all_day <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
-recurrence <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+date <br /><code><a href='#types' class='optional'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
+all_day <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` if this unavailability will last the whole day
+start_time <br /><code><a href='#types' class='optional'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
+end_time <br /><code><a href='#types' class='optional'>string</a></code> | The ending time of a worker's unavailability (inclusive) in their local timezone. Uses 24-hour time notation
+recurrence <br /><code><a href='#types' class='optional'>enum</a></code> | The frequency at which this block of unavailable time repeats. If specified, this unavailable time block will repeat at this interval until the unavailable time block is deleted. Possible values `none`, `daily`, or `weekly`
 
 
 
@@ -8357,7 +8357,7 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -8424,9 +8424,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -8543,7 +8543,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -8628,12 +8628,12 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) participant in the visit.  Only one worker can be part of a visit.
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
-calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
-assessment_response_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
-start_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the starting time of the visit
-end_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime of the ending time of the visit
+worker_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [worker](#workers) participant in the visit.  Only one worker can be part of a visit.
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
+calendar_event_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
+assessment_response_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
+start_time <br /><code><a href='#types' class='required'>isodatetime</a></code> | Datetime of the starting time of the visit
+end_time <br /><code><a href='#types' class='required'>isodatetime</a></code> | Datetime of the ending time of the visit
 
 
 
@@ -8706,9 +8706,9 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-calendar_event_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
-assessment_response_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+calendar_event_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
+assessment_response_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
 
 
 
@@ -8776,9 +8776,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -8911,7 +8911,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -9027,14 +9027,14 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
-last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
-gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
-role_ids <br /><code><a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-active <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
+email <br /><code><a href='#types' class='required'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+first_name <br /><code><a href='#types' class='required'>string</a></code> | Worker's first name
+last_name <br /><code><a href='#types' class='required'>string</a></code> | Worker's last name
+phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types' class='required'>timezone</a></code> | Timezone in which the worker's working hours should be represented
+gender <br /><code><a href='#types' class='optional'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
+role_ids <br /><code><a href='#types' class='required'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
+active <br /><code><a href='#types' class='optional'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 
 
 
@@ -9150,15 +9150,15 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-email <br /><code><a href='#types'>optional</a> <a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
-first_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Worker's first name
-last_name <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Worker's last name
-phone_number <br /><code><a href='#types'>optional</a> <a href='#types'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
-timezone <br /><code><a href='#types'>optional</a> <a href='#types'>timezone</a></code> | Timezone in which the worker's working hours should be represented
-gender <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
-role_ids <br /><code><a href='#types'>optional</a> <a href='#types'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
-active <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+email <br /><code><a href='#types' class='optional'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+first_name <br /><code><a href='#types' class='optional'>string</a></code> | Worker's first name
+last_name <br /><code><a href='#types' class='optional'>string</a></code> | Worker's last name
+phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
+timezone <br /><code><a href='#types' class='optional'>timezone</a></code> | Timezone in which the worker's working hours should be represented
+gender <br /><code><a href='#types' class='optional'>string</a></code> | Gender of the worker. Possible values are, `Male`, `Female`, `Unknown`, `Other`, `Transgender`, and `Decline`
+role_ids <br /><code><a href='#types' class='optional'>list(string)</a></code> | The human readable and chosen IDs of the roles of this worker. The set of possible roles for your program are defined in [Workshop](https://workshop.welkinhealth.com)
+active <br /><code><a href='#types' class='optional'>boolean</a></code> | The worker account is in an active state and can be used to log in. Default is False.
 
 
 
@@ -9231,9 +9231,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
@@ -9348,7 +9348,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
 
@@ -9417,9 +9417,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-page[from] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types'>optional</a> <a href='#types'>integer</a></code> | Maximum number of items to include in the response
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
 
