@@ -507,6 +507,15 @@ html, body {
       text-decoration: none;
       color: $code-snippet-text;
     }
+
+    a.required:first-of-type::before {
+      content: "required ";
+      color: $aside-note-text;
+    }
+
+    a.optional:first-of-type::before {
+      content: "optional ";
+    }
   }
 
   pre>code {
