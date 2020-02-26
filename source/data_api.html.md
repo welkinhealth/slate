@@ -2481,7 +2481,6 @@ phone number is added to the patient.</aside>
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
 conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
 title <br /><code><a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
@@ -2550,7 +2549,6 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
 
 
@@ -3883,6 +3881,7 @@ Event Labels are available in Welkin's analytics to help track the outcomes of e
     "follow_up": "no"
   },
   "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+  "entity_type": "call",
   "updated_at": "2018-09-12T01:27:32.033666+00:00",
   "created_at": "2018-09-12T01:27:32.033816+00:00"
 }
@@ -3894,7 +3893,7 @@ param | description
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier
 body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
 entity_id <br /><code><a href='#types'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
-entity_type <br /><code><a href='#types'></a></code> | The type of the `entity_id` object (either `call` or `visit`).
+entity_type <br /><code><a href='#types'>enum</a></code> | The type of the `entity_id` object (either `call` or `visit`).
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 
@@ -3947,6 +3946,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
       "follow_up": "no"
     },
     "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+    "entity_type": "call",
     "updated_at": "2018-09-12T01:27:32.033666+00:00",
     "created_at": "2018-09-12T01:27:32.033816+00:00"
   }
@@ -4031,6 +4031,7 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
       "follow_up": "no"
     },
     "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+    "entity_type": "call",
     "updated_at": "2018-09-12T01:27:32.033666+00:00",
     "created_at": "2018-09-12T01:27:32.033816+00:00"
   }
@@ -4113,6 +4114,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
       "follow_up": "no"
     },
     "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+    "entity_type": "call",
     "updated_at": "2018-09-12T01:27:32.033666+00:00",
     "created_at": "2018-09-12T01:27:32.033816+00:00"
   }
@@ -4179,6 +4181,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
         "follow_up": "no"
       },
       "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
+      "entity_type": "call",
       "updated_at": "2018-09-12T01:27:32.033666+00:00",
       "created_at": "2018-09-12T01:27:32.033816+00:00"
     }
@@ -6449,6 +6452,7 @@ make sure that you have a record of how and when consent was received from the p
 
 
 
+
 ### Model
 
 > Example Response
@@ -6481,7 +6485,7 @@ phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone numb
 phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
 verified <br /><code><a href='#types'>boolean</a></code> | `true` only if you have confirmed this phone number is owned by the [profile](#profiles) by calling this number and confirming the [profile's](#profiles) identity details. Default `false`
-archived <br /><code><a href='#types'></a></code> | 
+archived <br /><code><a href='#types'>boolean</a></code> | `true` if the phone number has been removed from the Profile.
 opted_in_to_sms <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving SMS at this number. Default `false`
 opted_in_to_call_recording <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to calls at this number being recorded. Default `false`
 opted_in_to_voicemail <br /><code><a href='#types'>boolean</a></code> | `true` only if the [profile](#profiles) has consented verbally, digitally, or in writing to receiving voicemail at this number. Default `false`
