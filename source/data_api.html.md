@@ -791,7 +791,7 @@ via this api only records that the message was sent to the <a href="#patients">p
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __app messages__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
 conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that this messages is contained in
@@ -806,7 +806,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single app message.
+Retrieves a single __app message__ by `id`.
 
 
 #### Invocation
@@ -864,7 +864,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __app messages__ record.
 
 
 
@@ -872,6 +872,8 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 ### Create
 
+
+Creates a new __app message__.
 
 New messages can be created in a [Patient](#patients) Profile. Messages created in Welkin are recorded in the
 [conversation](#conversations) view.
@@ -1044,7 +1046,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __app messages__ record.
 sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the message was sent
 
 
@@ -1053,7 +1055,7 @@ sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code> | D
 
 
 ### Find
-Finds app messages, using param filters.
+Retrieves __app messages__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __app messages__ resource.
 
 
 #### Invocation
@@ -1172,7 +1174,7 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __assessment responses__ record.
 spec_id <br /><code><a href='#types'>string</a></code> | (Deprecated) ID of the assessment which this response corresponds to. This is only used for assessments created in code by Welkin engineers.
 spec_name <br /><code><a href='#types'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 spec_version <br /><code><a href='#types'>guid</a></code> | Optionally, the version string of assessment spec. If not specified, the most recent spec version authored in [Workshop](https://workshop.welkinhealth.com) will be used.
@@ -1186,7 +1188,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single assessment response.
+Retrieves a single __assessment response__ by `id`.
 
 
 #### Invocation
@@ -1249,19 +1251,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __assessment responses__ record.
 
 
 
 
 
 ### Create
-
-
-Creates a new assessment response.
-
-
-
+Creates a new __assessment response__.
 
 
 #### Invocation
@@ -1387,7 +1384,7 @@ title <br /><code><a href='#types' class='optional'>string</a></code> | The titl
 
 
 ### Find
-Finds assessment responses, using param filters.
+Retrieves __assessment responses__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __assessment responses__ resource.
 
 
 #### Invocation
@@ -1512,7 +1509,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __calendar events__ record.
 calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
@@ -1530,7 +1527,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single calendar event.
+Retrieves a single __calendar event__ by `id`.
 
 
 #### Invocation
@@ -1589,14 +1586,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calendar events__ record.
 
 
 
 
 
 ### Create
-Creates a new calendar event.
+Creates a new __calendar event__.
 
 
 #### Invocation
@@ -1696,7 +1693,7 @@ appointment_type <br /><code><a href='#types' class='required'>string</a></code>
 
 
 ### Update
-Updates an existing calendar event.
+Updates an existing __calendar event__.
 
 
 #### Invocation
@@ -1770,7 +1767,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calendar events__ record.
 start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
 end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
@@ -1782,7 +1779,7 @@ outcome <br /><code><a href='#types' class='optional'>enum</a></code> | The resu
 
 
 ### Find
-Finds calendar events, using param filters.
+Retrieves __calendar events__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __calendar events__ resource.
 
 
 #### Invocation
@@ -1883,7 +1880,7 @@ coach [Working Hours](#working-hours) to [Workers](#workers).
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __calendars__ record.
 worker_id <br /><code><a href='#types'>guid</a></code> | The ID of the worker who's calendar this is
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created (excluding updates to events on the associated calendar)
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
@@ -1892,7 +1889,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single calendar.
+Retrieves a single __calendar__ by `id`.
 
 
 #### Invocation
@@ -1944,7 +1941,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calendars__ record.
 
 
 
@@ -1954,7 +1951,7 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 
 ### Find
-Finds calendars, using param filters.
+Retrieves __calendars__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __calendars__ resource.
 
 
 #### Invocation
@@ -2053,7 +2050,7 @@ These calls are attached to a [calendar event](#calendar_events) if a call was i
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __calls__ record.
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 call_type <br /><code><a href='#types'>enum</a></code> | The direction of the call. `inbound` or `outbound`
@@ -2070,7 +2067,7 @@ audio_url <br /><code><a href='#types'>string</a></code> | URL at which you can 
 
 
 ### Get
-Retrieves a single call.
+Retrieves a single __call__ by `id`.
 
 
 #### Invocation
@@ -2130,7 +2127,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calls__ record.
 
 
 
@@ -2140,7 +2137,7 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 
 ### Find
-Finds calls, using param filters.
+Retrieves __calls__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __calls__ resource.
 
 
 #### Invocation
@@ -2265,7 +2262,7 @@ worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#wor
 
 
 ### Get
-Retrieves a single care flow.
+Retrieves a single __care flow__ by `id`.
 
 
 #### Invocation
@@ -2342,7 +2339,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __care flows__ record.
 
 
 
@@ -2352,7 +2349,7 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 
 ### Find
-Finds care flows, using param filters.
+Retrieves __care flows__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __care flows__ resource.
 
 
 #### Invocation
@@ -2480,7 +2477,7 @@ phone number is added to the patient.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __conversations__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in this conversation. Only one patient can participate in any single conversation.
 conversation_type <br /><code><a href='#types'>enum</a></code> | `sms`, `email`, `app` (In app messages to non-Welkin apps), `welkin_app` (Welkin's 1st party in app messages)
 title <br /><code><a href='#types'>string</a></code> | The title string to be displayed in the conversation view for 3rd party app conversations
@@ -2493,7 +2490,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single conversation.
+Retrieves a single __conversation__ by `id`.
 
 
 #### Invocation
@@ -2549,7 +2546,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __conversations__ record.
 
 
 
@@ -2644,7 +2641,7 @@ email_address_ids <br /><code><a href='#types' class='optional'>list(guid)</a></
 
 
 ### Find
-Finds conversations, using param filters.
+Retrieves __conversations__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __conversations__ resource.
 
 
 #### Invocation
@@ -2754,7 +2751,7 @@ same type will have different effects within the Welkin Portal.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __custom data type records__ record.
 body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
 patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
 type_name <br /><code><a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
@@ -2765,7 +2762,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single custom data type record.
+Retrieves a single __custom data type record__ by `id`.
 
 
 #### Invocation
@@ -2825,7 +2822,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __custom data type records__ record.
 
 
 
@@ -2834,7 +2831,7 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 ### Create
 
 
-Creates a new custom data type record.
+Creates a new __custom data type record__.
 
 <aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
 in Welkin. In Welkin we will show the values from the latest created record. In Welkin edits to a
@@ -2942,7 +2939,7 @@ type_name <br /><code><a href='#types' class='required'>string</a></code> | ID o
 
 
 ### Update
-Updates an existing custom data type record.
+Updates an existing __custom data type record__.
 
 
 #### Invocation
@@ -3029,7 +3026,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __custom data type records__ record.
 body <br /><code><a href='#types' class='required'>json</a></code> | The content of the custom data type record
 
 
@@ -3038,7 +3035,7 @@ body <br /><code><a href='#types' class='required'>json</a></code> | The content
 
 
 ### Find
-Finds custom data type records, using param filters.
+Retrieves __custom data type records__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __custom data type records__ resource.
 
 
 #### Invocation
@@ -3156,7 +3153,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __email addresses__ record.
 email <br /><code><a href='#types'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
 friendly_name <br /><code><a href='#types'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) which this email address is associated with.
@@ -3171,7 +3168,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single email address.
+Retrieves a single __email address__ by `id`.
 
 
 #### Invocation
@@ -3228,14 +3225,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __email addresses__ record.
 
 
 
 
 
 ### Create
-Creates a new email address.
+Creates a new __email address__.
 
 
 #### Invocation
@@ -3332,7 +3329,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Update
-Updates an existing email address.
+Updates an existing __email address__.
 
 
 #### Invocation
@@ -3410,7 +3407,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __email addresses__ record.
 email <br /><code><a href='#types' class='optional'>email</a></code> | Email address for the [patient](#patients). Note: no validation of format is done on email addresses.
 friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | The display name for a [patient](#patients) email address, visible to [workers](#workers)
 verified <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` only if this email has been verified by the [patient](#patients) clicking on a link in an email to confirm that they received the verification email. This does not guarantee that the email address is owned by the [patient](#patients). Default `false`
@@ -3422,7 +3419,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Delete
-Deletes a single email address.
+Deletes a single __email address__.
 
 
 #### Invocation
@@ -3469,14 +3466,14 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __email addresses__ record.
 
 
 
 
 
 ### Find
-Finds email addresses, using param filters.
+Retrieves __email addresses__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __email addresses__ resource.
 
 
 #### Invocation
@@ -3593,7 +3590,7 @@ and recorded in Welkin when the patient responds.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __email messages__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message.
 sender_id <br /><code><a href='#types'>guid</a></code> | The ID of the email sender. When creating an email, this must be a [worker](#workers) ID.
 direction <br /><code><a href='#types'>enum</a></code> | Direction of the message from the perspective of the [worker](#workers)  (`inbound` or `outbound`)
@@ -3611,7 +3608,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single email message.
+Retrieves a single __email message__ by `id`.
 
 
 #### Invocation
@@ -3671,7 +3668,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __email messages__ record.
 
 
 
@@ -3782,7 +3779,7 @@ automatically_sent <br /><code><a href='#types' class='required'>boolean</a></co
 
 
 ### Find
-Finds email messages, using param filters.
+Retrieves __email messages__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __email messages__ resource.
 
 
 #### Invocation
@@ -3890,7 +3887,7 @@ Event Labels are available in Welkin's analytics to help track the outcomes of e
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __event labels__ record.
 body <br /><code><a href='#types'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
 entity_id <br /><code><a href='#types'>guid</a></code> | The ID of the [call](#calls) or [visit](#visits) which this event label set is attached to.
 entity_type <br /><code><a href='#types'>enum</a></code> | The type of the `entity_id` object (either `call` or `visit`).
@@ -3901,7 +3898,7 @@ updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single event label.
+Retrieves a single __event label__ by `id`.
 
 
 #### Invocation
@@ -3958,14 +3955,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __event labels__ record.
 
 
 
 
 
 ### Create
-Creates a new event label.
+Creates a new __event label__.
 
 
 #### Invocation
@@ -4051,7 +4048,7 @@ entity_id <br /><code><a href='#types' class='required'>guid</a></code> | The ID
 
 
 ### Update
-Updates an existing event label.
+Updates an existing __event label__.
 
 
 #### Invocation
@@ -4126,7 +4123,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __event labels__ record.
 body <br /><code><a href='#types' class='required'>json</a></code> | A json object containing label IDs and associated answers. The set of labels and their IDs and valid values are defined in [Workshop](https://workshop.welkinhealth.com).
 
 
@@ -4135,7 +4132,7 @@ body <br /><code><a href='#types' class='required'>json</a></code> | A json obje
 
 
 ### Find
-Finds event labels, using param filters.
+Retrieves __event labels__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __event labels__ resource.
 
 
 #### Invocation
@@ -4238,7 +4235,7 @@ To learn more about custom integrations, [drop us a line](https://welkinhealth.c
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __external ids__ record.
 resource <br /><code><a href='#types'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
 namespace <br /><code><a href='#types'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
 external_id <br /><code><a href='#types'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
@@ -4248,7 +4245,7 @@ welkin_id <br /><code><a href='#types'>guid</a></code> | ID of the resource with
 
 
 ### Get
-Retrieves a single external id.
+Retrieves a single __external id__ by `id`.
 
 
 #### Invocation
@@ -4301,14 +4298,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __external ids__ record.
 
 
 
 
 
 ### Create
-Creates a new external id.
+Creates a new __external id__.
 
 
 #### Invocation
@@ -4389,7 +4386,7 @@ welkin_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of 
 
 
 ### Update
-Updates an existing external id.
+Updates an existing __external id__.
 
 
 #### Invocation
@@ -4460,7 +4457,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __external ids__ record.
 resource <br /><code><a href='#types' class='optional'>string</a></code> | String name of the resource collection that this ID is associated with. For example `workers`
 namespace <br /><code><a href='#types' class='optional'>string</a></code> | Snake cased string separating mappings of the same Welkin ID to multiple external IDs
 external_id <br /><code><a href='#types' class='optional'>string</a></code> | ID of the resource in 3rd party system. Can be any string format
@@ -4472,7 +4469,7 @@ welkin_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of 
 
 
 ### Find
-Finds external ids, using param filters.
+Retrieves __external ids__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __external ids__ resource.
 
 
 #### Invocation
@@ -4579,7 +4576,7 @@ includes the file preview and the attachment type.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __file attachments__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) profile onto which the file will be attached
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who is attaching the file
 attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
@@ -4590,7 +4587,7 @@ file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [fi
 
 
 ### Get
-Retrieves a single file attachment.
+Retrieves a single __file attachment__ by `id`.
 
 
 #### Invocation
@@ -4646,14 +4643,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __file attachments__ record.
 
 
 
 
 
 ### Create
-Creates a new file attachment.
+Creates a new __file attachment__.
 
 
 #### Invocation
@@ -4749,7 +4746,7 @@ file_upload_ids <br /><code><a href='#types' class='required'>list(guid)</a></co
 
 
 ### Find
-Finds file attachments, using param filters.
+Retrieves __file attachments__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __file attachments__ resource.
 
 
 #### Invocation
@@ -4847,7 +4844,7 @@ profile one they have been attached via the [File Attachments](#file-attachments
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __file uploads__ record.
 mime_type <br /><code><a href='#types'>enum</a></code> | MIME type of the file being uploaded. Accepted MINE types: `image/tiff`, `image/jpeg`, `image/png`, `application/pdf`
 url <br /><code><a href='#types'>string</a></code> | URL of the file, including access tokens, of the file on Amazon S3. Note, the example URL has been truncated for display purposes.
 
@@ -4892,7 +4889,7 @@ data<br /><code><a href='#binary'>binary</a></code> | The binary data of the fil
 
 
 ### Get
-Retrieves a single file upload.
+Retrieves a single __file upload__ by `id`.
 
 
 #### Invocation
@@ -4943,14 +4940,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __file uploads__ record.
 
 
 
 
 
 ### Find
-Finds file uploads, using param filters.
+Retrieves __file uploads__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __file uploads__ resource.
 
 
 #### Invocation
@@ -5061,7 +5058,7 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __integration tasks__ record.
 status <br /><code><a href='#types'>enum</a></code> | Status of the task. Possible options are, `unattempted`, `running`, `failed`, or `succeeded`
 patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
 ref_ids <br /><code><a href='#types'>array</a> <a href='#types'>string</a></code> | Array of external IDs associated with the tasks, linking the task to the resource in external systems.
@@ -5100,7 +5097,7 @@ The top-level task (run_kiwihealth_pull) reports the status of the entire job, n
 
 
 ### Get
-Retrieves a single integration task.
+Retrieves a single __integration task__ by `id`.
 
 
 #### Invocation
@@ -5165,7 +5162,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __integration tasks__ record.
 
 
 
@@ -5333,7 +5330,7 @@ generation.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 primary_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
@@ -5361,7 +5358,7 @@ provider_id_number <br /><code><a href='#types'>string</a></code> | ID of the pa
 
 
 ### Get
-Retrieves a single patient.
+Retrieves a single __patient__ by `id`.
 
 
 #### Invocation
@@ -5431,14 +5428,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __patients__ record.
 
 
 
 
 
 ### Create
-Creates a new patient.
+Creates a new __patient__.
 
 
 #### Invocation
@@ -5599,7 +5596,7 @@ phone <br /><code><a href='#types' class='optional'>e164_phone</a></code> | (Dep
 
 
 ### Update
-Updates an existing patient.
+Updates an existing __patient__.
 
 
 #### Invocation
@@ -5732,7 +5729,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types' class='optional'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
 primary_worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
@@ -5760,7 +5757,7 @@ provider_id_number <br /><code><a href='#types' class='optional'>string</a></cod
 
 
 ### Find
-Finds patients, using param filters.
+Retrieves __patients__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __patients__ resource.
 
 
 #### Invocation
@@ -5894,7 +5891,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __phone numbers__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [patient](#patients) which this phone number is associated.
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) The identifier of the [patient](#patients) which this phone number is associated.
 phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the patient. Must be in international, E.164 format. Note, this can be a phone number of the patient, a care giver, or other associated entity.
@@ -5913,7 +5910,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single phone number.
+Retrieves a single __phone number__ by `id`.
 
 
 #### Invocation
@@ -5974,14 +5971,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __phone numbers__ record.
 
 
 
 
 
 ### Create
-Creates a new phone number.
+Creates a new __phone number__.
 
 
 #### Invocation
@@ -6098,7 +6095,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Update
-Updates an existing phone number.
+Updates an existing __phone number__.
 
 
 #### Invocation
@@ -6192,7 +6189,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __phone numbers__ record.
 phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | Not allowed. To update a patient's phone number you must delete the phone number and create a new phone number. This will also remove the existing [conversation](#conversations) associated with this phone number.
 phone_number_type <br /><code><a href='#types' class='optional'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between patient phone numbers
@@ -6208,7 +6205,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Delete
-Deletes a single phone number.
+Deletes a single __phone number__.
 
 
 #### Invocation
@@ -6255,14 +6252,14 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __phone numbers__ record.
 
 
 
 
 
 ### Find
-Finds phone numbers, using param filters.
+Retrieves __phone numbers__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __phone numbers__ resource.
 
 
 #### Invocation
@@ -6479,7 +6476,7 @@ make sure that you have a record of how and when consent was received from the p
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __profile phone numbers__ record.
 profile_id <br /><code><a href='#types'>guid</a></code> | The identifier of the [profile](#profiles) to which this phone number is associated.
 phone_number <br /><code><a href='#types'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
 phone_number_type <br /><code><a href='#types'>enum</a></code> | (`cell`, `landline`, `other`)
@@ -6498,7 +6495,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single profile phone number.
+Retrieves a single __profile phone number__ by `id`.
 
 
 #### Invocation
@@ -6560,14 +6557,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __profile phone numbers__ record.
 
 
 
 
 
 ### Create
-Creates a new profile phone number.
+Creates a new __profile phone number__.
 
 
 #### Invocation
@@ -6681,7 +6678,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Update
-Updates an existing profile phone number.
+Updates an existing __profile phone number__.
 
 
 #### Invocation
@@ -6776,7 +6773,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __profile phone numbers__ record.
 phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code> | The phone number to be associated with the profile. Must be in international, E.164 format.
 phone_number_type <br /><code><a href='#types' class='optional'>enum</a></code> | (`cell`, `landline`, `other`)
 friendly_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the phone number to help the [worker](#workers) differentiate between profile phone numbers
@@ -6792,7 +6789,7 @@ automatic_recipient <br /><code><a href='#types' class='optional'>boolean</a></c
 
 
 ### Delete
-Deletes a single profile phone number.
+Deletes a single __profile phone number__.
 
 
 #### Invocation
@@ -6839,14 +6836,14 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __profile phone numbers__ record.
 
 
 
 
 
 ### Find
-Finds profile phone numbers, using param filters.
+Retrieves __profile phone numbers__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __profile phone numbers__ resource.
 
 
 #### Invocation
@@ -6959,7 +6956,7 @@ define the [Relationships](#relationship-records) which link them.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __profiles__ record.
 profile_type_name <br /><code><a href='#types'>string</a></code> | Name of the Profile spec as defined in [Workshop](https://workshop.welkinhealth.com)
 body <br /><code><a href='#types'>json</a></code> | A JSON object representing the fields that are required for that Profile type
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
@@ -6969,7 +6966,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single profile.
+Retrieves a single __profile__ by `id`.
 
 
 #### Invocation
@@ -7027,14 +7024,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __profiles__ record.
 
 
 
 
 
 ### Create
-Creates a new profile.
+Creates a new __profile__.
 
 
 #### Invocation
@@ -7127,7 +7124,7 @@ body <br /><code><a href='#types' class='required'>json</a></code> | A JSON obje
 
 
 ### Update
-Updates an existing profile.
+Updates an existing __profile__.
 
 
 #### Invocation
@@ -7209,7 +7206,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __profiles__ record.
 body <br /><code><a href='#types' class='required'>json</a></code> | A JSON object representing the fields that are required for that Profile type
 
 
@@ -7218,7 +7215,7 @@ body <br /><code><a href='#types' class='required'>json</a></code> | A JSON obje
 
 
 ### Find
-Finds profiles, using param filters.
+Retrieves __profiles__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __profiles__ resource.
 
 
 #### Invocation
@@ -7328,7 +7325,7 @@ to quickly navigate to view details about the people and places in a [patient's]
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __relationship records__ record.
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 start_date <br /><code><a href='#types'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
@@ -7342,7 +7339,7 @@ relationship_type_id <br /><code><a href='#types'>string</a></code> | The ID of 
 
 
 ### Get
-Retrieves a single relationship record.
+Retrieves a single __relationship record__ by `id`.
 
 
 #### Invocation
@@ -7399,14 +7396,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __relationship records__ record.
 
 
 
 
 
 ### Create
-Creates a new relationship record.
+Creates a new __relationship record__.
 
 
 #### Invocation
@@ -7495,7 +7492,7 @@ relationship_type_id <br /><code><a href='#types' class='required'>string</a></c
 
 
 ### Update
-Updates an existing relationship record.
+Updates an existing __relationship record__.
 
 
 #### Invocation
@@ -7564,7 +7561,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __relationship records__ record.
 start_date <br /><code><a href='#types' class='optional'>date</a></code> | The date on which the relationship began between entity 1 and entity 2. This date must be in the past relative to current time.
 end_date <br /><code><a href='#types' class='optional'>date</a></code> | The date on which the relationship ended between entity 1 and entity 2. This date must be in the past relative to current time and must be after `start_date`.
 
@@ -7635,14 +7632,14 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __relationship records__ record.
 
 
 
 
 
 ### Find
-Finds relationship records, using param filters.
+Retrieves __relationship records__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __relationship records__ resource.
 
 
 #### Invocation
@@ -7753,7 +7750,7 @@ profile.
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __sms messages__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) who sent or received this message. Must match the [patient](#patients) participant of the [conversation](#conversations).
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who sent this message. Note: inbound messages do not have a `worker_id`
 conversation_id <br /><code><a href='#types'>guid</a></code> | ID of the [conversation](#conversations) that contains this message
@@ -7768,7 +7765,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single sms message.
+Retrieves a single __sms message__ by `id`.
 
 
 #### Invocation
@@ -7826,7 +7823,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __sms messages__ record.
 
 
 
@@ -7943,7 +7940,7 @@ welkin_send <br /><code><a href='#types' class='required'>boolean</a></code> | I
 
 
 ### Find
-Finds sms messages, using param filters.
+Retrieves __sms messages__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __sms messages__ resource.
 
 
 #### Invocation
@@ -8053,7 +8050,7 @@ are linked to a [worker](#workers)'s [Calendar](#calendars).
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __unavailable times__ record.
 date <br /><code><a href='#types'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
 all_day <br /><code><a href='#types'>boolean</a></code> | `true` if this unavailability will last the whole day
 start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
@@ -8067,7 +8064,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single unavailable time.
+Retrieves a single __unavailable time__ by `id`.
 
 
 #### Invocation
@@ -8124,14 +8121,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __unavailable times__ record.
 
 
 
 
 
 ### Create
-Creates a new unavailable time.
+Creates a new __unavailable time__.
 
 
 #### Invocation
@@ -8224,7 +8221,7 @@ calendar_id <br /><code><a href='#types' class='required'>guid</a></code> | The 
 
 
 ### Update
-Updates an existing unavailable time.
+Updates an existing __unavailable time__.
 
 
 #### Invocation
@@ -8302,7 +8299,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __unavailable times__ record.
 date <br /><code><a href='#types' class='optional'>date</a></code> | The initial date of this unavailability, in the format `YYYY-MM-DD` in the worker's local timezone.
 all_day <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` if this unavailability will last the whole day
 start_time <br /><code><a href='#types' class='optional'>string</a></code> | The start time of a worker's unavailability in their local timezone. Uses 24-hour time notation
@@ -8314,7 +8311,7 @@ recurrence <br /><code><a href='#types' class='optional'>enum</a></code> | The f
 
 
 ### Delete
-Deletes a single unavailable time.
+Deletes a single __unavailable time__.
 
 
 #### Invocation
@@ -8361,14 +8358,14 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __unavailable times__ record.
 
 
 
 
 
 ### Find
-Finds unavailable times, using param filters.
+Retrieves __unavailable times__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __unavailable times__ resource.
 
 
 #### Invocation
@@ -8475,7 +8472,7 @@ and [patients](#patients).
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __visits__ record.
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) participant in the visit.  Only one worker can be part of a visit.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) participant in the visit.  Only one patient can be part of a visit.
 calendar_event_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
@@ -8490,7 +8487,7 @@ updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single visit.
+Retrieves a single __visit__ by `id`.
 
 
 #### Invocation
@@ -8547,14 +8544,14 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __visits__ record.
 
 
 
 
 
 ### Create
-Creates a new visit.
+Creates a new __visit__.
 
 
 #### Invocation
@@ -8644,7 +8641,7 @@ end_time <br /><code><a href='#types' class='required'>isodatetime</a></code> | 
 
 
 ### Update
-Updates an existing visit.
+Updates an existing __visit__.
 
 
 #### Invocation
@@ -8710,7 +8707,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __visits__ record.
 calendar_event_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [calendar event](#calendar-events) that resulted in this visit, if any.
 assessment_response_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of an [assessment response](#assessment-responses) for this visit, if any.
 
@@ -8720,7 +8717,7 @@ assessment_response_id <br /><code><a href='#types' class='optional'>guid</a></c
 
 
 ### Find
-Finds visits, using param filters.
+Retrieves __visits__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __visits__ resource.
 
 
 #### Invocation
@@ -8836,7 +8833,7 @@ Workers are assigned to [patients](#patients) as the patient's primary worker vi
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __workers__ record.
 email <br /><code><a href='#types'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types'>string</a></code> | Worker's last name
@@ -8853,7 +8850,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single worker.
+Retrieves a single __worker__ by `id`.
 
 
 #### Invocation
@@ -8915,7 +8912,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __workers__ record.
 
 
 
@@ -8924,8 +8921,8 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 ### Create
 
 
-Creates a new worker. The new worker will have no password and the worker must go through the password reset flow
-before they can log in.
+Creates a new __worker__. The new worker will have no password and the worker must go through the
+password reset flow before they can log in.
 
 In order to create workers you must have this functionality enabled by Welkin. Please contact
 your implementation manager or customer success manager to have this functionality enabled for your program.
@@ -9047,7 +9044,7 @@ active <br /><code><a href='#types' class='optional'>boolean</a></code> | The wo
 ### Update
 
 
-Updates an existing worker.
+Updates an existing __worker__.
 
 In order to update workers you must have this functionality enabled by Welkin. Please contact
 your implementation manager or customer success manager to have this functionality enabled for your program.
@@ -9154,7 +9151,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __workers__ record.
 email <br /><code><a href='#types' class='optional'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
 first_name <br /><code><a href='#types' class='optional'>string</a></code> | Worker's first name
 last_name <br /><code><a href='#types' class='optional'>string</a></code> | Worker's last name
@@ -9170,7 +9167,7 @@ active <br /><code><a href='#types' class='optional'>boolean</a></code> | The wo
 
 
 ### Find
-Finds workers, using param filters.
+Retrieves __workers__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __workers__ resource.
 
 
 #### Invocation
@@ -9283,7 +9280,7 @@ represents their working times on that day. Working hours link to a [worker's](#
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __working hours__ record.
 day <br /><code><a href='#types'>enum</a></code> | The day of the week that these working hours apply to. Possible options are `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, or `Sunday`
 day_off <br /><code><a href='#types'>boolean</a></code> | `true` if a worker has designated this as a non-working day
 start_time <br /><code><a href='#types'>string</a></code> | The start time of a worker's work day in their local timezone. Uses 24-hour time notation
@@ -9296,7 +9293,7 @@ created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the re
 
 
 ### Get
-Retrieves a single working hour.
+Retrieves a single __working hour__ by `id`.
 
 
 #### Invocation
@@ -9352,7 +9349,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __working hours__ record.
 
 
 
@@ -9362,7 +9359,7 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 
 ### Find
-Finds working hours, using param filters.
+Retrieves __working hours__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __working hours__ resource.
 
 
 #### Invocation
