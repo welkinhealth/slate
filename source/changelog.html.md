@@ -19,6 +19,11 @@ Updates are listed by the day the api or documentation was released.
 
 **Data API Documentation URL:** [https://developers.welkinhealth.com](/data_api.html)
 
+## March 2nd, 2020
+* **[added]** Profiles can be created in Batch with External IDs [Batch Create](/data_api.html#batch-creation-of-resources)
+
+* **[added]** Profiles can be created in Batch with Profile Phone Numbers [Batch Create](/data_api.html#batch-creation-of-resources)
+
 ## January 20th, 2020
 * **[added]** GET, POST, PUT, and FIND for [Event Labels](/data_api.html#event-labels) APIs released.
 

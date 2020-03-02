@@ -2215,7 +2215,6 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 ## Care Flows
 
 
-
 Care Flows lay out a set of tasks, or multiple sets of tasks, to help the patient achieve 1 or more Goals.
 
 <aside>Care Flows can be created in the Coach Portal using a Care Flow template (designed in
@@ -4817,7 +4816,6 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 ## File Uploads
 
 
-
 Upload a file to Welkin. Uploaded files are stored on Amazon S3 and only become visible on a [patient](#patients)
 profile one they have been attached via the [File Attachments](#file-attachments) api.
 
@@ -5010,7 +5008,6 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 ## Integration Tasks (provisional)
-
 
 
 This endpoint reports the statuses and resulting errors from the ingestion of data via custom integrations built
@@ -9484,13 +9481,15 @@ base type | sub type | base type key | plurality
 [email messages](#email-messages) | [conversations](#conversations) | `conversation` | one to one
 [external ids](#external-ids) | [calendar events](#calendar-events) | `calendar_event` | one to one
 [external ids](#external-ids) | [patients](#patients) | `patient` | one to one
+[external ids](#external-ids) | [profiles](#profiles) | `profile` | one to one
 [external ids](#external-ids) | [workers](#workers) | `worker` | one to one
 [patients](#patients) | [custom data type records](#custom-data-type-records) | `custom_data_type_records` | one to many
 [patients](#patients) | [email addresses](#email-addresses) | `email_addresses` | one to many
 [patients](#patients) | [external ids](#external-ids) | `external_ids` | one to many
 [patients](#patients) | [phone numbers](#phone-numbers) | `phone_numbers` | one to many
 [phone numbers](#phone-numbers) | [patients](#patients) | `patient` | one to one
-[profile](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
+[profiles](#profiles) | [external ids](#external-ids) | `external_ids` | one to many
+[profiles](#profiles) | [profile phone numbers](#profile-phone-numbers) | `profile_phone_numbers` | one to many
 [profile phone numbers](#profile-phone-numbers) | [profiles](#profiles) | `profile` | one to one
 [workers](#workers) | [external ids](#external-ids) | `external_ids` | one to many
 
