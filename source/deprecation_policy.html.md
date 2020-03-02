@@ -34,7 +34,7 @@ These notifications will be sent via the developers listserve, posts on Welkin's
 
 Emails will be sent to the developers listserve when a new API version is released (thus deprecating the old version) and when an API version is going to be discontinued.
 
-All API responses will contain a `x-current-api-version` header which will be set to the current version of the Data API, a `x-api-deprecated` header when calling any deprecated API versions, and a `x-api-discontinued` header when calling any discontinued API versions.
+All API responses will contain a `X-Current-API-Version` header which will be set to the current version of the Data API, a `X-API-Deprecated` header when calling any deprecated API versions, and a `X-API-Discontinued` header when calling any discontinued API versions.
 
 # Definitions
 
