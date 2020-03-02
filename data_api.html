@@ -1534,7 +1534,7 @@ via this api only records that the message was sent to the <a href="#patients">p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>app messages</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -1574,7 +1574,7 @@ via this api only records that the message was sent to the <a href="#patients">p
 </tr>
 </tbody></table>
 <h3 id='app-messages-get'>Get</h3>
-<p>Retrieves a single app message.</p>
+<p>Retrieves a single <strong>app message</strong> by <code>id</code>.</p>
 <h4 id='app-messages-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -1623,10 +1623,12 @@ via this api only records that the message was sent to the <a href="#patients">p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>app messages</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='app-messages-create'>Create</h3>
+<p>Creates a new <strong>app message</strong>.</p>
+
 <p>New messages can be created in a <a href="#patients">Patient</a> Profile. Messages created in Welkin are recorded in the
 <a href="#conversations">conversation</a> view.</p>
 
@@ -1786,7 +1788,7 @@ behalf of Welkin to the patient.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>app messages</strong> record.</td>
 </tr>
 <tr>
 <td>sent_at <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
@@ -1794,7 +1796,7 @@ behalf of Welkin to the patient.</p>
 </tr>
 </tbody></table>
 <h3 id='app-messages-find'>Find</h3>
-<p>Finds app messages, using param filters.</p>
+<p>Retrieves <strong>app messages</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>app messages</strong> resource.</p>
 <h4 id='app-messages-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -1898,7 +1900,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>assessment responses</strong> record.</td>
 </tr>
 <tr>
 <td>spec_id <br /><code><a href='#types'>string</a></code></td>
@@ -1934,7 +1936,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='assessment-responses-get'>Get</h3>
-<p>Retrieves a single assessment response.</p>
+<p>Retrieves a single <strong>assessment response</strong> by <code>id</code>.</p>
 <h4 id='assessment-responses-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -1988,11 +1990,11 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>assessment responses</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='assessment-responses-create'>Create</h3>
-<p>Creates a new assessment response.</p>
+<p>Creates a new <strong>assessment response</strong>.</p>
 <h4 id='assessment-responses-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2122,7 +2124,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='assessment-responses-find'>Find</h3>
-<p>Finds assessment responses, using param filters.</p>
+<p>Retrieves <strong>assessment responses</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>assessment responses</strong> resource.</p>
 <h4 id='assessment-responses-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2226,7 +2228,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calendar events</strong> record.</td>
 </tr>
 <tr>
 <td>calendar_id <br /><code><a href='#types'>guid</a></code></td>
@@ -2278,7 +2280,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 </tbody></table>
 <h3 id='calendar-events-get'>Get</h3>
-<p>Retrieves a single calendar event.</p>
+<p>Retrieves a single <strong>calendar event</strong> by <code>id</code>.</p>
 <h4 id='calendar-events-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2328,11 +2330,11 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calendar events</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='calendar-events-create'>Create</h3>
-<p>Creates a new calendar event.</p>
+<p>Creates a new <strong>calendar event</strong>.</p>
 <h4 id='calendar-events-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2441,7 +2443,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 </tbody></table>
 <h3 id='calendar-events-update'>Update</h3>
-<p>Updates an existing calendar event.</p>
+<p>Updates an existing <strong>calendar event</strong>.</p>
 <h4 id='calendar-events-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2506,7 +2508,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calendar events</strong> record.</td>
 </tr>
 <tr>
 <td>start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
@@ -2526,7 +2528,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 </tbody></table>
 <h3 id='calendar-events-find'>Find</h3>
-<p>Finds calendar events, using param filters.</p>
+<p>Retrieves <strong>calendar events</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>calendar events</strong> resource.</p>
 <h4 id='calendar-events-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2614,7 +2616,7 @@ coach <a href="#working-hours">Working Hours</a> to <a href="#workers">Workers</
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calendars</strong> record.</td>
 </tr>
 <tr>
 <td>worker_id <br /><code><a href='#types'>guid</a></code></td>
@@ -2630,7 +2632,7 @@ coach <a href="#working-hours">Working Hours</a> to <a href="#workers">Workers</
 </tr>
 </tbody></table>
 <h3 id='calendars-get'>Get</h3>
-<p>Retrieves a single calendar.</p>
+<p>Retrieves a single <strong>calendar</strong> by <code>id</code>.</p>
 <h4 id='calendars-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2673,11 +2675,11 @@ coach <a href="#working-hours">Working Hours</a> to <a href="#workers">Workers</
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calendars</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='calendars-find'>Find</h3>
-<p>Finds calendars, using param filters.</p>
+<p>Retrieves <strong>calendars</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>calendars</strong> resource.</p>
 <h4 id='calendars-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2764,7 +2766,7 @@ These calls are attached to a <a href="#calendar_events">calendar event</a> if a
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calls</strong> record.</td>
 </tr>
 <tr>
 <td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
@@ -2812,7 +2814,7 @@ These calls are attached to a <a href="#calendar_events">calendar event</a> if a
 </tr>
 </tbody></table>
 <h3 id='calls-get'>Get</h3>
-<p>Retrieves a single call.</p>
+<p>Retrieves a single <strong>call</strong> by <code>id</code>.</p>
 <h4 id='calls-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -2863,11 +2865,11 @@ These calls are attached to a <a href="#calendar_events">calendar event</a> if a
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>calls</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='calls-find'>Find</h3>
-<p>Finds calls, using param filters.</p>
+<p>Retrieves <strong>calls</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>calls</strong> resource.</p>
 <h4 id='calls-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3040,7 +3042,7 @@ changes made to the Care Flow will not be reflected in the template it originate
 </tr>
 </tbody></table>
 <h3 id='care-flows-get'>Get</h3>
-<p>Retrieves a single care flow.</p>
+<p>Retrieves a single <strong>care flow</strong> by <code>id</code>.</p>
 <h4 id='care-flows-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3108,11 +3110,11 @@ changes made to the Care Flow will not be reflected in the template it originate
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>care flows</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='care-flows-find'>Find</h3>
-<p>Finds care flows, using param filters.</p>
+<p>Retrieves <strong>care flows</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>care flows</strong> resource.</p>
 <h4 id='care-flows-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3225,7 +3227,7 @@ phone number is added to the patient.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>conversations</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -3257,7 +3259,7 @@ phone number is added to the patient.</aside>
 </tr>
 </tbody></table>
 <h3 id='conversations-get'>Get</h3>
-<p>Retrieves a single conversation.</p>
+<p>Retrieves a single <strong>conversation</strong> by <code>id</code>.</p>
 <h4 id='conversations-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3304,7 +3306,7 @@ phone number is added to the patient.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>conversations</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='conversations-create'>Create</h3>
@@ -3386,7 +3388,7 @@ phone number is added to the patient.</aside>
 </tr>
 </tbody></table>
 <h3 id='conversations-find'>Find</h3>
-<p>Finds conversations, using param filters.</p>
+<p>Retrieves <strong>conversations</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>conversations</strong> resource.</p>
 <h4 id='conversations-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3485,7 +3487,7 @@ same type will have different effects within the Welkin Portal.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>custom data type records</strong> record.</td>
 </tr>
 <tr>
 <td>body <br /><code><a href='#types'>json</a></code></td>
@@ -3509,7 +3511,7 @@ same type will have different effects within the Welkin Portal.</aside>
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-get'>Get</h3>
-<p>Retrieves a single custom data type record.</p>
+<p>Retrieves a single <strong>custom data type record</strong> by <code>id</code>.</p>
 <h4 id='custom-data-type-records-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3560,11 +3562,11 @@ same type will have different effects within the Welkin Portal.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>custom data type records</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-create'>Create</h3>
-<p>Creates a new custom data type record.</p>
+<p>Creates a new <strong>custom data type record</strong>.</p>
 
 <aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
 in Welkin. In Welkin we will show the values from the latest created record. In Welkin edits to a
@@ -3664,7 +3666,7 @@ single value sidebar will not create a new record but rather update the latest r
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-update'>Update</h3>
-<p>Updates an existing custom data type record.</p>
+<p>Updates an existing <strong>custom data type record</strong>.</p>
 <h4 id='custom-data-type-records-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3742,7 +3744,7 @@ single value sidebar will not create a new record but rather update the latest r
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>custom data type records</strong> record.</td>
 </tr>
 <tr>
 <td>body <br /><code><a href='#types' class='required'>json</a></code></td>
@@ -3750,7 +3752,7 @@ single value sidebar will not create a new record but rather update the latest r
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-find'>Find</h3>
-<p>Finds custom data type records, using param filters.</p>
+<p>Retrieves <strong>custom data type records</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>custom data type records</strong> resource.</p>
 <h4 id='custom-data-type-records-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3856,7 +3858,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email addresses</strong> record.</td>
 </tr>
 <tr>
 <td>email <br /><code><a href='#types'>email</a></code></td>
@@ -3896,7 +3898,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </tr>
 </tbody></table>
 <h3 id='email-addresses-get'>Get</h3>
-<p>Retrieves a single email address.</p>
+<p>Retrieves a single <strong>email address</strong> by <code>id</code>.</p>
 <h4 id='email-addresses-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -3944,11 +3946,11 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email addresses</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='email-addresses-create'>Create</h3>
-<p>Creates a new email address.</p>
+<p>Creates a new <strong>email address</strong>.</p>
 <h4 id='email-addresses-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4051,7 +4053,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </tr>
 </tbody></table>
 <h3 id='email-addresses-update'>Update</h3>
-<p>Updates an existing email address.</p>
+<p>Updates an existing <strong>email address</strong>.</p>
 <h4 id='email-addresses-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4120,7 +4122,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email addresses</strong> record.</td>
 </tr>
 <tr>
 <td>email <br /><code><a href='#types' class='optional'>email</a></code></td>
@@ -4144,7 +4146,7 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </tr>
 </tbody></table>
 <h3 id='email-addresses-delete'>Delete</h3>
-<p>Deletes a single email address.</p>
+<p>Deletes a single <strong>email address</strong>.</p>
 <h4 id='email-addresses-delete-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4182,11 +4184,11 @@ more <a href="#patients">patients</a> share the same email address.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email addresses</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='email-addresses-find'>Find</h3>
-<p>Finds email addresses, using param filters.</p>
+<p>Retrieves <strong>email addresses</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>email addresses</strong> resource.</p>
 <h4 id='email-addresses-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4288,7 +4290,7 @@ and recorded in Welkin when the patient responds.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email messages</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -4340,7 +4342,7 @@ and recorded in Welkin when the patient responds.</p>
 </tr>
 </tbody></table>
 <h3 id='email-messages-get'>Get</h3>
-<p>Retrieves a single email message.</p>
+<p>Retrieves a single <strong>email message</strong> by <code>id</code>.</p>
 <h4 id='email-messages-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4391,7 +4393,7 @@ and recorded in Welkin when the patient responds.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>email messages</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='email-messages-create'>Create</h3>
@@ -4496,7 +4498,7 @@ this message.</p>
 </tr>
 </tbody></table>
 <h3 id='email-messages-find'>Find</h3>
-<p>Finds email messages, using param filters.</p>
+<p>Retrieves <strong>email messages</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>email messages</strong> resource.</p>
 <h4 id='email-messages-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4593,7 +4595,7 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>event labels</strong> record.</td>
 </tr>
 <tr>
 <td>body <br /><code><a href='#types'>json</a></code></td>
@@ -4617,7 +4619,7 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </tr>
 </tbody></table>
 <h3 id='event-labels-get'>Get</h3>
-<p>Retrieves a single event label.</p>
+<p>Retrieves a single <strong>event label</strong> by <code>id</code>.</p>
 <h4 id='event-labels-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4665,11 +4667,11 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>event labels</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='event-labels-create'>Create</h3>
-<p>Creates a new event label.</p>
+<p>Creates a new <strong>event label</strong>.</p>
 <h4 id='event-labels-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4746,7 +4748,7 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </tr>
 </tbody></table>
 <h3 id='event-labels-update'>Update</h3>
-<p>Updates an existing event label.</p>
+<p>Updates an existing <strong>event label</strong>.</p>
 <h4 id='event-labels-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4812,7 +4814,7 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>event labels</strong> record.</td>
 </tr>
 <tr>
 <td>body <br /><code><a href='#types' class='required'>json</a></code></td>
@@ -4820,7 +4822,7 @@ Event Labels are available in Welkin&#39;s analytics to help track the outcomes 
 </tr>
 </tbody></table>
 <h3 id='event-labels-find'>Find</h3>
-<p>Finds event labels, using param filters.</p>
+<p>Retrieves <strong>event labels</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>event labels</strong> resource.</p>
 <h4 id='event-labels-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4908,7 +4910,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>external ids</strong> record.</td>
 </tr>
 <tr>
 <td>resource <br /><code><a href='#types'>string</a></code></td>
@@ -4928,7 +4930,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </tr>
 </tbody></table>
 <h3 id='external-ids-get'>Get</h3>
-<p>Retrieves a single external id.</p>
+<p>Retrieves a single <strong>external id</strong> by <code>id</code>.</p>
 <h4 id='external-ids-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -4972,11 +4974,11 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>external ids</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='external-ids-create'>Create</h3>
-<p>Creates a new external id.</p>
+<p>Creates a new <strong>external id</strong>.</p>
 <h4 id='external-ids-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5054,7 +5056,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </tr>
 </tbody></table>
 <h3 id='external-ids-update'>Update</h3>
-<p>Updates an existing external id.</p>
+<p>Updates an existing <strong>external id</strong>.</p>
 <h4 id='external-ids-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5116,7 +5118,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>external ids</strong> record.</td>
 </tr>
 <tr>
 <td>resource <br /><code><a href='#types' class='optional'>string</a></code></td>
@@ -5136,7 +5138,7 @@ To learn more about custom integrations, <a href="https://welkinhealth.com/conta
 </tr>
 </tbody></table>
 <h3 id='external-ids-find'>Find</h3>
-<p>Finds external ids, using param filters.</p>
+<p>Retrieves <strong>external ids</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>external ids</strong> resource.</p>
 <h4 id='external-ids-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5239,7 +5241,7 @@ includes the file preview and the attachment type.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>file attachments</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -5263,7 +5265,7 @@ includes the file preview and the attachment type.</p>
 </tr>
 </tbody></table>
 <h3 id='file-attachments-get'>Get</h3>
-<p>Retrieves a single file attachment.</p>
+<p>Retrieves a single <strong>file attachment</strong> by <code>id</code>.</p>
 <h4 id='file-attachments-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5310,11 +5312,11 @@ includes the file preview and the attachment type.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>file attachments</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='file-attachments-create'>Create</h3>
-<p>Creates a new file attachment.</p>
+<p>Creates a new <strong>file attachment</strong>.</p>
 <h4 id='file-attachments-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5408,7 +5410,7 @@ includes the file preview and the attachment type.</p>
 </tr>
 </tbody></table>
 <h3 id='file-attachments-find'>Find</h3>
-<p>Finds file attachments, using param filters.</p>
+<p>Retrieves <strong>file attachments</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>file attachments</strong> resource.</p>
 <h4 id='file-attachments-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5492,7 +5494,7 @@ profile one they have been attached via the <a href="#file-attachments">File Att
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>file uploads</strong> record.</td>
 </tr>
 <tr>
 <td>mime_type <br /><code><a href='#types'>enum</a></code></td>
@@ -5544,7 +5546,7 @@ profile one they have been attached via the <a href="#file-attachments">File Att
 </tr>
 </tbody></table>
 <h3 id='file-uploads-get'>Get</h3>
-<p>Retrieves a single file upload.</p>
+<p>Retrieves a single <strong>file upload</strong> by <code>id</code>.</p>
 <h4 id='file-uploads-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5586,11 +5588,11 @@ profile one they have been attached via the <a href="#file-attachments">File Att
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>file uploads</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='file-uploads-find'>Find</h3>
-<p>Finds file uploads, using param filters.</p>
+<p>Retrieves <strong>file uploads</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>file uploads</strong> resource.</p>
 <h4 id='file-uploads-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5684,7 +5686,7 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>integration tasks</strong> record.</td>
 </tr>
 <tr>
 <td>status <br /><code><a href='#types'>enum</a></code></td>
@@ -5768,7 +5770,7 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 
 <p>The top-level task (run_kiwihealth_pull) reports the status of the entire job, not the individual tasks linked to the job. Individual task statuses are reported by task, but any errors they encounter can cause the whole job to fail.</p>
 <h3 id='integration-tasks-provisional-get'>Get</h3>
-<p>Retrieves a single integration task.</p>
+<p>Retrieves a single <strong>integration task</strong> by <code>id</code>.</p>
 <h4 id='integration-tasks-provisional-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -5824,7 +5826,7 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>integration tasks</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='integration-tasks-provisional-find'>Find</h3>
@@ -5958,7 +5960,7 @@ generation.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>patients</strong> record.</td>
 </tr>
 <tr>
 <td>phase <br /><code><a href='#types'>enum</a></code></td>
@@ -6050,7 +6052,7 @@ generation.</p>
 </tr>
 </tbody></table>
 <h3 id='patients-get'>Get</h3>
-<p>Retrieves a single patient.</p>
+<p>Retrieves a single <strong>patient</strong> by <code>id</code>.</p>
 <h4 id='patients-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6111,11 +6113,11 @@ generation.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>patients</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='patients-create'>Create</h3>
-<p>Creates a new patient.</p>
+<p>Creates a new <strong>patient</strong>.</p>
 <h4 id='patients-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6327,7 +6329,7 @@ generation.</p>
 </tr>
 </tbody></table>
 <h3 id='patients-update'>Update</h3>
-<p>Updates an existing patient.</p>
+<p>Updates an existing <strong>patient</strong>.</p>
 <h4 id='patients-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6451,7 +6453,7 @@ generation.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>patients</strong> record.</td>
 </tr>
 <tr>
 <td>phase <br /><code><a href='#types' class='optional'>enum</a></code></td>
@@ -6535,7 +6537,7 @@ generation.</p>
 </tr>
 </tbody></table>
 <h3 id='patients-find'>Find</h3>
-<p>Finds patients, using param filters.</p>
+<p>Retrieves <strong>patients</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>patients</strong> resource.</p>
 <h4 id='patients-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6648,7 +6650,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>phone numbers</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -6704,7 +6706,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </tr>
 </tbody></table>
 <h3 id='phone-numbers-get'>Get</h3>
-<p>Retrieves a single phone number.</p>
+<p>Retrieves a single <strong>phone number</strong> by <code>id</code>.</p>
 <h4 id='phone-numbers-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6756,11 +6758,11 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>phone numbers</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='phone-numbers-create'>Create</h3>
-<p>Creates a new phone number.</p>
+<p>Creates a new <strong>phone number</strong>.</p>
 <h4 id='phone-numbers-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6895,7 +6897,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </tr>
 </tbody></table>
 <h3 id='phone-numbers-update'>Update</h3>
-<p>Updates an existing phone number.</p>
+<p>Updates an existing <strong>phone number</strong>.</p>
 <h4 id='phone-numbers-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -6980,7 +6982,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>phone numbers</strong> record.</td>
 </tr>
 <tr>
 <td>phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code></td>
@@ -7020,7 +7022,7 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </tr>
 </tbody></table>
 <h3 id='phone-numbers-delete'>Delete</h3>
-<p>Deletes a single phone number.</p>
+<p>Deletes a single <strong>phone number</strong>.</p>
 <h4 id='phone-numbers-delete-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7058,11 +7060,11 @@ associated directly with the <a href="#patients">patient's</a> profile.</aside>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>phone numbers</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='phone-numbers-find'>Find</h3>
-<p>Finds phone numbers, using param filters.</p>
+<p>Retrieves <strong>phone numbers</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>phone numbers</strong> resource.</p>
 <h4 id='phone-numbers-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7265,7 +7267,7 @@ make sure that you have a record of how and when consent was received from the p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profile phone numbers</strong> record.</td>
 </tr>
 <tr>
 <td>profile_id <br /><code><a href='#types'>guid</a></code></td>
@@ -7321,7 +7323,7 @@ make sure that you have a record of how and when consent was received from the p
 </tr>
 </tbody></table>
 <h3 id='profile-phone-numbers-get'>Get</h3>
-<p>Retrieves a single profile phone number.</p>
+<p>Retrieves a single <strong>profile phone number</strong> by <code>id</code>.</p>
 <h4 id='profile-phone-numbers-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7374,11 +7376,11 @@ make sure that you have a record of how and when consent was received from the p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profile phone numbers</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='profile-phone-numbers-create'>Create</h3>
-<p>Creates a new profile phone number.</p>
+<p>Creates a new <strong>profile phone number</strong>.</p>
 <h4 id='profile-phone-numbers-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7507,7 +7509,7 @@ make sure that you have a record of how and when consent was received from the p
 </tr>
 </tbody></table>
 <h3 id='profile-phone-numbers-update'>Update</h3>
-<p>Updates an existing profile phone number.</p>
+<p>Updates an existing <strong>profile phone number</strong>.</p>
 <h4 id='profile-phone-numbers-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7593,7 +7595,7 @@ make sure that you have a record of how and when consent was received from the p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profile phone numbers</strong> record.</td>
 </tr>
 <tr>
 <td>phone_number <br /><code><a href='#types' class='optional'>e164_phone</a></code></td>
@@ -7633,7 +7635,7 @@ make sure that you have a record of how and when consent was received from the p
 </tr>
 </tbody></table>
 <h3 id='profile-phone-numbers-delete'>Delete</h3>
-<p>Deletes a single profile phone number.</p>
+<p>Deletes a single <strong>profile phone number</strong>.</p>
 <h4 id='profile-phone-numbers-delete-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7671,11 +7673,11 @@ make sure that you have a record of how and when consent was received from the p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profile phone numbers</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='profile-phone-numbers-find'>Find</h3>
-<p>Finds profile phone numbers, using param filters.</p>
+<p>Retrieves <strong>profile phone numbers</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>profile phone numbers</strong> resource.</p>
 <h4 id='profile-phone-numbers-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7778,7 +7780,7 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profiles</strong> record.</td>
 </tr>
 <tr>
 <td>profile_type_name <br /><code><a href='#types'>string</a></code></td>
@@ -7798,7 +7800,7 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </tr>
 </tbody></table>
 <h3 id='profiles-get'>Get</h3>
-<p>Retrieves a single profile.</p>
+<p>Retrieves a single <strong>profile</strong> by <code>id</code>.</p>
 <h4 id='profiles-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7847,11 +7849,11 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profiles</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='profiles-create'>Create</h3>
-<p>Creates a new profile.</p>
+<p>Creates a new <strong>profile</strong>.</p>
 <h4 id='profiles-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7935,7 +7937,7 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </tr>
 </tbody></table>
 <h3 id='profiles-update'>Update</h3>
-<p>Updates an existing profile.</p>
+<p>Updates an existing <strong>profile</strong>.</p>
 <h4 id='profiles-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8008,7 +8010,7 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>profiles</strong> record.</td>
 </tr>
 <tr>
 <td>body <br /><code><a href='#types' class='required'>json</a></code></td>
@@ -8016,7 +8018,7 @@ define the <a href="#relationship-records">Relationships</a> which link them.</p
 </tr>
 </tbody></table>
 <h3 id='profiles-find'>Find</h3>
-<p>Finds profiles, using param filters.</p>
+<p>Retrieves <strong>profiles</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>profiles</strong> resource.</p>
 <h4 id='profiles-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8111,7 +8113,7 @@ to quickly navigate to view details about the people and places in a <a href="#p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>relationship records</strong> record.</td>
 </tr>
 <tr>
 <td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
@@ -8147,7 +8149,7 @@ to quickly navigate to view details about the people and places in a <a href="#p
 </tr>
 </tbody></table>
 <h3 id='relationship-records-get'>Get</h3>
-<p>Retrieves a single relationship record.</p>
+<p>Retrieves a single <strong>relationship record</strong> by <code>id</code>.</p>
 <h4 id='relationship-records-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8195,11 +8197,11 @@ to quickly navigate to view details about the people and places in a <a href="#p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>relationship records</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='relationship-records-create'>Create</h3>
-<p>Creates a new relationship record.</p>
+<p>Creates a new <strong>relationship record</strong>.</p>
 <h4 id='relationship-records-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8288,7 +8290,7 @@ to quickly navigate to view details about the people and places in a <a href="#p
 </tr>
 </tbody></table>
 <h3 id='relationship-records-update'>Update</h3>
-<p>Updates an existing relationship record.</p>
+<p>Updates an existing <strong>relationship record</strong>.</p>
 <h4 id='relationship-records-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8348,7 +8350,7 @@ to quickly navigate to view details about the people and places in a <a href="#p
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>relationship records</strong> record.</td>
 </tr>
 <tr>
 <td>start_date <br /><code><a href='#types' class='optional'>date</a></code></td>
@@ -8409,11 +8411,11 @@ the data.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>relationship records</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='relationship-records-find'>Find</h3>
-<p>Finds relationship records, using param filters.</p>
+<p>Retrieves <strong>relationship records</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>relationship records</strong> resource.</p>
 <h4 id='relationship-records-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8511,7 +8513,7 @@ profile.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>sms messages</strong> record.</td>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
@@ -8551,7 +8553,7 @@ profile.</p>
 </tr>
 </tbody></table>
 <h3 id='sms-messages-get'>Get</h3>
-<p>Retrieves a single sms message.</p>
+<p>Retrieves a single <strong>sms message</strong> by <code>id</code>.</p>
 <h4 id='sms-messages-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8600,7 +8602,7 @@ profile.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>sms messages</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='sms-messages-create'>Create</h3>
@@ -8717,7 +8719,7 @@ profile.</p>
 </tr>
 </tbody></table>
 <h3 id='sms-messages-find'>Find</h3>
-<p>Finds sms messages, using param filters.</p>
+<p>Retrieves <strong>sms messages</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>sms messages</strong> resource.</p>
 <h4 id='sms-messages-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8812,7 +8814,7 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>unavailable times</strong> record.</td>
 </tr>
 <tr>
 <td>date <br /><code><a href='#types'>date</a></code></td>
@@ -8848,7 +8850,7 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </tr>
 </tbody></table>
 <h3 id='unavailable-times-get'>Get</h3>
-<p>Retrieves a single unavailable time.</p>
+<p>Retrieves a single <strong>unavailable time</strong> by <code>id</code>.</p>
 <h4 id='unavailable-times-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8896,11 +8898,11 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>unavailable times</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='unavailable-times-create'>Create</h3>
-<p>Creates a new unavailable time.</p>
+<p>Creates a new <strong>unavailable time</strong>.</p>
 <h4 id='unavailable-times-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -8996,7 +8998,7 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </tr>
 </tbody></table>
 <h3 id='unavailable-times-update'>Update</h3>
-<p>Updates an existing unavailable time.</p>
+<p>Updates an existing <strong>unavailable time</strong>.</p>
 <h4 id='unavailable-times-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9065,7 +9067,7 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>unavailable times</strong> record.</td>
 </tr>
 <tr>
 <td>date <br /><code><a href='#types' class='optional'>date</a></code></td>
@@ -9089,7 +9091,7 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </tr>
 </tbody></table>
 <h3 id='unavailable-times-delete'>Delete</h3>
-<p>Deletes a single unavailable time.</p>
+<p>Deletes a single <strong>unavailable time</strong>.</p>
 <h4 id='unavailable-times-delete-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9127,11 +9129,11 @@ are linked to a <a href="#workers">worker</a>&#39;s <a href="#calendars">Calenda
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>unavailable times</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='unavailable-times-find'>Find</h3>
-<p>Finds unavailable times, using param filters.</p>
+<p>Retrieves <strong>unavailable times</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>unavailable times</strong> resource.</p>
 <h4 id='unavailable-times-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9220,7 +9222,7 @@ and <a href="#patients">patients</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>visits</strong> record.</td>
 </tr>
 <tr>
 <td>worker_id <br /><code><a href='#types'>guid</a></code></td>
@@ -9260,7 +9262,7 @@ and <a href="#patients">patients</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='visits-get'>Get</h3>
-<p>Retrieves a single visit.</p>
+<p>Retrieves a single <strong>visit</strong> by <code>id</code>.</p>
 <h4 id='visits-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9308,11 +9310,11 @@ and <a href="#patients">patients</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>visits</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='visits-create'>Create</h3>
-<p>Creates a new visit.</p>
+<p>Creates a new <strong>visit</strong>.</p>
 <h4 id='visits-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9405,7 +9407,7 @@ and <a href="#patients">patients</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='visits-update'>Update</h3>
-<p>Updates an existing visit.</p>
+<p>Updates an existing <strong>visit</strong>.</p>
 <h4 id='visits-update-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9462,7 +9464,7 @@ and <a href="#patients">patients</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>visits</strong> record.</td>
 </tr>
 <tr>
 <td>calendar_event_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
@@ -9474,7 +9476,7 @@ and <a href="#patients">patients</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='visits-find'>Find</h3>
-<p>Finds visits, using param filters.</p>
+<p>Retrieves <strong>visits</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>visits</strong> resource.</p>
 <h4 id='visits-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9569,7 +9571,7 @@ and <a href="#patients">patients</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>workers</strong> record.</td>
 </tr>
 <tr>
 <td>email <br /><code><a href='#types'>email</a></code></td>
@@ -9617,7 +9619,7 @@ and <a href="#patients">patients</a>.</p>
 </tr>
 </tbody></table>
 <h3 id='workers-get'>Get</h3>
-<p>Retrieves a single worker.</p>
+<p>Retrieves a single <strong>worker</strong> by <code>id</code>.</p>
 <h4 id='workers-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -9670,12 +9672,12 @@ and <a href="#patients">patients</a>.</p>
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>workers</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='workers-create'>Create</h3>
-<p>Creates a new worker. The new worker will have no password and the worker must go through the password reset flow
-before they can log in.</p>
+<p>Creates a new <strong>worker</strong>. The new worker will have no password and the worker must go through the
+password reset flow before they can log in.</p>
 
 <p>In order to create workers you must have this functionality enabled by Welkin. Please contact
 your implementation manager or customer success manager to have this functionality enabled for your program.</p>
@@ -9802,7 +9804,7 @@ your implementation manager or customer success manager to have this functionali
 </tr>
 </tbody></table>
 <h3 id='workers-update'>Update</h3>
-<p>Updates an existing worker.</p>
+<p>Updates an existing <strong>worker</strong>.</p>
 
 <p>In order to update workers you must have this functionality enabled by Welkin. Please contact
 your implementation manager or customer success manager to have this functionality enabled for your program.</p>
@@ -9897,7 +9899,7 @@ your implementation manager or customer success manager to have this functionali
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>workers</strong> record.</td>
 </tr>
 <tr>
 <td>email <br /><code><a href='#types' class='optional'>email</a></code></td>
@@ -9933,7 +9935,7 @@ your implementation manager or customer success manager to have this functionali
 </tr>
 </tbody></table>
 <h3 id='workers-find'>Find</h3>
-<p>Finds workers, using param filters.</p>
+<p>Retrieves <strong>workers</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>workers</strong> resource.</p>
 <h4 id='workers-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -10029,7 +10031,7 @@ represents their working times on that day. Working hours link to a <a href="#wo
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>working hours</strong> record.</td>
 </tr>
 <tr>
 <td>day <br /><code><a href='#types'>enum</a></code></td>
@@ -10061,7 +10063,7 @@ represents their working times on that day. Working hours link to a <a href="#wo
 </tr>
 </tbody></table>
 <h3 id='working-hours-get'>Get</h3>
-<p>Retrieves a single working hour.</p>
+<p>Retrieves a single <strong>working hour</strong> by <code>id</code>.</p>
 <h4 id='working-hours-get-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -10108,11 +10110,11 @@ represents their working times on that day. Working hours link to a <a href="#wo
 </thead><tbody>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>The primary identifier</td>
+<td>The primary identifier of the <strong>working hours</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='working-hours-find'>Find</h3>
-<p>Finds working hours, using param filters.</p>
+<p>Retrieves <strong>working hours</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>working hours</strong> resource.</p>
 <h4 id='working-hours-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
