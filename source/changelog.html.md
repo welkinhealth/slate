@@ -87,6 +87,9 @@ Updates are listed by the day the data export or documentation was released.
 
 **Data Exports Documentation URL:** [https://developers.welkinhealth.com/data_exports.html](/data_exports.html)
 
+## March 12th, 2020
+* **[removed]** Removed duplicate fields with the old field names. Columns in exports are now consistently named across files. Exports run from here out will have the new column names.
+
 ## February 12th, 2020
 * **[changed]** Changed the order of some fields in some exports
 * **[changed]** Added duplicate fields with better field names (old fields to be removed March 11th)
