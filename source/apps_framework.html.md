@@ -75,23 +75,27 @@ Once Welkin adds the app to the Welkin environment configuration, the App's loca
 > Example request from Welkin (javascript)
 
 ```js
-// this is a simplified example because the client_id and client_secret would not be transmitted to the browser
+// On the server, Welkin does the equivalent of:
 function send_app_request(client_id, client_secret, patient_id, worker_id, provider_id)
   let claim = {
-    'iss': client_id,
-    'aud': audience,
-    'exp': Math.floor(Date.now() / 1000),
+    'iss': 'coach.welkinhealth.com',               // Fixed string
+    'aud': audience,                               // The URL of your app
+    'exp': Math.floor(Date.now() / 1000 + 60*10),  // Expires in 10min
+    'welkin_oauth_client_id': client_id,           // client_id of the secret used to sign
     'welkin_patient_id': patient_id,
     'welkin_worker_id': worker_id,
     'welkin_provider_id': provider_id,
   };
   let token = jwt.encode(claim, client_secret, algorithm='HS256');
+
+  // This signed token is then passed to the web
+  // browser, which makes a request to your application:
   let body = {
     'token': token
   };
-
-  // resp should include the content based on the redirect to be shown in the iFrame
-  resp = requests.post('https://www.example.com/test/app', data=body);
+  resp = requests.post('https://your-app.example.com/test/app', data=body);
+  // The content of resp is then rendered in the iframe
+}
 ```
 
 Welkin will send a POST request to the App, which will include the patient_id (if the app is configured as a patient action), worker_id, and provider_id in the JWT payload. The JWT will be included in the request body. When the request is received by the App, it will need to decode the JWT with it's credentials, and then will redirect (HTTP response 302) to the url that serves the content which will be displayed in the iFrame.
