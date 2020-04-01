@@ -363,23 +363,27 @@
 <blockquote>
 <p>Example request from Welkin (javascript)</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript"><code><div class="line-1"><span class="c1">// this is a simplified example because the client_id and client_secret would not be transmitted to the browser</span>
+<div class="highlight"><pre class="highlight javascript"><code><div class="line-1"><span class="c1">// On the server, Welkin does the equivalent of:</span>
 </div><div class="line-2"><span class="kd">function</span> <span class="nx">send_app_request</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">patient_id</span><span class="p">,</span> <span class="nx">worker_id</span><span class="p">,</span> <span class="nx">provider_id</span><span class="p">)</span>
 </div><div class="line-3">  <span class="kd">let</span> <span class="nx">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-4">    <span class="dl">'</span><span class="s1">iss</span><span class="dl">'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>
-</div><div class="line-5">    <span class="dl">'</span><span class="s1">aud</span><span class="dl">'</span><span class="p">:</span> <span class="nx">audience</span><span class="p">,</span>
-</div><div class="line-6">    <span class="dl">'</span><span class="s1">exp</span><span class="dl">'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
-</div><div class="line-7">    <span class="dl">'</span><span class="s1">welkin_patient_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">patient_id</span><span class="p">,</span>
-</div><div class="line-8">    <span class="dl">'</span><span class="s1">welkin_worker_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">worker_id</span><span class="p">,</span>
-</div><div class="line-9">    <span class="dl">'</span><span class="s1">welkin_provider_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">provider_id</span><span class="p">,</span>
-</div><div class="line-10">  <span class="p">};</span>
-</div><div class="line-11">  <span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">claim</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">algorithm</span><span class="o">=</span><span class="dl">'</span><span class="s1">HS256</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-12">  <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-13">    <span class="dl">'</span><span class="s1">token</span><span class="dl">'</span><span class="p">:</span> <span class="nx">token</span>
-</div><div class="line-14">  <span class="p">};</span>
-</div><div class="line-15">
-</div><div class="line-16">  <span class="c1">// resp should include the content based on the redirect to be shown in the iFrame</span>
-</div><div class="line-17">  <span class="nx">resp</span> <span class="o">=</span> <span class="nx">requests</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://www.example.com/test/app</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="o">=</span><span class="nx">body</span><span class="p">);</span>
+</div><div class="line-4">    <span class="dl">'</span><span class="s1">iss</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">coach.welkinhealth.com</span><span class="dl">'</span><span class="p">,</span>               <span class="c1">// Fixed string</span>
+</div><div class="line-5">    <span class="dl">'</span><span class="s1">aud</span><span class="dl">'</span><span class="p">:</span> <span class="nx">audience</span><span class="p">,</span>                               <span class="c1">// The URL of your app</span>
+</div><div class="line-6">    <span class="dl">'</span><span class="s1">exp</span><span class="dl">'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">+</span> <span class="mi">60</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>  <span class="c1">// Expires in 10min</span>
+</div><div class="line-7">    <span class="dl">'</span><span class="s1">welkin_oauth_client_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>           <span class="c1">// client_id of the secret used to sign</span>
+</div><div class="line-8">    <span class="dl">'</span><span class="s1">welkin_patient_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">patient_id</span><span class="p">,</span>
+</div><div class="line-9">    <span class="dl">'</span><span class="s1">welkin_worker_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">worker_id</span><span class="p">,</span>
+</div><div class="line-10">    <span class="dl">'</span><span class="s1">welkin_provider_id</span><span class="dl">'</span><span class="p">:</span> <span class="nx">provider_id</span><span class="p">,</span>
+</div><div class="line-11">  <span class="p">};</span>
+</div><div class="line-12">  <span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">claim</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">algorithm</span><span class="o">=</span><span class="dl">'</span><span class="s1">HS256</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-13">
+</div><div class="line-14">  <span class="c1">// This signed token is then passed to the web</span>
+</div><div class="line-15">  <span class="c1">// browser, which makes a request to your application:</span>
+</div><div class="line-16">  <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-17">    <span class="dl">'</span><span class="s1">token</span><span class="dl">'</span><span class="p">:</span> <span class="nx">token</span>
+</div><div class="line-18">  <span class="p">};</span>
+</div><div class="line-19">  <span class="nx">resp</span> <span class="o">=</span> <span class="nx">requests</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://your-app.example.com/test/app</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="o">=</span><span class="nx">body</span><span class="p">);</span>
+</div><div class="line-20">  <span class="c1">// The content of resp is then rendered in the iframe</span>
+</div><div class="line-21"><span class="p">}</span>
 </div></code></pre></div>
 <p>Welkin will send a POST request to the App, which will include the patient_id (if the app is configured as a patient action), worker_id, and provider_id in the JWT payload. The JWT will be included in the request body. When the request is received by the App, it will need to decode the JWT with it&#39;s credentials, and then will redirect (HTTP response 302) to the url that serves the content which will be displayed in the iFrame.</p>
 <h2 id='default-iframe-dimensions'>Default iFrame dimensions</h2>
