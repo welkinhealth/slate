@@ -167,7 +167,7 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
 #### Scopes
 
-Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
+Scopes limit the types of data and actions that a client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
 
 Each resources has a `read` and a `write` scope.
 
