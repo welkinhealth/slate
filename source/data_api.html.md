@@ -145,10 +145,6 @@ Welkin's APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. 
 4. Exchange Client Credential for an Access Token as shown in the example code.
 5. Make API requests with the Access Token.
 
-Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
-
-<aside>'all' is still a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
-
 Once you obtain an Access Token, the token can be passed as an Authorization header along with the keyword `Bearer`.
 
 The Access Tokens expire after 1 hour and a new Access Token must be requested.
@@ -168,6 +164,16 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
 * `assertion` = JWT token
 * `grant_type` = `urn:ietf:params:oauth:grant-type:jwt-bearer`
+
+#### Scopes
+
+Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
+
+Each resources has a `read` and a `write` scope.
+
+If you make a `POST` or `PUT` request with an access token which has only `write` scopes, you will receive a response with only the ID of the created or modified record. The rest of the fields will be redacted since you don't have `read` scope.
+
+<aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
 
 # Update Notifications
 Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
@@ -281,7 +287,7 @@ function create_jwt(client_id, client_secret, notify_url) {
     'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
     'scope': 'welkin',
   }
-  const assertion = jwt_simple.encode(claim, , 'HS256');
+  const assertion = jwt_simple.encode(claim, client_secret, 'HS256');
   return assertion;
 }
 
