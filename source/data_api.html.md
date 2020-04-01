@@ -814,7 +814,7 @@ Retrieves a single __app message__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
+curl -XGET https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -888,14 +888,14 @@ New messages can be created in a [Patient](#patients) Profile. Messages created 
 > Example Request
 
 ```shell
-curl -XPOST /v1/app_messages -d '{
+curl -XPOST https://api.welkinhealth.com/v1/app_messages -d '{
   "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
   "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
   "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
   "direction": "inbound",
   "contents": "Hi Developer, Welcome to Welkin Health.",
   "sent_at": "2018-09-12T01:27:32.045046+00:00"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -913,7 +913,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/app_messages'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -987,9 +987,9 @@ behalf of Welkin to the patient.
 > Example Request
 
 ```shell
-curl -XPUT /v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -d '{
+curl -XPUT https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -d '{
   "sent_at": "2018-09-12T01:27:32.045046+00:00"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -1002,7 +1002,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/app_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -1063,7 +1063,7 @@ Retrieves __app messages__, filtered by the supplied parameters. Only the parame
 > Example Request
 
 ```shell
-curl -XGET /v1/app_messages
+curl -XGET https://api.welkinhealth.com/v1/app_messages -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1196,7 +1196,7 @@ Retrieves a single __assessment response__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218
+curl -XGET https://api.welkinhealth.com/v1/assessment_responses/20c04e56-69f0-4d13-b5c1-a1763abd1218 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1266,7 +1266,7 @@ Creates a new __assessment response__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/assessment_responses -d '{
+curl -XPOST https://api.welkinhealth.com/v1/assessment_responses -d '{
   "spec_id": "some_string",
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
@@ -1281,7 +1281,7 @@ curl -XPOST /v1/assessment_responses -d '{
     "pain_scale": 0.4
   },
   "title": "some_string"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -1307,7 +1307,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/assessment_responses'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -1392,7 +1392,7 @@ Retrieves __assessment responses__, filtered by the supplied parameters. Only th
 > Example Request
 
 ```shell
-curl -XGET /v1/assessment_responses
+curl -XGET https://api.welkinhealth.com/v1/assessment_responses -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1535,7 +1535,7 @@ Retrieves a single __calendar event__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297
+curl -XGET https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1601,7 +1601,7 @@ Creates a new __calendar event__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/calendar_events -d '{
+curl -XPOST https://api.welkinhealth.com/v1/calendar_events -d '{
   "calendar_id": "598de18b-b203-4947-be34-6871188cd81d",
   "patient_id": "509fad6c-5382-4952-ad23-cfc2b2707180",
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
@@ -1609,7 +1609,7 @@ curl -XPOST /v1/calendar_events -d '{
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "modality": "call",
   "appointment_type": "intake_call"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -1628,7 +1628,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/calendar_events'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -1701,11 +1701,11 @@ Updates an existing __calendar event__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
+curl -XPUT https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
   "outcome": "completed"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -1720,7 +1720,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -1787,7 +1787,7 @@ Retrieves __calendar events__, filtered by the supplied parameters. Only the par
 > Example Request
 
 ```shell
-curl -XGET /v1/calendar_events
+curl -XGET https://api.welkinhealth.com/v1/calendar_events -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1897,7 +1897,7 @@ Retrieves a single __calendar__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
+curl -XGET https://api.welkinhealth.com/v1/calendars/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -1959,7 +1959,7 @@ Retrieves __calendars__, filtered by the supplied parameters. Only the parameter
 > Example Request
 
 ```shell
-curl -XGET /v1/calendars
+curl -XGET https://api.welkinhealth.com/v1/calendars -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2075,7 +2075,7 @@ Retrieves a single __call__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+curl -XGET https://api.welkinhealth.com/v1/calls/0546cc93-7695-49c1-ab5e-3daf3fde12bd -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2145,7 +2145,7 @@ Retrieves __calls__, filtered by the supplied parameters. Only the parameters li
 > Example Request
 
 ```shell
-curl -XGET /v1/calls
+curl -XGET https://api.welkinhealth.com/v1/calls -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2269,7 +2269,7 @@ Retrieves a single __care flow__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591
+curl -XGET https://api.welkinhealth.com/v1/care_flows/c68a80d4-95ea-4f61-bf90-615d70bea591 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2356,7 +2356,7 @@ Retrieves __care flows__, filtered by the supplied parameters. Only the paramete
 > Example Request
 
 ```shell
-curl -XGET /v1/care_flows
+curl -XGET https://api.welkinhealth.com/v1/care_flows -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2497,7 +2497,7 @@ Retrieves a single __conversation__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca
+curl -XGET https://api.welkinhealth.com/v1/conversations/bfa29e70-e328-4c3b-a3d1-7c2d959735ca -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2565,11 +2565,11 @@ Create a 3rd party app conversation for a [patient](#patients)
 > Example Request
 
 ```shell
-curl -XPOST /v1/conversations -d '{
+curl -XPOST https://api.welkinhealth.com/v1/conversations -d '{
   "patient_id": "0de64b35-2d04-40b6-b7a7-ba3d7eb50e88",
   "conversation_type": "app",
   "title": "App"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -2584,7 +2584,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/conversations'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -2648,7 +2648,7 @@ Retrieves __conversations__, filtered by the supplied parameters. Only the param
 > Example Request
 
 ```shell
-curl -XGET /v1/conversations
+curl -XGET https://api.welkinhealth.com/v1/conversations -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2769,7 +2769,7 @@ Retrieves a single __custom data type record__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
+curl -XGET https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -2844,7 +2844,7 @@ single value sidebar will not create a new record but rather update the latest r
 > Example Request
 
 ```shell
-curl -XPOST /v1/custom_data_type_records -d '{
+curl -XPOST https://api.welkinhealth.com/v1/custom_data_type_records -d '{
   "body": {
     "name": "Frank Smith",
     "suffix": "MD",
@@ -2854,7 +2854,7 @@ curl -XPOST /v1/custom_data_type_records -d '{
   },
   "patient_id": "a162d51e-7791-476a-bf9c-c631e178e3c4",
   "type_name": "hcp"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -2875,7 +2875,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/custom_data_type_records'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -2946,7 +2946,7 @@ Updates an existing __custom data type record__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
+curl -XPUT https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
   "body": {
     "name": "Frank Smith",
     "suffix": "MD",
@@ -2954,7 +2954,7 @@ curl -XPUT /v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d 
     "office_id": "e32ac52",
     "specialty": "internal medicine"
   }
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -2973,7 +2973,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -3042,7 +3042,7 @@ Retrieves __custom data type records__, filtered by the supplied parameters. Onl
 > Example Request
 
 ```shell
-curl -XGET /v1/custom_data_type_records
+curl -XGET https://api.welkinhealth.com/v1/custom_data_type_records -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3175,7 +3175,7 @@ Retrieves a single __email address__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+curl -XGET https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3239,7 +3239,7 @@ Creates a new __email address__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/email_addresses -d '{
+curl -XPOST https://api.welkinhealth.com/v1/email_addresses -d '{
   "email": "developer@welkinhealth.com",
   "friendly_name": "developer contact",
   "patient_id": "14492e35-c4e4-4235-8175-aa874321144e",
@@ -3247,7 +3247,7 @@ curl -XPOST /v1/email_addresses -d '{
   "verified": false,
   "opted_in_to_email": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -3266,7 +3266,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/email_addresses'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -3336,13 +3336,13 @@ Updates an existing __email address__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
+curl -XPUT https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -d '{
   "email": "developer@welkinhealth.com",
   "friendly_name": "developer contact",
   "verified": false,
   "opted_in_to_email": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -3359,7 +3359,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -3426,7 +3426,7 @@ Deletes a single __email address__.
 > Example Request
 
 ```shell
-curl -XDELETE /v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd
+curl -XDELETE https://api.welkinhealth.com/v1/email_addresses/0546cc93-7695-49c1-ab5e-3daf3fde12bd -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3480,7 +3480,7 @@ Retrieves __email addresses__, filtered by the supplied parameters. Only the par
 > Example Request
 
 ```shell
-curl -XGET /v1/email_addresses
+curl -XGET https://api.welkinhealth.com/v1/email_addresses -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3615,7 +3615,7 @@ Retrieves a single __email message__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b
+curl -XGET https://api.welkinhealth.com/v1/email_messages/76c5662c-1e16-4cfa-bbad-900e721a290b -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3691,13 +3691,13 @@ this message.
 > Example Request
 
 ```shell
-curl -XPOST /v1/email_messages -d '{
+curl -XPOST https://api.welkinhealth.com/v1/email_messages -d '{
   "sender_id": "0d5de756-cdda-4cc0-9cca-bcdc36b1a92f",
   "conversation_id": "bfa29e70-e328-4c3b-a3d1-7c2d959735ca",
   "subject": "This is a test email subject",
   "body_text": "This is a sample email body",
   "automatically_sent": "false"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -3714,7 +3714,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/email_messages'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -3786,7 +3786,7 @@ Retrieves __email messages__, filtered by the supplied parameters. Only the para
 > Example Request
 
 ```shell
-curl -XGET /v1/email_messages
+curl -XGET https://api.welkinhealth.com/v1/email_messages -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3905,7 +3905,7 @@ Retrieves a single __event label__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7
+curl -XGET https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -3969,13 +3969,13 @@ Creates a new __event label__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/event_labels -d '{
+curl -XPOST https://api.welkinhealth.com/v1/event_labels -d '{
   "body": {
     "welkin_default": "completed",
     "follow_up": "no"
   },
   "entity_id": "a162d51e-7791-476a-bf9c-c631e178e3c4"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -3992,7 +3992,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/event_labels'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -4055,12 +4055,12 @@ Updates an existing __event label__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
+curl -XPUT https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 -d '{
   "body": {
     "welkin_default": "completed",
     "follow_up": "no"
   }
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -4076,7 +4076,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/event_labels/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -4139,7 +4139,7 @@ Retrieves __event labels__, filtered by the supplied parameters. Only the parame
 > Example Request
 
 ```shell
-curl -XGET /v1/event_labels
+curl -XGET https://api.welkinhealth.com/v1/event_labels -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4252,7 +4252,7 @@ Retrieves a single __external id__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b
+curl -XGET https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4312,12 +4312,12 @@ Creates a new __external id__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/external_ids -d '{
+curl -XPOST https://api.welkinhealth.com/v1/external_ids -d '{
   "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -4333,7 +4333,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/external_ids'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -4393,12 +4393,12 @@ Updates an existing __external id__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
+curl -XPUT https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b -d '{
   "resource": "calendar_events",
   "namespace": "ehr",
   "external_id": "abc-123",
   "welkin_id": "e6cf56d8-a62d-4581-8339-91c846960041"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -4414,7 +4414,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/external_ids/76c5662c-1e16-4cfa-bbad-900e721a290b'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -4476,7 +4476,7 @@ Retrieves __external ids__, filtered by the supplied parameters. Only the parame
 > Example Request
 
 ```shell
-curl -XGET /v1/external_ids
+curl -XGET https://api.welkinhealth.com/v1/external_ids -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4594,7 +4594,7 @@ Retrieves a single __file attachment__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee
+curl -XGET https://api.welkinhealth.com/v1/file_attachments/b43694f1-ed2d-4e0d-a9ee-65a7e093efee -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4657,7 +4657,7 @@ Creates a new __file attachment__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/file_attachments -d '{
+curl -XPOST https://api.welkinhealth.com/v1/file_attachments -d '{
   "patient_id": "45534dcb-daab-45fe-adbc-c0408664ca14",
   "worker_id": "8004dca9-391c-422f-b8b3-1997b4747dac",
   "attachment_type": "x-ray",
@@ -4665,7 +4665,7 @@ curl -XPOST /v1/file_attachments -d '{
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
   ]
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -4684,7 +4684,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/file_attachments'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -4753,7 +4753,7 @@ Retrieves __file attachments__, filtered by the supplied parameters. Only the pa
 > Example Request
 
 ```shell
-curl -XGET /v1/file_attachments
+curl -XGET https://api.welkinhealth.com/v1/file_attachments -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4895,7 +4895,7 @@ Retrieves a single __file upload__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340
+curl -XGET https://api.welkinhealth.com/v1/file_uploads/efbcc819-f25f-4bf4-afd4-198a035d5340 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -4953,7 +4953,7 @@ Retrieves __file uploads__, filtered by the supplied parameters. Only the parame
 > Example Request
 
 ```shell
-curl -XGET /v1/file_uploads
+curl -XGET https://api.welkinhealth.com/v1/file_uploads -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5102,7 +5102,7 @@ Retrieves a single __integration task__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2
+curl -XGET https://api.welkinhealth.com/v1/integration_tasks/9bf1e295-47f5-4027-a382-008c860694c2 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5182,7 +5182,7 @@ Finds integration tasks, using param filters.
 > Example Request
 
 ```shell
-curl -XGET /v1/integration_tasks
+curl -XGET https://api.welkinhealth.com/v1/integration_tasks -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5363,7 +5363,7 @@ Retrieves a single __patient__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c
+curl -XGET https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5440,7 +5440,7 @@ Creates a new __patient__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/patients -d '{
+curl -XPOST https://api.welkinhealth.com/v1/patients -d '{
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
   "timezone": "US/Pacific",
@@ -5460,7 +5460,7 @@ curl -XPOST /v1/patients -d '{
   "weight": "175",
   "smokes": "false",
   "provider_id_number": "7IHnPI80"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -5491,7 +5491,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/patients'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -5601,7 +5601,7 @@ Updates an existing __patient__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
+curl -XPUT https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "phase": "intake",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
   "timezone": "US/Pacific",
@@ -5621,7 +5621,7 @@ curl -XPUT /v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "weight": "175",
   "smokes": "false",
   "provider_id_number": "7IHnPI80"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -5652,7 +5652,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -5762,7 +5762,7 @@ Retrieves __patients__, filtered by the supplied parameters. Only the parameters
 > Example Request
 
 ```shell
-curl -XGET /v1/patients
+curl -XGET https://api.welkinhealth.com/v1/patients -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5915,7 +5915,7 @@ Retrieves a single __phone number__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+curl -XGET https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -5983,7 +5983,7 @@ Creates a new __phone number__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/phone_numbers -d '{
+curl -XPOST https://api.welkinhealth.com/v1/phone_numbers -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phone_number": "+15555555555",
@@ -5995,7 +5995,7 @@ curl -XPOST /v1/phone_numbers -d '{
   "opted_in_to_voicemail": false,
   "opted_in_to_phone": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -6018,7 +6018,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/phone_numbers'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -6100,7 +6100,7 @@ Updates an existing __phone number__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
+curl -XPUT https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
   "phone_number": "+15555555555",
   "phone_number_type": "landline",
   "friendly_name": "main number",
@@ -6110,7 +6110,7 @@ curl -XPUT /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
   "opted_in_to_voicemail": false,
   "opted_in_to_phone": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -6131,7 +6131,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -6210,7 +6210,7 @@ Deletes a single __phone number__.
 > Example Request
 
 ```shell
-curl -XDELETE /v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+curl -XDELETE https://api.welkinhealth.com/v1/phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -6264,7 +6264,7 @@ Retrieves __phone numbers__, filtered by the supplied parameters. Only the param
 > Example Request
 
 ```shell
-curl -XGET /v1/phone_numbers
+curl -XGET https://api.welkinhealth.com/v1/phone_numbers -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -6342,11 +6342,11 @@ Parameters must be included in the request body and not as URL parameters.
 > Example Request
 
 ```shell
-curl -XPOST /v1/phone_numbers/find -d '{
+curl -XPOST https://api.welkinhealth.com/v1/phone_numbers/find -d '{
   "patient_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
   "user_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
   "phone_number": "+15555555555"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -6360,7 +6360,7 @@ data = {
   "phone_number": "+15555555555"
 }
 
-resp = requests.post(url,headers=headers, data=data).json()
+resp = requests.post(url,headers=headers, json=data).json()
 
 ```
 
@@ -6500,7 +6500,7 @@ Retrieves a single __profile phone number__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+curl -XGET https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -6569,7 +6569,7 @@ Creates a new __profile phone number__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/profile_phone_numbers -d '{
+curl -XPOST https://api.welkinhealth.com/v1/profile_phone_numbers -d '{
   "profile_id": "9a75cd83-7247-4d6b-a1dd-00e1aca2219f",
   "phone_number": "+15555555555",
   "phone_number_type": "landline",
@@ -6580,7 +6580,7 @@ curl -XPOST /v1/profile_phone_numbers -d '{
   "opted_in_to_voicemail": false,
   "opted_in_to_phone": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -6602,7 +6602,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/profile_phone_numbers'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -6683,7 +6683,7 @@ Updates an existing __profile phone number__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
+curl -XPUT https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
   "phone_number": "+15555555555",
   "phone_number_type": "landline",
   "friendly_name": "main number",
@@ -6693,7 +6693,7 @@ curl -XPUT /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -d '{
   "opted_in_to_voicemail": false,
   "opted_in_to_phone": true,
   "automatic_recipient": false
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -6714,7 +6714,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -6794,7 +6794,7 @@ Deletes a single __profile phone number__.
 > Example Request
 
 ```shell
-curl -XDELETE /v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f
+curl -XDELETE https://api.welkinhealth.com/v1/profile_phone_numbers/c9a72425-f433-4c6c-9d95-4057b25acc2f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -6848,7 +6848,7 @@ Retrieves __profile phone numbers__, filtered by the supplied parameters. Only t
 > Example Request
 
 ```shell
-curl -XGET /v1/profile_phone_numbers
+curl -XGET https://api.welkinhealth.com/v1/profile_phone_numbers -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -6971,7 +6971,7 @@ Retrieves a single __profile__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c
+curl -XGET https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7036,7 +7036,7 @@ Creates a new __profile__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/profiles -d '{
+curl -XPOST https://api.welkinhealth.com/v1/profiles -d '{
   "profile_type_name": "test_profile",
   "body": {
     "first_name": "Grace",
@@ -7044,7 +7044,7 @@ curl -XPOST /v1/profiles -d '{
     "birthday": "1906-12-09",
     "gender": "Female"
   }
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -7063,7 +7063,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/profiles'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -7129,14 +7129,14 @@ Updates an existing __profile__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
+curl -XPUT https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "body": {
     "first_name": "Grace",
     "last_name": "Hopper",
     "birthday": "1906-12-09",
     "gender": "Female"
   }
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -7154,7 +7154,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/profiles/45ceeba9-4944-43d1-b34d-0c36846acd4c'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -7220,7 +7220,7 @@ Retrieves __profiles__, filtered by the supplied parameters. Only the parameters
 > Example Request
 
 ```shell
-curl -XGET /v1/profiles
+curl -XGET https://api.welkinhealth.com/v1/profiles -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7344,7 +7344,7 @@ Retrieves a single __relationship record__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
+curl -XGET https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7408,13 +7408,13 @@ Creates a new __relationship record__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/relationship_records -d '{
+curl -XPOST https://api.welkinhealth.com/v1/relationship_records -d '{
   "start_date": "2018-02-02",
   "end_date": "2018-12-17",
   "entity_1_id": "35ceeba9-5944-46d1-e34d-1c36846eee3b",
   "entity_2_id": "12cedba8-4344-22d2-e14d-2c23666edc12",
   "relationship_type_id": "family_member"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -7431,7 +7431,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/relationship_records'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -7497,10 +7497,10 @@ Updates an existing __relationship record__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
+curl -XPUT https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "start_date": "2018-02-02",
   "end_date": "2018-12-17"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -7514,7 +7514,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -7580,7 +7580,7 @@ the data.
 > Example Request
 
 ```shell
-curl -XDELETE /v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c
+curl -XDELETE https://api.welkinhealth.com/v1/relationship_records/45ceeba9-4944-43d1-b34d-0c36846acd4c -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7644,7 +7644,7 @@ Retrieves __relationship records__, filtered by the supplied parameters. Only th
 > Example Request
 
 ```shell
-curl -XGET /v1/relationship_records
+curl -XGET https://api.welkinhealth.com/v1/relationship_records -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7770,7 +7770,7 @@ Retrieves a single __sms message__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26
+curl -XGET https://api.welkinhealth.com/v1/sms_messages/0adfd8b0-3497-48fc-8ffa-eb2add2cde26 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -7844,7 +7844,7 @@ profile.
 > Example Request
 
 ```shell
-curl -XPOST /v1/sms_messages -d '{
+curl -XPOST https://api.welkinhealth.com/v1/sms_messages -d '{
   "patient_id": "65ae66fa-d1c0-4b98-bf0a-21cd6090229f",
   "worker_id": "a1fa82d9-19e0-4114-a6d1-6745f8eaeff0",
   "conversation_id": "2e045bdd-0083-4341-bc37-9a81d990da31",
@@ -7852,7 +7852,7 @@ curl -XPOST /v1/sms_messages -d '{
   "contents": "Hi Developer, Welcome to Welkin Health.",
   "automatically_sent": false,
   "sent_at": "2018-09-12T01:27:32.045046+00:00"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -7871,7 +7871,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/sms_messages'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -7945,7 +7945,7 @@ Retrieves __sms messages__, filtered by the supplied parameters. Only the parame
 > Example Request
 
 ```shell
-curl -XGET /v1/sms_messages
+curl -XGET https://api.welkinhealth.com/v1/sms_messages -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8069,7 +8069,7 @@ Retrieves a single __unavailable time__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
+curl -XGET https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8133,14 +8133,14 @@ Creates a new __unavailable time__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/unavailable_times -d '{
+curl -XPOST https://api.welkinhealth.com/v1/unavailable_times -d '{
   "date": "2019-01-02",
   "all_day": false,
   "start_time": "12:00:00",
   "end_time": "14:30:00",
   "recurrence": "weekly",
   "calendar_id": "4d9a06b3-4568-488e-820c-217f628b0ea4"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -8158,7 +8158,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/unavailable_times'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -8226,13 +8226,13 @@ Updates an existing __unavailable time__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -d '{
+curl -XPUT https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -d '{
   "date": "2019-01-02",
   "all_day": false,
   "start_time": "12:00:00",
   "end_time": "14:30:00",
   "recurrence": "weekly"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -8249,7 +8249,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -8316,7 +8316,7 @@ Deletes a single __unavailable time__.
 > Example Request
 
 ```shell
-curl -XDELETE /v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f
+curl -XDELETE https://api.welkinhealth.com/v1/unavailable_times/7bbe0d77-9deb-4e81-8aff-6fb5d112e85f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8370,7 +8370,7 @@ Retrieves __unavailable times__, filtered by the supplied parameters. Only the p
 > Example Request
 
 ```shell
-curl -XGET /v1/unavailable_times
+curl -XGET https://api.welkinhealth.com/v1/unavailable_times -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8492,7 +8492,7 @@ Retrieves a single __visit__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9
+curl -XGET https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8556,13 +8556,13 @@ Creates a new __visit__.
 > Example Request
 
 ```shell
-curl -XPOST /v1/visits -d '{
+curl -XPOST https://api.welkinhealth.com/v1/visits -d '{
   "worker_id": "68140115-f3c9-4bcf-b029-783a1eb24153",
   "patient_id": "2923428f-2331-46bb-ab8f-04cca3aa0299",
   "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb",
   "start_time": "2019-09-28T21:45:11.093557+00:00",
   "end_time": "2019-09-28T21:45:11.093557+00:00"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -8579,7 +8579,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/visits'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -8646,9 +8646,9 @@ Updates an existing __visit__.
 > Example Request
 
 ```shell
-curl -XPUT /v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9 -d '{
+curl -XPUT https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9 -d '{
   "calendar_event_id": "8dbd90d2-3aeb-4e1f-8b1e-8dc7a9b34adb"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -8661,7 +8661,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/visits/2238a503-7ac6-4b4a-b43f-ff8c9d931ae9'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -8722,7 +8722,7 @@ Retrieves __visits__, filtered by the supplied parameters. Only the parameters l
 > Example Request
 
 ```shell
-curl -XGET /v1/visits
+curl -XGET https://api.welkinhealth.com/v1/visits -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8855,7 +8855,7 @@ Retrieves a single __worker__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f
+curl -XGET https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -8932,7 +8932,7 @@ your implementation manager or customer success manager to have this functionali
 > Example Request
 
 ```shell
-curl -XPOST /v1/workers -d '{
+curl -XPOST https://api.welkinhealth.com/v1/workers -d '{
   "email": "developer@welkinhealth.com",
   "first_name": "Emily",
   "last_name": "Smith",
@@ -8944,7 +8944,7 @@ curl -XPOST /v1/workers -d '{
     "admin"
   ],
   "active": "True"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -8967,7 +8967,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/workers'
 
-resp = requests.post(url, headers=headers, data=data).json()
+resp = requests.post(url, headers=headers, json=data).json()
 
 ```
 
@@ -9055,7 +9055,7 @@ your implementation manager or customer success manager to have this functionali
 > Example Request
 
 ```shell
-curl -XPUT /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
+curl -XPUT https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
   "email": "developer@welkinhealth.com",
   "first_name": "Emily",
   "last_name": "Smith",
@@ -9067,7 +9067,7 @@ curl -XPUT /v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f -d '{
     "admin"
   ],
   "active": "True"
-}'
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
 ```python
@@ -9090,7 +9090,7 @@ data = {
 }
 url = 'https://api.welkinhealth.com/v1/workers/0d5de756-cdda-4cc0-9cca-bcdc36b1a92f'
 
-resp = requests.put(url, headers=headers, data=data).json()
+resp = requests.put(url, headers=headers, json=data).json()
 
 ```
 
@@ -9172,7 +9172,7 @@ Retrieves __workers__, filtered by the supplied parameters. Only the parameters 
 > Example Request
 
 ```shell
-curl -XGET /v1/workers
+curl -XGET https://api.welkinhealth.com/v1/workers -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -9298,7 +9298,7 @@ Retrieves a single __working hour__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET /v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79
+curl -XGET https://api.welkinhealth.com/v1/working_hours/fd6eb4a3-fa06-4b95-91f2-eea0e050da79 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
@@ -9364,7 +9364,7 @@ Retrieves __working hours__, filtered by the supplied parameters. Only the param
 > Example Request
 
 ```shell
-curl -XGET /v1/working_hours
+curl -XGET https://api.welkinhealth.com/v1/working_hours -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
