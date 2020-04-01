@@ -19,6 +19,9 @@ Updates are listed by the day the api or documentation was released.
 
 **Data API Documentation URL:** [https://developers.welkinhealth.com](/data_api.html)
 
+## March 31st, 2020
+* **[added]** Unique scopes for each resource so that data access can be limited by Client ID. The `all` scope can still be used. [Authentication](/data_api.html#authentication)
+
 ## March 2nd, 2020
 * **[added]** Profiles can be created in Batch with External IDs [Batch Create](/data_api.html#batch-creation-of-resources)
 

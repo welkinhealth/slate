@@ -57,7 +57,8 @@ def get_welkin_api_token(client_id, client_secret, scope, endpoint):
 
 token = get_welkin_api_token('<client_id>',
                              '<client_secret>',
-                             'all',
+                             '<list of space separated scopes>',
+                             # example scope string: 'calls.read patients.write'
                              'https://api.welkinhealth.com/v1/token')
 ```
 
@@ -97,7 +98,8 @@ function get_welkin_api_token(client_id, client_secret, scope, endpoint) {
 
 WELKIN_ACCESS_TOKEN = get_welkin_api_token(process.env.WELKIN_CLIENT_ID,
                                            process.env.WELKIN_SECRET,
-                                           'all',
+                                           '<list of space separated scopes',
+                                           // example scope string: 'calls.read patients.write'
                                            WELKIN_TOKEN_URL);
 ```
 
@@ -135,7 +137,17 @@ CURL example not available
 
 Welkin's APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. This ensures that data stored within Welkin remains secure and is not accessible by unauthorized parties.
 
-Once you obtain an access token, the token can be passed as an Authorization header along with the keyword `Bearer`.
+#### Authentication Steps:
+
+1. Get access to [Integration Tools](https://workshop.welkinhealth.com/integration-tools) (requires a Welkin Workshop login).
+2. Create a Client and an associated Credential.
+3. Select the scopes that the Client can request.
+4. Exchange Client Credential for an Access Token as shown in the example code.
+5. Make API requests with the Access Token.
+
+Once you obtain an Access Token, the token can be passed as an Authorization header along with the keyword `Bearer`.
+
+The Access Tokens expire after 1 hour and a new Access Token must be requested.
 
 More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
@@ -143,15 +155,25 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 
 **Expected JWT fields**
 
-* `iss` = your client_id as issued by Welkin
+* `iss` = Your client_id as issued by Welkin in Integration Tools
 * `aud` = `https://api.welkinhealth.com/v1/token`
 * `exp` = ISO timestamp when the token should expire (recommended 1 hours from current time)
-* `scope` = `all`
+* `scope` = A space separated string of scopes
 
 **Expected POST body fields**
 
 * `assertion` = JWT token
 * `grant_type` = `urn:ietf:params:oauth:grant-type:jwt-bearer`
+
+#### Scopes
+
+Scopes limit the types of data and actions that a client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
+
+Each resources has a `read` and a `write` scope.
+
+If you make a `POST` or `PUT` request with an access token which has only `write` scopes, you will receive a response with only the ID of the created or modified record. The rest of the fields will be redacted since you don't have `read` scope.
+
+<aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
 
 # Update Notifications
 Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
@@ -265,7 +287,7 @@ function create_jwt(client_id, client_secret, notify_url) {
     'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
     'scope': 'welkin',
   }
-  const assertion = jwt_simple.encode(claim, , 'HS256');
+  const assertion = jwt_simple.encode(claim, client_secret, 'HS256');
   return assertion;
 }
 
@@ -839,6 +861,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/app_messages/:id`
 
+#### Required Scope
+`app_messages.read` or `all`
 
 > Example Response
 
@@ -937,6 +961,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/app_messages -d { }`
 
+#### Required Scope
+`app_messages.write` or `all`
 
 > Example Response
 
@@ -1021,6 +1047,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/app_messages/:id -d { }`
 
+#### Required Scope
+`app_messages.write` or `all`
 
 > Example Response
 
@@ -1088,6 +1116,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/app_messages`
 
+#### Required Scope
+`app_messages.read` or `all`
 
 > Example Response
 
@@ -1221,6 +1251,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/assessment_responses/:id`
 
+#### Required Scope
+`assessment_responses.read` or `all`
 
 > Example Response
 
@@ -1339,6 +1371,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/assessment_responses -d { }`
 
+#### Required Scope
+`assessment_responses.write` or `all`
 
 > Example Response
 
@@ -1417,6 +1451,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/assessment_responses`
 
+#### Required Scope
+`assessment_responses.read` or `all`
 
 > Example Response
 
@@ -1560,6 +1596,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calendar_events/:id`
 
+#### Required Scope
+`calendar_events.read` or `all`
 
 > Example Response
 
@@ -1653,6 +1691,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/calendar_events -d { }`
 
+#### Required Scope
+`calendar_events.write` or `all`
 
 > Example Response
 
@@ -1741,6 +1781,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/calendar_events/:id -d { }`
 
+#### Required Scope
+`calendar_events.write` or `all`
 
 > Example Response
 
@@ -1812,6 +1854,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calendar_events`
 
+#### Required Scope
+`calendar_events.read` or `all`
 
 > Example Response
 
@@ -1922,6 +1966,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calendars/:id`
 
+#### Required Scope
+`calendars.read` or `all`
 
 > Example Response
 
@@ -1984,6 +2030,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calendars`
 
+#### Required Scope
+`calendars.read` or `all`
 
 > Example Response
 
@@ -2021,6 +2069,8 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 Calls record that a call was completed between a [worker](#workers) and a [patient](#patients).
 These calls are attached to a [calendar event](#calendar_events) if a call was initiated from a calendar event.
+
+<aside>If you want to access call audio you must use an Access Token with the Scope <code>all</code>.</aside>
 
 
 
@@ -2100,6 +2150,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calls/:id`
 
+#### Required Scope
+`calls.read` or `all`
 
 > Example Response
 
@@ -2170,6 +2222,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/calls`
 
+#### Required Scope
+`calls.read` or `all`
 
 > Example Response
 
@@ -2294,6 +2348,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/care_flows/:id`
 
+#### Required Scope
+`care_flows.read` or `all`
 
 > Example Response
 
@@ -2381,6 +2437,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/care_flows`
 
+#### Required Scope
+`care_flows.read` or `all`
 
 > Example Response
 
@@ -2522,6 +2580,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/conversations/:id`
 
+#### Required Scope
+`conversations.read` or `all`
 
 > Example Response
 
@@ -2605,6 +2665,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/conversations -d { }`
 
+#### Required Scope
+`conversations.write` or `all`
 
 > Example Response
 
@@ -2673,6 +2735,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/conversations`
 
+#### Required Scope
+`conversations.read` or `all`
 
 > Example Response
 
@@ -2794,6 +2858,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/custom_data_type_records/:id`
 
+#### Required Scope
+`custom_data_type_records.read` or `all`
 
 > Example Response
 
@@ -2902,6 +2968,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/custom_data_type_records -d { }`
 
+#### Required Scope
+`custom_data_type_records.write` or `all`
 
 > Example Response
 
@@ -2998,6 +3066,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/custom_data_type_records/:id -d { }`
 
+#### Required Scope
+`custom_data_type_records.write` or `all`
 
 > Example Response
 
@@ -3067,6 +3137,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/custom_data_type_records`
 
+#### Required Scope
+`custom_data_type_records.read` or `all`
 
 > Example Response
 
@@ -3200,6 +3272,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/email_addresses/:id`
 
+#### Required Scope
+`email_addresses.read` or `all`
 
 > Example Response
 
@@ -3291,6 +3365,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/email_addresses -d { }`
 
+#### Required Scope
+`email_addresses.write` or `all`
 
 > Example Response
 
@@ -3382,6 +3458,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/email_addresses/:id -d { }`
 
+#### Required Scope
+`email_addresses.write` or `all`
 
 > Example Response
 
@@ -3451,6 +3529,8 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 `DELETE /v1/email_addresses/:id`
 
+#### Required Scope
+`email_addresses.write` or `all`
 
 > Example Response
 
@@ -3505,6 +3585,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/email_addresses`
 
+#### Required Scope
+`email_addresses.read` or `all`
 
 > Example Response
 
@@ -3640,6 +3722,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/email_messages/:id`
 
+#### Required Scope
+`email_messages.read` or `all`
 
 > Example Response
 
@@ -3737,6 +3821,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/email_messages -d { }`
 
+#### Required Scope
+`email_messages.write` or `all`
 
 > Example Response
 
@@ -3811,6 +3897,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/email_messages`
 
+#### Required Scope
+`email_messages.read` or `all`
 
 > Example Response
 
@@ -3930,6 +4018,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/event_labels/:id`
 
+#### Required Scope
+`event_labels.read` or `all`
 
 > Example Response
 
@@ -4015,6 +4105,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/event_labels -d { }`
 
+#### Required Scope
+`event_labels.write` or `all`
 
 > Example Response
 
@@ -4098,6 +4190,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/event_labels/:id -d { }`
 
+#### Required Scope
+`event_labels.write` or `all`
 
 > Example Response
 
@@ -4164,6 +4258,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/event_labels`
 
+#### Required Scope
+`event_labels.read` or `all`
 
 > Example Response
 
@@ -4207,13 +4303,7 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 Welkin APIs and systems communicate via GUIDs. All communications with Welkin's standard API must be made using
 Welkin's GUIDs. In rare cases, custom integrations are supported by mapping Welkin IDs to a set of external IDs.
 To learn more about custom integrations, [drop us a line](https://welkinhealth.com/contact-us/).
-
 <aside>Duplicate entries for the same Welkin ID or same External ID within a single namespace will be rejected.</aside>
-
-
-
-
-
 
 
 
@@ -4277,6 +4367,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/external_ids/:id`
 
+#### Required Scope
+`external_ids.read` or `all`
 
 > Example Response
 
@@ -4355,6 +4447,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/external_ids -d { }`
 
+#### Required Scope
+`external_ids.write` or `all`
 
 > Example Response
 
@@ -4436,6 +4530,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/external_ids/:id -d { }`
 
+#### Required Scope
+`external_ids.write` or `all`
 
 > Example Response
 
@@ -4501,6 +4597,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/external_ids`
 
+#### Required Scope
+`external_ids.read` or `all`
 
 > Example Response
 
@@ -4619,6 +4717,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/file_attachments/:id`
 
+#### Required Scope
+`file_attachments.read` or `all`
 
 > Example Response
 
@@ -4709,6 +4809,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/file_attachments -d { }`
 
+#### Required Scope
+`file_attachments.write` or `all`
 
 > Example Response
 
@@ -4778,6 +4880,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/file_attachments`
 
+#### Required Scope
+`file_attachments.read` or `all`
 
 > Example Response
 
@@ -4878,6 +4982,9 @@ r = requests.post(url, data=file_data, headers=headers)
 }
 ```
 
+#### Required Scope
+`all`
+
 #### Params
 
 param | description
@@ -4920,6 +5027,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/file_uploads/:id`
 
+#### Required Scope
+`file_uploads.read` or `all`
 
 > Example Response
 
@@ -4978,6 +5087,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/file_uploads`
 
+#### Required Scope
+`file_uploads.read` or `all`
 
 > Example Response
 
@@ -5127,6 +5238,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/integration_tasks/:id`
 
+#### Required Scope
+`integration_tasks.read` or `all`
 
 > Example Response
 
@@ -5207,6 +5320,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/integration_tasks`
 
+#### Required Scope
+`integration_tasks.read` or `all`
 
 > Example Response
 
@@ -5388,6 +5503,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/patients/:id`
 
+#### Required Scope
+`patients.read` or `all`
 
 > Example Response
 
@@ -5528,6 +5645,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/patients -d { }`
 
+#### Required Scope
+`patients.write` or `all`
 
 > Example Response
 
@@ -5689,6 +5808,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/patients/:id -d { }`
 
+#### Required Scope
+`patients.write` or `all`
 
 > Example Response
 
@@ -5787,6 +5908,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/patients`
 
+#### Required Scope
+`patients.read` or `all`
 
 > Example Response
 
@@ -5940,6 +6063,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/phone_numbers/:id`
 
+#### Required Scope
+`phone_numbers.read` or `all`
 
 > Example Response
 
@@ -6047,6 +6172,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/phone_numbers -d { }`
 
+#### Required Scope
+`phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6158,6 +6285,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/phone_numbers/:id -d { }`
 
+#### Required Scope
+`phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6235,6 +6364,8 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 `DELETE /v1/phone_numbers/:id`
 
+#### Required Scope
+`phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6289,6 +6420,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/phone_numbers`
 
+#### Required Scope
+`phone_numbers.read` or `all`
 
 > Example Response
 
@@ -6331,10 +6464,7 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 ### Find By Post
-
-Searches the collection, returning a list of matching resources. This `find by post` endpoint is a POST request.
-Parameters must be included in the request body and not as URL parameters.
-
+Retrieves __phone numbers__, filtered by the supplied parameters, sent in the `POST body`. Only the parameters listed below are supported in Find By Post for the __phone numbers__ resource.
 
 
 #### Invocation
@@ -6381,6 +6511,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/phone_numbers/find`
 
+#### Required Scope
+`phone_numbers.read` or `all`
 
 > Example Response
 
@@ -6525,6 +6657,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/profile_phone_numbers/:id`
 
+#### Required Scope
+`profile_phone_numbers.read` or `all`
 
 > Example Response
 
@@ -6630,6 +6764,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/profile_phone_numbers -d { }`
 
+#### Required Scope
+`profile_phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6741,6 +6877,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/profile_phone_numbers/:id -d { }`
 
+#### Required Scope
+`profile_phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6819,6 +6957,8 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 `DELETE /v1/profile_phone_numbers/:id`
 
+#### Required Scope
+`profile_phone_numbers.write` or `all`
 
 > Example Response
 
@@ -6873,6 +7013,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/profile_phone_numbers`
 
+#### Required Scope
+`profile_phone_numbers.read` or `all`
 
 > Example Response
 
@@ -6996,6 +7138,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/profiles/:id`
 
+#### Required Scope
+`profiles.read` or `all`
 
 > Example Response
 
@@ -7088,6 +7232,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/profiles -d { }`
 
+#### Required Scope
+`profiles.write` or `all`
 
 > Example Response
 
@@ -7178,6 +7324,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/profiles/:id -d { }`
 
+#### Required Scope
+`profiles.write` or `all`
 
 > Example Response
 
@@ -7245,6 +7393,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/profiles`
 
+#### Required Scope
+`profiles.read` or `all`
 
 > Example Response
 
@@ -7369,6 +7519,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/relationship_records/:id`
 
+#### Required Scope
+`relationship_records.read` or `all`
 
 > Example Response
 
@@ -7454,6 +7606,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/relationship_records -d { }`
 
+#### Required Scope
+`relationship_records.write` or `all`
 
 > Example Response
 
@@ -7534,6 +7688,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/relationship_records/:id -d { }`
 
+#### Required Scope
+`relationship_records.write` or `all`
 
 > Example Response
 
@@ -7605,6 +7761,8 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 `DELETE /v1/relationship_records/:id`
 
+#### Required Scope
+`relationship_records.write` or `all`
 
 > Example Response
 
@@ -7669,6 +7827,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/relationship_records`
 
+#### Required Scope
+`relationship_records.read` or `all`
 
 > Example Response
 
@@ -7795,6 +7955,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/sms_messages/:id`
 
+#### Required Scope
+`sms_messages.read` or `all`
 
 > Example Response
 
@@ -7896,6 +8058,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/sms_messages -d { }`
 
+#### Required Scope
+`sms_messages.write` or `all`
 
 > Example Response
 
@@ -7970,6 +8134,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/sms_messages`
 
+#### Required Scope
+`sms_messages.read` or `all`
 
 > Example Response
 
@@ -8094,6 +8260,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/unavailable_times/:id`
 
+#### Required Scope
+`unavailable_times.read` or `all`
 
 > Example Response
 
@@ -8182,6 +8350,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/unavailable_times -d { }`
 
+#### Required Scope
+`unavailable_times.write` or `all`
 
 > Example Response
 
@@ -8272,6 +8442,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/unavailable_times/:id -d { }`
 
+#### Required Scope
+`unavailable_times.write` or `all`
 
 > Example Response
 
@@ -8341,6 +8513,8 @@ const response = await axios({method: 'delete', url: url, headers: headers});
 
 `DELETE /v1/unavailable_times/:id`
 
+#### Required Scope
+`unavailable_times.write` or `all`
 
 > Example Response
 
@@ -8395,6 +8569,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/unavailable_times`
 
+#### Required Scope
+`unavailable_times.read` or `all`
 
 > Example Response
 
@@ -8517,6 +8693,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/visits/:id`
 
+#### Required Scope
+`visits.read` or `all`
 
 > Example Response
 
@@ -8602,6 +8780,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/visits -d { }`
 
+#### Required Scope
+`visits.write` or `all`
 
 > Example Response
 
@@ -8680,6 +8860,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/visits/:id -d { }`
 
+#### Required Scope
+`visits.write` or `all`
 
 > Example Response
 
@@ -8747,6 +8929,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/visits`
 
+#### Required Scope
+`visits.read` or `all`
 
 > Example Response
 
@@ -8880,6 +9064,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/workers/:id`
 
+#### Required Scope
+`workers.read` or `all`
 
 > Example Response
 
@@ -8996,6 +9182,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 `POST /v1/workers -d { }`
 
+#### Required Scope
+`workers.write` or `all`
 
 > Example Response
 
@@ -9119,6 +9307,8 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 `PUT /v1/workers/:id -d { }`
 
+#### Required Scope
+`workers.write` or `all`
 
 > Example Response
 
@@ -9197,6 +9387,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/workers`
 
+#### Required Scope
+`workers.read` or `all`
 
 > Example Response
 
@@ -9323,6 +9515,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/working_hours/:id`
 
+#### Required Scope
+`working_hours.read` or `all`
 
 > Example Response
 
@@ -9389,6 +9583,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 `GET /v1/working_hours`
 
+#### Required Scope
+`working_hours.read` or `all`
 
 > Example Response
 
