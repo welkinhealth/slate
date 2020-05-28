@@ -903,7 +903,13 @@
 </div><div class="line-9"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
 </div><div class="line-10">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">couldn't get data from Welkin</span><span class="dl">"</span><span class="p">);</span>
 </div><div class="line-11"><span class="p">}</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">CURL example not available
+</div></code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1"><span class="c"># no shell example for JWT construction</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="c"># POST with form-urlencoded body</span>
+</div><div class="line-4">curl https://api.welkinhealth.com/v1/token <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'assertion=eyJ.........OmU&amp;grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="c"># POST with json body</span>
+</div><div class="line-7">curl https://api.welkinhealth.com/v1/token <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">''</span>
 </div></code></pre></div>
 <p>Welkin&#39;s APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. This ensures that data stored within Welkin remains secure and is not accessible by unauthorized parties.</p>
 <h4 id='authentication-authentication-steps'>Authentication Steps:</h4>
@@ -932,14 +938,16 @@
 <li><code>scope</code> = A space separated string of scopes</li>
 </ul>
 
-<p><strong>Expected POST body fields</strong></p>
+<p><strong>Expected body fields</strong></p>
 
 <ul>
 <li><code>assertion</code> = JWT token</li>
 <li><code>grant_type</code> = <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code></li>
 </ul>
+
+<p>The body may be form-encoded or JSON.</p>
 <h4 id='authentication-scopes'>Scopes</h4>
-<p>Scopes limit the types of data and actions that a client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: <code>calls.read patients.write assessments.read</code></p>
+<p>Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: <code>calls.read patients.write assessments.read</code></p>
 
 <p>Each resources has a <code>read</code> and a <code>write</code> scope.</p>
 
@@ -2231,8 +2239,8 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 calendar event can be scheduled for a date and time or simply for a date.</p>
 
 <aside>All calendar events have an associated appointment prompt which will trigger at the time of the event. Valid
-appointment prompts are specific to your implementation of Welkin. The
-range of appointment prompts can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
+appointment prompts are specific to your implementation of Welkin. The range of appointment prompts can be found in
+<a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
 
 <aside>If <code>is_all_day</code> is set to <code>true</code> then you must set <code>day</code>. If <code>is_all_day</code> is set to <code>false</code> then you must use
 <code>start_time</code> and <code>end_time</code>.</aside>
@@ -2270,23 +2278,23 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
-<td>ID of the <a href="#patients">patient</a></td>
+<td>ID of the <a href="#patients">patient</a> :type user_id: guid</td>
 </tr>
 <tr>
 <td>user_id <br /><code><a href='#types'>guid</a></code></td>
 <td>(Deprecated) ID of the <a href="#patients">patient</a></td>
 </tr>
 <tr>
-<td>is_all_day <br /><code><a href='#types'>boolean</a></code></td>
-<td><code>true</code> if not scheduled for a specific time of day. <code>false</code> otherwise</td>
+<td>is_all_day <br /><code></code></td>
+<td><code>true</code> if not scheduled for a specific time of day. <code>false</code> otherwise :type is_all_day: boolean</td>
 </tr>
 <tr>
-<td>start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
-<td>Scheduled start time of the calendar event if scheduled for a specific time of day</td>
+<td>start_time <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime</td>
 </tr>
 <tr>
-<td>end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
-<td>Scheduled end time of the calendar event if scheduled for a specific time of day</td>
+<td>end_time <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime</td>
 </tr>
 <tr>
 <td>day <br /><code><a href='#types'>date</a></code></td>
@@ -2453,7 +2461,7 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>ID of the <a href="#patients">patient</a></td>
+<td>ID of the <a href="#patients">patient</a> :type user_id: guid</td>
 </tr>
 <tr>
 <td>user_id <br /><code><a href='#types' class='required'>guid</a></code></td>
@@ -2461,11 +2469,11 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
-<td>Scheduled start time of the calendar event if scheduled for a specific time of day</td>
+<td>Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime</td>
 </tr>
 <tr>
 <td>end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
-<td>Scheduled end time of the calendar event if scheduled for a specific time of day</td>
+<td>Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime</td>
 </tr>
 <tr>
 <td>day <br /><code><a href='#types' class='optional'>date</a></code></td>
@@ -2478,6 +2486,14 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 <tr>
 <td>appointment_type <br /><code><a href='#types' class='required'>string</a></code></td>
 <td>Appointment prompt to be used for this event (see note for details)</td>
+</tr>
+<tr>
+<td>ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>If this is set, Welkin will not check whether the calendar event is during an <a href="#unavailable-times">unavailable time</a> for the worker.</td>
+</tr>
+<tr>
+<td>ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>If this is set, Welkin will not check whether the calendar event is within the worker&#39;s weekly available days and hours.</td>
 </tr>
 </tbody></table>
 <h3 id='calendar-events-update'>Update</h3>
@@ -2552,11 +2568,11 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 </tr>
 <tr>
 <td>start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
-<td>Scheduled start time of the calendar event if scheduled for a specific time of day</td>
+<td>Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime</td>
 </tr>
 <tr>
 <td>end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
-<td>Scheduled end time of the calendar event if scheduled for a specific time of day</td>
+<td>Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime</td>
 </tr>
 <tr>
 <td>day <br /><code><a href='#types' class='optional'>date</a></code></td>
@@ -2565,6 +2581,14 @@ range of appointment prompts can be found in <a href="https://workshop.welkinhea
 <tr>
 <td>outcome <br /><code><a href='#types' class='optional'>enum</a></code></td>
 <td>The result of the event if it is no longer upcoming (<code>completed</code>, <code>cancelled</code>, <code>no_show</code>)</td>
+</tr>
+<tr>
+<td>ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>If this is set, Welkin will not check whether the calendar event is during an <a href="#unavailable-times">unavailable time</a> for the worker.</td>
+</tr>
+<tr>
+<td>ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>If this is set, Welkin will not check whether the calendar event is within the worker&#39;s weekly available days and hours.</td>
 </tr>
 </tbody></table>
 <h3 id='calendar-events-find'>Find</h3>
@@ -6082,6 +6106,10 @@ generation.</p>
 <tr>
 <td>phase <br /><code><a href='#types'>enum</a></code></td>
 <td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+</tr>
+<tr>
+<td>is_active <br /><code></code></td>
+<td></td>
 </tr>
 <tr>
 <td>primary_worker_id <br /><code><a href='#types'>guid</a></code></td>
