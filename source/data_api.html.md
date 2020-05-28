@@ -132,7 +132,13 @@ try {
 ```
 
 ```shell
-CURL example not available
+# no shell example for JWT construction
+
+# POST with form-urlencoded body
+curl https://api.welkinhealth.com/v1/token -X POST -d 'assertion=eyJ.........OmU&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer'
+
+# POST with json body
+curl https://api.welkinhealth.com/v1/token -X POST -d ''
 ```
 
 Welkin's APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. This ensures that data stored within Welkin remains secure and is not accessible by unauthorized parties.
@@ -160,14 +166,16 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 * `exp` = ISO timestamp when the token should expire (recommended 1 hours from current time)
 * `scope` = A space separated string of scopes
 
-**Expected POST body fields**
+**Expected body fields**
 
 * `assertion` = JWT token
 * `grant_type` = `urn:ietf:params:oauth:grant-type:jwt-bearer`
 
+The body may be form-encoded or JSON.
+
 #### Scopes
 
-Scopes limit the types of data and actions that a client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
+Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
 
 Each resources has a `read` and a `write` scope.
 
@@ -1503,11 +1511,13 @@ Calendar events are appointments on worker [calendars](#calendars). They're in r
 calendar event can be scheduled for a date and time or simply for a date.
 
 <aside>All calendar events have an associated appointment prompt which will trigger at the time of the event. Valid
-appointment prompts are specific to your implementation of Welkin. The
-range of appointment prompts can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
+appointment prompts are specific to your implementation of Welkin. The range of appointment prompts can be found in
+<a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
 
 <aside>If <code>is_all_day</code> is set to <code>true</code> then you must set <code>day</code>. If <code>is_all_day</code> is set to <code>false</code> then you must use
 <code>start_time</code> and <code>end_time</code>.</aside>
+
+
 
 
 
@@ -1547,11 +1557,11 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __calendar events__ record.
 calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) :type user_id: guid
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-is_all_day <br /><code><a href='#types'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+is_all_day <br /><code></code> | `true` if not scheduled for a specific time of day. `false` otherwise :type is_all_day: boolean
+start_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
@@ -1720,13 +1730,15 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 param | description
 - | -
 calendar_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) :type user_id: guid
 user_id <br /><code><a href='#types' class='required'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 modality <br /><code><a href='#types' class='required'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
 appointment_type <br /><code><a href='#types' class='required'>string</a></code> | Appointment prompt to be used for this event (see note for details)
+ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is during an [unavailable time](#unavailable-times) for the worker.
+ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is within the worker's weekly available days and hours.
 
 
 
@@ -1810,10 +1822,12 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calendar events__ record.
-start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types' class='optional'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
+ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is during an [unavailable time](#unavailable-times) for the worker.
+ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is within the worker's weekly available days and hours.
 
 
 
@@ -5444,6 +5458,7 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+is_active <br /><code></code> | 
 primary_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
