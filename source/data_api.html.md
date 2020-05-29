@@ -6596,9 +6596,9 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 ## Patient Facing Assesment Links
 
 
-Patients facing assessment links can be created using this api.
+A patient facing assessment link is a unique, one-time link that can be shared with a patient so they can fill out the assessment independently.
 
-Links generated can be used to perform the patient facing assessments and are valid for the specific duration only. This duration is based on providers configuration and it can be found under `patient_survey.url_lifetime_days`. If it is not set then defult is 30 days.
+Generated links are only valid for the specific duration. This duration is set to 30 days by default, although it can be changed through a PSE request.
 
 ### Model
 
@@ -6619,8 +6619,8 @@ Links generated can be used to perform the patient facing assessments and are va
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
-patient_id<br /><code><a href='#types'>guid</a></code> | The primary identifier of the patients record.
-url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the user to fill out the assessment 
+patient_id<br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients).
+url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
@@ -6760,8 +6760,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
-patient_id<br /><code><a href='#types'>guid</a></code> | The primary identifier of the patients record.
-url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the user to fill out the assessment 
+patient_id<br /><code><a href='#types'>guid</a></code> | The primary ID of the [patient](#patients).
+url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
