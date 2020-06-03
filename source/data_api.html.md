@@ -5992,6 +5992,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
+patient_id<br /><code><a href='#types' class='optional'>guid</a></code> | The primary ID of the [patient](#patients).
+spec_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
