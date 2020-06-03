@@ -132,7 +132,13 @@ try {
 ```
 
 ```shell
-CURL example not available
+# no shell example for JWT construction
+
+# POST with form-urlencoded body
+curl https://api.welkinhealth.com/v1/token -X POST -d 'assertion=eyJ.........OmU&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer'
+
+# POST with json body
+curl https://api.welkinhealth.com/v1/token -X POST -d ''
 ```
 
 Welkin's APIs are secured using a 2-legged OAuth JWT-Bearer authorization flow. This ensures that data stored within Welkin remains secure and is not accessible by unauthorized parties.
@@ -160,14 +166,16 @@ More information on the JWT protocol can be found at [jwt.io](https://jwt.io/).
 * `exp` = ISO timestamp when the token should expire (recommended 1 hours from current time)
 * `scope` = A space separated string of scopes
 
-**Expected POST body fields**
+**Expected body fields**
 
 * `assertion` = JWT token
 * `grant_type` = `urn:ietf:params:oauth:grant-type:jwt-bearer`
 
+The body may be form-encoded or JSON.
+
 #### Scopes
 
-Scopes limit the types of data and actions that a client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
+Scopes limit the types of data and actions that Client can take via the API. Scopes are passed as a space separated list when requesting an Access Token. For example: `calls.read patients.write assessments.read`
 
 Each resources has a `read` and a `write` scope.
 
@@ -1177,6 +1185,7 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
 
 
 
+
 ### Model
 
 > Example Response
@@ -1186,6 +1195,63 @@ Similarly, Assessments completed in Welkin can be retrieved via this API.
   "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
   "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
   "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+  "spec": {
+    "title": "Survey",
+    "baseField": {
+      "fields": [
+        {
+          "fields": [
+            {
+              "options": [
+                "SILVER",
+                "GOLD",
+                "BRONZE"
+              ],
+              "fieldId": "plan_type",
+              "fieldType": "select",
+              "label": "What is your plan type?"
+            },
+            {
+              "fieldId": "years_active",
+              "fieldType": "number",
+              "label": "How long have you had this disease?"
+            },
+            {
+              "allowDecimal": true,
+              "fieldId": "pain_scale",
+              "fieldType": "number",
+              "label": "How much pain on a scale of 1 to 10 do you experience?"
+            },
+            {
+              "fieldId": "last_hcp_visit",
+              "fieldType": "datepicker",
+              "label": "When was the last time you visited the hospital?"
+            },
+            {
+              "fieldId": "active",
+              "fieldType": "boolean",
+              "label": "Do you have this disease?"
+            },
+            {
+              "fieldId": "insurance_provider",
+              "fieldType": "textarea",
+              "label": "What is your insurance provider?"
+            }
+          ],
+          "title": "Intake",
+          "fieldType": "section",
+          "fieldId": "mySection72"
+        }
+      ],
+      "fieldId": "_meta.base_fields",
+      "fieldType": "base"
+    },
+    "id": "789a1bb3-2434-4a8f-8507-38b25438d9f2",
+    "defaults": {
+      "wrapper": "assessmentQuestion"
+    },
+    "apiResource": "formation_responses"
+  },
   "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
   "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
   "model": {
@@ -1211,6 +1277,7 @@ spec_version <br /><code><a href='#types'>guid</a></code> | Optionally, the vers
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom this assessment was filled out.
 worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who created or most recently edited this assessment response. This is only set if the assessment was completed by a [worker](#workers) and not by the [patient](#patients).
 model <br /><code><a href='#types'>json</a></code> | Response data for assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
+spec <br /><code><a href='#types'>json</a></code> | Schema of assessment fields. The schema for this JSON object can be found in [Workshop](https://workshop.welkinhealth.com).
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
@@ -1262,6 +1329,63 @@ const response = await axios({method: 'get', url: url, headers: headers});
     "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
     "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
     "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+    "spec": {
+      "title": "Survey",
+      "baseField": {
+        "fields": [
+          {
+            "fields": [
+              {
+                "options": [
+                  "SILVER",
+                  "GOLD",
+                  "BRONZE"
+                ],
+                "fieldId": "plan_type",
+                "fieldType": "select",
+                "label": "What is your plan type?"
+              },
+              {
+                "fieldId": "years_active",
+                "fieldType": "number",
+                "label": "How long have you had this disease?"
+              },
+              {
+                "allowDecimal": true,
+                "fieldId": "pain_scale",
+                "fieldType": "number",
+                "label": "How much pain on a scale of 1 to 10 do you experience?"
+              },
+              {
+                "fieldId": "last_hcp_visit",
+                "fieldType": "datepicker",
+                "label": "When was the last time you visited the hospital?"
+              },
+              {
+                "fieldId": "active",
+                "fieldType": "boolean",
+                "label": "Do you have this disease?"
+              },
+              {
+                "fieldId": "insurance_provider",
+                "fieldType": "textarea",
+                "label": "What is your insurance provider?"
+              }
+            ],
+            "title": "Intake",
+            "fieldType": "section",
+            "fieldId": "mySection72"
+          }
+        ],
+        "fieldId": "_meta.base_fields",
+        "fieldType": "base"
+      },
+      "id": "789a1bb3-2434-4a8f-8507-38b25438d9f2",
+      "defaults": {
+        "wrapper": "assessmentQuestion"
+      },
+      "apiResource": "formation_responses"
+    },
     "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
     "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
     "model": {
@@ -1284,6 +1408,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __assessment responses__ record.
+include_schema <br /><code><a href='#types' class='optional'>boolean</a></code> | Set 'true', to include assessment schema in the response
 
 
 
@@ -1382,6 +1507,63 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
     "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
     "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
     "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+    "spec": {
+      "title": "Survey",
+      "baseField": {
+        "fields": [
+          {
+            "fields": [
+              {
+                "options": [
+                  "SILVER",
+                  "GOLD",
+                  "BRONZE"
+                ],
+                "fieldId": "plan_type",
+                "fieldType": "select",
+                "label": "What is your plan type?"
+              },
+              {
+                "fieldId": "years_active",
+                "fieldType": "number",
+                "label": "How long have you had this disease?"
+              },
+              {
+                "allowDecimal": true,
+                "fieldId": "pain_scale",
+                "fieldType": "number",
+                "label": "How much pain on a scale of 1 to 10 do you experience?"
+              },
+              {
+                "fieldId": "last_hcp_visit",
+                "fieldType": "datepicker",
+                "label": "When was the last time you visited the hospital?"
+              },
+              {
+                "fieldId": "active",
+                "fieldType": "boolean",
+                "label": "Do you have this disease?"
+              },
+              {
+                "fieldId": "insurance_provider",
+                "fieldType": "textarea",
+                "label": "What is your insurance provider?"
+              }
+            ],
+            "title": "Intake",
+            "fieldType": "section",
+            "fieldId": "mySection72"
+          }
+        ],
+        "fieldId": "_meta.base_fields",
+        "fieldType": "base"
+      },
+      "id": "789a1bb3-2434-4a8f-8507-38b25438d9f2",
+      "defaults": {
+        "wrapper": "assessmentQuestion"
+      },
+      "apiResource": "formation_responses"
+    },
     "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
     "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
     "model": {
@@ -1463,6 +1645,63 @@ const response = await axios({method: 'get', url: url, headers: headers});
       "id": "20c04e56-69f0-4d13-b5c1-a1763abd1218",
       "spec_name": "formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611",
       "spec_version": "a83acefd-b97c-4d05-99a8-003d443409dc",
+      "spec": {
+        "title": "Survey",
+        "baseField": {
+          "fields": [
+            {
+              "fields": [
+                {
+                  "options": [
+                    "SILVER",
+                    "GOLD",
+                    "BRONZE"
+                  ],
+                  "fieldId": "plan_type",
+                  "fieldType": "select",
+                  "label": "What is your plan type?"
+                },
+                {
+                  "fieldId": "years_active",
+                  "fieldType": "number",
+                  "label": "How long have you had this disease?"
+                },
+                {
+                  "allowDecimal": true,
+                  "fieldId": "pain_scale",
+                  "fieldType": "number",
+                  "label": "How much pain on a scale of 1 to 10 do you experience?"
+                },
+                {
+                  "fieldId": "last_hcp_visit",
+                  "fieldType": "datepicker",
+                  "label": "When was the last time you visited the hospital?"
+                },
+                {
+                  "fieldId": "active",
+                  "fieldType": "boolean",
+                  "label": "Do you have this disease?"
+                },
+                {
+                  "fieldId": "insurance_provider",
+                  "fieldType": "textarea",
+                  "label": "What is your insurance provider?"
+                }
+              ],
+              "title": "Intake",
+              "fieldType": "section",
+              "fieldId": "mySection72"
+            }
+          ],
+          "fieldId": "_meta.base_fields",
+          "fieldType": "base"
+        },
+        "id": "789a1bb3-2434-4a8f-8507-38b25438d9f2",
+        "defaults": {
+          "wrapper": "assessmentQuestion"
+        },
+        "apiResource": "formation_responses"
+      },
       "patient_id": "81cea8e6-0d47-4af1-8c18-d4019208a8d6",
       "worker_id": "22dff7c2-eacb-44c0-b562-be6163c31b0f",
       "model": {
@@ -1486,9 +1725,146 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
+include_schema <br /><code><a href='#types' class='optional'>boolean</a></code> | Set 'true', to include assessment schema in the response
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+
+## Availability
+
+
+Availability combines a worker's working hours, [unavailable times](#unavailable-times), and [calendar
+events](#calendar-events) to determine the periods when a worker is available.
+
+
+
+
+
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "data": {
+    "calendar_id": "e9419c29-2980-4488-8559-2e95f7bd78b7",
+    "worker_id": "c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9",
+    "available_times": [
+      {
+        "start": "2020-05-27T17:00:00+00:00",
+        "end": "2020-05-27T19:00:00+00:00"
+      },
+      {
+        "start": "2020-05-27T20:25:00+00:00",
+        "end": "2020-05-28T00:00:00+00:00"
+      },
+      {
+        "start": "2020-05-28T00:10:00+00:00",
+        "end": "2020-05-28T01:00:00+00:00"
+      }
+    ]
+  }
+}
+```
+
+
+param | description
+- | -
+calendar_id <br /><code><a href='#types'>guid</a></code> | The ID of the [calendar](#calendars).
+worker_id <br /><code><a href='#types'>guid</a></code> | The ID of the [worker](#workers).
+available_times <br /><code><a href='#types'>list</a></code> | A list of intervals where the worker is available. Each interval is an object containing `start` and `end` keys.
+
+
+
+
+
+
+
+
+### Find
+Retrieves __availability__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __availability__ resource.
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET 'https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&start=2020-05-27T07:00:00+00:00&end=2020-05-28T07:00:00+00' -H "Authorization: Bearer <your access token>"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&start=2020-05-27T07:00:00+00:00&end=2020-05-28T07:00:00+00'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&start=2020-05-27T07:00:00+00:00&end=2020-05-28T07:00:00+00';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
+`GET /v1/availability`
+
+#### Required Scope
+`availability.read` or `all`
+
+> Example Response
+
+```json
+{
+  "data": [
+    {
+      "data": {
+        "calendar_id": "e9419c29-2980-4488-8559-2e95f7bd78b7",
+        "worker_id": "c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9",
+        "available_times": [
+          {
+            "start": "2020-05-27T17:00:00+00:00",
+            "end": "2020-05-27T19:00:00+00:00"
+          },
+          {
+            "start": "2020-05-27T20:25:00+00:00",
+            "end": "2020-05-28T00:00:00+00:00"
+          },
+          {
+            "start": "2020-05-28T00:10:00+00:00",
+            "end": "2020-05-28T01:00:00+00:00"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+calendar_id <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of the [calendar](#calendars) for which to find availability. Either this or `worker_id` must be provided.
+worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of the [worker](#workers) for which to find availability. Either this or `calendar_id` must be provided.
+end <br /><code><a href='#types' class='required'>isodatetime</a></code> | Beginning of the time range to examine for worker availability.
+start <br /><code><a href='#types' class='required'>isodatetime</a></code> | Beginning of the time range to examine for worker availability.
 
 
 
@@ -1503,11 +1879,13 @@ Calendar events are appointments on worker [calendars](#calendars). They're in r
 calendar event can be scheduled for a date and time or simply for a date.
 
 <aside>All calendar events have an associated appointment prompt which will trigger at the time of the event. Valid
-appointment prompts are specific to your implementation of Welkin. The
-range of appointment prompts can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
+appointment prompts are specific to your implementation of Welkin. The range of appointment prompts can be found in
+<a href="https://workshop.welkinhealth.com">Workshop</a>.</aside>
 
 <aside>If <code>is_all_day</code> is set to <code>true</code> then you must set <code>day</code>. If <code>is_all_day</code> is set to <code>false</code> then you must use
 <code>start_time</code> and <code>end_time</code>.</aside>
+
+
 
 
 
@@ -1547,11 +1925,11 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __calendar events__ record.
 calendar_id <br /><code><a href='#types'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients)
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) :type user_id: guid
 user_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-is_all_day <br /><code><a href='#types'>boolean</a></code> | `true` if not scheduled for a specific time of day. `false` otherwise
-start_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+is_all_day <br /><code></code> | `true` if not scheduled for a specific time of day. `false` otherwise :type is_all_day: boolean
+start_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
 modality <br /><code><a href='#types'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
@@ -1720,13 +2098,15 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 param | description
 - | -
 calendar_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [calendar](#calendars) on which this event resides
-patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) :type user_id: guid
 user_id <br /><code><a href='#types' class='required'>guid</a></code> | (Deprecated) ID of the [patient](#patients)
-start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 modality <br /><code><a href='#types' class='required'>enum</a></code> | Mode via which the event will take place (`call` or `visit`)
 appointment_type <br /><code><a href='#types' class='required'>string</a></code> | Appointment prompt to be used for this event (see note for details)
+ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is during an [unavailable time](#unavailable-times) for the worker.
+ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is within the worker's weekly available days and hours.
 
 
 
@@ -1810,10 +2190,12 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __calendar events__ record.
-start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day
-end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day
+start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled start time of the calendar event if scheduled for a specific time of day :type start_time: optional isodatetime
+end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types' class='optional'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
+ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is during an [unavailable time](#unavailable-times) for the worker.
+ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is within the worker's weekly available days and hours.
 
 
 
@@ -2054,6 +2436,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
+email <br /><code><a href='#types' class='optional'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+worker <br /><code><a href='#types' class='optional'>guid</a></code> | The ID of the worker whose calendar do you want to find
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
@@ -5369,6 +5753,255 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 
+## Patient Facing Assessment Links
+
+
+Patient Facing assessment Links are generated for integrate them in the Patient Survey App
+Assessments assessment_spec_name should  have audience including patient
+
+
+
+
+
+### Model
+
+> Example Response
+
+```json
+{
+  "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+  "created_at": "2020-05-28T14:19:29.503879+00:00",
+  "updated_at": "2020-05-28T14:19:29.503904+00:00",
+  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+  "expire_time": "2020-06-27T14:19:29.500985+00:00",
+  "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patient facing assessment links__ record.
+patient_id <br /><code><a href='#types'>guid</a></code> | id of the patient on which the assessment response will be placed
+expire_time <br /><code></code> | 
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+url <br /><code></code> | Fully qualified URL to be presented to the user to fill out the assessment
+
+
+
+
+### Get
+Retrieves a single __patient facing assessment link__ by `id`.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0 -H "Authorization: Bearer <your access token>"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
+`GET /v1/patient_facing_assessment_links/:id`
+
+#### Required Scope
+`patient_facing_assessment_links.read` or `all`
+
+> Example Response
+
+```json
+{
+  "data": {
+    "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+    "created_at": "2020-05-28T14:19:29.503879+00:00",
+    "updated_at": "2020-05-28T14:19:29.503904+00:00",
+    "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+    "expire_time": "2020-06-27T14:19:29.500985+00:00",
+    "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+  }
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __patient facing assessment links__ record.
+
+
+
+
+
+### Create
+Creates a new __patient facing assessment link__.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST https://api.welkinhealth.com/v1/patient_facing_assessment_links -d '{
+  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+  "spec_name": "some_string"
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+  "spec_name": "some_string"
+}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
+
+resp = requests.post(url, headers=headers, json=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
+const data = {
+  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+  "spec_name": "some_string"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
+`POST /v1/patient_facing_assessment_links -d { }`
+
+#### Required Scope
+`patient_facing_assessment_links.write` or `all`
+
+> Example Response
+
+```json
+{
+  "data": {
+    "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+    "created_at": "2020-05-28T14:19:29.503879+00:00",
+    "updated_at": "2020-05-28T14:19:29.503904+00:00",
+    "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+    "expire_time": "2020-06-27T14:19:29.500985+00:00",
+    "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+  }
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | id of the patient on which the assessment response will be placed
+spec_name <br /><code><a href='#types' class='required'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+
+
+
+
+
+
+
+### Find
+Retrieves __patient facing assessment links__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __patient facing assessment links__ resource.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links -H "Authorization: Bearer <your access token>"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
+`GET /v1/patient_facing_assessment_links`
+
+#### Required Scope
+`patient_facing_assessment_links.read` or `all`
+
+> Example Response
+
+```json
+{
+  "data": [
+    {
+      "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+      "created_at": "2020-05-28T14:19:29.503879+00:00",
+      "updated_at": "2020-05-28T14:19:29.503904+00:00",
+      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+      "expire_time": "2020-06-27T14:19:29.500985+00:00",
+      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+    }
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+
 ## Patients
 
 
@@ -5444,6 +6077,7 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+is_active <br /><code></code> | 
 primary_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
@@ -9354,7 +9988,13 @@ active <br /><code><a href='#types' class='optional'>boolean</a></code> | The wo
 
 
 ### Find
-Retrieves __workers__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __workers__ resource.
+
+
+Retrieves __worker__, filtered by the supplied parameters.      Only the parameters listed below are supported in Find for the __worker__      resource.
+It is possible to filter by email and phone.     Both attributes can be used at the same time and will act as logical OR
+
+
+
 
 
 #### Invocation
@@ -9421,6 +10061,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
+email <br /><code><a href='#types' class='optional'>email</a></code> | Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.
+phone <br /><code><a href='#types' class='optional'>e164_phone</a></code> | Direct line phone number of the worker in international, E.164 format.
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
