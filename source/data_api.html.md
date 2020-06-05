@@ -5756,8 +5756,11 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 ## Patient Facing Assessment Links
 
 
-Patient Facing assessment Links are generated for integrate them in the Patient Survey App
-Assessments assessment_spec_name should  have audience including patient
+A patient facing assessment link is a unique, one-time link that can be shared with a patient so
+they can fill out the assessment independently.
+
+Generated links are only valid for the specific duration. This duration is set to 30 days by default,
+although it can be changed through a PSE request
 
 
 
@@ -5782,8 +5785,8 @@ Assessments assessment_spec_name should  have audience including patient
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patient facing assessment links__ record.
-patient_id <br /><code><a href='#types'>guid</a></code> | id of the patient on which the assessment response will be placed
-expire_time <br /><code></code> | 
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+expire_time <br /><code></code> | Datetime when the link will expire
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 url <br /><code></code> | Fully qualified URL to be presented to the user to fill out the assessment
@@ -5923,8 +5926,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types' class='required'>guid</a></code> | id of the patient on which the assessment response will be placed
-spec_name <br /><code><a href='#types' class='required'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+spec_name <br /><code><a href='#types' class='required'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 
 
 
@@ -5992,8 +5995,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-patient_id<br /><code><a href='#types' class='optional'>guid</a></code> | The primary ID of the [patient](#patients).
-spec_name <br /><code><a href='#types' class='optional'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+spec_name <br /><code><a href='#types' class='optional'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
@@ -6594,8 +6597,6 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 
-
-## Patient Facing Assesment Links
 
 
 A patient facing assessment link is a unique, one-time link that can be shared with a patient so they can fill out the assessment independently.
