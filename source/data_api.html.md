@@ -5756,8 +5756,11 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 ## Patient Facing Assessment Links
 
 
-Patient Facing assessment Links are generated for integrate them in the Patient Survey App
-Assessments assessment_spec_name should  have audience including patient
+A patient facing assessment link is a unique, one-time link that can be shared with a patient so
+they can fill out the assessment independently.
+
+Generated links are only valid for the specific duration. This duration is set to 30 days by default,
+although it can be changed through a PSE request
 
 
 
@@ -5782,8 +5785,8 @@ Assessments assessment_spec_name should  have audience including patient
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patient facing assessment links__ record.
-patient_id <br /><code><a href='#types'>guid</a></code> | id of the patient on which the assessment response will be placed
-expire_time <br /><code></code> | 
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+expire_time <br /><code></code> | Datetime when the link will expire
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 url <br /><code></code> | Fully qualified URL to be presented to the user to fill out the assessment
@@ -5923,8 +5926,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types' class='required'>guid</a></code> | id of the patient on which the assessment response will be placed
-spec_name <br /><code><a href='#types' class='required'>string</a></code> | Name of the assessment as listed in [Workshop](https://workshop.welkinhealth.com)
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+spec_name <br /><code><a href='#types' class='required'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 
 
 
@@ -5992,6 +5995,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [patient](#patients) on which the assessment response will be placed
+spec_name <br /><code><a href='#types' class='optional'>string</a></code> | The ref_name for the assessment as it appears in [Workshop](https://workshop.welkinhealth.com).
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
@@ -6576,6 +6581,245 @@ const response = await axios({method: 'get', url: url, headers: headers});
     }
   ],
   "links": "Elided for simplicity, see Find Endpoints Overview above"
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
+
+
+
+
+
+
+
+A patient facing assessment link is a unique, one-time link that can be shared with a patient so they can fill out the assessment independently.
+
+Generated links are only valid for the specific duration. This duration is set to 30 days by default, although it can be changed through a PSE request.
+
+### Model
+
+> Example Response
+
+```json
+{
+  "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+  "created_at": "2020-05-28T14:19:29.503879+00:00",
+  "updated_at": "2020-05-28T14:19:29.503904+00:00",
+  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+  "expire_time": "2020-06-27T14:19:29.500985+00:00",
+  "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+}
+```
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
+patient_id<br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients).
+url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
+
+
+
+### Get
+Retrieves a single __PFA link__ record by `id`.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0 -H "Authorization: Bearer <your access token>"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"}
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
+`GET /v1/patient_facing_assessment_links/:id`
+
+<!-- #### Required Scope
+`patients.read` or `all` -->
+
+> Example Response
+
+```json
+{
+  "data": {
+     "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+      "created_at": "2020-05-28T14:19:29.503879+00:00",
+      "updated_at": "2020-05-28T14:19:29.503904+00:00",
+      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+      "expire_time": "2020-06-27T14:19:29.500985+00:00",
+      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+  }
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __PFA link__ record.
+
+
+
+
+
+### Create
+Creates a new __PFA link__.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XPOST https://api.welkinhealth.com/v1/patient_facing_assessment_links -d '{
+  "spec_name": "pet_wellness",
+  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
+}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+
+data = {
+  "spec_name": "pet_wellness",
+  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
+}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
+
+resp = requests.post(url, headers=headers, json=data).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
+const data = {
+  "spec_name": "pet_wellness",
+  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
+};
+
+const response = await axios({method: 'post', url: url, headers: headers, data: data});
+
+```
+
+`POST /v1/patient_facing_assessment_links -d { }`
+
+<!-- #### Required Scope
+`patients.write` or `all` -->
+
+> Example Response
+
+```json
+{
+  "data": {
+     "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+      "created_at": "2020-05-28T14:19:29.503879+00:00",
+      "updated_at": "2020-05-28T14:19:29.503904+00:00",
+      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+      "expire_time": "2020-06-27T14:19:29.500985+00:00",
+      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+  }
+}
+```
+
+#### Params
+
+
+param | description
+- | -
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
+patient_id<br /><code><a href='#types'>guid</a></code> | The primary ID of the [patient](#patients).
+url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
+updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
+
+### Find
+Retrieves __PFA Links__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __PFA links__ resource.
+
+
+#### Invocation
+
+> Example Request
+
+```shell
+curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links -H "Authorization: Bearer <your access token>"
+```
+
+```python
+import requests
+
+headers = {"Authorization": "Bearer <token>"}
+url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
+
+resp = requests.get(url, headers=headers).json()
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {"Authorization": "Bearer <token>"};
+const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
+
+const response = await axios({method: 'get', url: url, headers: headers});
+
+```
+
+`GET /v1/patient_facing_assessment_links`
+
+<!-- #### Required Scope
+`patients.read` or `all` -->
+
+> Example Response
+
+```json
+{
+  "data": [
+    {
+      "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
+      "created_at": "2020-05-28T14:19:29.503879+00:00",
+      "updated_at": "2020-05-28T14:19:29.503904+00:00",
+      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
+      "expire_time": "2020-06-27T14:19:29.500985+00:00",
+      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
+    }
+  ],
 }
 ```
 
