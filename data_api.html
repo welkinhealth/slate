@@ -319,6 +319,17 @@
                       </ul>
                   </li>
                   <li>
+                    <a href="#availability" class="toc-h2 toc-link" data-title="Availability">Availability</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#availability-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#availability-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
                     <a href="#calendar-events" class="toc-h2 toc-link" data-title="Calendar Events">Calendar Events</a>
                       <ul class="toc-list-h3">
                           <li>
@@ -557,6 +568,23 @@
                           </li>
                           <li>
                             <a href="#integration-tasks-provisional-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#patient-facing-assessment-links" class="toc-h2 toc-link" data-title="Patient Facing Assessment Links">Patient Facing Assessment Links</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#patient-facing-assessment-links-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#patient-facing-assessment-links-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
+                          </li>
+                          <li>
+                            <a href="#patient-facing-assessment-links-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
+                          </li>
+                          <li>
+                            <a href="#patient-facing-assessment-links-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
                           </li>
                       </ul>
                   </li>
@@ -1914,19 +1942,76 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </div><div class="line-2"><span class="w">  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20c04e56-69f0-4d13-b5c1-a1763abd1218"</span><span class="p">,</span>
 </div><div class="line-3"><span class="w">  </span><span class="nl">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span>
 </div><div class="line-4"><span class="w">  </span><span class="nl">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span>
-</div><div class="line-5"><span class="w">  </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
-</div><div class="line-6"><span class="w">  </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
-</div><div class="line-7"><span class="w">  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-8"><span class="w">    </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
-</div><div class="line-9"><span class="w">    </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
-</div><div class="line-10"><span class="w">    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</div><div class="line-11"><span class="w">    </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-</div><div class="line-12"><span class="w">    </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
-</div><div class="line-13"><span class="w">    </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
-</div><div class="line-14"><span class="w">  </span><span class="p">},</span>
-</div><div class="line-15"><span class="w">  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
-</div><div class="line-16"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
-</div><div class="line-17"><span class="p">}</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"spec"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Survey"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"baseField"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-9"><span class="w">        </span><span class="p">{</span>
+</div><div class="line-10"><span class="w">          </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-11"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-12"><span class="w">              </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-13"><span class="w">                </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-14"><span class="w">                </span><span class="s2">"GOLD"</span><span class="p">,</span>
+</div><div class="line-15"><span class="w">                </span><span class="s2">"BRONZE"</span>
+</div><div class="line-16"><span class="w">              </span><span class="p">],</span>
+</div><div class="line-17"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan_type"</span><span class="p">,</span>
+</div><div class="line-18"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
+</div><div class="line-19"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your plan type?"</span>
+</div><div class="line-20"><span class="w">            </span><span class="p">},</span>
+</div><div class="line-21"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-22"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"years_active"</span><span class="p">,</span>
+</div><div class="line-23"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How long have you had this disease?"</span>
+</div><div class="line-25"><span class="w">            </span><span class="p">},</span>
+</div><div class="line-26"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-27"><span class="w">              </span><span class="nl">"allowDecimal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-28"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pain_scale"</span><span class="p">,</span>
+</div><div class="line-29"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-30"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How much pain on a scale of 1 to 10 do you experience?"</span>
+</div><div class="line-31"><span class="w">            </span><span class="p">},</span>
+</div><div class="line-32"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-33"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_hcp_visit"</span><span class="p">,</span>
+</div><div class="line-34"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datepicker"</span><span class="p">,</span>
+</div><div class="line-35"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"When was the last time you visited the hospital?"</span>
+</div><div class="line-36"><span class="w">            </span><span class="p">},</span>
+</div><div class="line-37"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-38"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+</div><div class="line-39"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+</div><div class="line-40"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you have this disease?"</span>
+</div><div class="line-41"><span class="w">            </span><span class="p">},</span>
+</div><div class="line-42"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-43"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insurance_provider"</span><span class="p">,</span>
+</div><div class="line-44"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span>
+</div><div class="line-45"><span class="w">              </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your insurance provider?"</span>
+</div><div class="line-46"><span class="w">            </span><span class="p">}</span>
+</div><div class="line-47"><span class="w">          </span><span class="p">],</span>
+</div><div class="line-48"><span class="w">          </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intake"</span><span class="p">,</span>
+</div><div class="line-49"><span class="w">          </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"section"</span><span class="p">,</span>
+</div><div class="line-50"><span class="w">          </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mySection72"</span>
+</div><div class="line-51"><span class="w">        </span><span class="p">}</span>
+</div><div class="line-52"><span class="w">      </span><span class="p">],</span>
+</div><div class="line-53"><span class="w">      </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_meta.base_fields"</span><span class="p">,</span>
+</div><div class="line-54"><span class="w">      </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span>
+</div><div class="line-55"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-56"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789a1bb3-2434-4a8f-8507-38b25438d9f2"</span><span class="p">,</span>
+</div><div class="line-57"><span class="w">    </span><span class="nl">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-58"><span class="w">      </span><span class="nl">"wrapper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assessmentQuestion"</span>
+</div><div class="line-59"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-60"><span class="w">    </span><span class="nl">"apiResource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_responses"</span>
+</div><div class="line-61"><span class="w">  </span><span class="p">},</span>
+</div><div class="line-62"><span class="w">  </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
+</div><div class="line-63"><span class="w">  </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
+</div><div class="line-64"><span class="w">  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-65"><span class="w">    </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
+</div><div class="line-66"><span class="w">    </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-67"><span class="w">    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-68"><span class="w">    </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</div><div class="line-69"><span class="w">    </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
+</div><div class="line-70"><span class="w">    </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
+</div><div class="line-71"><span class="w">  </span><span class="p">},</span>
+</div><div class="line-72"><span class="w">  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
+</div><div class="line-73"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
+</div><div class="line-74"><span class="p">}</span>
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -1961,6 +2046,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <tr>
 <td>model <br /><code><a href='#types'>json</a></code></td>
 <td>Response data for assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+</tr>
+<tr>
+<td>spec <br /><code><a href='#types'>json</a></code></td>
+<td>Schema of assessment fields. The schema for this JSON object can be found in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
 <td>updated_at <br /><code><a href='#types'>isodatetime</a></code></td>
@@ -2005,20 +2094,77 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </div><div class="line-3"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20c04e56-69f0-4d13-b5c1-a1763abd1218"</span><span class="p">,</span>
 </div><div class="line-4"><span class="w">    </span><span class="nl">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span>
 </div><div class="line-5"><span class="w">    </span><span class="nl">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span>
-</div><div class="line-6"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
-</div><div class="line-7"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
-</div><div class="line-8"><span class="w">    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-9"><span class="w">      </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
-</div><div class="line-10"><span class="w">      </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
-</div><div class="line-11"><span class="w">      </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</div><div class="line-12"><span class="w">      </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-</div><div class="line-13"><span class="w">      </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
-</div><div class="line-14"><span class="w">      </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
-</div><div class="line-15"><span class="w">    </span><span class="p">},</span>
-</div><div class="line-16"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
-</div><div class="line-17"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
-</div><div class="line-18"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-19"><span class="p">}</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"spec"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-7"><span class="w">      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Survey"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"baseField"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-9"><span class="w">        </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-10"><span class="w">          </span><span class="p">{</span>
+</div><div class="line-11"><span class="w">            </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-12"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-13"><span class="w">                </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-14"><span class="w">                  </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-15"><span class="w">                  </span><span class="s2">"GOLD"</span><span class="p">,</span>
+</div><div class="line-16"><span class="w">                  </span><span class="s2">"BRONZE"</span>
+</div><div class="line-17"><span class="w">                </span><span class="p">],</span>
+</div><div class="line-18"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan_type"</span><span class="p">,</span>
+</div><div class="line-19"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
+</div><div class="line-20"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your plan type?"</span>
+</div><div class="line-21"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-22"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-23"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"years_active"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How long have you had this disease?"</span>
+</div><div class="line-26"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-27"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-28"><span class="w">                </span><span class="nl">"allowDecimal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-29"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pain_scale"</span><span class="p">,</span>
+</div><div class="line-30"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-31"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How much pain on a scale of 1 to 10 do you experience?"</span>
+</div><div class="line-32"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-33"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-34"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_hcp_visit"</span><span class="p">,</span>
+</div><div class="line-35"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datepicker"</span><span class="p">,</span>
+</div><div class="line-36"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"When was the last time you visited the hospital?"</span>
+</div><div class="line-37"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-38"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-39"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+</div><div class="line-40"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+</div><div class="line-41"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you have this disease?"</span>
+</div><div class="line-42"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-43"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-44"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insurance_provider"</span><span class="p">,</span>
+</div><div class="line-45"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span>
+</div><div class="line-46"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your insurance provider?"</span>
+</div><div class="line-47"><span class="w">              </span><span class="p">}</span>
+</div><div class="line-48"><span class="w">            </span><span class="p">],</span>
+</div><div class="line-49"><span class="w">            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intake"</span><span class="p">,</span>
+</div><div class="line-50"><span class="w">            </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"section"</span><span class="p">,</span>
+</div><div class="line-51"><span class="w">            </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mySection72"</span>
+</div><div class="line-52"><span class="w">          </span><span class="p">}</span>
+</div><div class="line-53"><span class="w">        </span><span class="p">],</span>
+</div><div class="line-54"><span class="w">        </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_meta.base_fields"</span><span class="p">,</span>
+</div><div class="line-55"><span class="w">        </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span>
+</div><div class="line-56"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-57"><span class="w">      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789a1bb3-2434-4a8f-8507-38b25438d9f2"</span><span class="p">,</span>
+</div><div class="line-58"><span class="w">      </span><span class="nl">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-59"><span class="w">        </span><span class="nl">"wrapper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assessmentQuestion"</span>
+</div><div class="line-60"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-61"><span class="w">      </span><span class="nl">"apiResource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_responses"</span>
+</div><div class="line-62"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-63"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
+</div><div class="line-64"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
+</div><div class="line-65"><span class="w">    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-66"><span class="w">      </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
+</div><div class="line-67"><span class="w">      </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-68"><span class="w">      </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-69"><span class="w">      </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</div><div class="line-70"><span class="w">      </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
+</div><div class="line-71"><span class="w">      </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
+</div><div class="line-72"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-73"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
+</div><div class="line-74"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
+</div><div class="line-75"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-76"><span class="p">}</span>
 </div></code></pre></div><h4 id='assessment-responses-get-params'>Params</h4>
 <table><thead>
 <tr>
@@ -2029,6 +2175,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
 <td>The primary identifier of the <strong>assessment responses</strong> record.</td>
+</tr>
+<tr>
+<td>include_schema <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>Set &#39;true&#39;, to include assessment schema in the response</td>
 </tr>
 </tbody></table>
 <h3 id='assessment-responses-create'>Create</h3>
@@ -2113,20 +2263,77 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </div><div class="line-3"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20c04e56-69f0-4d13-b5c1-a1763abd1218"</span><span class="p">,</span>
 </div><div class="line-4"><span class="w">    </span><span class="nl">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span>
 </div><div class="line-5"><span class="w">    </span><span class="nl">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span>
-</div><div class="line-6"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
-</div><div class="line-7"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
-</div><div class="line-8"><span class="w">    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-9"><span class="w">      </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
-</div><div class="line-10"><span class="w">      </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
-</div><div class="line-11"><span class="w">      </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</div><div class="line-12"><span class="w">      </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-</div><div class="line-13"><span class="w">      </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
-</div><div class="line-14"><span class="w">      </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
-</div><div class="line-15"><span class="w">    </span><span class="p">},</span>
-</div><div class="line-16"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
-</div><div class="line-17"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
-</div><div class="line-18"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-19"><span class="p">}</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"spec"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-7"><span class="w">      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Survey"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"baseField"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-9"><span class="w">        </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-10"><span class="w">          </span><span class="p">{</span>
+</div><div class="line-11"><span class="w">            </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-12"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-13"><span class="w">                </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-14"><span class="w">                  </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-15"><span class="w">                  </span><span class="s2">"GOLD"</span><span class="p">,</span>
+</div><div class="line-16"><span class="w">                  </span><span class="s2">"BRONZE"</span>
+</div><div class="line-17"><span class="w">                </span><span class="p">],</span>
+</div><div class="line-18"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan_type"</span><span class="p">,</span>
+</div><div class="line-19"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
+</div><div class="line-20"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your plan type?"</span>
+</div><div class="line-21"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-22"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-23"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"years_active"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How long have you had this disease?"</span>
+</div><div class="line-26"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-27"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-28"><span class="w">                </span><span class="nl">"allowDecimal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-29"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pain_scale"</span><span class="p">,</span>
+</div><div class="line-30"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-31"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How much pain on a scale of 1 to 10 do you experience?"</span>
+</div><div class="line-32"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-33"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-34"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_hcp_visit"</span><span class="p">,</span>
+</div><div class="line-35"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datepicker"</span><span class="p">,</span>
+</div><div class="line-36"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"When was the last time you visited the hospital?"</span>
+</div><div class="line-37"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-38"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-39"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+</div><div class="line-40"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+</div><div class="line-41"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you have this disease?"</span>
+</div><div class="line-42"><span class="w">              </span><span class="p">},</span>
+</div><div class="line-43"><span class="w">              </span><span class="p">{</span>
+</div><div class="line-44"><span class="w">                </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insurance_provider"</span><span class="p">,</span>
+</div><div class="line-45"><span class="w">                </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span>
+</div><div class="line-46"><span class="w">                </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your insurance provider?"</span>
+</div><div class="line-47"><span class="w">              </span><span class="p">}</span>
+</div><div class="line-48"><span class="w">            </span><span class="p">],</span>
+</div><div class="line-49"><span class="w">            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intake"</span><span class="p">,</span>
+</div><div class="line-50"><span class="w">            </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"section"</span><span class="p">,</span>
+</div><div class="line-51"><span class="w">            </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mySection72"</span>
+</div><div class="line-52"><span class="w">          </span><span class="p">}</span>
+</div><div class="line-53"><span class="w">        </span><span class="p">],</span>
+</div><div class="line-54"><span class="w">        </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_meta.base_fields"</span><span class="p">,</span>
+</div><div class="line-55"><span class="w">        </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span>
+</div><div class="line-56"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-57"><span class="w">      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789a1bb3-2434-4a8f-8507-38b25438d9f2"</span><span class="p">,</span>
+</div><div class="line-58"><span class="w">      </span><span class="nl">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-59"><span class="w">        </span><span class="nl">"wrapper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assessmentQuestion"</span>
+</div><div class="line-60"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-61"><span class="w">      </span><span class="nl">"apiResource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_responses"</span>
+</div><div class="line-62"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-63"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
+</div><div class="line-64"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
+</div><div class="line-65"><span class="w">    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-66"><span class="w">      </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
+</div><div class="line-67"><span class="w">      </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-68"><span class="w">      </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-69"><span class="w">      </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</div><div class="line-70"><span class="w">      </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
+</div><div class="line-71"><span class="w">      </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
+</div><div class="line-72"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-73"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
+</div><div class="line-74"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
+</div><div class="line-75"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-76"><span class="p">}</span>
 </div></code></pre></div><h4 id='assessment-responses-create-params'>Params</h4>
 <table><thead>
 <tr>
@@ -2198,22 +2405,79 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </div><div class="line-4"><span class="w">      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20c04e56-69f0-4d13-b5c1-a1763abd1218"</span><span class="p">,</span>
 </div><div class="line-5"><span class="w">      </span><span class="nl">"spec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_specs_d3da7fc6-77e3-4982-800a-bcaa6983a611"</span><span class="p">,</span>
 </div><div class="line-6"><span class="w">      </span><span class="nl">"spec_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a83acefd-b97c-4d05-99a8-003d443409dc"</span><span class="p">,</span>
-</div><div class="line-7"><span class="w">      </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
-</div><div class="line-8"><span class="w">      </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
-</div><div class="line-9"><span class="w">      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-10"><span class="w">        </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
-</div><div class="line-11"><span class="w">        </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
-</div><div class="line-12"><span class="w">        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</div><div class="line-13"><span class="w">        </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-</div><div class="line-14"><span class="w">        </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
-</div><div class="line-15"><span class="w">        </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
-</div><div class="line-16"><span class="w">      </span><span class="p">},</span>
-</div><div class="line-17"><span class="w">      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
-</div><div class="line-18"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
-</div><div class="line-19"><span class="w">    </span><span class="p">}</span>
-</div><div class="line-20"><span class="w">  </span><span class="p">],</span>
-</div><div class="line-21"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
-</div><div class="line-22"><span class="p">}</span>
+</div><div class="line-7"><span class="w">      </span><span class="nl">"spec"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-8"><span class="w">        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Survey"</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">        </span><span class="nl">"baseField"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-10"><span class="w">          </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-11"><span class="w">            </span><span class="p">{</span>
+</div><div class="line-12"><span class="w">              </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-13"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-14"><span class="w">                  </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-15"><span class="w">                    </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-16"><span class="w">                    </span><span class="s2">"GOLD"</span><span class="p">,</span>
+</div><div class="line-17"><span class="w">                    </span><span class="s2">"BRONZE"</span>
+</div><div class="line-18"><span class="w">                  </span><span class="p">],</span>
+</div><div class="line-19"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plan_type"</span><span class="p">,</span>
+</div><div class="line-20"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span>
+</div><div class="line-21"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your plan type?"</span>
+</div><div class="line-22"><span class="w">                </span><span class="p">},</span>
+</div><div class="line-23"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-24"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"years_active"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-26"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How long have you had this disease?"</span>
+</div><div class="line-27"><span class="w">                </span><span class="p">},</span>
+</div><div class="line-28"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-29"><span class="w">                  </span><span class="nl">"allowDecimal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-30"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pain_scale"</span><span class="p">,</span>
+</div><div class="line-31"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+</div><div class="line-32"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How much pain on a scale of 1 to 10 do you experience?"</span>
+</div><div class="line-33"><span class="w">                </span><span class="p">},</span>
+</div><div class="line-34"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-35"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_hcp_visit"</span><span class="p">,</span>
+</div><div class="line-36"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datepicker"</span><span class="p">,</span>
+</div><div class="line-37"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"When was the last time you visited the hospital?"</span>
+</div><div class="line-38"><span class="w">                </span><span class="p">},</span>
+</div><div class="line-39"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-40"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+</div><div class="line-41"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+</div><div class="line-42"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you have this disease?"</span>
+</div><div class="line-43"><span class="w">                </span><span class="p">},</span>
+</div><div class="line-44"><span class="w">                </span><span class="p">{</span>
+</div><div class="line-45"><span class="w">                  </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insurance_provider"</span><span class="p">,</span>
+</div><div class="line-46"><span class="w">                  </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span>
+</div><div class="line-47"><span class="w">                  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your insurance provider?"</span>
+</div><div class="line-48"><span class="w">                </span><span class="p">}</span>
+</div><div class="line-49"><span class="w">              </span><span class="p">],</span>
+</div><div class="line-50"><span class="w">              </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intake"</span><span class="p">,</span>
+</div><div class="line-51"><span class="w">              </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"section"</span><span class="p">,</span>
+</div><div class="line-52"><span class="w">              </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mySection72"</span>
+</div><div class="line-53"><span class="w">            </span><span class="p">}</span>
+</div><div class="line-54"><span class="w">          </span><span class="p">],</span>
+</div><div class="line-55"><span class="w">          </span><span class="nl">"fieldId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_meta.base_fields"</span><span class="p">,</span>
+</div><div class="line-56"><span class="w">          </span><span class="nl">"fieldType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span>
+</div><div class="line-57"><span class="w">        </span><span class="p">},</span>
+</div><div class="line-58"><span class="w">        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789a1bb3-2434-4a8f-8507-38b25438d9f2"</span><span class="p">,</span>
+</div><div class="line-59"><span class="w">        </span><span class="nl">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-60"><span class="w">          </span><span class="nl">"wrapper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assessmentQuestion"</span>
+</div><div class="line-61"><span class="w">        </span><span class="p">},</span>
+</div><div class="line-62"><span class="w">        </span><span class="nl">"apiResource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"formation_responses"</span>
+</div><div class="line-63"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-64"><span class="w">      </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81cea8e6-0d47-4af1-8c18-d4019208a8d6"</span><span class="p">,</span>
+</div><div class="line-65"><span class="w">      </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22dff7c2-eacb-44c0-b562-be6163c31b0f"</span><span class="p">,</span>
+</div><div class="line-66"><span class="w">      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-67"><span class="w">        </span><span class="nl">"insurance_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acme Insurance"</span><span class="p">,</span>
+</div><div class="line-68"><span class="w">        </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SILVER"</span><span class="p">,</span>
+</div><div class="line-69"><span class="w">        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</div><div class="line-70"><span class="w">        </span><span class="nl">"years_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</div><div class="line-71"><span class="w">        </span><span class="nl">"last_hcp_visit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-14"</span><span class="p">,</span>
+</div><div class="line-72"><span class="w">        </span><span class="nl">"pain_scale"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span>
+</div><div class="line-73"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-74"><span class="w">      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.024836+00:00"</span><span class="p">,</span>
+</div><div class="line-75"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.025031+00:00"</span>
+</div><div class="line-76"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-77"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-78"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-79"><span class="p">}</span>
 </div></code></pre></div><h4 id='assessment-responses-find-params'>Params</h4>
 <table><thead>
 <tr>
@@ -2221,6 +2485,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <th>description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>include_schema <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td>Set &#39;true&#39;, to include assessment schema in the response</td>
+</tr>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
@@ -2232,6 +2500,130 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <tr>
 <td>page[size] <br /><code><a href='#types' class='optional'>integer</a></code></td>
 <td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
+<h2 id='availability'>Availability</h2>
+<p>Availability combines a worker&#39;s working hours, <a href="#unavailable-times">unavailable times</a>, and <a href="#calendar-events">calendar
+events</a> to determine the periods when a worker is available.</p>
+<h3 id='availability-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"calendar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e9419c29-2980-4488-8559-2e95f7bd78b7"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"available_times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-6"><span class="w">      </span><span class="p">{</span>
+</div><div class="line-7"><span class="w">        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T17:00:00+00:00"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T19:00:00+00:00"</span>
+</div><div class="line-9"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-10"><span class="w">      </span><span class="p">{</span>
+</div><div class="line-11"><span class="w">        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T20:25:00+00:00"</span><span class="p">,</span>
+</div><div class="line-12"><span class="w">        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T00:00:00+00:00"</span>
+</div><div class="line-13"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-14"><span class="w">      </span><span class="p">{</span>
+</div><div class="line-15"><span class="w">        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T00:10:00+00:00"</span><span class="p">,</span>
+</div><div class="line-16"><span class="w">        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T01:00:00+00:00"</span>
+</div><div class="line-17"><span class="w">      </span><span class="p">}</span>
+</div><div class="line-18"><span class="w">    </span><span class="p">]</span>
+</div><div class="line-19"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-20"><span class="p">}</span>
+</div></code></pre></div>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>calendar_id <br /><code><a href='#types'>guid</a></code></td>
+<td>The ID of the <a href="#calendars">calendar</a>.</td>
+</tr>
+<tr>
+<td>worker_id <br /><code><a href='#types'>guid</a></code></td>
+<td>The ID of the <a href="#workers">worker</a>.</td>
+</tr>
+<tr>
+<td>available_times <br /><code><a href='#types'>list</a></code></td>
+<td>A list of intervals where the worker is available. Each interval is an object containing <code>start</code> and <code>end</code> keys.</td>
+</tr>
+</tbody></table>
+<h3 id='availability-find'>Find</h3>
+<p>Retrieves <strong>availability</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>availability</strong> resource.</p>
+<h4 id='availability-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> <span class="s1">'https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&amp;start=2020-05-27T07:00:00+00:00&amp;end=2020-05-28T07:00:00+00'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&amp;start=2020-05-27T07:00:00+00:00&amp;end=2020-05-28T07:00:00+00'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/availability?worker_id=c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9&amp;start=2020-05-27T07:00:00+00:00&amp;end=2020-05-28T07:00:00+00</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/availability</code></p>
+<h4 id='availability-find-required-scope'>Required Scope</h4>
+<p><code>availability.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-3"><span class="w">    </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-5"><span class="w">        </span><span class="nl">"calendar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e9419c29-2980-4488-8559-2e95f7bd78b7"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">        </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6fb1c46-e6a0-4349-a91d-64a7c2e2d2c9"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">        </span><span class="nl">"available_times"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-8"><span class="w">          </span><span class="p">{</span>
+</div><div class="line-9"><span class="w">            </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T17:00:00+00:00"</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">            </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T19:00:00+00:00"</span>
+</div><div class="line-11"><span class="w">          </span><span class="p">},</span>
+</div><div class="line-12"><span class="w">          </span><span class="p">{</span>
+</div><div class="line-13"><span class="w">            </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-27T20:25:00+00:00"</span><span class="p">,</span>
+</div><div class="line-14"><span class="w">            </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T00:00:00+00:00"</span>
+</div><div class="line-15"><span class="w">          </span><span class="p">},</span>
+</div><div class="line-16"><span class="w">          </span><span class="p">{</span>
+</div><div class="line-17"><span class="w">            </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T00:10:00+00:00"</span><span class="p">,</span>
+</div><div class="line-18"><span class="w">            </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T01:00:00+00:00"</span>
+</div><div class="line-19"><span class="w">          </span><span class="p">}</span>
+</div><div class="line-20"><span class="w">        </span><span class="p">]</span>
+</div><div class="line-21"><span class="w">      </span><span class="p">}</span>
+</div><div class="line-22"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-23"><span class="w">  </span><span class="p">]</span>
+</div><div class="line-24"><span class="p">}</span>
+</div></code></pre></div><h4 id='availability-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>calendar_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>The ID of the <a href="#calendars">calendar</a> for which to find availability. Either this or <code>worker_id</code> must be provided.</td>
+</tr>
+<tr>
+<td>worker_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>The ID of the <a href="#workers">worker</a> for which to find availability. Either this or <code>calendar_id</code> must be provided.</td>
+</tr>
+<tr>
+<td>end <br /><code><a href='#types' class='required'>isodatetime</a></code></td>
+<td>Beginning of the time range to examine for worker availability.</td>
+</tr>
+<tr>
+<td>start <br /><code><a href='#types' class='required'>isodatetime</a></code></td>
+<td>Beginning of the time range to examine for worker availability.</td>
 </tr>
 </tbody></table>
 <h2 id='calendar-events'>Calendar Events</h2>
@@ -2793,6 +3185,14 @@ coach <a href="#working-hours">Working Hours</a> to <a href="#workers">Workers</
 <th>description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>email <br /><code><a href='#types' class='optional'>email</a></code></td>
+<td>Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.</td>
+</tr>
+<tr>
+<td>worker <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>The ID of the worker whose calendar do you want to find</td>
+</tr>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
@@ -6040,6 +6440,233 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 <td>ref_id <br /><code><a href='#types' class='optional'>string</a></code></td>
 <td>An external ID associated with the task, linking the task to the resource in external systems.</td>
 </tr>
+<tr>
+<td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The earliest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The latest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[size] <br /><code><a href='#types' class='optional'>integer</a></code></td>
+<td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
+<h2 id='patient-facing-assessment-links'>Patient Facing Assessment Links</h2>
+<p>Patient Facing assessment Links are generated for integrate them in the Patient Survey App
+Assessments assessment_spec_name should  have audience including patient</p>
+<h3 id='patient-facing-assessment-links-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&amp;spec_name=pet_wellness"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503879+00:00"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503904+00:00"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4f0a3adf-8e74-4981-a984-1dc079df577c"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">  </span><span class="nl">"expire_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-27T14:19:29.500985+00:00"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6db22d8e-de8e-43a8-be5c-19957dd2b2a0"</span>
+</div><div class="line-8"><span class="p">}</span>
+</div></code></pre></div>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier of the <strong>patient facing assessment links</strong> record.</td>
+</tr>
+<tr>
+<td>patient_id <br /><code><a href='#types'>guid</a></code></td>
+<td>id of the patient on which the assessment response will be placed</td>
+</tr>
+<tr>
+<td>expire_time <br /><code></code></td>
+<td></td>
+</tr>
+<tr>
+<td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was created</td>
+</tr>
+<tr>
+<td>updated_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Datetime the resource was last updated</td>
+</tr>
+<tr>
+<td>url <br /><code></code></td>
+<td>Fully qualified URL to be presented to the user to fill out the assessment</td>
+</tr>
+</tbody></table>
+<h3 id='patient-facing-assessment-links-get'>Get</h3>
+<p>Retrieves a single <strong>patient facing assessment link</strong> by <code>id</code>.</p>
+<h4 id='patient-facing-assessment-links-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0 <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">}</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/patient_facing_assessment_links/:id</code></p>
+<h4 id='patient-facing-assessment-links-get-required-scope'>Required Scope</h4>
+<p><code>patient_facing_assessment_links.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&amp;spec_name=pet_wellness"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503879+00:00"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503904+00:00"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4f0a3adf-8e74-4981-a984-1dc079df577c"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"expire_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-27T14:19:29.500985+00:00"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6db22d8e-de8e-43a8-be5c-19957dd2b2a0"</span>
+</div><div class="line-9"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-10"><span class="p">}</span>
+</div></code></pre></div><h4 id='patient-facing-assessment-links-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>The primary identifier of the <strong>patient facing assessment links</strong> record.</td>
+</tr>
+</tbody></table>
+<h3 id='patient-facing-assessment-links-create'>Create</h3>
+<p>Creates a new <strong>patient facing assessment link</strong>.</p>
+<h4 id='patient-facing-assessment-links-create-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPOST</span> https://api.welkinhealth.com/v1/patient_facing_assessment_links <span class="nt">-d</span> <span class="s1">'{</span>
+</div><div class="line-2"><span class="s1">  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",</span>
+</div><div class="line-3"><span class="s1">  "spec_name": "some_string"</span>
+</div><div class="line-4"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4">
+</div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="s">"patient_id"</span><span class="p">:</span> <span class="s">"4f0a3adf-8e74-4981-a984-1dc079df577c"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="s">"spec_name"</span><span class="p">:</span> <span class="s">"some_string"</span>
+</div><div class="line-8"><span class="p">}</span>
+</div><div class="line-9"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/patient_facing_assessment_links'</span>
+</div><div class="line-10">
+</div><div class="line-11"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-12">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/patient_facing_assessment_links</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="dl">"</span><span class="s2">patient_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">4f0a3adf-8e74-4981-a984-1dc079df577c</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="dl">"</span><span class="s2">spec_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">some_string</span><span class="dl">"</span>
+</div><div class="line-8"><span class="p">};</span>
+</div><div class="line-9">
+</div><div class="line-10"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-11">
+</div></code></pre></div>
+<p><code>POST /v1/patient_facing_assessment_links -d { }</code></p>
+<h4 id='patient-facing-assessment-links-create-required-scope'>Required Scope</h4>
+<p><code>patient_facing_assessment_links.write</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&amp;spec_name=pet_wellness"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503879+00:00"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503904+00:00"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4f0a3adf-8e74-4981-a984-1dc079df577c"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"expire_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-27T14:19:29.500985+00:00"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6db22d8e-de8e-43a8-be5c-19957dd2b2a0"</span>
+</div><div class="line-9"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-10"><span class="p">}</span>
+</div></code></pre></div><h4 id='patient-facing-assessment-links-create-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>patient_id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>id of the patient on which the assessment response will be placed</td>
+</tr>
+<tr>
+<td>spec_name <br /><code><a href='#types' class='required'>string</a></code></td>
+<td>Name of the assessment as listed in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+</tr>
+</tbody></table>
+<h3 id='patient-facing-assessment-links-find'>Find</h3>
+<p>Retrieves <strong>patient facing assessment links</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>patient facing assessment links</strong> resource.</p>
+<h4 id='patient-facing-assessment-links-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/patient_facing_assessment_links <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/patient_facing_assessment_links'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/patient_facing_assessment_links</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/patient_facing_assessment_links</code></p>
+<h4 id='patient-facing-assessment-links-find-required-scope'>Required Scope</h4>
+<p><code>patient_facing_assessment_links.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-3"><span class="w">    </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&amp;spec_name=pet_wellness"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503879+00:00"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-05-28T14:19:29.503904+00:00"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">      </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4f0a3adf-8e74-4981-a984-1dc079df577c"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"expire_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-27T14:19:29.500985+00:00"</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6db22d8e-de8e-43a8-be5c-19957dd2b2a0"</span>
+</div><div class="line-10"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-11"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-12"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-13"><span class="p">}</span>
+</div></code></pre></div><h4 id='patient-facing-assessment-links-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
@@ -10157,7 +10784,8 @@ your implementation manager or customer success manager to have this functionali
 </tr>
 </tbody></table>
 <h3 id='workers-find'>Find</h3>
-<p>Retrieves <strong>workers</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>workers</strong> resource.</p>
+<p>Retrieves <strong>worker</strong>, filtered by the supplied parameters.      Only the parameters listed below are supported in Find for the <strong>worker</strong>      resource.
+It is possible to filter by email and phone.     Both attributes can be used at the same time and will act as logical OR</p>
 <h4 id='workers-find-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -10213,6 +10841,14 @@ your implementation manager or customer success manager to have this functionali
 <th>description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>email <br /><code><a href='#types' class='optional'>email</a></code></td>
+<td>Email address of the worker. This is also used as the username of the worker when logging into the Welkin Portal.</td>
+</tr>
+<tr>
+<td>phone <br /><code><a href='#types' class='optional'>e164_phone</a></code></td>
+<td>Direct line phone number of the worker in international, E.164 format.</td>
+</tr>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
