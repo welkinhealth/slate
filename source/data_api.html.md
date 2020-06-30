@@ -2124,7 +2124,8 @@ Updates an existing __calendar event__.
 curl -XPUT https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 -d '{
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
-  "outcome": "completed"
+  "outcome": "completed",
+  "appointment_type": "intake_call"
 }' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
@@ -2136,7 +2137,8 @@ headers = {"Authorization": "Bearer <token>"}
 data = {
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
-  "outcome": "completed"
+  "outcome": "completed",
+  "appointment_type": "intake_call"
 }
 url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'
 
@@ -2152,7 +2154,8 @@ const url = 'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-
 const data = {
   "start_time": "2018-09-10T18:56:19.357228+00:00",
   "end_time": "2018-09-10T18:56:19.357540+00:00",
-  "outcome": "completed"
+  "outcome": "completed",
+  "appointment_type": "intake_call"
 };
 
 const response = await axios({method: 'put', url: url, headers: headers, data: data});
@@ -2194,6 +2197,7 @@ start_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> 
 end_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Scheduled end time of the calendar event if scheduled for a specific time of day :type end_time: optional isodatetime
 day <br /><code><a href='#types' class='optional'>date</a></code> | Date of the calendar event if not scheduled for a specific time of day
 outcome <br /><code><a href='#types' class='optional'>enum</a></code> | The result of the event if it is no longer upcoming (`completed`, `cancelled`, `no_show`)
+appointment_type <br /><code><a href='#types' class='optional'>string</a></code> | Appointment prompt to be used for this event (see note for details)
 ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is during an [unavailable time](#unavailable-times) for the worker.
 ignore_working_hours <br /><code><a href='#types' class='optional'>boolean</a></code> | If this is set, Welkin will not check whether the calendar event is within the worker's weekly available days and hours.
 
@@ -5037,6 +5041,7 @@ includes the file preview and the attachment type.
 
 
 
+
 ### Model
 
 > Example Response
@@ -5050,7 +5055,8 @@ includes the file preview and the attachment type.
   "description": "Right leg",
   "file_upload_ids": [
     "efbcc819-f25f-4bf4-afd4-198a035d5340"
-  ]
+  ],
+  "created_at": "2020-06-24T01:27:32.045336+00:00"
 }
 ```
 
@@ -5063,6 +5069,7 @@ worker_id <br /><code><a href='#types'>guid</a></code> | ID of the worker who is
 attachment_type <br /><code><a href='#types'>string</a></code> | A label attached to the file. Note, for your implementation of Welkin there may be a predefined set of possible labels.
 description <br /><code><a href='#types'>optional</a> <a href='#types'>string</a></code> | Text description or notes about the file being attached
 file_upload_ids <br /><code><a href='#types'>list(guid)</a></code> | List of [file upload IDs](#file-uploads) to attach to the [patient](#patients)
+created_at <br /><code><a href='#types'>isodatetime</a></code> | Date and time when the attachment created
 
 
 
@@ -5116,7 +5123,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
     "description": "Right leg",
     "file_upload_ids": [
       "efbcc819-f25f-4bf4-afd4-198a035d5340"
-    ]
+    ],
+    "created_at": "2020-06-24T01:27:32.045336+00:00"
   }
 }
 ```
@@ -5208,7 +5216,8 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
     "description": "Right leg",
     "file_upload_ids": [
       "efbcc819-f25f-4bf4-afd4-198a035d5340"
-    ]
+    ],
+    "created_at": "2020-06-24T01:27:32.045336+00:00"
   }
 }
 ```
@@ -5280,7 +5289,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
       "description": "Right leg",
       "file_upload_ids": [
         "efbcc819-f25f-4bf4-afd4-198a035d5340"
-      ]
+      ],
+      "created_at": "2020-06-24T01:27:32.045336+00:00"
     }
   ],
   "links": "Elided for simplicity, see Find Endpoints Overview above"
@@ -6046,6 +6056,7 @@ generation.
 
 
 
+
 ### Model
 
 > Example Response
@@ -6072,6 +6083,7 @@ generation.
   "zip_code": "94110",
   "state": "CA",
   "country": "US",
+  "is_active": "true",
   "updated_at": "2018-09-12T01:27:32.108773+00:00",
   "created_at": "2018-09-12T01:27:32.109872+00:00"
 }
@@ -6082,7 +6094,7 @@ param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
-is_active <br /><code></code> | 
+is_active <br /><code><a href='#types'>boolean</a></code> | `true` or `false` for whether the patient record is active or inactive. Caution: marking a patient inactive will also finish calendar events and dismiss alerts.
 primary_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types'>timezone</a></code> | Timezone in which this [patient](#patients) lives
@@ -6170,6 +6182,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
     "zip_code": "94110",
     "state": "CA",
     "country": "US",
+    "is_active": "true",
     "updated_at": "2018-09-12T01:27:32.108773+00:00",
     "created_at": "2018-09-12T01:27:32.109872+00:00"
   }
@@ -6312,6 +6325,7 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
     "zip_code": "94110",
     "state": "CA",
     "country": "US",
+    "is_active": "true",
     "updated_at": "2018-09-12T01:27:32.108773+00:00",
     "created_at": "2018-09-12T01:27:32.109872+00:00"
   }
@@ -6361,6 +6375,7 @@ Updates an existing __patient__.
 ```shell
 curl -XPUT https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
   "phase": "intake",
+  "is_active": "true",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
   "timezone": "US/Pacific",
   "first_name": "Grace",
@@ -6389,6 +6404,7 @@ headers = {"Authorization": "Bearer <token>"}
 
 data = {
   "phase": "intake",
+  "is_active": "true",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
   "timezone": "US/Pacific",
   "first_name": "Grace",
@@ -6421,6 +6437,7 @@ const headers = {"Authorization": "Bearer <token>"};
 const url = 'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c';
 const data = {
   "phase": "intake",
+  "is_active": "true",
   "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",
   "timezone": "US/Pacific",
   "first_name": "Grace",
@@ -6475,6 +6492,7 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
     "zip_code": "94110",
     "state": "CA",
     "country": "US",
+    "is_active": "true",
     "updated_at": "2018-09-12T01:27:32.108773+00:00",
     "created_at": "2018-09-12T01:27:32.109872+00:00"
   }
@@ -6488,6 +6506,7 @@ param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __patients__ record.
 phase <br /><code><a href='#types' class='optional'>enum</a></code> | The phase (or stage) of care that this patient is in. The possible set of phases is defined in [Workshop](https://workshop.welkinhealth.com).
+is_active <br /><code><a href='#types' class='optional'>boolean</a></code> | `true` or `false` for whether the patient record is active or inactive. Caution: marking a patient inactive will also finish calendar events and dismiss alerts.
 primary_worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 coach_id <br /><code><a href='#types' class='optional'>guid</a></code> | (Deprecated) ID of the [worker](#workers) who is the primary [worker](#workers) for this [patient](#patients).
 timezone <br /><code><a href='#types' class='optional'>timezone</a></code> | Timezone in which this [patient](#patients) lives
@@ -6576,250 +6595,12 @@ const response = await axios({method: 'get', url: url, headers: headers});
       "zip_code": "94110",
       "state": "CA",
       "country": "US",
+      "is_active": "true",
       "updated_at": "2018-09-12T01:27:32.108773+00:00",
       "created_at": "2018-09-12T01:27:32.109872+00:00"
     }
   ],
   "links": "Elided for simplicity, see Find Endpoints Overview above"
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
-page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
-
-
-
-
-
-
-
-A patient facing assessment link is a unique, one-time link that can be shared with a patient so they can fill out the assessment independently.
-
-Generated links are only valid for the specific duration. This duration is set to 30 days by default, although it can be changed through a PSE request.
-
-### Model
-
-> Example Response
-
-```json
-{
-  "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
-  "created_at": "2020-05-28T14:19:29.503879+00:00",
-  "updated_at": "2020-05-28T14:19:29.503904+00:00",
-  "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
-  "expire_time": "2020-06-27T14:19:29.500985+00:00",
-  "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
-}
-```
-
-
-param | description
-- | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
-patient_id<br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients).
-url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
-updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
-expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
-
-
-
-### Get
-Retrieves a single __PFA link__ record by `id`.
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0 -H "Authorization: Bearer <your access token>"
-```
-
-```python
-import requests
-
-headers = {"Authorization": "Bearer <token>"}
-url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0'
-
-resp = requests.get(url, headers=headers).json()
-
-```
-
-```javascript
-const axios = require('axios');
-
-const headers = {"Authorization": "Bearer <token>"}
-const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links/6db22d8e-de8e-43a8-be5c-19957dd2b2a0';
-
-const response = await axios({method: 'get', url: url, headers: headers});
-
-```
-
-`GET /v1/patient_facing_assessment_links/:id`
-
-<!-- #### Required Scope
-`patients.read` or `all` -->
-
-> Example Response
-
-```json
-{
-  "data": {
-     "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
-      "created_at": "2020-05-28T14:19:29.503879+00:00",
-      "updated_at": "2020-05-28T14:19:29.503904+00:00",
-      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
-      "expire_time": "2020-06-27T14:19:29.500985+00:00",
-      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
-  }
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __PFA link__ record.
-
-
-
-
-
-### Create
-Creates a new __PFA link__.
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XPOST https://api.welkinhealth.com/v1/patient_facing_assessment_links -d '{
-  "spec_name": "pet_wellness",
-  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
-}' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
-```
-
-```python
-import requests
-
-headers = {"Authorization": "Bearer <token>"}
-
-data = {
-  "spec_name": "pet_wellness",
-  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
-}
-url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
-
-resp = requests.post(url, headers=headers, json=data).json()
-
-```
-
-```javascript
-const axios = require('axios');
-
-const headers = {"Authorization": "Bearer <token>"};
-const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
-const data = {
-  "spec_name": "pet_wellness",
-  "patient_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054"
-};
-
-const response = await axios({method: 'post', url: url, headers: headers, data: data});
-
-```
-
-`POST /v1/patient_facing_assessment_links -d { }`
-
-<!-- #### Required Scope
-`patients.write` or `all` -->
-
-> Example Response
-
-```json
-{
-  "data": {
-     "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
-      "created_at": "2020-05-28T14:19:29.503879+00:00",
-      "updated_at": "2020-05-28T14:19:29.503904+00:00",
-      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
-      "expire_time": "2020-06-27T14:19:29.500985+00:00",
-      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
-  }
-}
-```
-
-#### Params
-
-
-param | description
-- | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __PFA link__ record.
-patient_id<br /><code><a href='#types'>guid</a></code> | The primary ID of the [patient](#patients).
-url <br /><code><a href='#types'>string</a></code> | Fully qualified URL to be presented to the patient to fill out the assessment 
-updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
-created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
-expire_time <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource will be invalid
-
-### Find
-Retrieves __PFA Links__, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the __PFA links__ resource.
-
-
-#### Invocation
-
-> Example Request
-
-```shell
-curl -XGET https://api.welkinhealth.com/v1/patient_facing_assessment_links -H "Authorization: Bearer <your access token>"
-```
-
-```python
-import requests
-
-headers = {"Authorization": "Bearer <token>"}
-url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links'
-
-resp = requests.get(url, headers=headers).json()
-
-```
-
-```javascript
-const axios = require('axios');
-
-const headers = {"Authorization": "Bearer <token>"};
-const url = 'https://api.welkinhealth.com/v1/patient_facing_assessment_links';
-
-const response = await axios({method: 'get', url: url, headers: headers});
-
-```
-
-`GET /v1/patient_facing_assessment_links`
-
-<!-- #### Required Scope
-`patients.read` or `all` -->
-
-> Example Response
-
-```json
-{
-  "data": [
-    {
-      "url": "https://survey.welkinhealth.com/beta/?token=6db22d8e-de8e-43a8-be5c-19957dd2b2a0&spec_name=pet_wellness",
-      "created_at": "2020-05-28T14:19:29.503879+00:00",
-      "updated_at": "2020-05-28T14:19:29.503904+00:00",
-      "patient_id": "4f0a3adf-8e74-4981-a984-1dc079df577c",
-      "expire_time": "2020-06-27T14:19:29.500985+00:00",
-      "id": "6db22d8e-de8e-43a8-be5c-19957dd2b2a0"
-    }
-  ],
 }
 ```
 
