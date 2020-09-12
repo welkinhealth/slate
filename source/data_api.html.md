@@ -2044,19 +2044,65 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 > Example Response
 
 ```json
+// for custom_data event_type
+"data": [
+        {
+            "relationships": {}, 
+            "event_type": "custom_data", 
+            "event_time": "2020-09-10T23:38:30.851579+00:00", 
+            "created_at": "2020-09-10T23:38:30.854040+00:00", 
+            "updated_at": "2020-09-10T23:38:30.854056+00:00", 
+            "id": "e59b31d9-d854-496d-ab8f-461670a9bc8d", 
+            "actor_type": "worker", 
+            "actor_id": "7e3a8a06-d443-49c4-8ed8-ec1f683e2210", 
+            "env_id": "e88444a4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
+            "type": "audit_logs", 
+            "event": {
+                "type_name": "cdt_ref_name", 
+                "patient_name": "Test Patient", 
+                "diff": {
+                    "key": "value"
+                }, 
+                "operation": "create", 
+                "patient_id": "802336e8-39df-4243-bb90-d1c7028abdbd", 
+                "id": "24c9fd66-1b15-404c-8668-ea330acb7b81"
+            }
+        }
+]
 
+// for login event_type
+"data": [
+        {
+            "relationships": {}, 
+            "event_type": "login", 
+            "event_time": "2020-09-04T17:59:43.322951+00:00", 
+            "created_at": "2020-09-04T17:59:57.332752+00:00", 
+            "updated_at": "2020-09-04T17:59:57.332787+00:00", 
+            "id": "11a1645e-6d31-448b-90e4-4babc662df5a", 
+            "actor_type": "worker", 
+            "actor_id": "1f42jhfb-e2ae-4c91-b7bb-083c956731af", 
+            "env_id": "e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
+            "type": "audit_logs", 
+            "event": {
+                "first_name": "Profilio Coach", 
+                "last_name": null, 
+                "id": "1f98adfb-e2ae-4c91-b7bb-083c956731af", 
+                "email": "coach+profilio@welkinhealth.com"
+            }
+        }
+]
 ```
 
 
 param | description
 - | -
-id <br /><code><a href='#types'>json</a></code> | The primary identifier of the __audit logs__ record.
-env_id <br /><code></code> | 
-actor_id <br /><code></code> | 
+id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __audit logs__ record.
+env_id <br /><code><a href='#types'>guid</a></code> | 
+actor_id <br /><code><a href='#types'>guid</a></code> | 
 actor_type <br /><code><a href='#types'>enum</a></code> | 
-event_time <br /><code></code> | 
+event_time <br /><code><a href='#types'>isodatetime</a></code> | 
 event_type <br /><code><a href='#types'>enum</a></code> | 
-event <br /><code></code> | 
+event <br /><code><a href='#types'>json</a></code> | 
 
 
 
