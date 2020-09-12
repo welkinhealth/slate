@@ -2848,7 +2848,53 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <blockquote>
 <p>Example Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1">
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="err">//</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">custom_data</span><span class="w"> </span><span class="err">event_type</span>
+</div><div class="line-2"><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-3"><span class="w">        </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">            </span><span class="nl">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span>
+</div><div class="line-5"><span class="w">            </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom_data"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-6"><span class="w">            </span><span class="nl">"event_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.851579+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-7"><span class="w">            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.854040+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-8"><span class="w">            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.854056+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-9"><span class="w">            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e59b31d9-d854-496d-ab8f-461670a9bc8d"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-10"><span class="w">            </span><span class="nl">"actor_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-11"><span class="w">            </span><span class="nl">"actor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e3a8a06-d443-49c4-8ed8-ec1f683e2210"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-12"><span class="w">            </span><span class="nl">"env_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e88444a4-6ad7-42f9-a9c1-9c7d06d3cdf9"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-13"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audit_logs"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-14"><span class="w">            </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-15"><span class="w">                </span><span class="nl">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdt_ref_name"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-16"><span class="w">                </span><span class="nl">"patient_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Patient"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-17"><span class="w">                </span><span class="nl">"diff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-18"><span class="w">                    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span>
+</div><div class="line-19"><span class="w">                </span><span class="p">},</span><span class="w"> </span>
+</div><div class="line-20"><span class="w">                </span><span class="nl">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-21"><span class="w">                </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802336e8-39df-4243-bb90-d1c7028abdbd"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-22"><span class="w">                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24c9fd66-1b15-404c-8668-ea330acb7b81"</span>
+</div><div class="line-23"><span class="w">            </span><span class="p">}</span>
+</div><div class="line-24"><span class="w">        </span><span class="p">}</span>
+</div><div class="line-25"><span class="p">]</span>
+</div><div class="line-26">
+</div><div class="line-27"><span class="err">//</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">login</span><span class="w"> </span><span class="err">event_type</span>
+</div><div class="line-28"><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-29"><span class="w">        </span><span class="p">{</span>
+</div><div class="line-30"><span class="w">            </span><span class="nl">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span>
+</div><div class="line-31"><span class="w">            </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-32"><span class="w">            </span><span class="nl">"event_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:43.322951+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-33"><span class="w">            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332752+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-34"><span class="w">            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332787+00:00"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-35"><span class="w">            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11a1645e-6d31-448b-90e4-4babc662df5a"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-36"><span class="w">            </span><span class="nl">"actor_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-37"><span class="w">            </span><span class="nl">"actor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f42jhfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-38"><span class="w">            </span><span class="nl">"env_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-39"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audit_logs"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-40"><span class="w">            </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-41"><span class="w">                </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Profilio Coach"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-42"><span class="w">                </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-43"><span class="w">                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f98adfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
+</div><div class="line-44"><span class="w">                </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach+profilio@welkinhealth.com"</span>
+</div><div class="line-45"><span class="w">            </span><span class="p">}</span>
+</div><div class="line-46"><span class="w">        </span><span class="p">}</span>
+</div><div class="line-47"><span class="p">]</span>
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -2857,15 +2903,15 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>id <br /><code><a href='#types'>json</a></code></td>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
 <td>The primary identifier of the <strong>audit logs</strong> record.</td>
 </tr>
 <tr>
-<td>env_id <br /><code></code></td>
+<td>env_id <br /><code><a href='#types'>guid</a></code></td>
 <td></td>
 </tr>
 <tr>
-<td>actor_id <br /><code></code></td>
+<td>actor_id <br /><code><a href='#types'>guid</a></code></td>
 <td></td>
 </tr>
 <tr>
@@ -2873,7 +2919,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td></td>
 </tr>
 <tr>
-<td>event_time <br /><code></code></td>
+<td>event_time <br /><code><a href='#types'>isodatetime</a></code></td>
 <td></td>
 </tr>
 <tr>
@@ -2881,7 +2927,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td></td>
 </tr>
 <tr>
-<td>event <br /><code></code></td>
+<td>event <br /><code><a href='#types'>json</a></code></td>
 <td></td>
 </tr>
 </tbody></table>
