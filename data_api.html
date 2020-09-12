@@ -282,6 +282,26 @@
             <a href="#api-reference" class="toc-h1 toc-link" data-title="API Reference">API Reference</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#alerts" class="toc-h2 toc-link" data-title="Alerts">Alerts</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#alerts-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#alerts-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
+                          </li>
+                          <li>
+                            <a href="#alerts-create" class="toc-h3 toc-link" data-title="API Reference">Create</a>
+                          </li>
+                          <li>
+                            <a href="#alerts-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                          </li>
+                          <li>
+                            <a href="#alerts-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
                     <a href="#app-messages" class="toc-h2 toc-link" data-title="App Messages">App Messages</a>
                       <ul class="toc-list-h3">
                           <li>
@@ -315,6 +335,20 @@
                           </li>
                           <li>
                             <a href="#assessment-responses-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#audit-logs" class="toc-h2 toc-link" data-title="Audit Logs">Audit Logs</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#audit-logs-model" class="toc-h3 toc-link" data-title="API Reference">Model</a>
+                          </li>
+                          <li>
+                            <a href="#audit-logs-get" class="toc-h3 toc-link" data-title="API Reference">Get</a>
+                          </li>
+                          <li>
+                            <a href="#audit-logs-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
                           </li>
                       </ul>
                   </li>
@@ -431,6 +465,9 @@
                           </li>
                           <li>
                             <a href="#custom-data-type-records-update" class="toc-h3 toc-link" data-title="API Reference">Update</a>
+                          </li>
+                          <li>
+                            <a href="#custom-data-type-records-delete" class="toc-h3 toc-link" data-title="API Reference">Delete</a>
                           </li>
                           <li>
                             <a href="#custom-data-type-records-find" class="toc-h3 toc-link" data-title="API Reference">Find</a>
@@ -1557,7 +1594,307 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>The <em>Find By Post</em> request URL is <code>/v1/&lt;resource_type&gt;/find</code></p>
 
 <p>Parameters for <em>Find By Post</em> requests are sent in the request body.</p>
-<h1 id='api-reference'>API Reference</h1><h2 id='app-messages'>App Messages</h2>
+<h1 id='api-reference'>API Reference</h1><h2 id='alerts'>Alerts</h2><h3 id='alerts-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1">
+</div></code></pre></div>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>The primary identifier of the <strong>alerts</strong> record.</td>
+</tr>
+<tr>
+<td>patient_id <br /><code><a href='#types'>guid</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>worker_id <br /><code><a href='#types'>guid</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>alert_type <br /><code><a href='#types'>string</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>config <br /><code><a href='#types'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>active_time <br /><code><a href='#types'>isodatetimestring</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>finished_time <br /><code><a href='#types'>isodatetime</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>completed <br /><code><a href='#types'>boolean</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>dismissed <br /><code></code></td>
+<td></td>
+</tr>
+<tr>
+<td>dismissed_by_worker_id <br /><code></code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='alerts-get'>Get</h3>
+<p>Retrieves a single <strong>alert</strong> by <code>id</code>.</p>
+<h4 id='alerts-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">}</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/alerts/:id</code></p>
+<h4 id='alerts-get-required-scope'>Required Scope</h4>
+<p><code>alerts.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
+</div><div class="line-3"><span class="p">}</span>
+</div></code></pre></div><h4 id='alerts-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>The primary identifier of the <strong>alerts</strong> record.</td>
+</tr>
+</tbody></table>
+<h3 id='alerts-create'>Create</h3>
+<p>Creates a new <strong>alert</strong>.</p>
+<h4 id='alerts-create-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPOST</span> https://api.welkinhealth.com/v1/alerts <span class="nt">-d</span> <span class="s1">'{</span>
+</div><div class="line-2"><span class="s1">  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",</span>
+</div><div class="line-3"><span class="s1">  "worker_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",</span>
+</div><div class="line-4"><span class="s1">  "alert_type": "some_string"</span>
+</div><div class="line-5"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4">
+</div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="s">"patient_id"</span><span class="p">:</span> <span class="s">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="s">"worker_id"</span><span class="p">:</span> <span class="s">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="s">"alert_type"</span><span class="p">:</span> <span class="s">"some_string"</span>
+</div><div class="line-9"><span class="p">}</span>
+</div><div class="line-10"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts'</span>
+</div><div class="line-11">
+</div><div class="line-12"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-13">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="dl">"</span><span class="s2">patient_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="dl">"</span><span class="s2">worker_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="dl">"</span><span class="s2">alert_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">some_string</span><span class="dl">"</span>
+</div><div class="line-9"><span class="p">};</span>
+</div><div class="line-10">
+</div><div class="line-11"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-12">
+</div></code></pre></div>
+<p><code>POST /v1/alerts -d { }</code></p>
+<h4 id='alerts-create-required-scope'>Required Scope</h4>
+<p><code>alerts.write</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
+</div><div class="line-3"><span class="p">}</span>
+</div></code></pre></div><h4 id='alerts-create-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>patient_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>worker_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>alert_type <br /><code><a href='#types' class='required'>string</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>config <br /><code><a href='#types' class='required'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='alerts-update'>Update</h3>
+<p>Updates an existing <strong>alert</strong>.</p>
+<h4 id='alerts-update-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPUT</span> https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c <span class="nt">-d</span> <span class="s1">'{</span>
+</div><div class="line-2"><span class="s1">  "finished_time": "2018-10-21T18:30:10.100000+00:00"</span>
+</div><div class="line-3"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4">
+</div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="s">"finished_time"</span><span class="p">:</span> <span class="s">"2018-10-21T18:30:10.100000+00:00"</span>
+</div><div class="line-7"><span class="p">}</span>
+</div><div class="line-8"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
+</div><div class="line-9">
+</div><div class="line-10"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-11">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class="line-6">  <span class="dl">"</span><span class="s2">finished_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-10-21T18:30:10.100000+00:00</span><span class="dl">"</span>
+</div><div class="line-7"><span class="p">};</span>
+</div><div class="line-8">
+</div><div class="line-9"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-10">
+</div></code></pre></div>
+<p><code>PUT /v1/alerts/:id -d { }</code></p>
+<h4 id='alerts-update-required-scope'>Required Scope</h4>
+<p><code>alerts.write</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
+</div><div class="line-3"><span class="p">}</span>
+</div></code></pre></div><h4 id='alerts-update-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>The primary identifier of the <strong>alerts</strong> record.</td>
+</tr>
+<tr>
+<td>config <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>finished_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>completed <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='alerts-find'>Find</h3>
+<p>Retrieves <strong>alerts</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>alerts</strong> resource.</p>
+<h4 id='alerts-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/alerts <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/alerts</code></p>
+<h4 id='alerts-find-required-scope'>Required Scope</h4>
+<p><code>alerts.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-3">
+</div><div class="line-4"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-6"><span class="p">}</span>
+</div></code></pre></div><h4 id='alerts-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>alert_type <br /><code><a href='#types' class='optional'>string</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The earliest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The latest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[size] <br /><code><a href='#types' class='optional'>integer</a></code></td>
+<td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
+<h2 id='app-messages'>App Messages</h2>
 <p>App Messages can be viewed or created from the <a href="#conversations">conversation</a> view of the <a href="#patients">Patient</a>
 Profile. App Messages are text based communications that are sent to patients via a web or mobile app and do not
 include emails or sms messages.</p>
@@ -2502,6 +2839,187 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td>Maximum number of items to include in the response</td>
 </tr>
 </tbody></table>
+<h2 id='audit-logs'>Audit Logs</h2>
+<p>:param event_type
+:param actor_type
+:param start_time
+:param end_time</p>
+<h3 id='audit-logs-model'>Model</h3>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1">
+</div></code></pre></div>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types'>json</a></code></td>
+<td>The primary identifier of the <strong>audit logs</strong> record.</td>
+</tr>
+<tr>
+<td>env_id <br /><code></code></td>
+<td></td>
+</tr>
+<tr>
+<td>actor_id <br /><code></code></td>
+<td></td>
+</tr>
+<tr>
+<td>actor_type <br /><code><a href='#types'>enum</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>event_time <br /><code></code></td>
+<td></td>
+</tr>
+<tr>
+<td>event_type <br /><code><a href='#types'>enum</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>event <br /><code></code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='audit-logs-get'>Get</h3>
+<p>Retrieves a single <strong>audit log</strong> by <code>id</code>.</p>
+<h4 id='audit-logs-get-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/audit_logs/ <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/audit_logs/'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">}</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/audit_logs/</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/audit_logs/:id</code></p>
+<h4 id='audit-logs-get-required-scope'>Required Scope</h4>
+<p><code>audit_logs.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
+</div><div class="line-3"><span class="p">}</span>
+</div></code></pre></div><h4 id='audit-logs-get-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>The primary identifier of the <strong>audit logs</strong> record.</td>
+</tr>
+</tbody></table>
+<h3 id='audit-logs-find'>Find</h3>
+<p>Retrieves <strong>audit logs</strong>, filtered by the supplied parameters. Only the parameters listed below are supported in Find for the <strong>audit logs</strong> resource.</p>
+<h4 id='audit-logs-find-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/audit_logs <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/audit_logs'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/audit_logs</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>GET /v1/audit_logs</code></p>
+<h4 id='audit-logs-find-required-scope'>Required Scope</h4>
+<p><code>audit_logs.read</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</div><div class="line-3">
+</div><div class="line-4"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-6"><span class="p">}</span>
+</div></code></pre></div><h4 id='audit-logs-find-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td>The primary identifier of the <strong>audit logs</strong> record.</td>
+</tr>
+<tr>
+<td>actor_type <br /><code><a href='#types' class='optional'>enum</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>event_type <br /><code><a href='#types' class='required'>enum</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>email <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>end_time <br /><code><a href='#types' class='optional'>date</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>operation <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>patient_id <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>start_time <br /><code><a href='#types' class='optional'>date</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>type_name <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The earliest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>The latest timestamp to include in the response</td>
+</tr>
+<tr>
+<td>page[size] <br /><code><a href='#types' class='optional'>integer</a></code></td>
+<td>Maximum number of items to include in the response</td>
+</tr>
+</tbody></table>
 <h2 id='availability'>Availability</h2>
 <p>Availability combines a worker&#39;s working hours, <a href="#unavailable-times">unavailable times</a>, and <a href="#calendar-events">calendar
 events</a> to determine the periods when a worker is available.</p>
@@ -2897,8 +3415,9 @@ appointment prompts are specific to your implementation of Welkin. The range of 
 <div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPUT</span> https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297 <span class="nt">-d</span> <span class="s1">'{</span>
 </div><div class="line-2"><span class="s1">  "start_time": "2018-09-10T18:56:19.357228+00:00",</span>
 </div><div class="line-3"><span class="s1">  "end_time": "2018-09-10T18:56:19.357540+00:00",</span>
-</div><div class="line-4"><span class="s1">  "outcome": "completed"</span>
-</div><div class="line-5"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div><div class="line-4"><span class="s1">  "outcome": "completed",</span>
+</div><div class="line-5"><span class="s1">  "appointment_type": "intake_call"</span>
+</div><div class="line-6"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
 </div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
@@ -2906,12 +3425,13 @@ appointment prompts are specific to your implementation of Welkin. The range of 
 </div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
 </div><div class="line-6">  <span class="s">"start_time"</span><span class="p">:</span> <span class="s">"2018-09-10T18:56:19.357228+00:00"</span><span class="p">,</span>
 </div><div class="line-7">  <span class="s">"end_time"</span><span class="p">:</span> <span class="s">"2018-09-10T18:56:19.357540+00:00"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="s">"outcome"</span><span class="p">:</span> <span class="s">"completed"</span>
-</div><div class="line-9"><span class="p">}</span>
-</div><div class="line-10"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'</span>
-</div><div class="line-11">
-</div><div class="line-12"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</div><div class="line-13">
+</div><div class="line-8">  <span class="s">"outcome"</span><span class="p">:</span> <span class="s">"completed"</span><span class="p">,</span>
+</div><div class="line-9">  <span class="s">"appointment_type"</span><span class="p">:</span> <span class="s">"intake_call"</span>
+</div><div class="line-10"><span class="p">}</span>
+</div><div class="line-11"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/calendar_events/f2baaf15-94d2-415d-b3e6-7409b643d297'</span>
+</div><div class="line-12">
+</div><div class="line-13"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-14">
 </div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
@@ -2919,11 +3439,12 @@ appointment prompts are specific to your implementation of Welkin. The range of 
 </div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
 </div><div class="line-6">  <span class="dl">"</span><span class="s2">start_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-09-10T18:56:19.357228+00:00</span><span class="dl">"</span><span class="p">,</span>
 </div><div class="line-7">  <span class="dl">"</span><span class="s2">end_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-09-10T18:56:19.357540+00:00</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="dl">"</span><span class="s2">outcome</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">completed</span><span class="dl">"</span>
-</div><div class="line-9"><span class="p">};</span>
-</div><div class="line-10">
-</div><div class="line-11"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
-</div><div class="line-12">
+</div><div class="line-8">  <span class="dl">"</span><span class="s2">outcome</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">completed</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-9">  <span class="dl">"</span><span class="s2">appointment_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">intake_call</span><span class="dl">"</span>
+</div><div class="line-10"><span class="p">};</span>
+</div><div class="line-11">
+</div><div class="line-12"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-13">
 </div></code></pre></div>
 <p><code>PUT /v1/calendar_events/:id -d { }</code></p>
 <h4 id='calendar-events-update-required-scope'>Required Scope</h4>
@@ -2973,6 +3494,10 @@ appointment prompts are specific to your implementation of Welkin. The range of 
 <tr>
 <td>outcome <br /><code><a href='#types' class='optional'>enum</a></code></td>
 <td>The result of the event if it is no longer upcoming (<code>completed</code>, <code>cancelled</code>, <code>no_show</code>)</td>
+</tr>
+<tr>
+<td>appointment_type <br /><code><a href='#types' class='optional'>string</a></code></td>
+<td>Appointment prompt to be used for this event (see note for details)</td>
 </tr>
 <tr>
 <td>ignore_unavailable_times <br /><code><a href='#types' class='optional'>boolean</a></code></td>
@@ -3037,6 +3562,10 @@ appointment prompts are specific to your implementation of Welkin. The range of 
 <th>description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>calendar_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>The ID of the calendar whose events do you want to find. If the param is not set, then will get all calendar events</td>
+</tr>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
@@ -4241,6 +4770,50 @@ single value sidebar will not create a new record but rather update the latest r
 <tr>
 <td>body <br /><code><a href='#types' class='required'>json</a></code></td>
 <td>The content of the custom data type record</td>
+</tr>
+</tbody></table>
+<h3 id='custom-data-type-records-delete'>Delete</h3>
+<p>Deletes a single <strong>custom data type record</strong>.</p>
+<h4 id='custom-data-type-records-delete-invocation'>Invocation</h4>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XDELETE</span> https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7 <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7'</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-7">
+</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+</div><div class="line-2">
+</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/custom_data_type_records/07ae21f7-c60e-42cb-ab7a-c80a3c445cc7</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-5">
+</div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
+</div><div class="line-7">
+</div></code></pre></div>
+<p><code>DELETE /v1/custom_data_type_records/:id</code></p>
+<h4 id='custom-data-type-records-delete-required-scope'>Required Scope</h4>
+<p><code>custom_data_type_records.write</code> or <code>all</code></p>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+</div><div class="line-3"><span class="p">}</span>
+</div></code></pre></div><h4 id='custom-data-type-records-delete-params'>Params</h4>
+<table><thead>
+<tr>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>The primary identifier of the <strong>custom data type records</strong> record.</td>
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-find'>Find</h3>
@@ -5755,8 +6328,9 @@ includes the file preview and the attachment type.</p>
 </div><div class="line-6"><span class="w">  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right leg"</span><span class="p">,</span>
 </div><div class="line-7"><span class="w">  </span><span class="nl">"file_upload_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </div><div class="line-8"><span class="w">    </span><span class="s2">"efbcc819-f25f-4bf4-afd4-198a035d5340"</span>
-</div><div class="line-9"><span class="w">  </span><span class="p">]</span>
-</div><div class="line-10"><span class="p">}</span>
+</div><div class="line-9"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-10"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-24T01:27:32.045336+00:00"</span>
+</div><div class="line-11"><span class="p">}</span>
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -5787,6 +6361,10 @@ includes the file preview and the attachment type.</p>
 <tr>
 <td>file_upload_ids <br /><code><a href='#types'>list(guid)</a></code></td>
 <td>List of <a href="#file-uploads">file upload IDs</a> to attach to the <a href="#patients">patient</a></td>
+</tr>
+<tr>
+<td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>Date and time when the attachment created</td>
 </tr>
 </tbody></table>
 <h3 id='file-attachments-get'>Get</h3>
@@ -5827,9 +6405,10 @@ includes the file preview and the attachment type.</p>
 </div><div class="line-7"><span class="w">    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right leg"</span><span class="p">,</span>
 </div><div class="line-8"><span class="w">    </span><span class="nl">"file_upload_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </div><div class="line-9"><span class="w">      </span><span class="s2">"efbcc819-f25f-4bf4-afd4-198a035d5340"</span>
-</div><div class="line-10"><span class="w">    </span><span class="p">]</span>
-</div><div class="line-11"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-12"><span class="p">}</span>
+</div><div class="line-10"><span class="w">    </span><span class="p">],</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-24T01:27:32.045336+00:00"</span>
+</div><div class="line-12"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-13"><span class="p">}</span>
 </div></code></pre></div><h4 id='file-attachments-get-params'>Params</h4>
 <table><thead>
 <tr>
@@ -5907,9 +6486,10 @@ includes the file preview and the attachment type.</p>
 </div><div class="line-7"><span class="w">    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right leg"</span><span class="p">,</span>
 </div><div class="line-8"><span class="w">    </span><span class="nl">"file_upload_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </div><div class="line-9"><span class="w">      </span><span class="s2">"efbcc819-f25f-4bf4-afd4-198a035d5340"</span>
-</div><div class="line-10"><span class="w">    </span><span class="p">]</span>
-</div><div class="line-11"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-12"><span class="p">}</span>
+</div><div class="line-10"><span class="w">    </span><span class="p">],</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-24T01:27:32.045336+00:00"</span>
+</div><div class="line-12"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-13"><span class="p">}</span>
 </div></code></pre></div><h4 id='file-attachments-create-params'>Params</h4>
 <table><thead>
 <tr>
@@ -5977,11 +6557,12 @@ includes the file preview and the attachment type.</p>
 </div><div class="line-8"><span class="w">      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right leg"</span><span class="p">,</span>
 </div><div class="line-9"><span class="w">      </span><span class="nl">"file_upload_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </div><div class="line-10"><span class="w">        </span><span class="s2">"efbcc819-f25f-4bf4-afd4-198a035d5340"</span>
-</div><div class="line-11"><span class="w">      </span><span class="p">]</span>
-</div><div class="line-12"><span class="w">    </span><span class="p">}</span>
-</div><div class="line-13"><span class="w">  </span><span class="p">],</span>
-</div><div class="line-14"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
-</div><div class="line-15"><span class="p">}</span>
+</div><div class="line-11"><span class="w">      </span><span class="p">],</span>
+</div><div class="line-12"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-24T01:27:32.045336+00:00"</span>
+</div><div class="line-13"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-14"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-15"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-16"><span class="p">}</span>
 </div></code></pre></div><h4 id='file-attachments-find-params'>Params</h4>
 <table><thead>
 <tr>
@@ -6454,8 +7035,11 @@ Welkin's standard API are self reporting and do not require Integration Task mon
 </tr>
 </tbody></table>
 <h2 id='patient-facing-assessment-links'>Patient Facing Assessment Links</h2>
-<p>Patient Facing assessment Links are generated for integrate them in the Patient Survey App
-Assessments assessment_spec_name should  have audience including patient</p>
+<p>A patient facing assessment link is a unique, one-time link that can be shared with a patient so
+they can fill out the assessment independently.</p>
+
+<p>Generated links are only valid for the specific duration. This duration is set to 30 days by default,
+although it can be changed through a PSE request</p>
 <h3 id='patient-facing-assessment-links-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
@@ -6481,11 +7065,11 @@ Assessments assessment_spec_name should  have audience including patient</p>
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
-<td>id of the patient on which the assessment response will be placed</td>
+<td>ID of the <a href="#patients">patient</a> on which the assessment response will be placed</td>
 </tr>
 <tr>
 <td>expire_time <br /><code></code></td>
-<td></td>
+<td>Datetime when the link will expire</td>
 </tr>
 <tr>
 <td>created_at <br /><code><a href='#types'>isodatetime</a></code></td>
@@ -6611,11 +7195,11 @@ Assessments assessment_spec_name should  have audience including patient</p>
 </thead><tbody>
 <tr>
 <td>patient_id <br /><code><a href='#types' class='required'>guid</a></code></td>
-<td>id of the patient on which the assessment response will be placed</td>
+<td>ID of the <a href="#patients">patient</a> on which the assessment response will be placed</td>
 </tr>
 <tr>
 <td>spec_name <br /><code><a href='#types' class='required'>string</a></code></td>
-<td>Name of the assessment as listed in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+<td>The ref_name for the assessment as it appears in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 </tbody></table>
 <h3 id='patient-facing-assessment-links-find'>Find</h3>
@@ -6668,6 +7252,14 @@ Assessments assessment_spec_name should  have audience including patient</p>
 </tr>
 </thead><tbody>
 <tr>
+<td>patient_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>ID of the <a href="#patients">patient</a> on which the assessment response will be placed</td>
+</tr>
+<tr>
+<td>spec_name <br /><code><a href='#types' class='optional'>string</a></code></td>
+<td>The ref_name for the assessment as it appears in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+</tr>
+<tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
 </tr>
@@ -6691,6 +7283,25 @@ Take care to ensure you are not duplicating a patient when creating a new one.</
 <p>When using the Welkin API it&#39;s best to designate one system as the master system, and have the other systems be
 followers. In this model, patients are created in only one source, limiting the possibility of duplicate patient
 generation.</p>
+
+<p>english, spanish, vietnamese, tagalog, chinese, arabic, korean, punjabi, russian, other, unknown,
+cantonese, hmong, mandarin_chinese, abkhazian, afar, afrikaans, akan, albanian, amharic,
+aragonese, armenian, assamese, avaric, avestan, aymara, azerbaijani, bambara, bashkir, basque,
+belarusian, bengali, bihari, bislama, bosnian, breton, bulgarian, burmese, catalan, chamorro,
+chechen, chewa, chuvash, cornish, corsican, cree, croatian, czech, danish, maldivian, dutch,
+dzongkha, esperanto, estonian, ewe, faroese, fijian, finnish, french, fulah, galician, georgian,
+german, greek, guarani, gujarati, haitian, hausa, hebrew, herero, hindi, hiri_motu, hungarian,
+indonesian, irish, igbo, inupiaq, ido, icelandic, italian, inuktitut, japanese, javanese, greenlandic,
+kannada, kanuri, kashmiri, kazakh, central_khmer, kikuyu, kinyarwanda, kyrgyz, komi, kongo, kurdish,
+kwanyama, latin, luxembourgish, ganda, limburgish, lingala, lao, lithuanian, luba_katanga, latvian,
+manx, macedonian, malagasy, malay, malayalam, maltese, maori, marathi, marshallese, mongolian,
+nauru, navajo, north_ndebele, nepali, ndonga, norwegian_bokmal, norwegian_nynorsk, norwegian,
+nuosu, south_ndebele, occitan, ojibwa, oromo, oriya, ossetian, pali, persian, polish, pashto,
+portuguese, quechua, romansh, rundi, romanian, sanskrit, sardinian, sindhi, northern_sami, samoan,
+sango, serbian, gaelic, shona, sinhalese, slovak, slovenian, somali, southern_sotho, sundanese,
+swahili, swati, swedish, tamil, telugu, tajik, thai, tigrinya, tibetan, turkmen, tswana, tonga,
+turkish, tsonga, tatar, twi, tahitian, uyghur, ukrainian, urdu, uzbek, venda, volapuk, walloon, welsh,
+wolof, western_frisian, xhosa, yiddish, yoruba, chuang, zului</p>
 <h3 id='patients-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
@@ -6716,9 +7327,10 @@ generation.</p>
 </div><div class="line-19"><span class="w">  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span>
 </div><div class="line-20"><span class="w">  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
 </div><div class="line-21"><span class="w">  </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span>
-</div><div class="line-22"><span class="w">  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
-</div><div class="line-23"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
-</div><div class="line-24"><span class="p">}</span>
+</div><div class="line-22"><span class="w">  </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</div><div class="line-23"><span class="w">  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
+</div><div class="line-25"><span class="p">}</span>
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -6735,8 +7347,8 @@ generation.</p>
 <td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
 </tr>
 <tr>
-<td>is_active <br /><code></code></td>
-<td></td>
+<td>is_active <br /><code><a href='#types'>boolean</a></code></td>
+<td><code>true</code> or <code>false</code> for whether the patient record is active or inactive. Caution: marking a patient inactive will also finish calendar events and dismiss alerts.</td>
 </tr>
 <tr>
 <td>primary_worker_id <br /><code><a href='#types'>guid</a></code></td>
@@ -6800,7 +7412,7 @@ generation.</p>
 </tr>
 <tr>
 <td>primary_language <br /><code><a href='#types'>optional</a> <a href='#types'>enum</a></code></td>
-<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+<td>This patient&#39;s primary language. Available options include ISO 639-1:</td>
 </tr>
 <tr>
 <td>gender <br /><code><a href='#types'>string</a></code></td>
@@ -6874,10 +7486,11 @@ generation.</p>
 </div><div class="line-20"><span class="w">    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span>
 </div><div class="line-21"><span class="w">    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
 </div><div class="line-22"><span class="w">    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span>
-</div><div class="line-23"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
-</div><div class="line-24"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
-</div><div class="line-25"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-26"><span class="p">}</span>
+</div><div class="line-23"><span class="w">    </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
+</div><div class="line-26"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-27"><span class="p">}</span>
 </div></code></pre></div><h4 id='patients-get-params'>Params</h4>
 <table><thead>
 <tr>
@@ -7004,10 +7617,11 @@ generation.</p>
 </div><div class="line-20"><span class="w">    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span>
 </div><div class="line-21"><span class="w">    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
 </div><div class="line-22"><span class="w">    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span>
-</div><div class="line-23"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
-</div><div class="line-24"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
-</div><div class="line-25"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-26"><span class="p">}</span>
+</div><div class="line-23"><span class="w">    </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
+</div><div class="line-26"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-27"><span class="p">}</span>
 </div></code></pre></div><h4 id='patients-create-params'>Params</h4>
 <table><thead>
 <tr>
@@ -7073,7 +7687,7 @@ generation.</p>
 </tr>
 <tr>
 <td>primary_language <br /><code><a href='#types' class='optional'>enum</a></code></td>
-<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+<td>This patient&#39;s primary language. Available options include ISO 639-1:</td>
 </tr>
 <tr>
 <td>gender <br /><code><a href='#types' class='optional'>string</a></code></td>
@@ -7112,82 +7726,85 @@ generation.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPUT</span> https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c <span class="nt">-d</span> <span class="s1">'{</span>
 </div><div class="line-2"><span class="s1">  "phase": "intake",</span>
-</div><div class="line-3"><span class="s1">  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",</span>
-</div><div class="line-4"><span class="s1">  "timezone": "US/Pacific",</span>
-</div><div class="line-5"><span class="s1">  "first_name": "Grace",</span>
-</div><div class="line-6"><span class="s1">  "last_name": "Hopper",</span>
-</div><div class="line-7"><span class="s1">  "birthday": "1906-12-09",</span>
-</div><div class="line-8"><span class="s1">  "street": "3265 17th St",</span>
-</div><div class="line-9"><span class="s1">  "street_line_two": "#304",</span>
-</div><div class="line-10"><span class="s1">  "city": "San Francisco",</span>
-</div><div class="line-11"><span class="s1">  "county": "San Francisco County",</span>
-</div><div class="line-12"><span class="s1">  "zip_code": "94110",</span>
-</div><div class="line-13"><span class="s1">  "state": "CA",</span>
-</div><div class="line-14"><span class="s1">  "country": "US",</span>
-</div><div class="line-15"><span class="s1">  "primary_language": "english",</span>
-</div><div class="line-16"><span class="s1">  "gender": "Female",</span>
-</div><div class="line-17"><span class="s1">  "height": "72",</span>
-</div><div class="line-18"><span class="s1">  "weight": "175",</span>
-</div><div class="line-19"><span class="s1">  "smokes": "false",</span>
-</div><div class="line-20"><span class="s1">  "provider_id_number": "7IHnPI80"</span>
-</div><div class="line-21"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div><div class="line-3"><span class="s1">  "is_active": "true",</span>
+</div><div class="line-4"><span class="s1">  "primary_worker_id": "1ecacc1f-1a4c-4bcb-9790-528642cba054",</span>
+</div><div class="line-5"><span class="s1">  "timezone": "US/Pacific",</span>
+</div><div class="line-6"><span class="s1">  "first_name": "Grace",</span>
+</div><div class="line-7"><span class="s1">  "last_name": "Hopper",</span>
+</div><div class="line-8"><span class="s1">  "birthday": "1906-12-09",</span>
+</div><div class="line-9"><span class="s1">  "street": "3265 17th St",</span>
+</div><div class="line-10"><span class="s1">  "street_line_two": "#304",</span>
+</div><div class="line-11"><span class="s1">  "city": "San Francisco",</span>
+</div><div class="line-12"><span class="s1">  "county": "San Francisco County",</span>
+</div><div class="line-13"><span class="s1">  "zip_code": "94110",</span>
+</div><div class="line-14"><span class="s1">  "state": "CA",</span>
+</div><div class="line-15"><span class="s1">  "country": "US",</span>
+</div><div class="line-16"><span class="s1">  "primary_language": "english",</span>
+</div><div class="line-17"><span class="s1">  "gender": "Female",</span>
+</div><div class="line-18"><span class="s1">  "height": "72",</span>
+</div><div class="line-19"><span class="s1">  "weight": "175",</span>
+</div><div class="line-20"><span class="s1">  "smokes": "false",</span>
+</div><div class="line-21"><span class="s1">  "provider_id_number": "7IHnPI80"</span>
+</div><div class="line-22"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
 </div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
 </div><div class="line-4">
 </div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
 </div><div class="line-6">  <span class="s">"phase"</span><span class="p">:</span> <span class="s">"intake"</span><span class="p">,</span>
-</div><div class="line-7">  <span class="s">"primary_worker_id"</span><span class="p">:</span> <span class="s">"1ecacc1f-1a4c-4bcb-9790-528642cba054"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="s">"timezone"</span><span class="p">:</span> <span class="s">"US/Pacific"</span><span class="p">,</span>
-</div><div class="line-9">  <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"Grace"</span><span class="p">,</span>
-</div><div class="line-10">  <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Hopper"</span><span class="p">,</span>
-</div><div class="line-11">  <span class="s">"birthday"</span><span class="p">:</span> <span class="s">"1906-12-09"</span><span class="p">,</span>
-</div><div class="line-12">  <span class="s">"street"</span><span class="p">:</span> <span class="s">"3265 17th St"</span><span class="p">,</span>
-</div><div class="line-13">  <span class="s">"street_line_two"</span><span class="p">:</span> <span class="s">"#304"</span><span class="p">,</span>
-</div><div class="line-14">  <span class="s">"city"</span><span class="p">:</span> <span class="s">"San Francisco"</span><span class="p">,</span>
-</div><div class="line-15">  <span class="s">"county"</span><span class="p">:</span> <span class="s">"San Francisco County"</span><span class="p">,</span>
-</div><div class="line-16">  <span class="s">"zip_code"</span><span class="p">:</span> <span class="s">"94110"</span><span class="p">,</span>
-</div><div class="line-17">  <span class="s">"state"</span><span class="p">:</span> <span class="s">"CA"</span><span class="p">,</span>
-</div><div class="line-18">  <span class="s">"country"</span><span class="p">:</span> <span class="s">"US"</span><span class="p">,</span>
-</div><div class="line-19">  <span class="s">"primary_language"</span><span class="p">:</span> <span class="s">"english"</span><span class="p">,</span>
-</div><div class="line-20">  <span class="s">"gender"</span><span class="p">:</span> <span class="s">"Female"</span><span class="p">,</span>
-</div><div class="line-21">  <span class="s">"height"</span><span class="p">:</span> <span class="s">"72"</span><span class="p">,</span>
-</div><div class="line-22">  <span class="s">"weight"</span><span class="p">:</span> <span class="s">"175"</span><span class="p">,</span>
-</div><div class="line-23">  <span class="s">"smokes"</span><span class="p">:</span> <span class="s">"false"</span><span class="p">,</span>
-</div><div class="line-24">  <span class="s">"provider_id_number"</span><span class="p">:</span> <span class="s">"7IHnPI80"</span>
-</div><div class="line-25"><span class="p">}</span>
-</div><div class="line-26"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
-</div><div class="line-27">
-</div><div class="line-28"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</div><div class="line-29">
+</div><div class="line-7">  <span class="s">"is_active"</span><span class="p">:</span> <span class="s">"true"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="s">"primary_worker_id"</span><span class="p">:</span> <span class="s">"1ecacc1f-1a4c-4bcb-9790-528642cba054"</span><span class="p">,</span>
+</div><div class="line-9">  <span class="s">"timezone"</span><span class="p">:</span> <span class="s">"US/Pacific"</span><span class="p">,</span>
+</div><div class="line-10">  <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"Grace"</span><span class="p">,</span>
+</div><div class="line-11">  <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Hopper"</span><span class="p">,</span>
+</div><div class="line-12">  <span class="s">"birthday"</span><span class="p">:</span> <span class="s">"1906-12-09"</span><span class="p">,</span>
+</div><div class="line-13">  <span class="s">"street"</span><span class="p">:</span> <span class="s">"3265 17th St"</span><span class="p">,</span>
+</div><div class="line-14">  <span class="s">"street_line_two"</span><span class="p">:</span> <span class="s">"#304"</span><span class="p">,</span>
+</div><div class="line-15">  <span class="s">"city"</span><span class="p">:</span> <span class="s">"San Francisco"</span><span class="p">,</span>
+</div><div class="line-16">  <span class="s">"county"</span><span class="p">:</span> <span class="s">"San Francisco County"</span><span class="p">,</span>
+</div><div class="line-17">  <span class="s">"zip_code"</span><span class="p">:</span> <span class="s">"94110"</span><span class="p">,</span>
+</div><div class="line-18">  <span class="s">"state"</span><span class="p">:</span> <span class="s">"CA"</span><span class="p">,</span>
+</div><div class="line-19">  <span class="s">"country"</span><span class="p">:</span> <span class="s">"US"</span><span class="p">,</span>
+</div><div class="line-20">  <span class="s">"primary_language"</span><span class="p">:</span> <span class="s">"english"</span><span class="p">,</span>
+</div><div class="line-21">  <span class="s">"gender"</span><span class="p">:</span> <span class="s">"Female"</span><span class="p">,</span>
+</div><div class="line-22">  <span class="s">"height"</span><span class="p">:</span> <span class="s">"72"</span><span class="p">,</span>
+</div><div class="line-23">  <span class="s">"weight"</span><span class="p">:</span> <span class="s">"175"</span><span class="p">,</span>
+</div><div class="line-24">  <span class="s">"smokes"</span><span class="p">:</span> <span class="s">"false"</span><span class="p">,</span>
+</div><div class="line-25">  <span class="s">"provider_id_number"</span><span class="p">:</span> <span class="s">"7IHnPI80"</span>
+</div><div class="line-26"><span class="p">}</span>
+</div><div class="line-27"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
+</div><div class="line-28">
+</div><div class="line-29"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-30">
 </div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
 </div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/patients/45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">'</span><span class="p">;</span>
 </div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
 </div><div class="line-6">  <span class="dl">"</span><span class="s2">phase</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">intake</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-7">  <span class="dl">"</span><span class="s2">primary_worker_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1ecacc1f-1a4c-4bcb-9790-528642cba054</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US/Pacific</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-9">  <span class="dl">"</span><span class="s2">first_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Grace</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-10">  <span class="dl">"</span><span class="s2">last_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Hopper</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-11">  <span class="dl">"</span><span class="s2">birthday</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1906-12-09</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-12">  <span class="dl">"</span><span class="s2">street</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3265 17th St</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-13">  <span class="dl">"</span><span class="s2">street_line_two</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#304</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-14">  <span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">San Francisco</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-15">  <span class="dl">"</span><span class="s2">county</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">San Francisco County</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-16">  <span class="dl">"</span><span class="s2">zip_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">94110</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-17">  <span class="dl">"</span><span class="s2">state</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CA</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-18">  <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-19">  <span class="dl">"</span><span class="s2">primary_language</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">english</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-20">  <span class="dl">"</span><span class="s2">gender</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Female</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-21">  <span class="dl">"</span><span class="s2">height</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">72</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-22">  <span class="dl">"</span><span class="s2">weight</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">175</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-23">  <span class="dl">"</span><span class="s2">smokes</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-24">  <span class="dl">"</span><span class="s2">provider_id_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7IHnPI80</span><span class="dl">"</span>
-</div><div class="line-25"><span class="p">};</span>
-</div><div class="line-26">
-</div><div class="line-27"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
-</div><div class="line-28">
+</div><div class="line-7">  <span class="dl">"</span><span class="s2">is_active</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">true</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="dl">"</span><span class="s2">primary_worker_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1ecacc1f-1a4c-4bcb-9790-528642cba054</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-9">  <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US/Pacific</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-10">  <span class="dl">"</span><span class="s2">first_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Grace</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-11">  <span class="dl">"</span><span class="s2">last_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Hopper</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-12">  <span class="dl">"</span><span class="s2">birthday</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1906-12-09</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-13">  <span class="dl">"</span><span class="s2">street</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3265 17th St</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-14">  <span class="dl">"</span><span class="s2">street_line_two</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#304</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-15">  <span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">San Francisco</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-16">  <span class="dl">"</span><span class="s2">county</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">San Francisco County</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-17">  <span class="dl">"</span><span class="s2">zip_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">94110</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-18">  <span class="dl">"</span><span class="s2">state</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CA</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-19">  <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-20">  <span class="dl">"</span><span class="s2">primary_language</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">english</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-21">  <span class="dl">"</span><span class="s2">gender</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Female</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-22">  <span class="dl">"</span><span class="s2">height</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">72</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-23">  <span class="dl">"</span><span class="s2">weight</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">175</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-24">  <span class="dl">"</span><span class="s2">smokes</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-25">  <span class="dl">"</span><span class="s2">provider_id_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7IHnPI80</span><span class="dl">"</span>
+</div><div class="line-26"><span class="p">};</span>
+</div><div class="line-27">
+</div><div class="line-28"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-29">
 </div></code></pre></div>
 <p><code>PUT /v1/patients/:id -d { }</code></p>
 <h4 id='patients-update-required-scope'>Required Scope</h4>
@@ -7218,10 +7835,11 @@ generation.</p>
 </div><div class="line-20"><span class="w">    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span>
 </div><div class="line-21"><span class="w">    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
 </div><div class="line-22"><span class="w">    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span>
-</div><div class="line-23"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
-</div><div class="line-24"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
-</div><div class="line-25"><span class="w">  </span><span class="p">}</span>
-</div><div class="line-26"><span class="p">}</span>
+</div><div class="line-23"><span class="w">    </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</div><div class="line-24"><span class="w">    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
+</div><div class="line-26"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-27"><span class="p">}</span>
 </div></code></pre></div><h4 id='patients-update-params'>Params</h4>
 <table><thead>
 <tr>
@@ -7236,6 +7854,10 @@ generation.</p>
 <tr>
 <td>phase <br /><code><a href='#types' class='optional'>enum</a></code></td>
 <td>The phase (or stage) of care that this patient is in. The possible set of phases is defined in <a href="https://workshop.welkinhealth.com">Workshop</a>.</td>
+</tr>
+<tr>
+<td>is_active <br /><code><a href='#types' class='optional'>boolean</a></code></td>
+<td><code>true</code> or <code>false</code> for whether the patient record is active or inactive. Caution: marking a patient inactive will also finish calendar events and dismiss alerts.</td>
 </tr>
 <tr>
 <td>primary_worker_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
@@ -7291,7 +7913,7 @@ generation.</p>
 </tr>
 <tr>
 <td>primary_language <br /><code><a href='#types' class='optional'>enum</a></code></td>
-<td>This patient&#39;s primary language. Available options are [&quot;english&quot;, &quot;spanish&quot;, &quot;vietnamese&quot;, &quot;tagalog&quot;, &quot;chinese&quot;, &quot;arabic&quot;, &quot;korean&quot;, &quot;punjabi&quot;, &quot;russian&quot;, &quot;other&quot;]</td>
+<td>This patient&#39;s primary language. Available options include ISO 639-1:</td>
 </tr>
 <tr>
 <td>gender <br /><code><a href='#types' class='optional'>string</a></code></td>
@@ -7366,12 +7988,13 @@ generation.</p>
 </div><div class="line-21"><span class="w">      </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94110"</span><span class="p">,</span>
 </div><div class="line-22"><span class="w">      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
 </div><div class="line-23"><span class="w">      </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span>
-</div><div class="line-24"><span class="w">      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
-</div><div class="line-25"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
-</div><div class="line-26"><span class="w">    </span><span class="p">}</span>
-</div><div class="line-27"><span class="w">  </span><span class="p">],</span>
-</div><div class="line-28"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
-</div><div class="line-29"><span class="p">}</span>
+</div><div class="line-24"><span class="w">      </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+</div><div class="line-25"><span class="w">      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.108773+00:00"</span><span class="p">,</span>
+</div><div class="line-26"><span class="w">      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-12T01:27:32.109872+00:00"</span>
+</div><div class="line-27"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-28"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-29"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-30"><span class="p">}</span>
 </div></code></pre></div><h4 id='patients-find-params'>Params</h4>
 <table><thead>
 <tr>
