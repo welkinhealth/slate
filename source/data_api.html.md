@@ -2030,12 +2030,7 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 ## Audit Logs
-
-
-:param event_type
-:param actor_type
-:param start_time
-:param end_time
+An audit trail of logins by users or custom data type modifications performed by a user, api, or process.
 
 
 
@@ -2044,7 +2039,6 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 > Example Response
 
 ```json
-// for custom_data event_type
 "data": [
         {
             "relationships": {}, 
@@ -2068,10 +2062,8 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
                 "id": "24c9fd66-1b15-404c-8668-ea330acb7b81"
             }
         }
-]
 
-// for login event_type
-"data": [
+
         {
             "relationships": {}, 
             "event_type": "login", 
@@ -2148,7 +2140,26 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 ```json
 {
-  "data": 
+  "data": [
+    {
+            "relationships": {}, 
+            "event_type": "login", 
+            "event_time": "2020-09-04T17:59:43.322951+00:00", 
+            "created_at": "2020-09-04T17:59:57.332752+00:00", 
+            "updated_at": "2020-09-04T17:59:57.332787+00:00", 
+            "id": "11a1645e-6d31-448b-90e4-4babc662df5a", 
+            "actor_type": "worker", 
+            "actor_id": "1f42jhfb-e2ae-4c91-b7bb-083c956731af", 
+            "env_id": "e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
+            "type": "audit_logs", 
+            "event": {
+                "first_name": "Profilio Coach", 
+                "last_name": null, 
+                "id": "1f98adfb-e2ae-4c91-b7bb-083c956731af", 
+                "email": "coach+profilio@welkinhealth.com"
+            }
+      }
+  ]
 }
 ```
 
@@ -2158,6 +2169,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __audit logs__ record.
+event_type <br /><code><a href='#types' class='required'>enum</a></code> | `login` or `custom_data`
 
 
 
@@ -2208,9 +2220,8 @@ const response = await axios({method: 'get', url: url, headers: headers});
 ```json
 {
   "data": [
-    
-  ],
-  "links": "Elided for simplicity, see Find Endpoints Overview above"
+    "Elided for simplicity, see Get Endpoints Overview above"
+  ]
 }
 ```
 
@@ -2220,16 +2231,15 @@ const response = await axios({method: 'get', url: url, headers: headers});
 param | description
 - | -
 id <br /><code><a href='#types' class='optional'>json</a></code> | The primary identifier of the __audit logs__ record.
-actor_type <br /><code><a href='#types' class='optional'>enum</a></code> | 
-event_type <br /><code><a href='#types' class='required'>enum</a></code> | 
-email <br /><code><a href='#types' class='optional'>json</a></code> | 
+actor_type <br /><code><a href='#types' class='optional'>enum</a></code> | `api`, `process` or `worker`
+event_type <br /><code><a href='#types' class='required'>enum</a></code> | `login` or `custom_data`
+email <br /><code><a href='#types' class='optional'>string</a></code> | For `worker` actor_type
 end_time <br /><code><a href='#types' class='optional'>date</a></code> | 
-operation <br /><code><a href='#types' class='optional'>json</a></code> | 
-patient_id <br /><code><a href='#types' class='optional'>json</a></code> | 
+operation <br /><code><a href='#types' class='optional'>string</a></code> | `create`, `update`, or `delete` for custom_data
+patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | 
 start_time <br /><code><a href='#types' class='optional'>date</a></code> | 
-type_name <br /><code><a href='#types' class='optional'>json</a></code> | 
-page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
+page[from] <br /><code><a href='#types' class='optional'>date</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>date</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
