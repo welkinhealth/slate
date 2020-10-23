@@ -254,7 +254,7 @@
               </ul>
           </li>
           <li>
-            <a href="#realtime-notifications-v2" class="toc-h1 toc-link" data-title="Realtime Notifications (v2)">Realtime Notifications (v2)</a>
+            <a href="#realtime-notifications" class="toc-h1 toc-link" data-title="Realtime Notifications">Realtime Notifications</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#subscription-confirmation" class="toc-h2 toc-link" data-title="Subscription Confirmation">Subscription Confirmation</a>
@@ -264,20 +264,6 @@
                   </li>
                   <li>
                     <a href="#legacy-notifications-v1" class="toc-h2 toc-link" data-title="Legacy Notifications (v1)">Legacy Notifications (v1)</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#legacy-notifications-v1-webhook-body" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Webhook body</a>
-                          </li>
-                          <li>
-                            <a href="#legacy-notifications-v1-webhook-security" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Webhook security</a>
-                          </li>
-                          <li>
-                            <a href="#legacy-notifications-v1-find-endpoints" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Find endpoints</a>
-                          </li>
-                          <li>
-                            <a href="#legacy-notifications-v1-find-by-post" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Find by POST</a>
-                          </li>
-                      </ul>
                   </li>
               </ul>
           </li>
@@ -1022,21 +1008,24 @@
 <p>If you make a <code>POST</code> or <code>PUT</code> request with an access token which has only <code>write</code> scopes, you will receive a response with only the ID of the created or modified record. The rest of the fields will be redacted since you don&#39;t have <code>read</code> scope.</p>
 
 <aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
-<h1 id='realtime-notifications-v2'>Realtime Notifications (v2)</h1>
+<h1 id='realtime-notifications'>Realtime Notifications</h1>
 <p>Welkin&#39;s APIs use a “ping and pull” model. We notify subscribers via Webhook any time there’s an update to your data within our platform. You can pull the updated resources into your system using a GET request following the receipt of a notification.</p>
 
 <p>To enable Notifications, configure the URL to receive notifications in Workshop Integration Tools. The first request that we send to your subscribed URL contains a confirmation URL. You will need to open this URL in your browser or send a GET request to this URL to confirm your webhook subscription. After this step is complete, we will send notifications to your subscribed URL.</p>
 <h2 id='subscription-confirmation'>Subscription Confirmation</h2>
 <p>Welkin&#39;s Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing <code>&quot;Type&quot;</code> of <code>&quot;SubscriptionConfirmation&quot;</code>, and <code>&quot;SubscribeURL&quot;</code> containing a URL that you need to visit or GET to confirm your subscription.</p>
 
-<p>Example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code><div class="line-1">{
-</div><div class="line-2">  "Type": "SubscriptionConfirmation",
-</div><div class="line-3">  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
-</div><div class="line-4">  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&amp;Token=XXXXXXXXXXXX",
-</div><div class="line-5">  ...
-</div><div class="line-6">}
-</div></code></pre></div><h2 id='webhook-contents'>Webhook Contents</h2>
+<aside>
+Example:
+
+{
+  "Type": "SubscriptionConfirmation",
+  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
+  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&Token=XXXXXXXXXXXX",
+  ...
+}
+</aside>
+<h2 id='webhook-contents'>Webhook Contents</h2>
 <table><thead>
 <tr>
 <th>field</th>
@@ -1055,20 +1044,19 @@
 <td>JWT token to verify the notification came from Welkin</td>
 </tr>
 <tr>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
 <td>notification</td>
 <td><code>json</code></td>
 <td>Contains the following JSON schema:</td>
 </tr>
+</tbody></table>
+
+<table><thead>
 <tr>
-<td>-</td>
-<td>-</td>
-<td>-</td>
+<th>field</th>
+<th>type</th>
+<th>description</th>
 </tr>
+</thead><tbody>
 <tr>
 <td>provider_id</td>
 <td><code>string</code></td>
@@ -1101,26 +1089,31 @@
 </tr>
 </tbody></table>
 
-<p>Example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code><div class="line-1">{
-</div><div class="line-2"> "notification": {
-</div><div class="line-3">   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
-</div><div class="line-4">   "resource": "patients",
-</div><div class="line-5">   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
-</div><div class="line-6">   "updated_at": "2020-04-27 00:00:00.006785",
-</div><div class="line-7">   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
-</div><div class="line-8">   "action": "update"
-</div><div class="line-9"> },
-</div><div class="line-10"> "send_to": "https://example.com/my-notifications-go-here",
-</div><div class="line-11"> "jwt": "XXXXXXXXXXXXX"
-</div><div class="line-12">}
-</div></code></pre></div><h2 id='legacy-notifications-v1'>Legacy Notifications (v1)</h2>
+<aside>
+Example:
+
+{
+ "notification": {
+   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
+   "resource": "patients",
+   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "updated_at": "2020-04-27 00:00:00.006785",
+   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "action": "update"
+ },
+ "send_to": "https://example.com/my-notifications-go-here",
+ "jwt": "XXXXXXXXXXXXX"
+}
+</aside>
+<h2 id='legacy-notifications-v1'>Legacy Notifications (v1)</h2>
 <p>Welkin&#39;s v1 webhoook notifications are sent every <code>60</code> seconds, and include which resources have changed, the time range of the changes, and a url to use in a <code>GET</code> request to fetch the changes (see <em>Find</em> endpoints for each resource).</p>
 
 <p>Welkin will only send notifications for updates which have happened in the last <code>24</code> hours. If you pause webhook delivery for more than 24 hours, or webhook delivery fails for more than 24 hours, you should use <em>Find</em> endpoints to query for any resources which may have changed since the last webhook you received.</p>
 
 <aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
-<h3 id='legacy-notifications-v1-webhook-body'>Webhook body</h3>
+
+<p><strong>Webhook body</strong></p>
+
 <p>Each notification contains all the updates for all the resource types since the last successful notification.</p>
 
 <blockquote>
@@ -1130,52 +1123,25 @@
 </div><div class="line-2"><span class="w">    </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-14T23:34:05.647496"</span><span class="p">,</span>
 </div><div class="line-3"><span class="w">    </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-15T23:34:05.647496"</span><span class="p">,</span>
 </div><div class="line-4"><span class="w">    </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.welkinhealth.com/v1/patients?page[to]=2018-05-15T23:34:05.647496&amp;page[from]=2018-05-14T23:34:05.647496"</span><span class="p">}]</span>
-</div></code></pre></div><h5 id='legacy-notifications-v1-webhook-body-scopes-model-notification-webhook-request-body'>Model notification webhook request body</h5>
-<table><thead>
-<tr>
-<th>field</th>
-<th>type</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>_</td>
-<td><code>list</code></td>
-<td>List of data_update_notification objects</td>
-</tr>
-</tbody></table>
-<h5 id='legacy-notifications-v1-webhook-body-scopes-model-data_update_notification'>Model data_update_notification</h5>
-<table><thead>
-<tr>
-<th>field</th>
-<th>type</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>resource</td>
-<td><code>string</code></td>
-<td>Resource endpoint path name</td>
-</tr>
-<tr>
-<td>from</td>
-<td><code>isodatetime</code></td>
-<td>Datetime of first update</td>
-</tr>
-<tr>
-<td>to</td>
-<td><code>isodatetime</code></td>
-<td>Datetime of latest update</td>
-</tr>
-<tr>
-<td>href</td>
-<td><code>string</code></td>
-<td>Link to GET all updates for this notification</td>
-</tr>
-</tbody></table>
-<h3 id='legacy-notifications-v1-webhook-security'>Webhook security</h3>
-<p>Welkin supports two authentication flows for the notifications. Both have the same level of security.</p>
-<h4 id='legacy-notifications-v1-webhook-security-jwt-as-bearer-token-recommended'>JWT as Bearer Token (Recommended)</h4>
+</div></code></pre></div>
+<p><strong>Model notification webhook request body</strong>
+field | type | description
+- | - | -
+_ | <code>list</code> | List of data_update_notification objects</p>
+
+<p><strong>Model data_update_notification</strong>
+field | type | description
+- | - | -
+resource | <code>string</code> | Resource endpoint path name
+from | <code>isodatetime</code> | Datetime of first update
+to | <code>isodatetime</code> | Datetime of latest update
+href | <code>string</code> | Link to GET all updates for this notification</p>
+
+<p><strong>Webhook security</strong>
+Welkin supports two authentication flows for the notifications. Both have the same level of security.</p>
+
+<p><strong>JWT as Bearer Token (Recommended)</strong></p>
+
 <p>A JWT is included as the Bearer Token on each notification request.</p>
 
 <p>In this model the JWT is not exchanged for an access token but is used directly as the access token for the notification endpoint.</p>
@@ -1194,7 +1160,9 @@
 <li><code>notify_url</code> - url at which the customer will receive the webhooks</li>
 <li>list of api resources for which notifications should be sent</li>
 </ul>
-<h4 id='legacy-notifications-v1-webhook-security-token-exchange'>Token exchange</h4>
+
+<p><strong>Token exchange</strong></p>
+
 <blockquote>
 <p>Example Welkin side code (for illustration only)</p>
 </blockquote>
@@ -1218,7 +1186,9 @@
 <li><code>token_endpoint_url</code> - url from which Welkin will request access tokens</li>
 <li>list of api resources for which notifications should be sent</li>
 </ul>
-<h3 id='legacy-notifications-v1-find-endpoints'>Find endpoints</h3>
+
+<p><strong>Find endpoints</strong></p>
+
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -1317,7 +1287,9 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Make sure to fully follow the pagination links when receiving <a href="#update-notifications">Update Notifications</a> to ensure you load all the data.</p>
 
 <p>Full <code>links</code> fields are elided in each <code>FIND</code> example response below for each method.</p>
-<h3 id='legacy-notifications-v1-find-by-post'>Find by POST</h3>
+
+<p><strong>Find by POST</strong></p>
+
 <blockquote>
 <p>Example Request</p>
 </blockquote>
