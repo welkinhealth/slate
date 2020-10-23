@@ -781,27 +781,57 @@ Parameters for *Find By Post* requests are sent in the request body.
 ## Alerts
 
 
+The Alerts API will allow you to create a new alert in the Inbox that are tied to events that occur in your
+applications outside of Welkin. For example, if you use a messaging application outside of Welkin that you use to
+communicate with your patients, you can configure an Alert notification that will display in your Welkin Inbox to
+let you know that you have messages from a patient in your messaging application.
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Model
 
 > Example Response
 
 ```json
-
+{
+  "active_time": "2020-10-15T13:29:31.536121+00:00",
+  "alert_type": "app_message",
+  "completed": false,
+  "dismissed": false,
+  "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+  "finished_time": null,
+  "worker_id": null,
+  "dismissed_by_worker_id": null,
+  "config": {
+    "count": 2
+  },
+  "id": "96d4fad8-cbd3-4710-a429-c09526c8f114"
+}
 ```
 
 
 param | description
 - | -
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __alerts__ record.
-patient_id <br /><code><a href='#types'>guid</a></code> | 
-worker_id <br /><code><a href='#types'>guid</a></code> | 
-alert_type <br /><code><a href='#types'>string</a></code> | 
-config <br /><code><a href='#types'>json</a></code> | 
-active_time <br /><code><a href='#types'>isodatetimestring</a></code> | 
-finished_time <br /><code><a href='#types'>isodatetime</a></code> | 
-completed <br /><code><a href='#types'>boolean</a></code> | 
-dismissed <br /><code></code> | 
-dismissed_by_worker_id <br /><code></code> | 
+patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom alert needs to be created
+worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) creating the alert
+alert_type <br /><code><a href='#types'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
+config <br /><code><a href='#types'>optional</a> <a href='#types'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+active_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the alert was active
+finished_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the alert was finished
+completed <br /><code><a href='#types'>boolean</a></code> | Denotes whether the alert was completed
+dismissed <br /><code><a href='#types'>boolean</a></code> | Denotes whether the alert was dismissed
+dismissed_by_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who dismissed the alert.
 
 
 
@@ -815,14 +845,14 @@ Retrieves a single __alert__ by `id`.
 > Example Request
 
 ```shell
-curl -XGET https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c -H "Authorization: Bearer <your access token>"
+curl -XGET https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114 -H "Authorization: Bearer <your access token>"
 ```
 
 ```python
 import requests
 
 headers = {"Authorization": "Bearer <token>"}
-url = 'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+url = 'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114'
 
 resp = requests.get(url, headers=headers).json()
 
@@ -832,7 +862,7 @@ resp = requests.get(url, headers=headers).json()
 const axios = require('axios');
 
 const headers = {"Authorization": "Bearer <token>"}
-const url = 'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+const url = 'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114';
 
 const response = await axios({method: 'get', url: url, headers: headers});
 
@@ -847,7 +877,20 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 ```json
 {
-  "data": 
+  "data": {
+    "active_time": "2020-10-15T13:29:31.536121+00:00",
+    "alert_type": "app_message",
+    "completed": false,
+    "dismissed": false,
+    "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+    "finished_time": null,
+    "worker_id": null,
+    "dismissed_by_worker_id": null,
+    "config": {
+      "count": 2
+    },
+    "id": "96d4fad8-cbd3-4710-a429-c09526c8f114"
+  }
 }
 ```
 
@@ -872,9 +915,12 @@ Creates a new __alert__.
 
 ```shell
 curl -XPOST https://api.welkinhealth.com/v1/alerts -d '{
-  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "worker_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "alert_type": "some_string"
+  "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+  "alert_type": "app_message",
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00"
 }' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
@@ -884,9 +930,12 @@ import requests
 headers = {"Authorization": "Bearer <token>"}
 
 data = {
-  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "worker_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "alert_type": "some_string"
+  "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+  "alert_type": "app_message",
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00"
 }
 url = 'https://api.welkinhealth.com/v1/alerts'
 
@@ -900,9 +949,12 @@ const axios = require('axios');
 const headers = {"Authorization": "Bearer <token>"};
 const url = 'https://api.welkinhealth.com/v1/alerts';
 const data = {
-  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "worker_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",
-  "alert_type": "some_string"
+  "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+  "alert_type": "app_message",
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00"
 };
 
 const response = await axios({method: 'post', url: url, headers: headers, data: data});
@@ -918,7 +970,20 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 ```json
 {
-  "data": 
+  "data": {
+    "active_time": "2020-10-15T13:29:31.536121+00:00",
+    "alert_type": "app_message",
+    "completed": false,
+    "dismissed": false,
+    "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+    "finished_time": null,
+    "worker_id": null,
+    "dismissed_by_worker_id": null,
+    "config": {
+      "count": 2
+    },
+    "id": "96d4fad8-cbd3-4710-a429-c09526c8f114"
+  }
 }
 ```
 
@@ -927,11 +992,11 @@ const response = await axios({method: 'post', url: url, headers: headers, data: 
 
 param | description
 - | -
-patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | 
-worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | 
-alert_type <br /><code><a href='#types' class='required'>string</a></code> | 
-config <br /><code><a href='#types' class='required'>json</a></code> | 
-active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code> | 
+patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) for whom alert needs to be created
+worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) creating the alert
+alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
+config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was active
 
 
 
@@ -946,8 +1011,12 @@ Updates an existing __alert__.
 > Example Request
 
 ```shell
-curl -XPUT https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c -d '{
-  "finished_time": "2018-10-21T18:30:10.100000+00:00"
+curl -XPUT https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114 -d '{
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00",
+  "completed": false
 }' -H "Authorization: Bearer <your access token>" -H "Content-Type: application/json"
 ```
 
@@ -957,9 +1026,13 @@ import requests
 headers = {"Authorization": "Bearer <token>"}
 
 data = {
-  "finished_time": "2018-10-21T18:30:10.100000+00:00"
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00",
+  "completed": false
 }
-url = 'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'
+url = 'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114'
 
 resp = requests.put(url, headers=headers, json=data).json()
 
@@ -969,9 +1042,13 @@ resp = requests.put(url, headers=headers, json=data).json()
 const axios = require('axios');
 
 const headers = {"Authorization": "Bearer <token>"};
-const url = 'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c';
+const url = 'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114';
 const data = {
-  "finished_time": "2018-10-21T18:30:10.100000+00:00"
+  "config": {
+    "count": 2
+  },
+  "active_time": "2020-10-15T13:29:31.536121+00:00",
+  "completed": false
 };
 
 const response = await axios({method: 'put', url: url, headers: headers, data: data});
@@ -987,7 +1064,20 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 
 ```json
 {
-  "data": 
+  "data": {
+    "active_time": "2020-10-15T13:29:31.536121+00:00",
+    "alert_type": "app_message",
+    "completed": false,
+    "dismissed": false,
+    "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+    "finished_time": null,
+    "worker_id": null,
+    "dismissed_by_worker_id": null,
+    "config": {
+      "count": 2
+    },
+    "id": "96d4fad8-cbd3-4710-a429-c09526c8f114"
+  }
 }
 ```
 
@@ -997,10 +1087,10 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __alerts__ record.
-config <br /><code><a href='#types' class='optional'>json</a></code> | 
-active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code> | 
-finished_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | 
-completed <br /><code><a href='#types' class='optional'>boolean</a></code> | 
+config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was active
+finished_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was finished
+completed <br /><code><a href='#types' class='required'>boolean</a></code> | Denotes whether the alert was completed
 
 
 
@@ -1049,7 +1139,20 @@ const response = await axios({method: 'get', url: url, headers: headers});
 ```json
 {
   "data": [
-    
+    {
+      "active_time": "2020-10-15T13:29:31.536121+00:00",
+      "alert_type": "app_message",
+      "completed": false,
+      "dismissed": false,
+      "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",
+      "finished_time": null,
+      "worker_id": null,
+      "dismissed_by_worker_id": null,
+      "config": {
+        "count": 2
+      },
+      "id": "96d4fad8-cbd3-4710-a429-c09526c8f114"
+    }
   ],
   "links": "Elided for simplicity, see Find Endpoints Overview above"
 }
@@ -1060,7 +1163,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-alert_type <br /><code><a href='#types' class='optional'>string</a></code> | 
+alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
@@ -2030,7 +2133,12 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 
 ## Audit Logs
-An audit trail of logins by users or custom data type modifications performed by a user, api, or process.
+
+
+:param event_type
+:param actor_type
+:param start_time
+:param end_time
 
 
 
@@ -2039,62 +2147,19 @@ An audit trail of logins by users or custom data type modifications performed by
 > Example Response
 
 ```json
-"data": [
-        {
-            "relationships": {}, 
-            "event_type": "custom_data", 
-            "event_time": "2020-09-10T23:38:30.851579+00:00", 
-            "created_at": "2020-09-10T23:38:30.854040+00:00", 
-            "updated_at": "2020-09-10T23:38:30.854056+00:00", 
-            "id": "e59b31d9-d854-496d-ab8f-461670a9bc8d", 
-            "actor_type": "worker", 
-            "actor_id": "7e3a8a06-d443-49c4-8ed8-ec1f683e2210", 
-            "env_id": "e88444a4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
-            "type": "audit_logs", 
-            "event": {
-                "type_name": "cdt_ref_name", 
-                "patient_name": "Test Patient", 
-                "diff": {
-                    "key": "value"
-                }, 
-                "operation": "create", 
-                "patient_id": "802336e8-39df-4243-bb90-d1c7028abdbd", 
-                "id": "24c9fd66-1b15-404c-8668-ea330acb7b81"
-            }
-        }
 
-
-        {
-            "relationships": {}, 
-            "event_type": "login", 
-            "event_time": "2020-09-04T17:59:43.322951+00:00", 
-            "created_at": "2020-09-04T17:59:57.332752+00:00", 
-            "updated_at": "2020-09-04T17:59:57.332787+00:00", 
-            "id": "11a1645e-6d31-448b-90e4-4babc662df5a", 
-            "actor_type": "worker", 
-            "actor_id": "1f42jhfb-e2ae-4c91-b7bb-083c956731af", 
-            "env_id": "e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
-            "type": "audit_logs", 
-            "event": {
-                "first_name": "Profilio Coach", 
-                "last_name": null, 
-                "id": "1f98adfb-e2ae-4c91-b7bb-083c956731af", 
-                "email": "coach+profilio@welkinhealth.com"
-            }
-        }
-]
 ```
 
 
 param | description
 - | -
-id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __audit logs__ record.
-env_id <br /><code><a href='#types'>guid</a></code> | 
-actor_id <br /><code><a href='#types'>guid</a></code> | 
+id <br /><code><a href='#types'>json</a></code> | The primary identifier of the __audit logs__ record.
+env_id <br /><code></code> | 
+actor_id <br /><code></code> | 
 actor_type <br /><code><a href='#types'>enum</a></code> | 
-event_time <br /><code><a href='#types'>isodatetime</a></code> | 
+event_time <br /><code></code> | 
 event_type <br /><code><a href='#types'>enum</a></code> | 
-event <br /><code><a href='#types'>json</a></code> | 
+event <br /><code></code> | 
 
 
 
@@ -2140,26 +2205,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 ```json
 {
-  "data": [
-    {
-            "relationships": {}, 
-            "event_type": "login", 
-            "event_time": "2020-09-04T17:59:43.322951+00:00", 
-            "created_at": "2020-09-04T17:59:57.332752+00:00", 
-            "updated_at": "2020-09-04T17:59:57.332787+00:00", 
-            "id": "11a1645e-6d31-448b-90e4-4babc662df5a", 
-            "actor_type": "worker", 
-            "actor_id": "1f42jhfb-e2ae-4c91-b7bb-083c956731af", 
-            "env_id": "e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9", 
-            "type": "audit_logs", 
-            "event": {
-                "first_name": "Profilio Coach", 
-                "last_name": null, 
-                "id": "1f98adfb-e2ae-4c91-b7bb-083c956731af", 
-                "email": "coach+profilio@welkinhealth.com"
-            }
-      }
-  ]
+  "data": 
 }
 ```
 
@@ -2169,7 +2215,6 @@ const response = await axios({method: 'get', url: url, headers: headers});
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __audit logs__ record.
-event_type <br /><code><a href='#types' class='required'>enum</a></code> | `login` or `custom_data`
 
 
 
@@ -2220,8 +2265,9 @@ const response = await axios({method: 'get', url: url, headers: headers});
 ```json
 {
   "data": [
-    "Elided for simplicity, see Get Endpoints Overview above"
-  ]
+    
+  ],
+  "links": "Elided for simplicity, see Find Endpoints Overview above"
 }
 ```
 
@@ -2231,15 +2277,16 @@ const response = await axios({method: 'get', url: url, headers: headers});
 param | description
 - | -
 id <br /><code><a href='#types' class='optional'>json</a></code> | The primary identifier of the __audit logs__ record.
-actor_type <br /><code><a href='#types' class='optional'>enum</a></code> | `api`, `process` or `worker`
-event_type <br /><code><a href='#types' class='required'>enum</a></code> | `login` or `custom_data`
-email <br /><code><a href='#types' class='optional'>string</a></code> | For `worker` actor_type
+actor_type <br /><code><a href='#types' class='optional'>enum</a></code> | 
+event_type <br /><code><a href='#types' class='required'>enum</a></code> | 
+email <br /><code><a href='#types' class='optional'>json</a></code> | 
 end_time <br /><code><a href='#types' class='optional'>date</a></code> | 
-operation <br /><code><a href='#types' class='optional'>string</a></code> | `create`, `update`, or `delete` for custom_data
-patient_id <br /><code><a href='#types' class='optional'>guid</a></code> | 
+operation <br /><code><a href='#types' class='optional'>json</a></code> | 
+patient_id <br /><code><a href='#types' class='optional'>json</a></code> | 
 start_time <br /><code><a href='#types' class='optional'>date</a></code> | 
-page[from] <br /><code><a href='#types' class='optional'>date</a></code> | The earliest timestamp to include in the response
-page[to] <br /><code><a href='#types' class='optional'>date</a></code> | The latest timestamp to include in the response
+type_name <br /><code><a href='#types' class='optional'>json</a></code> | 
+page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
+page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
 
 
@@ -3680,14 +3727,9 @@ page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Ma
 
 Welkin stores the custom data associated with [patients](#patients) in custom data type records. The custom data
 types must first be defined in [Workshop](https://workshop.welkinhealth.com) before they can be addressed in the API.
-
 <aside>Multiple records of the same data type can be created for each <a href="#patients">patient</a>. Depending on the display
 conditions and data uses defined in <a href="https://workshop.welkinhealth.com">Workshop</a>, creating multiple records of the
 same type will have different effects within the Welkin Portal.</aside>
-
-
-
-
 
 
 
@@ -3719,6 +3761,7 @@ id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the 
 body <br /><code><a href='#types'>json</a></code> | The content of the custom data type record
 patient_id <br /><code><a href='#types'>guid</a></code> | The ID of the [patient](#patients)
 type_name <br /><code><a href='#types'>string</a></code> | ID of the custom data type as defined in [Workshop](https://workshop.welkinhealth.com)
+updated_by <br /><code></code> | 
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
 
@@ -3798,7 +3841,6 @@ id <br /><code><a href='#types' class='required'>guid</a></code> | The primary i
 
 
 Creates a new __custom data type record__.
-
 <aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
 in Welkin. In Welkin we will show the values from the latest created record. In Welkin edits to a
 single value sidebar will not create a new record but rather update the latest record.</aside>
@@ -6691,6 +6733,7 @@ last_name <br /><code><a href='#types'>string</a></code> | Last name of this pat
 birthday <br /><code><a href='#types'>optional</a> <a href='#types'>date</a></code> | Date of birth of this patient
 updated_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was last updated
 created_at <br /><code><a href='#types'>isodatetime</a></code> | Datetime the resource was created
+email_addresses <br /><code><a href='#types'>object</a></code> | 
 street <br /><code><a href='#types'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types'>string</a></code> | City of this patient's address
@@ -6932,6 +6975,7 @@ timezone <br /><code><a href='#types' class='required'>timezone</a></code> | Tim
 first_name <br /><code><a href='#types' class='required'>string</a></code> | First name of this patient
 last_name <br /><code><a href='#types' class='required'>string</a></code> | Last name of this patient
 birthday <br /><code><a href='#types' class='optional'>date</a></code> | Date of birth of this patient
+email_addresses <br /><code><a href='#types' class='optional'>list(object)</a></code> | 
 street <br /><code><a href='#types' class='optional'>string</a></code> | Street address of this patient
 street_line_two <br /><code><a href='#types' class='optional'>string</a></code> | Second line of this patient's street address
 city <br /><code><a href='#types' class='optional'>string</a></code> | City of this patient's address
