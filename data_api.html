@@ -254,27 +254,30 @@
               </ul>
           </li>
           <li>
-            <a href="#update-notifications" class="toc-h1 toc-link" data-title="Update Notifications">Update Notifications</a>
+            <a href="#realtime-notifications-v2" class="toc-h1 toc-link" data-title="Realtime Notifications (v2)">Realtime Notifications (v2)</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#webhook-body" class="toc-h2 toc-link" data-title="Webhook body">Webhook body</a>
+                    <a href="#subscription-confirmation" class="toc-h2 toc-link" data-title="Subscription Confirmation">Subscription Confirmation</a>
                   </li>
                   <li>
-                    <a href="#webhook-security" class="toc-h2 toc-link" data-title="Webhook security">Webhook security</a>
+                    <a href="#webhook-contents" class="toc-h2 toc-link" data-title="Webhook Contents">Webhook Contents</a>
+                  </li>
+                  <li>
+                    <a href="#legacy-notifications-v1" class="toc-h2 toc-link" data-title="Legacy Notifications (v1)">Legacy Notifications (v1)</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#webhook-security-jwt-as-bearer-token-recommended" class="toc-h3 toc-link" data-title="Update Notifications">JWT as Bearer Token (Recommended)</a>
+                            <a href="#legacy-notifications-v1-webhook-body" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Webhook body</a>
                           </li>
                           <li>
-                            <a href="#webhook-security-token-exchange" class="toc-h3 toc-link" data-title="Update Notifications">Token exchange</a>
+                            <a href="#legacy-notifications-v1-webhook-security" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Webhook security</a>
+                          </li>
+                          <li>
+                            <a href="#legacy-notifications-v1-find-endpoints" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Find endpoints</a>
+                          </li>
+                          <li>
+                            <a href="#legacy-notifications-v1-find-by-post" class="toc-h3 toc-link" data-title="Realtime Notifications (v2)">Find by POST</a>
                           </li>
                       </ul>
-                  </li>
-                  <li>
-                    <a href="#find-endpoints" class="toc-h2 toc-link" data-title="Find endpoints">Find endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#find-by-post" class="toc-h2 toc-link" data-title="Find by POST">Find by POST</a>
                   </li>
               </ul>
           </li>
@@ -1019,27 +1022,105 @@
 <p>If you make a <code>POST</code> or <code>PUT</code> request with an access token which has only <code>write</code> scopes, you will receive a response with only the ID of the created or modified record. The rest of the fields will be redacted since you don&#39;t have <code>read</code> scope.</p>
 
 <aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
-<h1 id='update-notifications'>Update Notifications</h1>
-<p>Welkin&#39;s APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.</p>
+<h1 id='realtime-notifications-v2'>Realtime Notifications (v2)</h1>
+<p>Welkin&#39;s APIs use a “ping and pull” model. We notify subscribers via Webhook any time there’s an update to your data within our platform. You can pull the updated resources into your system using a GET request following the receipt of a notification.</p>
 
-<p>The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a <code>GET</code> request to fetch the changes (see <em>Find</em> endpoints for each resource).</p>
+<p>To enable Notifications, configure the URL to receive notifications in Workshop Integration Tools. The first request that we send to your subscribed URL contains a confirmation URL. You will need to open this URL in your browser or send a GET request to this URL to confirm your webhook subscription. After this step is complete, we will send notifications to your subscribed URL.</p>
+<h2 id='subscription-confirmation'>Subscription Confirmation</h2>
+<p>Welkin&#39;s Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing <code>&quot;Type&quot;</code> of <code>&quot;SubscriptionConfirmation&quot;</code>, and <code>&quot;SubscribeURL&quot;</code> containing a URL that you need to visit or GET to confirm your subscription.</p>
 
-<p>Webhook notifications are sent every <code>60</code> seconds. This means that notifications might be sent at most <code>60</code> seconds from the time the resource is changed in Welkin.</p>
+<p>Example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code><div class="line-1">{
+</div><div class="line-2">  "Type": "SubscriptionConfirmation",
+</div><div class="line-3">  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
+</div><div class="line-4">  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&amp;Token=XXXXXXXXXXXX",
+</div><div class="line-5">  ...
+</div><div class="line-6">}
+</div></code></pre></div><h2 id='webhook-contents'>Webhook Contents</h2>
+<table><thead>
+<tr>
+<th>field</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>send_to</td>
+<td><code>string</code></td>
+<td>URL that is subscribed to the notifications</td>
+</tr>
+<tr>
+<td>jwt</td>
+<td><code>string</code></td>
+<td>JWT token to verify the notification came from Welkin</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notification</td>
+<td><code>json</code></td>
+<td>Contains the following JSON schema:</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>provider_id</td>
+<td><code>string</code></td>
+<td>Welkin ID specifying the environment (for example, Sandbox or Live)</td>
+</tr>
+<tr>
+<td>resource</td>
+<td><code>string</code></td>
+<td>The type of resource in Welkin that was modified, e.g. <code>patients</code></td>
+</tr>
+<tr>
+<td>resource_id</td>
+<td><code>string</code></td>
+<td>The Welkin ID of the resource that was modified</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td><code>datetime</code></td>
+<td>Datetime when notification was triggered</td>
+</tr>
+<tr>
+<td>href</td>
+<td><code>string</code> or <code>null</code></td>
+<td>Link to GET the resource, or null if resource was deleted</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>string</code></td>
+<td>The action that modified the resource: <code>create</code>, <code>update</code>, <code>delete</code></td>
+</tr>
+</tbody></table>
+
+<p>Example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code><div class="line-1">{
+</div><div class="line-2"> "notification": {
+</div><div class="line-3">   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
+</div><div class="line-4">   "resource": "patients",
+</div><div class="line-5">   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+</div><div class="line-6">   "updated_at": "2020-04-27 00:00:00.006785",
+</div><div class="line-7">   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+</div><div class="line-8">   "action": "update"
+</div><div class="line-9"> },
+</div><div class="line-10"> "send_to": "https://example.com/my-notifications-go-here",
+</div><div class="line-11"> "jwt": "XXXXXXXXXXXXX"
+</div><div class="line-12">}
+</div></code></pre></div><h2 id='legacy-notifications-v1'>Legacy Notifications (v1)</h2>
+<p>Welkin&#39;s v1 webhoook notifications are sent every <code>60</code> seconds, and include which resources have changed, the time range of the changes, and a url to use in a <code>GET</code> request to fetch the changes (see <em>Find</em> endpoints for each resource).</p>
 
 <p>Welkin will only send notifications for updates which have happened in the last <code>24</code> hours. If you pause webhook delivery for more than 24 hours, or webhook delivery fails for more than 24 hours, you should use <em>Find</em> endpoints to query for any resources which may have changed since the last webhook you received.</p>
 
 <aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
-
-<p><strong>An example of Welkin’s data sync could look like the following:</strong></p>
-
-<ol>
-<li>Alex, a worker, logs into Welkin and updates the phone number in the patient&#39;s (Allison) profile.</li>
-<li>Welkin sends a notification to the customer’s 3rd party system, letting them know that the patient object for Allison has been changed.</li>
-<li>In response, the 3rd party system requests the full patient object for Allison, which contains the new phone number.</li>
-<li>The system processes the updated patient object and saves it.</li>
-<li>Both Welkin and the customer’s integrated system are now in sync, both reflecting Allison’s updated phone number.</li>
-</ol>
-<h2 id='webhook-body'>Webhook body</h2>
+<h3 id='legacy-notifications-v1-webhook-body'>Webhook body</h3>
 <p>Each notification contains all the updates for all the resource types since the last successful notification.</p>
 
 <blockquote>
@@ -1049,7 +1130,7 @@
 </div><div class="line-2"><span class="w">    </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-14T23:34:05.647496"</span><span class="p">,</span>
 </div><div class="line-3"><span class="w">    </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-15T23:34:05.647496"</span><span class="p">,</span>
 </div><div class="line-4"><span class="w">    </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.welkinhealth.com/v1/patients?page[to]=2018-05-15T23:34:05.647496&amp;page[from]=2018-05-14T23:34:05.647496"</span><span class="p">}]</span>
-</div></code></pre></div><h4 id='webhook-body-model-notification-webhook-request-body'>Model notification webhook request body</h4>
+</div></code></pre></div><h5 id='legacy-notifications-v1-webhook-body-scopes-model-notification-webhook-request-body'>Model notification webhook request body</h5>
 <table><thead>
 <tr>
 <th>field</th>
@@ -1063,7 +1144,7 @@
 <td>List of data_update_notification objects</td>
 </tr>
 </tbody></table>
-<h4 id='webhook-body-model-data_update_notification'>Model data_update_notification</h4>
+<h5 id='legacy-notifications-v1-webhook-body-scopes-model-data_update_notification'>Model data_update_notification</h5>
 <table><thead>
 <tr>
 <th>field</th>
@@ -1092,95 +1173,9 @@
 <td>Link to GET all updates for this notification</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-security'>Webhook security</h2>
-<p>Welkin&#39;s APIs expect that the webhook destination is secured using <a href="#authentication">JWT Bearer Authorization</a> in the same manor that our core API is secured. This ensures that patient data remains secure and protected at all times.</p>
-
+<h3 id='legacy-notifications-v1-webhook-security'>Webhook security</h3>
 <p>Welkin supports two authentication flows for the notifications. Both have the same level of security.</p>
-<h3 id='webhook-security-jwt-as-bearer-token-recommended'>JWT as Bearer Token (Recommended)</h3>
-<blockquote>
-<p>Example Welkin side code (for illustration only)</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-X</span> POST <span class="se">\</span>
-</div><div class="line-2">  <span class="s1">'https://customer.com/notify'</span> <span class="se">\</span>
-</div><div class="line-3">  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-</div><div class="line-4">  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer &lt;JWT&gt;'</span> <span class="se">\</span>
-</div><div class="line-5">  <span class="nt">-d</span> <span class="s1">'[ { "resource": "patients",</span>
-</div><div class="line-6"><span class="s1">          "from": "2018-05-14T23:34:05.647496",</span>
-</div><div class="line-7"><span class="s1">          "to": "2018-05-15T23:35:05.647496",</span>
-</div><div class="line-8"><span class="s1">          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">arrow</span>
-</div><div class="line-2"><span class="kn">import</span> <span class="nn">jwt</span>
-</div><div class="line-3"><span class="kn">import</span> <span class="nn">requests</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="c1"># Create the JWT</span>
-</div><div class="line-6"><span class="k">def</span> <span class="nf">create_jwt</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">notify_url</span><span class="p">):</span>
-</div><div class="line-7">  <span class="n">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-8">    <span class="s">'iss'</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
-</div><div class="line-9">    <span class="s">'aud'</span><span class="p">:</span> <span class="n">notify_url</span><span class="p">,</span>
-</div><div class="line-10">    <span class="s">'exp'</span><span class="p">:</span> <span class="n">arrow</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
-</div><div class="line-11">    <span class="s">'scope'</span><span class="p">:</span> <span class="s">'welkin'</span><span class="p">,</span>
-</div><div class="line-12">  <span class="p">}</span>
-</div><div class="line-13">  <span class="n">assertion</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">claim</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">'HS256'</span><span class="p">)</span>
-</div><div class="line-14">  <span class="k">return</span> <span class="n">assertion</span>
-</div><div class="line-15">
-</div><div class="line-16"><span class="c1"># The token to be used for making notification requests</span>
-</div><div class="line-17"><span class="n">token</span> <span class="o">=</span> <span class="n">create_jwt</span><span class="p">(</span><span class="s">'&lt;client_id&gt;'</span><span class="p">,</span>
-</div><div class="line-18">                <span class="s">'&lt;client_secret&gt;'</span><span class="p">,</span>
-</div><div class="line-19">                <span class="s">'&lt;client_notify_url&gt;'</span><span class="p">)</span>
-</div><div class="line-20">
-</div><div class="line-21"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer { }"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">token</span><span class="p">)}</span>
-</div><div class="line-22">
-</div><div class="line-23"><span class="c1"># Metadata about each resource type which has changed</span>
-</div><div class="line-24"><span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s">"resource"</span><span class="p">:</span> <span class="s">"patients"</span><span class="p">,</span>
-</div><div class="line-25">           <span class="s">"from"</span><span class="p">:</span> <span class="s">"2018-05-14T23:34:05.647496"</span><span class="p">,</span>
-</div><div class="line-26">           <span class="s">"to"</span><span class="p">:</span> <span class="s">"2018-05-15T23:35:05.647496"</span><span class="p">,</span>
-</div><div class="line-27">           <span class="s">"href"</span><span class="p">:</span> <span class="s">"https://api.welkinhealth.com/v1/patients ..."</span> <span class="p">}</span> <span class="p">]</span>
-</div><div class="line-28">
-</div><div class="line-29"><span class="c1"># Welkin sends the actual notification</span>
-</div><div class="line-30"><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'&lt;client_notify_url&gt;'</span><span class="p">,</span>
-</div><div class="line-31">              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</div><div class="line-32">              <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-2"><span class="kd">const</span> <span class="nx">jwt_simple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">jwt-simple</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-3">
-</div><div class="line-4"><span class="c1">// Create the JWT</span>
-</div><div class="line-5"><span class="kd">function</span> <span class="nx">create_jwt</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">notify_url</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="kd">const</span> <span class="nx">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-7">    <span class="dl">'</span><span class="s1">iss</span><span class="dl">'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>
-</div><div class="line-8">    <span class="dl">'</span><span class="s1">aud</span><span class="dl">'</span><span class="p">:</span> <span class="nx">notify_url</span><span class="p">,</span>
-</div><div class="line-9">    <span class="dl">'</span><span class="s1">exp</span><span class="dl">'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">,</span> <span class="c1">// one hour token request</span>
-</div><div class="line-10">    <span class="dl">'</span><span class="s1">scope</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">welkin</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-11">  <span class="p">}</span>
-</div><div class="line-12">  <span class="kd">const</span> <span class="nx">assertion</span> <span class="o">=</span> <span class="nx">jwt_simple</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">claim</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="dl">'</span><span class="s1">HS256</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-13">  <span class="k">return</span> <span class="nx">assertion</span><span class="p">;</span>
-</div><div class="line-14"><span class="p">}</span>
-</div><div class="line-15">
-</div><div class="line-16"><span class="err">#</span> <span class="nx">The</span> <span class="nx">token</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">used</span> <span class="k">for</span> <span class="nx">making</span> <span class="nx">notification</span> <span class="nx">requests</span>
-</div><div class="line-17"><span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">create_jwt</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;client_id&gt;</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-18">                <span class="dl">'</span><span class="s1">&lt;client_secret&gt;</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-19">                <span class="dl">'</span><span class="s1">&lt;client_notify_url&gt;</span><span class="dl">'</span><span class="p">)</span>
-</div><div class="line-20">
-</div><div class="line-21"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">token</span><span class="p">};</span>
-</div><div class="line-22">
-</div><div class="line-23"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">resource</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">patients</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-24">           <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-14T23:34:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-25">           <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-15T23:35:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-26">           <span class="dl">"</span><span class="s2">href</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.welkinhealth.com/v1/patients ...</span><span class="dl">"</span> <span class="p">}</span> <span class="p">];</span>
-</div><div class="line-27">
-</div><div class="line-28"><span class="err">#</span> <span class="nx">Welkin</span> <span class="nx">sends</span> <span class="nx">the</span> <span class="nx">actual</span> <span class="nx">notification</span>
-</div><div class="line-29"><span class="k">try</span> <span class="p">{</span>
-</div><div class="line-30">  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span>
-</div><div class="line-31">    <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-32">    <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;client_notify_url&gt;</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-33">    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-</div><div class="line-34">    <span class="na">data</span><span class="p">:</span> <span class="nx">data</span>
-</div><div class="line-35">  <span class="p">});</span>
-</div><div class="line-36">  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-</div><div class="line-37"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-38">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error could not get access token</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-39">  <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
-</div><div class="line-40"><span class="p">}</span>
-</div></code></pre></div>
+<h4 id='legacy-notifications-v1-webhook-security-jwt-as-bearer-token-recommended'>JWT as Bearer Token (Recommended)</h4>
 <p>A JWT is included as the Bearer Token on each notification request.</p>
 
 <p>In this model the JWT is not exchanged for an access token but is used directly as the access token for the notification endpoint.</p>
@@ -1199,114 +1194,11 @@
 <li><code>notify_url</code> - url at which the customer will receive the webhooks</li>
 <li>list of api resources for which notifications should be sent</li>
 </ul>
-<h3 id='webhook-security-token-exchange'>Token exchange</h3>
+<h4 id='legacy-notifications-v1-webhook-security-token-exchange'>Token exchange</h4>
 <blockquote>
 <p>Example Welkin side code (for illustration only)</p>
 </blockquote>
-<div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">arrow</span>
-</div><div class="line-2"><span class="kn">import</span> <span class="nn">jwt</span>
-</div><div class="line-3"><span class="kn">import</span> <span class="nn">requests</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="n">JWT_BEARER_URI</span> <span class="o">=</span> <span class="s">'urn:ietf:params:oauth:grant-type:jwt-bearer'</span>
-</div><div class="line-6">
-</div><div class="line-7"><span class="c1"># Welkin gets an access token from customer</span>
-</div><div class="line-8"><span class="k">def</span> <span class="nf">get_token</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
-</div><div class="line-9">  <span class="n">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-10">    <span class="s">'iss'</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
-</div><div class="line-11">    <span class="s">'aud'</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
-</div><div class="line-12">    <span class="s">'exp'</span><span class="p">:</span> <span class="n">arrow</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
-</div><div class="line-13">    <span class="s">'scope'</span><span class="p">:</span> <span class="s">'welkin'</span><span class="p">,</span>
-</div><div class="line-14">  <span class="p">}</span>
-</div><div class="line-15">  <span class="n">assertion</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">claim</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">'HS256'</span><span class="p">)</span>
-</div><div class="line-16">  <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-17">    <span class="s">'assertion'</span><span class="p">:</span> <span class="n">assertion</span><span class="p">,</span>
-</div><div class="line-18">    <span class="s">'grant_type'</span><span class="p">:</span> <span class="n">JWT_BEARER_URI</span>
-</div><div class="line-19">  <span class="p">}</span>
-</div><div class="line-20">  <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-</div><div class="line-21">  <span class="n">token</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">'access_token'</span><span class="p">]</span>
-</div><div class="line-22">  <span class="k">return</span> <span class="n">token</span>
-</div><div class="line-23">
-</div><div class="line-24"><span class="c1"># The token to be used for making notification requests</span>
-</div><div class="line-25"><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span><span class="p">(</span><span class="s">'&lt;client_id&gt;'</span><span class="p">,</span>
-</div><div class="line-26">                  <span class="s">'&lt;client_secret&gt;'</span><span class="p">,</span>
-</div><div class="line-27">                  <span class="s">'&lt;token_endpoint_url&gt;'</span>
-</div><div class="line-28">                  <span class="p">)</span>
-</div><div class="line-29">
-</div><div class="line-30"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer { }"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">token</span><span class="p">)}</span>
-</div><div class="line-31">
-</div><div class="line-32"><span class="c1"># Metadata about each resource type which has changed</span>
-</div><div class="line-33"><span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s">"resource"</span><span class="p">:</span> <span class="s">"patients"</span><span class="p">,</span>
-</div><div class="line-34">           <span class="s">"from"</span><span class="p">:</span> <span class="s">"2018-05-14T23:34:05.647496"</span><span class="p">,</span>
-</div><div class="line-35">           <span class="s">"to"</span><span class="p">:</span> <span class="s">"2018-05-15T23:35:05.647496"</span><span class="p">,</span>
-</div><div class="line-36">           <span class="s">"href"</span><span class="p">:</span> <span class="s">"https://api.welkinhealth.com/v1/patients ..."</span> <span class="p">}</span> <span class="p">]</span>
-</div><div class="line-37">
-</div><div class="line-38"><span class="c1"># Welkin sends the actual notification</span>
-</div><div class="line-39"><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'&lt;client_notify_url&gt;'</span><span class="p">,</span>
-</div><div class="line-40">              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</div><div class="line-41">              <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-2"><span class="kd">const</span> <span class="nx">jwt_simple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">jwt-simple</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-3">
-</div><div class="line-4"><span class="c1">// Create the JWT</span>
-</div><div class="line-5"><span class="kd">function</span> <span class="nx">create_jwt</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">notify_url</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="kd">const</span> <span class="nx">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-7">    <span class="dl">'</span><span class="s1">iss</span><span class="dl">'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>
-</div><div class="line-8">    <span class="dl">'</span><span class="s1">aud</span><span class="dl">'</span><span class="p">:</span> <span class="nx">notify_url</span><span class="p">,</span>
-</div><div class="line-9">    <span class="dl">'</span><span class="s1">exp</span><span class="dl">'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">,</span> <span class="c1">// one hour token request</span>
-</div><div class="line-10">    <span class="dl">'</span><span class="s1">scope</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">welkin</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-11">  <span class="p">}</span>
-</div><div class="line-12">  <span class="kd">const</span> <span class="nx">assertion</span> <span class="o">=</span> <span class="nx">jwt_simple</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">claim</span><span class="p">,</span> <span class="p">,</span> <span class="dl">'</span><span class="s1">HS256</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-13">  <span class="k">return</span> <span class="nx">assertion</span><span class="p">;</span>
-</div><div class="line-14"><span class="p">}</span>
-</div><div class="line-15">
-</div><div class="line-16"><span class="kd">function</span> <span class="nx">get_customer_webhook_token</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">endpoint</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-17">  <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">create_jwt</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">endpoint</span><span class="p">);</span>
-</div><div class="line-18">
-</div><div class="line-19">  <span class="kd">const</span> <span class="nx">JWT_BEARER_URI</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">urn:ietf:params:oauth:grant-type:jwt-bearer</span><span class="dl">'</span><span class="p">;</span>
-</div><div class="line-20">
-</div><div class="line-21">  <span class="k">try</span> <span class="p">{</span>
-</div><div class="line-22">    <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span>
-</div><div class="line-23">      <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-24">      <span class="na">url</span><span class="p">:</span> <span class="nx">endpoint</span><span class="p">,</span>
-</div><div class="line-25">      <span class="na">data</span><span class="p">:</span> <span class="nx">querystring</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span>
-</div><div class="line-26">        <span class="p">{</span><span class="dl">'</span><span class="s1">assertion</span><span class="dl">'</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
-</div><div class="line-27">        <span class="dl">'</span><span class="s1">grant_type</span><span class="dl">'</span><span class="p">:</span> <span class="nx">JWT_BEARER_URI</span>
-</div><div class="line-28">        <span class="p">}</span>
-</div><div class="line-29">      <span class="p">)</span>
-</div><div class="line-30">    <span class="p">});</span>
-</div><div class="line-31">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-</div><div class="line-32">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-33">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error could not get access token</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-34">    <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
-</div><div class="line-35">  <span class="p">}</span>
-</div><div class="line-36"><span class="p">}</span>
-</div><div class="line-37">
-</div><div class="line-38"><span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">get_customer_webhook_token</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;customer client id&gt;</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-39">                     <span class="dl">"</span><span class="s2">&lt;customer client secret&gt;</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-40">                     <span class="dl">"</span><span class="s2">&lt;customer token url&gt;</span><span class="dl">"</span><span class="p">);</span>
-</div><div class="line-41">
-</div><div class="line-42"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">token</span><span class="p">};</span>
-</div><div class="line-43">
-</div><div class="line-44"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">resource</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">patients</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-45">           <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-14T23:34:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-46">           <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-15T23:35:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-47">           <span class="dl">"</span><span class="s2">href</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.welkinhealth.com/v1/patients ...</span><span class="dl">"</span> <span class="p">}</span> <span class="p">];</span>
-</div><div class="line-48">
-</div><div class="line-49"><span class="err">#</span> <span class="nx">Welkin</span> <span class="nx">sends</span> <span class="nx">the</span> <span class="nx">actual</span> <span class="nx">notification</span>
-</div><div class="line-50"><span class="k">try</span> <span class="p">{</span>
-</div><div class="line-51">  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span>
-</div><div class="line-52">    <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-53">    <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;client_notify_url&gt;</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-54">    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-</div><div class="line-55">    <span class="na">data</span><span class="p">:</span> <span class="nx">data</span>
-</div><div class="line-56">  <span class="p">});</span>
-</div><div class="line-57">  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-</div><div class="line-58"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-59">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error could not get access token</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-60">  <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
-</div><div class="line-61"><span class="p">}</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">CURL example not available
-</div></code></pre></div>
+
 <p>A JWT sent as a Bearer Token to your Token endpoint is exchanged for an access token which is then used when sending the notifications.</p>
 
 <p>In this model we send two requests, first to get an access token and then to send the notification. Having two round trip requests is not needed to secure the notifications endpoint.</p>
@@ -1326,120 +1218,7 @@
 <li><code>token_endpoint_url</code> - url from which Welkin will request access tokens</li>
 <li>list of api resources for which notifications should be sent</li>
 </ul>
-
-<blockquote>
-<p>Example request for access token from Welkin to Customer</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-X</span> POST <span class="se">\</span>
-</div><div class="line-2">  <span class="s1">'https://customer.com/token'</span> <span class="se">\</span>
-</div><div class="line-3">  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-</div><div class="line-4">  <span class="nt">-d</span> <span class="s1">'{ "assertion": "&lt;JWT&gt;",</span>
-</div><div class="line-5"><span class="s1">        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer"</span>
-</div><div class="line-6"><span class="s1">      }'</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-2"><span class="kd">const</span> <span class="nx">jwt_simple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">jwt-simple</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-3"><span class="kd">const</span> <span class="nx">querystring</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">querystring</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="kd">const</span> <span class="nx">JWT_BEARER_URI</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">urn:ietf:params:oauth:grant-type:jwt-bearer</span><span class="dl">'</span><span class="p">;</span>
-</div><div class="line-6">
-</div><div class="line-7"><span class="kd">function</span> <span class="nx">get_customer_webhook_token</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">client_secret</span><span class="p">,</span> <span class="nx">endpoint</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-8">  <span class="kd">const</span> <span class="nx">token_data</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-9">    <span class="dl">'</span><span class="s1">iss</span><span class="dl">'</span><span class="p">:</span> <span class="nx">client_id</span><span class="p">,</span>
-</div><div class="line-10">    <span class="dl">'</span><span class="s1">aud</span><span class="dl">'</span><span class="p">:</span> <span class="nx">endpoint</span><span class="p">,</span>
-</div><div class="line-11">    <span class="dl">'</span><span class="s1">exp</span><span class="dl">'</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">,</span> <span class="c1">// one hour token request</span>
-</div><div class="line-12">    <span class="dl">'</span><span class="s1">scope</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">welkin</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-13">  <span class="p">}</span>
-</div><div class="line-14">  <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt_simple</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">token_data</span><span class="p">,</span> <span class="p">,</span> <span class="dl">'</span><span class="s1">HS256</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-15">  <span class="k">try</span> <span class="p">{</span>
-</div><div class="line-16">    <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span>
-</div><div class="line-17">      <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-</div><div class="line-18">      <span class="na">url</span><span class="p">:</span> <span class="nx">endpoint</span><span class="p">,</span>
-</div><div class="line-19">      <span class="na">data</span><span class="p">:</span> <span class="nx">querystring</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span>
-</div><div class="line-20">        <span class="p">{</span><span class="dl">'</span><span class="s1">assertion</span><span class="dl">'</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
-</div><div class="line-21">        <span class="dl">'</span><span class="s1">grant_type</span><span class="dl">'</span><span class="p">:</span> <span class="nx">JWT_BEARER_URI</span>
-</div><div class="line-22">        <span class="p">}</span>
-</div><div class="line-23">      <span class="p">)</span>
-</div><div class="line-24">    <span class="p">});</span>
-</div><div class="line-25">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
-</div><div class="line-26">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</div><div class="line-27">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error could not get access token</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-28">    <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
-</div><div class="line-29">  <span class="p">}</span>
-</div><div class="line-30"><span class="p">}</span>
-</div><div class="line-31">
-</div><div class="line-32"><span class="nx">get_customer_webhook_token</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;customer client id&gt;</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-33">                     <span class="dl">"</span><span class="s2">&lt;customer client secret&gt;</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-34">                     <span class="dl">"</span><span class="s2">&lt;customer token url&gt;</span><span class="dl">"</span><span class="p">);</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">arrow</span>
-</div><div class="line-2"><span class="kn">import</span> <span class="nn">jwt</span>
-</div><div class="line-3"><span class="kn">import</span> <span class="nn">requests</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="n">JWT_BEARER_URI</span> <span class="o">=</span> <span class="s">'urn:ietf:params:oauth:grant-type:jwt-bearer'</span>
-</div><div class="line-6">
-</div><div class="line-7"><span class="k">def</span> <span class="nf">get_customer_webhook_token</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
-</div><div class="line-8">  <span class="n">claim</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-9">    <span class="s">'iss'</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
-</div><div class="line-10">    <span class="s">'aud'</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
-</div><div class="line-11">    <span class="s">'exp'</span><span class="p">:</span> <span class="n">arrow</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
-</div><div class="line-12">    <span class="s">'scope'</span><span class="p">:</span> <span class="s">'welkin'</span><span class="p">,</span>
-</div><div class="line-13">  <span class="p">}</span>
-</div><div class="line-14">  <span class="n">assertion</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">claim</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">'HS256'</span><span class="p">)</span>
-</div><div class="line-15">  <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-16">    <span class="s">'assertion'</span><span class="p">:</span> <span class="n">assertion</span><span class="p">,</span>
-</div><div class="line-17">    <span class="s">'grant_type'</span><span class="p">:</span> <span class="n">JWT_BEARER_URI</span>
-</div><div class="line-18">  <span class="p">}</span>
-</div><div class="line-19">  <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-</div><div class="line-20">  <span class="n">token</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">'access_token'</span><span class="p">]</span>
-</div><div class="line-21">  <span class="k">return</span> <span class="n">token</span>
-</div><div class="line-22">
-</div><div class="line-23"><span class="n">token</span> <span class="o">=</span> <span class="n">get_customer_webhook_token</span><span class="p">(</span><span class="s">'&lt;customer client id&gt;'</span><span class="p">,</span>
-</div><div class="line-24">                             <span class="s">'&lt;customer client secret&gt;'</span><span class="p">,</span>
-</div><div class="line-25">                             <span class="s">'&lt;customer token url&gt;'</span><span class="p">)</span>
-</div></code></pre></div>
-<blockquote>
-<p>Example token response from Customer</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
-</div><div class="line-2"><span class="w">  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;token&gt;"</span>
-</div><div class="line-3"><span class="p">}</span>
-</div></code></pre></div>
-<blockquote>
-<p>Example notification from Welkin to Customer (url truncated)</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-X</span> POST <span class="se">\</span>
-</div><div class="line-2">  <span class="s1">'https://customer.com/notify'</span> <span class="se">\</span>
-</div><div class="line-3">  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-</div><div class="line-4">  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer &lt;token&gt;'</span> <span class="se">\</span>
-</div><div class="line-5">  <span class="nt">-d</span> <span class="s1">'[ { "resource": "patients",</span>
-</div><div class="line-6"><span class="s1">          "from": "2018-05-14T23:34:05.647496",</span>
-</div><div class="line-7"><span class="s1">          "to": "2018-05-15T23:35:05.647496",</span>
-</div><div class="line-8"><span class="s1">          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
-</div><div class="line-2">
-</div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer { }"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"&lt;token from exchange&gt;"</span><span class="p">)}</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="c1"># Metadata about each resource type which has changed</span>
-</div><div class="line-6"><span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s">"resource"</span><span class="p">:</span> <span class="s">"patients"</span><span class="p">,</span>
-</div><div class="line-7">           <span class="s">"from"</span><span class="p">:</span> <span class="s">"2018-05-14T23:34:05.647496"</span><span class="p">,</span>
-</div><div class="line-8">           <span class="s">"to"</span><span class="p">:</span> <span class="s">"2018-05-15T23:35:05.647496"</span><span class="p">,</span>
-</div><div class="line-9">           <span class="s">"href"</span><span class="p">:</span> <span class="s">"https://api.welkinhealth.com/v1/patients ..."</span> <span class="p">}</span> <span class="p">]</span>
-</div><div class="line-10">
-</div><div class="line-11"><span class="c1"># Welkin sends the actual notification</span>
-</div><div class="line-12"><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'&lt;client_notify_url&gt;'</span><span class="p">,</span>
-</div><div class="line-13">              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</div><div class="line-14">              <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
-</div><div class="line-2">
-</div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;token from exchange&gt;</span><span class="dl">"</span><span class="p">};</span>
-</div><div class="line-4">
-</div><div class="line-5"><span class="c1">// Metadata about each resource type which has changed</span>
-</div><div class="line-6"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">resource</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">patients</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-7">                 <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-14T23:34:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-8">                 <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-05-15T23:35:05.647496</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-9">                 <span class="dl">"</span><span class="s2">href</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.welkinhealth.com/v1/patients ...</span><span class="dl">"</span> <span class="p">}</span> <span class="p">];</span>
-</div><div class="line-10">
-</div><div class="line-11"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;client_notify_url&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
-</div></code></pre></div><h2 id='find-endpoints'>Find endpoints</h2>
+<h3 id='legacy-notifications-v1-find-endpoints'>Find endpoints</h3>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -1538,7 +1317,7 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Make sure to fully follow the pagination links when receiving <a href="#update-notifications">Update Notifications</a> to ensure you load all the data.</p>
 
 <p>Full <code>links</code> fields are elided in each <code>FIND</code> example response below for each method.</p>
-<h2 id='find-by-post'>Find by POST</h2>
+<h3 id='legacy-notifications-v1-find-by-post'>Find by POST</h3>
 <blockquote>
 <p>Example Request</p>
 </blockquote>
@@ -1594,11 +1373,29 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>The <em>Find By Post</em> request URL is <code>/v1/&lt;resource_type&gt;/find</code></p>
 
 <p>Parameters for <em>Find By Post</em> requests are sent in the request body.</p>
-<h1 id='api-reference'>API Reference</h1><h2 id='alerts'>Alerts</h2><h3 id='alerts-model'>Model</h3>
+<h1 id='api-reference'>API Reference</h1><h2 id='alerts'>Alerts</h2>
+<p>The Alerts API will allow you to create a new alert in the Inbox that are tied to events that occur in your
+applications outside of Welkin. For example, if you use a messaging application outside of Welkin that you use to
+communicate with your patients, you can configure an Alert notification that will display in your Welkin Inbox to
+let you know that you have messages from a patient in your messaging application.</p>
+<h3 id='alerts-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1">
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">  </span><span class="nl">"alert_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_message"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">  </span><span class="nl">"completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"dismissed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">  </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">  </span><span class="nl">"finished_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">  </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">  </span><span class="nl">"dismissed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">  </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</div><div class="line-12"><span class="w">  </span><span class="p">},</span>
+</div><div class="line-13"><span class="w">  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96d4fad8-cbd3-4710-a429-c09526c8f114"</span>
+</div><div class="line-14"><span class="p">}</span>
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -1612,39 +1409,39 @@ Data is paginated and the <code>links</code> section of the response indicates h
 </tr>
 <tr>
 <td>patient_id <br /><code><a href='#types'>guid</a></code></td>
-<td></td>
+<td>ID of the <a href="#patients">patient</a> for whom alert needs to be created</td>
 </tr>
 <tr>
-<td>worker_id <br /><code><a href='#types'>guid</a></code></td>
-<td></td>
+<td>worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code></td>
+<td>ID of the <a href="#workers">worker</a> creating the alert</td>
 </tr>
 <tr>
 <td>alert_type <br /><code><a href='#types'>string</a></code></td>
-<td></td>
+<td>The type of the alert that needs to be created. supported types [&#39;app_message&#39;]</td>
 </tr>
 <tr>
-<td>config <br /><code><a href='#types'>json</a></code></td>
-<td></td>
+<td>config <br /><code><a href='#types'>optional</a> <a href='#types'>json</a></code></td>
+<td>A json object containing &#39;count&#39; field with value, this is a optional field, default count will be 1</td>
 </tr>
 <tr>
-<td>active_time <br /><code><a href='#types'>isodatetimestring</a></code></td>
-<td></td>
+<td>active_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>Date and time when the alert was active</td>
 </tr>
 <tr>
-<td>finished_time <br /><code><a href='#types'>isodatetime</a></code></td>
-<td></td>
+<td>finished_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code></td>
+<td>Date and time when the alert was finished</td>
 </tr>
 <tr>
 <td>completed <br /><code><a href='#types'>boolean</a></code></td>
-<td></td>
+<td>Denotes whether the alert was completed</td>
 </tr>
 <tr>
-<td>dismissed <br /><code></code></td>
-<td></td>
+<td>dismissed <br /><code><a href='#types'>boolean</a></code></td>
+<td>Denotes whether the alert was dismissed</td>
 </tr>
 <tr>
-<td>dismissed_by_worker_id <br /><code></code></td>
-<td></td>
+<td>dismissed_by_worker_id <br /><code><a href='#types'>guid</a></code></td>
+<td>ID of the <a href="#workers">worker</a> who dismissed the alert.</td>
 </tr>
 </tbody></table>
 <h3 id='alerts-get'>Get</h3>
@@ -1653,18 +1450,18 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <blockquote>
 <p>Example Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XGET</span> https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114 <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span>
 </div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
-</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
+</div><div class="line-4"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114'</span>
 </div><div class="line-5">
 </div><div class="line-6"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </div><div class="line-7">
 </div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">}</span>
-</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114</span><span class="dl">'</span><span class="p">;</span>
 </div><div class="line-5">
 </div><div class="line-6"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">});</span>
 </div><div class="line-7">
@@ -1677,8 +1474,21 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Example Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
-</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
-</div><div class="line-3"><span class="p">}</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"alert_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_message"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"dismissed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">    </span><span class="nl">"finished_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">    </span><span class="nl">"dismissed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-12"><span class="w">      </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</div><div class="line-13"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-14"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96d4fad8-cbd3-4710-a429-c09526c8f114"</span>
+</div><div class="line-15"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-16"><span class="p">}</span>
 </div></code></pre></div><h4 id='alerts-get-params'>Params</h4>
 <table><thead>
 <tr>
@@ -1698,35 +1508,44 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Example Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPOST</span> https://api.welkinhealth.com/v1/alerts <span class="nt">-d</span> <span class="s1">'{</span>
-</div><div class="line-2"><span class="s1">  "patient_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",</span>
-</div><div class="line-3"><span class="s1">  "worker_id": "45ceeba9-4944-43d1-b34d-0c36846acd4c",</span>
-</div><div class="line-4"><span class="s1">  "alert_type": "some_string"</span>
-</div><div class="line-5"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</div><div class="line-2"><span class="s1">  "patient_id": "3c2f6fc5-a666-46e2-aefd-880dedf04de1",</span>
+</div><div class="line-3"><span class="s1">  "alert_type": "app_message",</span>
+</div><div class="line-4"><span class="s1">  "config": {</span>
+</div><div class="line-5"><span class="s1">    "count": 2</span>
+</div><div class="line-6"><span class="s1">  },</span>
+</div><div class="line-7"><span class="s1">  "active_time": "2020-10-15T13:29:31.536121+00:00"</span>
+</div><div class="line-8"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
 </div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
 </div><div class="line-4">
 </div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="s">"patient_id"</span><span class="p">:</span> <span class="s">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span>
-</div><div class="line-7">  <span class="s">"worker_id"</span><span class="p">:</span> <span class="s">"45ceeba9-4944-43d1-b34d-0c36846acd4c"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="s">"alert_type"</span><span class="p">:</span> <span class="s">"some_string"</span>
-</div><div class="line-9"><span class="p">}</span>
-</div><div class="line-10"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts'</span>
-</div><div class="line-11">
-</div><div class="line-12"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</div><div class="line-13">
+</div><div class="line-6">  <span class="s">"patient_id"</span><span class="p">:</span> <span class="s">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="s">"alert_type"</span><span class="p">:</span> <span class="s">"app_message"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="s">"config"</span><span class="p">:</span> <span class="p">{</span>
+</div><div class="line-9">    <span class="s">"count"</span><span class="p">:</span> <span class="mi">2</span>
+</div><div class="line-10">  <span class="p">},</span>
+</div><div class="line-11">  <span class="s">"active_time"</span><span class="p">:</span> <span class="s">"2020-10-15T13:29:31.536121+00:00"</span>
+</div><div class="line-12"><span class="p">}</span>
+</div><div class="line-13"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts'</span>
+</div><div class="line-14">
+</div><div class="line-15"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-16">
 </div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
 </div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts</span><span class="dl">'</span><span class="p">;</span>
 </div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="dl">"</span><span class="s2">patient_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-7">  <span class="dl">"</span><span class="s2">worker_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">"</span><span class="p">,</span>
-</div><div class="line-8">  <span class="dl">"</span><span class="s2">alert_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">some_string</span><span class="dl">"</span>
-</div><div class="line-9"><span class="p">};</span>
-</div><div class="line-10">
-</div><div class="line-11"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
-</div><div class="line-12">
+</div><div class="line-6">  <span class="dl">"</span><span class="s2">patient_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3c2f6fc5-a666-46e2-aefd-880dedf04de1</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-7">  <span class="dl">"</span><span class="s2">alert_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">app_message</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-8">  <span class="dl">"</span><span class="s2">config</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+</div><div class="line-9">    <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span>
+</div><div class="line-10">  <span class="p">},</span>
+</div><div class="line-11">  <span class="dl">"</span><span class="s2">active_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-10-15T13:29:31.536121+00:00</span><span class="dl">"</span>
+</div><div class="line-12"><span class="p">};</span>
+</div><div class="line-13">
+</div><div class="line-14"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-15">
 </div></code></pre></div>
 <p><code>POST /v1/alerts -d { }</code></p>
 <h4 id='alerts-create-required-scope'>Required Scope</h4>
@@ -1736,8 +1555,21 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Example Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
-</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
-</div><div class="line-3"><span class="p">}</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"alert_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_message"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"dismissed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">    </span><span class="nl">"finished_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">    </span><span class="nl">"dismissed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-12"><span class="w">      </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</div><div class="line-13"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-14"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96d4fad8-cbd3-4710-a429-c09526c8f114"</span>
+</div><div class="line-15"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-16"><span class="p">}</span>
 </div></code></pre></div><h4 id='alerts-create-params'>Params</h4>
 <table><thead>
 <tr>
@@ -1746,24 +1578,24 @@ Data is paginated and the <code>links</code> section of the response indicates h
 </tr>
 </thead><tbody>
 <tr>
-<td>patient_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
-<td></td>
+<td>patient_id <br /><code><a href='#types' class='required'>guid</a></code></td>
+<td>ID of the <a href="#patients">patient</a> for whom alert needs to be created</td>
 </tr>
 <tr>
 <td>worker_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
-<td></td>
+<td>ID of the <a href="#workers">worker</a> creating the alert</td>
 </tr>
 <tr>
 <td>alert_type <br /><code><a href='#types' class='required'>string</a></code></td>
-<td></td>
+<td>The type of the alert that needs to be created. supported types [&#39;app_message&#39;]</td>
 </tr>
 <tr>
-<td>config <br /><code><a href='#types' class='required'>json</a></code></td>
-<td></td>
+<td>config <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td>A json object containing &#39;count&#39; field with value, this is a optional field, default count will be 1</td>
 </tr>
 <tr>
-<td>active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code></td>
-<td></td>
+<td>active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>Date and time when the alert was active</td>
 </tr>
 </tbody></table>
 <h3 id='alerts-update'>Update</h3>
@@ -1772,30 +1604,42 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <blockquote>
 <p>Example Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPUT</span> https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c <span class="nt">-d</span> <span class="s1">'{</span>
-</div><div class="line-2"><span class="s1">  "finished_time": "2018-10-21T18:30:10.100000+00:00"</span>
-</div><div class="line-3"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><div class="line-1">curl <span class="nt">-XPUT</span> https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114 <span class="nt">-d</span> <span class="s1">'{</span>
+</div><div class="line-2"><span class="s1">  "config": {</span>
+</div><div class="line-3"><span class="s1">    "count": 2</span>
+</div><div class="line-4"><span class="s1">  },</span>
+</div><div class="line-5"><span class="s1">  "active_time": "2020-10-15T13:29:31.536121+00:00",</span>
+</div><div class="line-6"><span class="s1">  "completed": false</span>
+</div><div class="line-7"><span class="s1">}'</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your access token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
 </div></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><div class="line-1"><span class="kn">import</span> <span class="nn">requests</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer &lt;token&gt;"</span><span class="p">}</span>
 </div><div class="line-4">
 </div><div class="line-5"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="s">"finished_time"</span><span class="p">:</span> <span class="s">"2018-10-21T18:30:10.100000+00:00"</span>
-</div><div class="line-7"><span class="p">}</span>
-</div><div class="line-8"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c'</span>
-</div><div class="line-9">
-</div><div class="line-10"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</div><div class="line-11">
+</div><div class="line-6">  <span class="s">"config"</span><span class="p">:</span> <span class="p">{</span>
+</div><div class="line-7">    <span class="s">"count"</span><span class="p">:</span> <span class="mi">2</span>
+</div><div class="line-8">  <span class="p">},</span>
+</div><div class="line-9">  <span class="s">"active_time"</span><span class="p">:</span> <span class="s">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-10">  <span class="s">"completed"</span><span class="p">:</span> <span class="n">false</span>
+</div><div class="line-11"><span class="p">}</span>
+</div><div class="line-12"><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114'</span>
+</div><div class="line-13">
+</div><div class="line-14"><span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</div><div class="line-15">
 </div></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><div class="line-1"><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 </div><div class="line-2">
 </div><div class="line-3"><span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;token&gt;</span><span class="dl">"</span><span class="p">};</span>
-</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/45ceeba9-4944-43d1-b34d-0c36846acd4c</span><span class="dl">'</span><span class="p">;</span>
+</div><div class="line-4"><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.welkinhealth.com/v1/alerts/96d4fad8-cbd3-4710-a429-c09526c8f114</span><span class="dl">'</span><span class="p">;</span>
 </div><div class="line-5"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class="line-6">  <span class="dl">"</span><span class="s2">finished_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2018-10-21T18:30:10.100000+00:00</span><span class="dl">"</span>
-</div><div class="line-7"><span class="p">};</span>
-</div><div class="line-8">
-</div><div class="line-9"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
-</div><div class="line-10">
+</div><div class="line-6">  <span class="dl">"</span><span class="s2">config</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+</div><div class="line-7">    <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span>
+</div><div class="line-8">  <span class="p">},</span>
+</div><div class="line-9">  <span class="dl">"</span><span class="s2">active_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-10-15T13:29:31.536121+00:00</span><span class="dl">"</span><span class="p">,</span>
+</div><div class="line-10">  <span class="dl">"</span><span class="s2">completed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
+</div><div class="line-11"><span class="p">};</span>
+</div><div class="line-12">
+</div><div class="line-13"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+</div><div class="line-14">
 </div></code></pre></div>
 <p><code>PUT /v1/alerts/:id -d { }</code></p>
 <h4 id='alerts-update-required-scope'>Required Scope</h4>
@@ -1805,8 +1649,21 @@ Data is paginated and the <code>links</code> section of the response indicates h
 <p>Example Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
-</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
-</div><div class="line-3"><span class="p">}</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">    </span><span class="nl">"active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">    </span><span class="nl">"alert_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_message"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">    </span><span class="nl">"completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">    </span><span class="nl">"dismissed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">    </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">    </span><span class="nl">"finished_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">    </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">    </span><span class="nl">"dismissed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-11"><span class="w">    </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-12"><span class="w">      </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</div><div class="line-13"><span class="w">    </span><span class="p">},</span>
+</div><div class="line-14"><span class="w">    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96d4fad8-cbd3-4710-a429-c09526c8f114"</span>
+</div><div class="line-15"><span class="w">  </span><span class="p">}</span>
+</div><div class="line-16"><span class="p">}</span>
 </div></code></pre></div><h4 id='alerts-update-params'>Params</h4>
 <table><thead>
 <tr>
@@ -1820,19 +1677,19 @@ Data is paginated and the <code>links</code> section of the response indicates h
 </tr>
 <tr>
 <td>config <br /><code><a href='#types' class='optional'>json</a></code></td>
-<td></td>
+<td>A json object containing &#39;count&#39; field with value, this is a optional field, default count will be 1</td>
 </tr>
 <tr>
-<td>active_time <br /><code><a href='#types' class='optional'>isodatetimestring</a></code></td>
-<td></td>
+<td>active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
+<td>Date and time when the alert was active</td>
 </tr>
 <tr>
 <td>finished_time <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
-<td></td>
+<td>Date and time when the alert was finished</td>
 </tr>
 <tr>
-<td>completed <br /><code><a href='#types' class='optional'>boolean</a></code></td>
-<td></td>
+<td>completed <br /><code><a href='#types' class='required'>boolean</a></code></td>
+<td>Denotes whether the alert was completed</td>
 </tr>
 </tbody></table>
 <h3 id='alerts-find'>Find</h3>
@@ -1866,10 +1723,23 @@ Data is paginated and the <code>links</code> section of the response indicates h
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
 </div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</div><div class="line-3">
-</div><div class="line-4"><span class="w">  </span><span class="p">],</span>
-</div><div class="line-5"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
-</div><div class="line-6"><span class="p">}</span>
+</div><div class="line-3"><span class="w">    </span><span class="p">{</span>
+</div><div class="line-4"><span class="w">      </span><span class="nl">"active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-15T13:29:31.536121+00:00"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">      </span><span class="nl">"alert_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_message"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">      </span><span class="nl">"completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">      </span><span class="nl">"dismissed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">      </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c2f6fc5-a666-46e2-aefd-880dedf04de1"</span><span class="p">,</span>
+</div><div class="line-9"><span class="w">      </span><span class="nl">"finished_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-10"><span class="w">      </span><span class="nl">"worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-11"><span class="w">      </span><span class="nl">"dismissed_by_worker_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</div><div class="line-12"><span class="w">      </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-13"><span class="w">        </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</div><div class="line-14"><span class="w">      </span><span class="p">},</span>
+</div><div class="line-15"><span class="w">      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96d4fad8-cbd3-4710-a429-c09526c8f114"</span>
+</div><div class="line-16"><span class="w">    </span><span class="p">}</span>
+</div><div class="line-17"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-18"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-19"><span class="p">}</span>
 </div></code></pre></div><h4 id='alerts-find-params'>Params</h4>
 <table><thead>
 <tr>
@@ -1878,8 +1748,8 @@ Data is paginated and the <code>links</code> section of the response indicates h
 </tr>
 </thead><tbody>
 <tr>
-<td>alert_type <br /><code><a href='#types' class='optional'>string</a></code></td>
-<td></td>
+<td>alert_type <br /><code><a href='#types' class='required'>string</a></code></td>
+<td>The type of the alert that needs to be created. supported types [&#39;app_message&#39;]</td>
 </tr>
 <tr>
 <td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
@@ -2840,55 +2710,15 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 </tbody></table>
 <h2 id='audit-logs'>Audit Logs</h2>
-<p>An audit trail of logins by users or custom data type modifications performed by a user, api, or process.</p>
+<p>:param event_type
+:param actor_type
+:param start_time
+:param end_time</p>
 <h3 id='audit-logs-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</div><div class="line-2"><span class="w">        </span><span class="p">{</span>
-</div><div class="line-3"><span class="w">            </span><span class="nl">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span>
-</div><div class="line-4"><span class="w">            </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom_data"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-5"><span class="w">            </span><span class="nl">"event_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.851579+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-6"><span class="w">            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.854040+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-7"><span class="w">            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-10T23:38:30.854056+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-8"><span class="w">            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e59b31d9-d854-496d-ab8f-461670a9bc8d"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-9"><span class="w">            </span><span class="nl">"actor_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-10"><span class="w">            </span><span class="nl">"actor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e3a8a06-d443-49c4-8ed8-ec1f683e2210"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-11"><span class="w">            </span><span class="nl">"env_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e88444a4-6ad7-42f9-a9c1-9c7d06d3cdf9"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-12"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audit_logs"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-13"><span class="w">            </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-14"><span class="w">                </span><span class="nl">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdt_ref_name"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-15"><span class="w">                </span><span class="nl">"patient_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Patient"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-16"><span class="w">                </span><span class="nl">"diff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-17"><span class="w">                    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span>
-</div><div class="line-18"><span class="w">                </span><span class="p">},</span><span class="w"> </span>
-</div><div class="line-19"><span class="w">                </span><span class="nl">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-20"><span class="w">                </span><span class="nl">"patient_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802336e8-39df-4243-bb90-d1c7028abdbd"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-21"><span class="w">                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24c9fd66-1b15-404c-8668-ea330acb7b81"</span>
-</div><div class="line-22"><span class="w">            </span><span class="p">}</span>
-</div><div class="line-23"><span class="w">        </span><span class="p">}</span>
-</div><div class="line-24">
-</div><div class="line-25">
-</div><div class="line-26"><span class="w">        </span><span class="p">{</span>
-</div><div class="line-27"><span class="w">            </span><span class="nl">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span>
-</div><div class="line-28"><span class="w">            </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-29"><span class="w">            </span><span class="nl">"event_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:43.322951+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-30"><span class="w">            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332752+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-31"><span class="w">            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332787+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-32"><span class="w">            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11a1645e-6d31-448b-90e4-4babc662df5a"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-33"><span class="w">            </span><span class="nl">"actor_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-34"><span class="w">            </span><span class="nl">"actor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f42jhfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-35"><span class="w">            </span><span class="nl">"env_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-36"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audit_logs"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-37"><span class="w">            </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-38"><span class="w">                </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Profilio Coach"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-39"><span class="w">                </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-40"><span class="w">                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f98adfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-41"><span class="w">                </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach+profilio@welkinhealth.com"</span>
-</div><div class="line-42"><span class="w">            </span><span class="p">}</span>
-</div><div class="line-43"><span class="w">        </span><span class="p">}</span>
-</div><div class="line-44"><span class="p">]</span>
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1">
 </div></code></pre></div>
 <table><thead>
 <tr>
@@ -2897,15 +2727,15 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>id <br /><code><a href='#types'>guid</a></code></td>
+<td>id <br /><code><a href='#types'>json</a></code></td>
 <td>The primary identifier of the <strong>audit logs</strong> record.</td>
 </tr>
 <tr>
-<td>env_id <br /><code><a href='#types'>guid</a></code></td>
+<td>env_id <br /><code></code></td>
 <td></td>
 </tr>
 <tr>
-<td>actor_id <br /><code><a href='#types'>guid</a></code></td>
+<td>actor_id <br /><code></code></td>
 <td></td>
 </tr>
 <tr>
@@ -2913,7 +2743,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td></td>
 </tr>
 <tr>
-<td>event_time <br /><code><a href='#types'>isodatetime</a></code></td>
+<td>event_time <br /><code></code></td>
 <td></td>
 </tr>
 <tr>
@@ -2921,7 +2751,7 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td></td>
 </tr>
 <tr>
-<td>event <br /><code><a href='#types'>json</a></code></td>
+<td>event <br /><code></code></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -2955,27 +2785,8 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <p>Example Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
-</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</div><div class="line-3"><span class="w">    </span><span class="p">{</span>
-</div><div class="line-4"><span class="w">            </span><span class="nl">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span>
-</div><div class="line-5"><span class="w">            </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-6"><span class="w">            </span><span class="nl">"event_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:43.322951+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-7"><span class="w">            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332752+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-8"><span class="w">            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-04T17:59:57.332787+00:00"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-9"><span class="w">            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11a1645e-6d31-448b-90e4-4babc662df5a"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-10"><span class="w">            </span><span class="nl">"actor_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-11"><span class="w">            </span><span class="nl">"actor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f42jhfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-12"><span class="w">            </span><span class="nl">"env_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e88411j4-6ad7-42f9-a9c1-9c7d06d3cdf9"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-13"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audit_logs"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-14"><span class="w">            </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</div><div class="line-15"><span class="w">                </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Profilio Coach"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-16"><span class="w">                </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-17"><span class="w">                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f98adfb-e2ae-4c91-b7bb-083c956731af"</span><span class="p">,</span><span class="w"> </span>
-</div><div class="line-18"><span class="w">                </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach+profilio@welkinhealth.com"</span>
-</div><div class="line-19"><span class="w">            </span><span class="p">}</span>
-</div><div class="line-20"><span class="w">      </span><span class="p">}</span>
-</div><div class="line-21"><span class="w">  </span><span class="p">]</span>
-</div><div class="line-22"><span class="p">}</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span>
+</div><div class="line-3"><span class="p">}</span>
 </div></code></pre></div><h4 id='audit-logs-get-params'>Params</h4>
 <table><thead>
 <tr>
@@ -2986,10 +2797,6 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <tr>
 <td>id <br /><code><a href='#types' class='required'>guid</a></code></td>
 <td>The primary identifier of the <strong>audit logs</strong> record.</td>
-</tr>
-<tr>
-<td>event_type <br /><code><a href='#types' class='required'>enum</a></code></td>
-<td><code>login</code> or <code>custom_data</code></td>
 </tr>
 </tbody></table>
 <h3 id='audit-logs-find'>Find</h3>
@@ -3023,9 +2830,10 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
 </div><div class="line-2"><span class="w">  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</div><div class="line-3"><span class="w">    </span><span class="s2">"Elided for simplicity, see Get Endpoints Overview above"</span>
-</div><div class="line-4"><span class="w">  </span><span class="p">]</span>
-</div><div class="line-5"><span class="p">}</span>
+</div><div class="line-3">
+</div><div class="line-4"><span class="w">  </span><span class="p">],</span>
+</div><div class="line-5"><span class="w">  </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elided for simplicity, see Find Endpoints Overview above"</span>
+</div><div class="line-6"><span class="p">}</span>
 </div></code></pre></div><h4 id='audit-logs-find-params'>Params</h4>
 <table><thead>
 <tr>
@@ -3039,26 +2847,26 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 </tr>
 <tr>
 <td>actor_type <br /><code><a href='#types' class='optional'>enum</a></code></td>
-<td><code>api</code>, <code>process</code> or <code>worker</code></td>
+<td></td>
 </tr>
 <tr>
 <td>event_type <br /><code><a href='#types' class='required'>enum</a></code></td>
-<td><code>login</code> or <code>custom_data</code></td>
+<td></td>
 </tr>
 <tr>
-<td>email <br /><code><a href='#types' class='optional'>string</a></code></td>
-<td>For <code>worker</code> actor_type</td>
+<td>email <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
 </tr>
 <tr>
 <td>end_time <br /><code><a href='#types' class='optional'>date</a></code></td>
 <td></td>
 </tr>
 <tr>
-<td>operation <br /><code><a href='#types' class='optional'>string</a></code></td>
-<td><code>create</code>, <code>update</code>, or <code>delete</code> for custom_data</td>
+<td>operation <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
 </tr>
 <tr>
-<td>patient_id <br /><code><a href='#types' class='optional'>guid</a></code></td>
+<td>patient_id <br /><code><a href='#types' class='optional'>json</a></code></td>
 <td></td>
 </tr>
 <tr>
@@ -3066,11 +2874,15 @@ created in <a href="https://workshop.welkinhealth.com">Workshop</a>.</p>
 <td></td>
 </tr>
 <tr>
-<td>page[from] <br /><code><a href='#types' class='optional'>date</a></code></td>
+<td>type_name <br /><code><a href='#types' class='optional'>json</a></code></td>
+<td></td>
+</tr>
+<tr>
+<td>page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The earliest timestamp to include in the response</td>
 </tr>
 <tr>
-<td>page[to] <br /><code><a href='#types' class='optional'>date</a></code></td>
+<td>page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code></td>
 <td>The latest timestamp to include in the response</td>
 </tr>
 <tr>
@@ -4528,11 +4340,10 @@ phone number is added to the patient.</aside>
 </tbody></table>
 <h2 id='custom-data-type-records'>Custom Data Type Records</h2>
 <p>Welkin stores the custom data associated with <a href="#patients">patients</a> in custom data type records. The custom data
-types must first be defined in <a href="https://workshop.welkinhealth.com">Workshop</a> before they can be addressed in the API.</p>
-
+types must first be defined in <a href="https://workshop.welkinhealth.com">Workshop</a> before they can be addressed in the API.
 <aside>Multiple records of the same data type can be created for each <a href="#patients">patient</a>. Depending on the display
 conditions and data uses defined in <a href="https://workshop.welkinhealth.com">Workshop</a>, creating multiple records of the
-same type will have different effects within the Welkin Portal.</aside>
+same type will have different effects within the Welkin Portal.</aside></p>
 <h3 id='custom-data-type-records-model'>Model</h3>
 <blockquote>
 <p>Example Response</p>
@@ -4573,6 +4384,10 @@ same type will have different effects within the Welkin Portal.</aside>
 <tr>
 <td>type_name <br /><code><a href='#types'>string</a></code></td>
 <td>ID of the custom data type as defined in <a href="https://workshop.welkinhealth.com">Workshop</a></td>
+</tr>
+<tr>
+<td>updated_by <br /><code></code></td>
+<td></td>
 </tr>
 <tr>
 <td>updated_at <br /><code><a href='#types'>isodatetime</a></code></td>
@@ -4641,11 +4456,10 @@ same type will have different effects within the Welkin Portal.</aside>
 </tr>
 </tbody></table>
 <h3 id='custom-data-type-records-create'>Create</h3>
-<p>Creates a new <strong>custom data type record</strong>.</p>
-
+<p>Creates a new <strong>custom data type record</strong>.
 <aside>This method will always create a new record even if the CDT is displayed as a single value sidebar section
 in Welkin. In Welkin we will show the values from the latest created record. In Welkin edits to a
-single value sidebar will not create a new record but rather update the latest record.</aside>
+single value sidebar will not create a new record but rather update the latest record.</aside></p>
 <h4 id='custom-data-type-records-create-invocation'>Invocation</h4>
 <blockquote>
 <p>Example Request</p>
@@ -7441,6 +7255,10 @@ wolof, western_frisian, xhosa, yiddish, yoruba, chuang, zului</p>
 <td>Datetime the resource was created</td>
 </tr>
 <tr>
+<td>email_addresses <br /><code><a href='#types'>object</a></code></td>
+<td></td>
+</tr>
+<tr>
 <td>street <br /><code><a href='#types'>string</a></code></td>
 <td>Street address of this patient</td>
 </tr>
@@ -7714,6 +7532,10 @@ wolof, western_frisian, xhosa, yiddish, yoruba, chuang, zului</p>
 <tr>
 <td>birthday <br /><code><a href='#types' class='optional'>date</a></code></td>
 <td>Date of birth of this patient</td>
+</tr>
+<tr>
+<td>email_addresses <br /><code><a href='#types' class='optional'>list(object)</a></code></td>
+<td></td>
 </tr>
 <tr>
 <td>street <br /><code><a href='#types' class='optional'>string</a></code></td>
