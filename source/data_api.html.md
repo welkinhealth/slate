@@ -189,22 +189,24 @@ Welkin's APIs use a “ping and pull” model. We notify subscribers via Webhook
 
 To enable Notifications, configure the URL to receive notifications in Workshop Integration Tools. The first request that we send to your subscribed URL contains a confirmation URL. You will need to open this URL in your browser or send a GET request to this URL to confirm your webhook subscription. After this step is complete, we will send notifications to your subscribed URL.
 
-## Subscription Confirmation
-
-Welkin's Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing `"Type"` of `"SubscriptionConfirmation"`, and `"SubscribeURL"` containing a URL that you need to visit or GET to confirm your subscription.
-
-<aside>
-Example:
-
-{
-  "Type": "SubscriptionConfirmation",
-  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
-  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&Token=XXXXXXXXXXXX",
-  ...
-}
-</aside>
 
 ## Webhook Contents
+> Example:
+```
+{
+ "notification": {
+   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
+   "resource": "patients",
+   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "updated_at": "2020-04-27 00:00:00.006785",
+   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "action": "update"
+ },
+ "send_to": "https://example.com/my-notifications-go-here",
+ "jwt": "XXXXXXXXXXXXX"
+}
+```
+
 
 field | type | description
 - | - | -
@@ -221,22 +223,22 @@ updated_at | `datetime` | Datetime when notification was triggered
 href | `string` or `null` | Link to GET the resource, or null if resource was deleted
 action | `string` | The action that modified the resource: `create`, `update`, `delete`
 
-<aside>
-Example:
 
+
+## Subscription Confirmation
+
+> Example:
+```
 {
- "notification": {
-   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
-   "resource": "patients",
-   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
-   "updated_at": "2020-04-27 00:00:00.006785",
-   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
-   "action": "update"
- },
- "send_to": "https://example.com/my-notifications-go-here",
- "jwt": "XXXXXXXXXXXXX"
+  "Type": "SubscriptionConfirmation",
+  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
+  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&Token=XXXXXXXXXXXX",
+  ...
 }
-</aside>
+```
+
+Welkin's Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing `"Type"` of `"SubscriptionConfirmation"`, and `"SubscribeURL"` containing a URL that you need to visit or GET to confirm your subscription.
+
 
 ## Legacy Notifications (v1)
 
