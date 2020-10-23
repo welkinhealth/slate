@@ -183,26 +183,69 @@ If you make a `POST` or `PUT` request with an access token which has only `write
 
 <aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
 
-# Update Notifications
-Welkin's APIs work using a “ping and pull” model. This means our APIs notify subscribers via Webhook any time there’s an update to your data within our platform. Your subscribers can then decide if you want to pull the updated resources into your system, from Welkin. This ensures your systems are kept up to date with the latest data changes in our platform, without needing to continuously poll our APIs.
+# Realtime Notifications (v2)
 
-The webhook notification includes which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
+Welkin's APIs use a “ping and pull” model. We notify subscribers via Webhook any time there’s an update to your data within our platform. You can pull the updated resources into your system using a GET request following the receipt of a notification.
 
-Webhook notifications are sent every `60` seconds. This means that notifications might be sent at most `60` seconds from the time the resource is changed in Welkin.
+To enable Notifications, configure the URL to receive notifications in Workshop Integration Tools. The first request that we send to your subscribed URL contains a confirmation URL. You will need to open this URL in your browser or send a GET request to this URL to confirm your webhook subscription. After this step is complete, we will send notifications to your subscribed URL.
+
+## Subscription Confirmation
+
+Welkin's Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing `"Type"` of `"SubscriptionConfirmation"`, and `"SubscribeURL"` containing a URL that you need to visit or GET to confirm your subscription.
+
+Example:
+
+```
+{
+  "Type": "SubscriptionConfirmation",
+  "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
+  "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&Token=XXXXXXXXXXXX",
+  ...
+}
+```
+
+## Webhook Contents
+
+field | type | description
+- | - | -
+send_to | `string` | URL that is subscribed to the notifications
+jwt | `string` | JWT token to verify the notification came from Welkin
+- | - | -
+notification | `json` | Contains the following JSON schema:
+- | - | -
+provider_id | `string` | Welkin ID specifying the environment (for example, Sandbox or Live)
+resource | `string` | The type of resource in Welkin that was modified, e.g. `patients`
+resource_id | `string` | The Welkin ID of the resource that was modified
+updated_at | `datetime` | Datetime when notification was triggered
+href | `string` or `null` | Link to GET the resource, or null if resource was deleted
+action | `string` | The action that modified the resource: `create`, `update`, `delete`
+
+Example:
+
+```
+{
+ "notification": {
+   "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
+   "resource": "patients",
+   "resource_id": "9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "updated_at": "2020-04-27 00:00:00.006785",
+   "href": "https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4",
+   "action": "update"
+ },
+ "send_to": "https://example.com/my-notifications-go-here",
+ "jwt": "XXXXXXXXXXXXX"
+}
+```
+
+## Legacy Notifications (v1)
+
+Welkin's v1 webhoook notifications are sent every `60` seconds, and include which resources have changed, the time range of the changes, and a url to use in a `GET` request to fetch the changes (see *Find* endpoints for each resource).
 
 Welkin will only send notifications for updates which have happened in the last `24` hours. If you pause webhook delivery for more than 24 hours, or webhook delivery fails for more than 24 hours, you should use *Find* endpoints to query for any resources which may have changed since the last webhook you received.
 
 <aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
 
-**An example of Welkin’s data sync could look like the following:**
-
-1. Alex, a worker, logs into Welkin and updates the phone number in the patient's (Allison) profile.
-2. Welkin sends a notification to the customer’s 3rd party system, letting them know that the patient object for Allison has been changed.
-3. In response, the 3rd party system requests the full patient object for Allison, which contains the new phone number.
-4. The system processes the updated patient object and saves it.
-5. Both Welkin and the customer’s integrated system are now in sync, both reflecting Allison’s updated phone number.
-
-## Webhook body
+### Webhook body
 
 Each notification contains all the updates for all the resource types since the last successful notification.
 
@@ -215,12 +258,12 @@ Each notification contains all the updates for all the resource types since the 
     "href": "https://api.welkinhealth.com/v1/patients?page[to]=2018-05-15T23:34:05.647496&page[from]=2018-05-14T23:34:05.647496"}]
 ```
 
-#### Model notification webhook request body
+##### Model notification webhook request body
 field | type | description
 - | - | -
 _ | `list` | List of data_update_notification objects
 
-#### Model data_update_notification
+##### Model data_update_notification
 field | type | description
 - | - | -
 resource | `string` | Resource endpoint path name
@@ -228,103 +271,10 @@ from | `isodatetime` | Datetime of first update
 to | `isodatetime` | Datetime of latest update
 href | `string` | Link to GET all updates for this notification
 
-## Webhook security
-Welkin's APIs expect that the webhook destination is secured using [JWT Bearer Authorization](#authentication) in the same manor that our core API is secured. This ensures that patient data remains secure and protected at all times.
-
+### Webhook security
 Welkin supports two authentication flows for the notifications. Both have the same level of security.
 
-### JWT as Bearer Token (Recommended)
-
-> Example Welkin side code (for illustration only)
-
-```shell
-curl -X POST \
-  'https://customer.com/notify' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <JWT>' \
-  -d '[ { "resource": "patients",
-          "from": "2018-05-14T23:34:05.647496",
-          "to": "2018-05-15T23:35:05.647496",
-          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'
-```
-
-```python
-import arrow
-import jwt
-import requests
-
-# Create the JWT
-def create_jwt(client_id, client_secret, notify_url):
-  claim = {
-    'iss': client_id,
-    'aud': notify_url,
-    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
-    'scope': 'welkin',
-  }
-  assertion = jwt.encode(claim, client_secret, algorithm='HS256')
-  return assertion
-
-# The token to be used for making notification requests
-token = create_jwt('<client_id>',
-                '<client_secret>',
-                '<client_notify_url>')
-
-headers = {"Authorization": "Bearer { }".format(token)}
-
-# Metadata about each resource type which has changed
-data = [ { "resource": "patients",
-           "from": "2018-05-14T23:34:05.647496",
-           "to": "2018-05-15T23:35:05.647496",
-           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
-
-# Welkin sends the actual notification
-requests.post('<client_notify_url>',
-              headers=headers,
-              data=data)
-```
-
-```javascript
-const axios = require('axios');
-const jwt_simple = require('jwt-simple');
-
-// Create the JWT
-function create_jwt(client_id, client_secret, notify_url) {
-  const claim = {
-    'iss': client_id,
-    'aud': notify_url,
-    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
-    'scope': 'welkin',
-  }
-  const assertion = jwt_simple.encode(claim, client_secret, 'HS256');
-  return assertion;
-}
-
-# The token to be used for making notification requests
-const token = create_jwt('<client_id>',
-                '<client_secret>',
-                '<client_notify_url>')
-
-const headers = {"Authorization": "Bearer " + token};
-
-const data = [ { "resource": "patients",
-           "from": "2018-05-14T23:34:05.647496",
-           "to": "2018-05-15T23:35:05.647496",
-           "href": "https://api.welkinhealth.com/v1/patients ..." } ];
-
-# Welkin sends the actual notification
-try {
-  const res = await axios({
-    method: 'post',
-    url: '<client_notify_url>',
-    headers: headers,
-    data: data
-  });
-  return res.data.access_token;
-} catch (e) {
-  console.log('error could not get access token');
-  return '';
-}
-```
+#### JWT as Bearer Token (Recommended)
 
 A JWT is included as the Bearer Token on each notification request.
 
@@ -343,121 +293,9 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `notify_url` - url at which the customer will receive the webhooks
 * list of api resources for which notifications should be sent
 
-### Token exchange
+#### Token exchange
 
 > Example Welkin side code (for illustration only)
-
-```python
-import arrow
-import jwt
-import requests
-
-JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
-
-# Welkin gets an access token from customer
-def get_token(client_id, client_secret, endpoint):
-  claim = {
-    'iss': client_id,
-    'aud': endpoint,
-    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
-    'scope': 'welkin',
-  }
-  assertion = jwt.encode(claim, client_secret, algorithm='HS256')
-  params = {
-    'assertion': assertion,
-    'grant_type': JWT_BEARER_URI
-  }
-  resp = requests.post(endpoint, data=params)
-  token = resp.json()['access_token']
-  return token
-
-# The token to be used for making notification requests
-token = get_token('<client_id>',
-                  '<client_secret>',
-                  '<token_endpoint_url>'
-                  )
-
-headers = {"Authorization": "Bearer { }".format(token)}
-
-# Metadata about each resource type which has changed
-data = [ { "resource": "patients",
-           "from": "2018-05-14T23:34:05.647496",
-           "to": "2018-05-15T23:35:05.647496",
-           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
-
-# Welkin sends the actual notification
-requests.post('<client_notify_url>',
-              headers=headers,
-              data=data)
-```
-
-```javascript
-const axios = require('axios');
-const jwt_simple = require('jwt-simple');
-
-// Create the JWT
-function create_jwt(client_id, client_secret, notify_url) {
-  const claim = {
-    'iss': client_id,
-    'aud': notify_url,
-    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
-    'scope': 'welkin',
-  }
-  const assertion = jwt_simple.encode(claim, , 'HS256');
-  return assertion;
-}
-
-function get_customer_webhook_token(client_id, client_secret, endpoint) {
-  const token = create_jwt(client_id, client_secret, endpoint);
-
-  const JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
-
-  try {
-    const res = await axios({
-      method: 'post',
-      url: endpoint,
-      data: querystring.stringify(
-        {'assertion': token.toString(),
-        'grant_type': JWT_BEARER_URI
-        }
-      )
-    });
-    return res.data.access_token;
-  } catch (e) {
-    console.log('error could not get access token');
-    return '';
-  }
-}
-
-const token = get_customer_webhook_token("<customer client id>",
-                     "<customer client secret>",
-                     "<customer token url>");
-
-const headers = {"Authorization": "Bearer " + token};
-
-const data = [ { "resource": "patients",
-           "from": "2018-05-14T23:34:05.647496",
-           "to": "2018-05-15T23:35:05.647496",
-           "href": "https://api.welkinhealth.com/v1/patients ..." } ];
-
-# Welkin sends the actual notification
-try {
-  const res = await axios({
-    method: 'post',
-    url: '<client_notify_url>',
-    headers: headers,
-    data: data
-  });
-  return res.data.access_token;
-} catch (e) {
-  console.log('error could not get access token');
-  return '';
-}
-```
-
-```shell
-CURL example not available
-```
 
 A JWT sent as a Bearer Token to your Token endpoint is exchanged for an access token which is then used when sending the notifications.
 
@@ -477,135 +315,7 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `token_endpoint_url` - url from which Welkin will request access tokens
 * list of api resources for which notifications should be sent
 
-> Example request for access token from Welkin to Customer
-
-```shell
-curl -X POST \
-  'https://customer.com/token' \
-  -H 'Content-Type: application/json' \
-  -d '{ "assertion": "<JWT>",
-        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer"
-      }'
-```
-
-```javascript
-const axios = require('axios');
-const jwt_simple = require('jwt-simple');
-const querystring = require('querystring');
-
-const JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
-
-function get_customer_webhook_token(client_id, client_secret, endpoint) {
-  const token_data = {
-    'iss': client_id,
-    'aud': endpoint,
-    'exp': Math.round(new Date() / 1000) + 3600, // one hour token request
-    'scope': 'welkin',
-  }
-  const token = jwt_simple.encode(token_data, , 'HS256');
-  try {
-    const res = await axios({
-      method: 'post',
-      url: endpoint,
-      data: querystring.stringify(
-        {'assertion': token.toString(),
-        'grant_type': JWT_BEARER_URI
-        }
-      )
-    });
-    return res.data.access_token;
-  } catch (e) {
-    console.log('error could not get access token');
-    return '';
-  }
-}
-
-get_customer_webhook_token("<customer client id>",
-                     "<customer client secret>",
-                     "<customer token url>");
-```
-
-```python
-import arrow
-import jwt
-import requests
-
-JWT_BEARER_URI = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
-
-def get_customer_webhook_token(client_id, client_secret, endpoint):
-  claim = {
-    'iss': client_id,
-    'aud': endpoint,
-    'exp': arrow.utcnow().shift(seconds=3600).timestamp,
-    'scope': 'welkin',
-  }
-  assertion = jwt.encode(claim, client_secret, algorithm='HS256')
-  params = {
-    'assertion': assertion,
-    'grant_type': JWT_BEARER_URI
-  }
-  resp = requests.post(endpoint, data=params)
-  token = resp.json()['access_token']
-  return token
-
-token = get_customer_webhook_token('<customer client id>',
-                             '<customer client secret>',
-                             '<customer token url>')
-```
-
-> Example token response from Customer
-
-```json
-{
-  "access_token": "<token>"
-}
-```
-
-> Example notification from Welkin to Customer (url truncated)
-
-```shell
-curl -X POST \
-  'https://customer.com/notify' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <token>' \
-  -d '[ { "resource": "patients",
-          "from": "2018-05-14T23:34:05.647496",
-          "to": "2018-05-15T23:35:05.647496",
-          "href": "https://api.welkinhealth.com/v1/patients ..." } ]'
-```
-
-```python
-import requests
-
-headers = {"Authorization": "Bearer { }".format("<token from exchange>")}
-
-# Metadata about each resource type which has changed
-data = [ { "resource": "patients",
-           "from": "2018-05-14T23:34:05.647496",
-           "to": "2018-05-15T23:35:05.647496",
-           "href": "https://api.welkinhealth.com/v1/patients ..." } ]
-
-# Welkin sends the actual notification
-requests.post('<client_notify_url>',
-              headers=headers,
-              data=data)
-```
-
-```javascript
-const axios = require('axios');
-
-const headers = {"Authorization": "Bearer " + "<token from exchange>"};
-
-// Metadata about each resource type which has changed
-const data = [ { "resource": "patients",
-                 "from": "2018-05-14T23:34:05.647496",
-                 "to": "2018-05-15T23:35:05.647496",
-                 "href": "https://api.welkinhealth.com/v1/patients ..." } ];
-
-const response = await axios({method: 'post', url: '<client_notify_url>', headers: headers, data: data});
-```
-
-## Find endpoints
+### Find endpoints
 > Example Request
 
 ```shell
@@ -711,7 +421,7 @@ Make sure to fully follow the pagination links when receiving [Update Notificati
 
 Full `links` fields are elided in each `FIND` example response below for each method.
 
-## Find by POST
+### Find by POST
 > Example Request
 
 ```shell
