@@ -183,7 +183,7 @@ If you make a `POST` or `PUT` request with an access token which has only `write
 
 <aside>'all' is a valid scope for use in the Welkin Data API. When selected in Integration Tools the Client ID will have the ability to request an Access Token which has access to all the endpoints within Welkin's Data API.</aside>
 
-# Realtime Notifications (v2)
+# Realtime Notifications
 
 Welkin's APIs use a “ping and pull” model. We notify subscribers via Webhook any time there’s an update to your data within our platform. You can pull the updated resources into your system using a GET request following the receipt of a notification.
 
@@ -193,16 +193,16 @@ To enable Notifications, configure the URL to receive notifications in Workshop 
 
 Welkin's Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing `"Type"` of `"SubscriptionConfirmation"`, and `"SubscribeURL"` containing a URL that you need to visit or GET to confirm your subscription.
 
+<aside>
 Example:
 
-```
 {
   "Type": "SubscriptionConfirmation",
   "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
   "SubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&Token=XXXXXXXXXXXX",
   ...
 }
-```
+</aside>
 
 ## Webhook Contents
 
@@ -210,8 +210,9 @@ field | type | description
 - | - | -
 send_to | `string` | URL that is subscribed to the notifications
 jwt | `string` | JWT token to verify the notification came from Welkin
-- | - | -
 notification | `json` | Contains the following JSON schema:
+
+field | type | description
 - | - | -
 provider_id | `string` | Welkin ID specifying the environment (for example, Sandbox or Live)
 resource | `string` | The type of resource in Welkin that was modified, e.g. `patients`
@@ -220,9 +221,9 @@ updated_at | `datetime` | Datetime when notification was triggered
 href | `string` or `null` | Link to GET the resource, or null if resource was deleted
 action | `string` | The action that modified the resource: `create`, `update`, `delete`
 
+<aside>
 Example:
 
-```
 {
  "notification": {
    "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
@@ -235,7 +236,7 @@ Example:
  "send_to": "https://example.com/my-notifications-go-here",
  "jwt": "XXXXXXXXXXXXX"
 }
-```
+</aside>
 
 ## Legacy Notifications (v1)
 
@@ -245,7 +246,7 @@ Welkin will only send notifications for updates which have happened in the last 
 
 <aside>The notified services should respond with a 200 response if the content of the notification was successfully <strong>received</strong>. The webhook's HTTP request from Welkin will timeout after <code>30</code> seconds if the notified service does not respond. You should not block responding to the notification on processing the full content of the notification. If Welkin doesn't receive a 200 success response to the webhook before the request times out, Welkin will re-issue that notification at the next notification interval.</aside>
 
-### Webhook body
+<strong>Webhook body</strong>
 
 Each notification contains all the updates for all the resource types since the last successful notification.
 
@@ -258,12 +259,12 @@ Each notification contains all the updates for all the resource types since the 
     "href": "https://api.welkinhealth.com/v1/patients?page[to]=2018-05-15T23:34:05.647496&page[from]=2018-05-14T23:34:05.647496"}]
 ```
 
-##### Model notification webhook request body
+<strong>Model notification webhook request body</strong>
 field | type | description
 - | - | -
 _ | `list` | List of data_update_notification objects
 
-##### Model data_update_notification
+<strong>Model data_update_notification</strong>
 field | type | description
 - | - | -
 resource | `string` | Resource endpoint path name
@@ -271,10 +272,10 @@ from | `isodatetime` | Datetime of first update
 to | `isodatetime` | Datetime of latest update
 href | `string` | Link to GET all updates for this notification
 
-### Webhook security
+<strong>Webhook security</strong>
 Welkin supports two authentication flows for the notifications. Both have the same level of security.
 
-#### JWT as Bearer Token (Recommended)
+<strong>JWT as Bearer Token (Recommended)</strong>
 
 A JWT is included as the Bearer Token on each notification request.
 
@@ -293,7 +294,7 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `notify_url` - url at which the customer will receive the webhooks
 * list of api resources for which notifications should be sent
 
-#### Token exchange
+<strong>Token exchange</strong>
 
 > Example Welkin side code (for illustration only)
 
@@ -315,7 +316,7 @@ Hash algorithm used by Welkin in creating the JWT: `HS256`
 * `token_endpoint_url` - url from which Welkin will request access tokens
 * list of api resources for which notifications should be sent
 
-### Find endpoints
+<strong>Find endpoints</strong>
 > Example Request
 
 ```shell
@@ -421,7 +422,7 @@ Make sure to fully follow the pagination links when receiving [Update Notificati
 
 Full `links` fields are elided in each `FIND` example response below for each method.
 
-### Find by POST
+<strong>Find by POST</strong>
 > Example Request
 
 ```shell
