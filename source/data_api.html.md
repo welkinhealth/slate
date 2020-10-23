@@ -192,7 +192,8 @@ To enable Notifications, configure the URL to receive notifications in Workshop 
 
 ## Webhook Contents
 > Example:
-```
+
+```json
 {
  "notification": {
    "provider_id": "9c64b12d-a70a-4c02-a58c-526e03a8e73b",
@@ -228,7 +229,8 @@ action | `string` | The action that modified the resource: `create`, `update`, `
 ## Subscription Confirmation
 
 > Example:
-```
+
+```json
 {
   "Type": "SubscriptionConfirmation",
   "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.",
