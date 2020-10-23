@@ -1014,23 +1014,21 @@
 <p>To enable Notifications, configure the URL to receive notifications in Workshop Integration Tools. The first request that we send to your subscribed URL contains a confirmation URL. You will need to open this URL in your browser or send a GET request to this URL to confirm your webhook subscription. After this step is complete, we will send notifications to your subscribed URL.</p>
 <h2 id='webhook-contents'>Webhook Contents</h2>
 <blockquote>
-<p>Example:
-<code>
-{
- &quot;notification&quot;: {
-   &quot;provider_id&quot;: &quot;9c64b12d-a70a-4c02-a58c-526e03a8e73b&quot;,
-   &quot;resource&quot;: &quot;patients&quot;,
-   &quot;resource_id&quot;: &quot;9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4&quot;,
-   &quot;updated_at&quot;: &quot;2020-04-27 00:00:00.006785&quot;,
-   &quot;href&quot;: &quot;https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4&quot;,
-   &quot;action&quot;: &quot;update&quot;
- },
- &quot;send_to&quot;: &quot;https://example.com/my-notifications-go-here&quot;,
- &quot;jwt&quot;: &quot;XXXXXXXXXXXXX&quot;
-}
-</code></p>
+<p>Example:</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w"> </span><span class="nl">"notification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</div><div class="line-3"><span class="w">   </span><span class="nl">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c64b12d-a70a-4c02-a58c-526e03a8e73b"</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">   </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patients"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">   </span><span class="nl">"resource_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4"</span><span class="p">,</span>
+</div><div class="line-6"><span class="w">   </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-27 00:00:00.006785"</span><span class="p">,</span>
+</div><div class="line-7"><span class="w">   </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.welkinhealth.com/v1/patients/9d5b23a4-249f-48d6-87dd-48f8f8c2b6a4"</span><span class="p">,</span>
+</div><div class="line-8"><span class="w">   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update"</span>
+</div><div class="line-9"><span class="w"> </span><span class="p">},</span>
+</div><div class="line-10"><span class="w"> </span><span class="nl">"send_to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/my-notifications-go-here"</span><span class="p">,</span>
+</div><div class="line-11"><span class="w"> </span><span class="nl">"jwt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXXXXXXXXXXX"</span>
+</div><div class="line-12"><span class="p">}</span>
+</div></code></pre></div>
 <table><thead>
 <tr>
 <th>field</th>
@@ -1095,17 +1093,15 @@
 </tbody></table>
 <h2 id='subscription-confirmation'>Subscription Confirmation</h2>
 <blockquote>
-<p>Example:
-<code>
-{
-  &quot;Type&quot;: &quot;SubscriptionConfirmation&quot;,
-  &quot;Message&quot;: &quot;You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message.&quot;,
-  &quot;SubscribeURL&quot;: &quot;https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&amp;Token=XXXXXXXXXXXX&quot;,
-  ...
-}
-</code></p>
+<p>Example:</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight json tab-json"><code><div class="line-1"><span class="p">{</span>
+</div><div class="line-2"><span class="w">  </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SubscriptionConfirmation"</span><span class="p">,</span>
+</div><div class="line-3"><span class="w">  </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have chosen to subscribe to the topic arn:aws:sns:us-east-1:XXXXXXXXXXXX:example. To confirm the subscription, visit the SubscribeURL included in this message."</span><span class="p">,</span>
+</div><div class="line-4"><span class="w">  </span><span class="nl">"SubscribeURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:XXXXXXXXXXXX:example&amp;Token=XXXXXXXXXXXX"</span><span class="p">,</span>
+</div><div class="line-5"><span class="w">  </span><span class="err">...</span>
+</div><div class="line-6"><span class="p">}</span>
+</div></code></pre></div>
 <p>Welkin&#39;s Realtime Notifications are powered by AWS Simple Notification Service (SNS). The URL that you have subscribed will receive a request containing <code>&quot;Type&quot;</code> of <code>&quot;SubscriptionConfirmation&quot;</code>, and <code>&quot;SubscribeURL&quot;</code> containing a URL that you need to visit or GET to confirm your subscription.</p>
 <h2 id='legacy-notifications-v1'>Legacy Notifications (v1)</h2>
 <p>Welkin&#39;s v1 webhoook notifications are sent every <code>60</code> seconds, and include which resources have changed, the time range of the changes, and a url to use in a <code>GET</code> request to fetch the changes (see <em>Find</em> endpoints for each resource).</p>
