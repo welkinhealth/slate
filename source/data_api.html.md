@@ -825,11 +825,11 @@ param | description
 id <br /><code><a href='#types'>guid</a></code> | The primary identifier of the __alerts__ record.
 patient_id <br /><code><a href='#types'>guid</a></code> | ID of the [patient](#patients) for whom alert needs to be created
 worker_id <br /><code><a href='#types'>optional</a> <a href='#types'>guid</a></code> | ID of the [worker](#workers) creating the alert
-alert_type <br /><code><a href='#types'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
-config <br /><code><a href='#types'>optional</a> <a href='#types'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+alert_type <br /><code><a href='#types'>string</a></code> | The type of the alert that needs to be created. Supported types: ['app_message']
+config <br /><code><a href='#types'>optional</a> <a href='#types'>json</a></code> | A json object containing 'count' field with value
 active_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the alert was active
 finished_time <br /><code><a href='#types'>optional</a> <a href='#types'>isodatetime</a></code> | Date and time when the alert was finished
-completed <br /><code><a href='#types'>boolean</a></code> | Denotes whether the alert was completed
+completed <br /><code><a href='#types'>optional</a> <a href='#types'>boolean</a></code> | Denotes whether the alert was completed
 dismissed <br /><code><a href='#types'>boolean</a></code> | Denotes whether the alert was dismissed
 dismissed_by_worker_id <br /><code><a href='#types'>guid</a></code> | ID of the [worker](#workers) who dismissed the alert.
 
@@ -994,8 +994,8 @@ param | description
 - | -
 patient_id <br /><code><a href='#types' class='required'>guid</a></code> | ID of the [patient](#patients) for whom alert needs to be created
 worker_id <br /><code><a href='#types' class='optional'>guid</a></code> | ID of the [worker](#workers) creating the alert
-alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
-config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. Supported types: ['app_message']
+config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value. Note: if not provided count will be set to 1
 active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was active
 
 
@@ -1087,10 +1087,10 @@ const response = await axios({method: 'put', url: url, headers: headers, data: d
 param | description
 - | -
 id <br /><code><a href='#types' class='required'>guid</a></code> | The primary identifier of the __alerts__ record.
-config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value, this is a optional field, default count will be 1
+config <br /><code><a href='#types' class='optional'>json</a></code> | A json object containing 'count' field with value
 active_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was active
 finished_time <br /><code><a href='#types' class='optional'>isodatetime</a></code> | Date and time when the alert was finished
-completed <br /><code><a href='#types' class='required'>boolean</a></code> | Denotes whether the alert was completed
+completed <br /><code><a href='#types' class='optional'>boolean</a></code> | Denotes whether the alert was completed
 
 
 
@@ -1163,7 +1163,7 @@ const response = await axios({method: 'get', url: url, headers: headers});
 
 param | description
 - | -
-alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. supported types ['app_message']
+alert_type <br /><code><a href='#types' class='required'>string</a></code> | The type of the alert that needs to be created. Supported types: ['app_message']
 page[from] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The earliest timestamp to include in the response
 page[to] <br /><code><a href='#types' class='optional'>isodatetime</a></code> | The latest timestamp to include in the response
 page[size] <br /><code><a href='#types' class='optional'>integer</a></code> | Maximum number of items to include in the response
